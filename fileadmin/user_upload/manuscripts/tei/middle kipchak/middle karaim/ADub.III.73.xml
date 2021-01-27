@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://epidoc.stoa.org/schema/latest/tei-epidoc.rng" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<?xml-model href="http://epidoc.stoa.org/schema/latest/tei-epidoc.rng" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xml:space="preserve" xml:lang="en">
+  <teiHeader>
+    <fileDesc>
+      <titleStmt>
+        <title ana="#no"/>
+        <author ana="#no"/>
+        <editor role="translator">Jeshua Josef Mordkowicz,
+          <locus>folios 1r–2v</locus>
+        </editor>
+        <editor role="translator">Simcha ben Chananel,
+          <locus>folios 3r–387v</locus>
+        </editor>
+        <editor role="translator">Unknown,
+          <locus>folio 388r–388v</locus>
+        </editor>
+        <respStmt>
+          <resp when="2015">Manuscript description by</resp>
+          <name>Michał Németh</name>
+        </respStmt>
+        <respStmt>
+          <resp when="2020">Digital edition by</resp>
+          <name>Michał Németh</name>
+        </respStmt>
+      </titleStmt>
+      <editionStmt>
+        <edition>
+          Németh, Michał. 2020. ‘A digital edition of the Karaim biblical manuscript ADub.III.73’, in László Károly and Michał Németh (eds)
+          <emph>A database of Middle Turkic documents.</emph>
+          Uppsala: Department of linguistics and philology. Accessed
+          <date when-custom="Now-DayinMonth"/>
+          <date when-custom="Now-MonthAbbr"/>
+          <date when-custom="Now-Year"/>.
+          <ref target="currentPageURL"/>
+        </edition>
+      </editionStmt>
+      <publicationStmt>
+        <publisher>Uppsala University, Department of linguistics and philology</publisher>
+        <pubPlace>Uppsala, Sweden</pubPlace>
+        <date>2020</date>
+        <availability status="restricted">
+          <licence target="https://creativecommons.org/licenses/by/4.0/">
+            Creative Commons Attribution 4.0 International</licence>
+        </availability>
+      </publicationStmt>
+      <notesStmt>
+        <note>The oldest known North-Western Karaim translation of Biblical texts. The Torah was critically edited by Németh (2021), the Book of Ruth was critically edited by Németh (2015).</note>
+      </notesStmt>
+      <sourceDesc>
+        <msDesc>
+          <msIdentifier>
+            <settlement>Warsaw, Poland</settlement>
+            <repository>Private archive</repository>
+            <idno>ADub.III.73</idno>
+          </msIdentifier>
+          <msContents>
+            <summary>
+              A Karaim translation of the Torah and the Haftarah
+            </summary>
+            <msItem n="1">
+              <locus>folios 1r-2v</locus>
+              <title ana="#no"/>
+              <author ana="#no"/>
+              <textLang>South-Western Karaim</textLang>
+            </msItem>
+            <msItem n="2">
+              <locus>folios 3r-387v</locus>
+              <title ana="#no"/>
+              <author ana="#no"/>
+              <textLang>North-Western Karaim</textLang>
+            </msItem>
+            <msItem n="3">
+              <locus>colophon, incipits</locus>
+              <title ana="#no"/>
+              <author ana="#no"/>
+              <textLang>Hebrew</textLang>
+            </msItem>
+            <msItemStruct>
+              <title n="0" type="book">
+                <measure quantity="1"/>
+                <abbr>In</abbr>
+                Incipit
+              </title>
+              <title n="1" type="book">
+                <measure quantity="50"/>
+                <abbr>Gen.</abbr>
+                Genesis
+              </title>
+            </msItemStruct>
+          </msContents>
+          <physDesc>
+            <objectDesc form="codex">
+              <supportDesc material="paper">
+                <support>
+                  <objectType>Codex</objectType>
+                  <material>Handmade cream-coloured paper</material>
+                  <watermark ana="#no"/>
+                </support>
+                <extent>002+388+003
+                  <dimensions scope="all" type="leaf" unit="mm">
+                    <height>175</height>
+                    <width>140</width>
+                  </dimensions>
+                </extent>
+                <foliation ana="#no"/>
+                <collation>
+                  <catchwords>Catchwords on each folio verso</catchwords>
+                </collation>
+                <condition>Very good, the text is clearly legible, the margins of
+                  <locus>folios 1–17</locus>
+                  are damaged, which resulted in the loss of text, the item underwent a complex restoration treatment in 2015, see Pronobis-Gajdzis (2015).</condition>
+              </supportDesc>
+              <layoutDesc>
+                <layout columns="1" writtenLines="21 22">
+                  <p>Written in one column with 21 to 22 lines per page</p>
+                  <dimensions scope="sole" type="written" unit="mm">
+                    <height>155</height>
+                    <width>120</width>
+                  </dimensions>
+                </layout>
+              </layoutDesc>
+            </objectDesc>
+            <handDesc>
+              <handNote medium="ink">Ink:
+                <term type="ink">light brown, dark brown, black</term>
+              </handNote>
+              <handNote scope="sole" script="Karaim semi-cursive"/>
+              <handNote scribe="copyist">Jeshua Josef Mordkowicz (born 1802, died 1884),
+                <locus>folios 1r–2v</locus>
+              </handNote>
+              <handNote scribe="copyist">Simcha ben Chananel (born ca. 1670, died 1723),
+                <locus>folios 3r–387v</locus>
+              </handNote>
+              <handNote scribe="copyist">Unknown (early 20th century),
+                <locus>folio 388r–388v</locus>
+              </handNote>
+            </handDesc>
+            <scriptDesc>
+              <scriptNote>Hebrew (Tiberian vocalisation)</scriptNote>
+            </scriptDesc>
+            <bindingDesc>
+              <binding contemporary="false">
+                <p>Rebound in 2015</p>
+              </binding>
+            </bindingDesc>
+          </physDesc>
+          <history>
+            <origin>
+              <origDate>mid-19th century,
+                <locus>folios 1r–2v</locus>
+              </origDate>
+              <origDate>5480 A.M. / 1720 A.D.,
+                <locus>folios 3r–387v</locus>
+              </origDate>
+              <origDate>turn of the 20th century,
+                <locus>folio 388r–388v</locus>
+              </origDate>
+              <origPlace>Kukizów or Halych,
+                <locus>folios 1r–2v</locus>
+              </origPlace>
+              <origPlace>Kukizów,
+                <locus>folios 3r–387v</locus>
+              </origPlace>
+              <origPlace>Unknown,
+                <locus>folio 388r-388v</locus>
+              </origPlace>
+            </origin>
+            <provenance>
+              <name type="person" role="owner">Simcha ben Chananel (1720–1723)</name>
+              <name type="person" role="owner">Josef ben Jehuda (?–1768)</name>
+              <name type="person" role="owner">Zecharia ben Shalom (1768–1771?)</name>
+              <name type="person" role="owner">Mordechai ben Zecharia (?)</name>
+              <name type="person" role="owner">Shalom ben Zecharia (?)</name>
+              <name type="person" role="owner">Jeshua Josef Mordkowicz (?–1884?)</name>
+              <name type="person" role="owner">Aleksander Dubiński (?–2002)</name>
+              <name type="person" role="owner">Adam Józef Dubiński (2002–)</name>
+            </provenance>
+          </history>
+          <additional>
+            <listBibl>
+              <bibl>Németh, Michał. 2015. An early North-Western Karaim Bible translation from 1720. Part 2. The Book of Ruth.
+                <emph>Karaite Archives</emph>
+                3: 49–102.</bibl>
+              <bibl>Németh, Michał. 2021.
+                <emph>The Western Karaim Torah. A critical edition of a manuscript from 1720.</emph>
+                Leiden and Boston: Brill (Languages of Asia series).</bibl>
+              <bibl>Pronobis-Gajdzis, Małgorzata. 2015. Zachować dla przyszłości. Sprawozdanie z prac konserwatorsko-restauratorskich prowadzonych przy drukach i rękopisach karaimskich w roku 2015 [To Preserve for the Future. Report on the Conservation-Restoration
+                Treatment of Karaim Prints and Manuscripts in 2015].
+                <emph>Almanach Karaimski</emph>
+                4: 283–287.</bibl>
+            </listBibl>
+          </additional>
+        </msDesc>
+      </sourceDesc>
+    </fileDesc>
+    <profileDesc>
+      <creation>
+        The main text of the Torah was created by
+        <persName>Simcha ben Chananel</persName>
+        between
+        <date>25 March and 31 May 1720</date>, see the colophon on folios 342v – 343r. The text of the Haftarah must have been created not much later. In the colophons that close the translation of Exodus, Leviticus, Number and Deuteronomy — see folios 157v
+        (line 14), 207v (line 5), 278v (line 2), 342v (line 5), respectively — the copyist states that the text of the Pentateuch he copied is his own translation (<emph>peshat</emph>).
+      </creation>
+      <langUsage>
+        <language ident="kdr">North-Western Karaim</language>
+      </langUsage>
+      <textClass>
+        <keywords scheme="http://id.loc.gov/authorities/subjects">
+          <term>Bible--Versions, Karaim</term>
+        </keywords>
+      </textClass>
+      <abstract>
+        <p>
+          <lg>
+            <l>Torah, 1r–343r</l>
+            <l>Book of Ruth, 344r–349v</l>
+            <l>Book of Lamentations, 350r–360r</l>
+            <l>Ecclesiastes, 360v–374v</l>
+            <l>Book of Esther, 375r–388v</l>
+          </lg>
+        </p>
+      </abstract>
+    </profileDesc>
+  </teiHeader>
+  <text>
+    <body>
+      <p/>
+    </body>
+  </text>
+</TEI>

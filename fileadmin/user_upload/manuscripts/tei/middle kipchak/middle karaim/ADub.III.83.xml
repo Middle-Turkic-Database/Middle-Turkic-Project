@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://epidoc.stoa.org/schema/latest/tei-epidoc.rng" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<?xml-model href="http://epidoc.stoa.org/schema/latest/tei-epidoc.rng" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xml:space="preserve" xml:lang="en">
+  <teiHeader>
+    <fileDesc>
+      <titleStmt>
+        <title ana="#no"/>
+        <author ana="#no"/>
+        <editor role="translator">Jeshua Josef Mordkowicz</editor>
+        <respStmt>
+          <resp when="2020">Manuscript description by</resp>
+          <name>Michał Németh</name>
+        </respStmt>
+        <respStmt>
+          <resp when="2021">Digital edition by</resp>
+          <name>?András Anita?</name>
+        </respStmt>
+      </titleStmt>
+      <editionStmt>
+        <edition>
+          András, Anita. 2020. ‘A digital edition of the Karaim biblical manuscript ADub.III.83’, in László Károly and Michał Németh (eds)
+          <emph>A database of Middle Turkic documents</emph>. Uppsala: Department of linguistics and philology. Accessed
+          <date when-custom="Now-DayinMonth"/>
+          <date when-custom="Now-MonthAbbr"/>
+          <date when-custom="Now-Year"/>.
+          <ref target="currentPageURL"/>
+        </edition>
+      </editionStmt>
+      <publicationStmt>
+        <publisher>Uppsala University, Department of linguistics and philology</publisher>
+        <pubPlace>Uppsala, Sweden</pubPlace>
+        <date>2020</date>
+        <availability status="restricted">
+          <licence target="https://creativecommons.org/licenses/by/4.0/">
+            Creative Commons Attribution 4.0 International</licence>
+        </availability>
+      </publicationStmt>
+      <notesStmt>
+        <note>The only known South-Western Karaim translation of the books of the latter prophets and the twelve minor prophets. Numerous notes on the margins visible (in pencil and red pencil).</note>
+      </notesStmt>
+      <sourceDesc>
+        <msDesc>
+          <msIdentifier>
+            <settlement>Warsaw, Poland</settlement>
+            <repository>Private archive</repository>
+            <idno>ADub.III.83</idno>
+          </msIdentifier>
+          <msContents>
+            <summary>
+              A Karaim translation of the books of the latter prophets and the twelve minor prophets
+            </summary>
+            <msItem n="1">
+              <title ana="#no"/>
+              <author ana="#no"/>
+              <textLang>South-Western Karaim</textLang>
+            </msItem>
+            <msItem n="2">
+              <locus>colophon, incipits</locus>
+              <title ana="#no"/>
+              <author ana="#no"/>
+              <textLang>Hebrew</textLang>
+            </msItem>
+          </msContents>
+          <physDesc>
+            <objectDesc form="codex">
+              <supportDesc material="paper">
+                <support>
+                  <objectType>Codex</objectType>
+                  <material>Handmade cream-coloured paper</material>
+                  <watermark ana="#no"/>
+                </support>
+                <extent>006+245+004
+                  <dimensions scope="all" type="leaf" unit="mm">
+                    <height>210</height>
+                    <width>160</width>
+                  </dimensions>
+                </extent>
+                <foliation ana="#no"/>
+                <collation>
+                  <catchwords>Catchwords on each folio verso</catchwords>
+                </collation>
+                <condition>Good, the text is clearly legible, the ink has slightly soaked through the paper, stored in a worn-out wooden box</condition>
+              </supportDesc>
+              <layoutDesc>
+                <layout columns="1" writtenLines="25">
+                  <p>Written in one column with 25 lines per page</p>
+                  <dimensions scope="sole" type="written" unit="mm">
+                    <height>165</height>
+                    <width>120</width>
+                  </dimensions>
+                </layout>
+              </layoutDesc>
+            </objectDesc>
+            <handDesc>
+              <handNote medium="ink">Ink:
+                <term type="ink">dark brown</term>
+              </handNote>
+              <handNote scope="sole" script="Karaim semi-cursive"/>
+              <handNote scribe="copyist">Jeshua Josef Mordkowicz (born 1802, died 1884)</handNote>
+            </handDesc>
+            <scriptDesc>
+              <scriptNote>Hebrew (Tiberian vocalisation)</scriptNote>
+            </scriptDesc>
+            <bindingDesc>
+              <binding contemporary="true">
+                <p>Sewn binding, leather covering of wooden boards</p>
+              </binding>
+            </bindingDesc>
+          </physDesc>
+          <history>
+            <origin>
+              <origDate>2nd half of the 19th century</origDate>
+              <origPlace>Halych</origPlace>
+            </origin>
+            <provenance>
+              <name type="person" role="owner">Jeshua Josef Mordkowicz (?–1884?)</name>
+              <name type="person" role="owner">Aleksander Dubiński (?–2002)</name>
+              <name type="person" role="owner">Adam Józef Dubiński (2002–)</name>
+            </provenance>
+          </history>
+          <additional>
+            <listBibl>
+              <bibl ana="#no"/>
+            </listBibl>
+          </additional>
+        </msDesc>
+      </sourceDesc>
+    </fileDesc>
+    <profileDesc>
+      <creation ana="#no"/>
+      <langUsage>
+        <language ident="kdr">South-Western Karaim</language>
+      </langUsage>
+      <textClass>
+        <keywords scheme="http://id.loc.gov/authorities/subjects">
+          <term>Bible--Versions, Karaim</term>
+        </keywords>
+      </textClass>
+      <abstract>
+        <p>
+          <lg>
+            <l>Table of content 1r</l>
+            <l>Isaiah 2r–66r</l>
+            <l>Jeremiah 66v–131v</l>
+            <l>Ezekiel 132r–191r</l>
+            <l>Hosea 191v–201r</l>
+            <l>Joel 201r–204r</l>
+            <l>Amos 204v–211r</l>
+            <l>Obadiah 211r–212r</l>
+            <l>Jonah 212v–214r</l>
+            <l>Micah 214v–219v</l>
+            <l>Nahum 220r–222v</l>
+            <l>Habakkuk 222v–225v</l>
+            <l>Zephaniah 225v–228v</l>
+            <l>Haggai 228v–230v</l>
+            <l>Zechariah 230v–242v</l>
+            <l>Malachi 242v–245v</l>
+          </lg>
+        </p>
+      </abstract>
+    </profileDesc>
+  </teiHeader>
+  <text>
+    <body>
+      <div type="edition" xml:space="preserve">
+        <ab>
+          <lb n="1"/>Karaim text here
+        </ab>
+      </div>
+      <div type="apparatus">
+        <p>external apparatus criticus (if applicable)</p>
+      </div>
+      <div type="translation">
+        <p>translation(s) (if available)</p>
+      </div>
+      <div type="commentary">
+        <p>commentary</p>
+      </div>
+      <div type="bibliography">
+        <p>bibliography of previous editions, discussion, etc.</p>
+      </div>
+    </body>
+  </text>
+</TEI>
