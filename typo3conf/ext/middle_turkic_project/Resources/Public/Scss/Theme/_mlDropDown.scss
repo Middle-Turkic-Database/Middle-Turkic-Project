@@ -1,0 +1,63 @@
+@import "../../../../../bootstrap_package/Resources/Public/Scss/Theme/_navbar";
+@media (min-width: ($grid-float-breakpoint)) {
+    .navbar-light {
+        .navbar-nav {
+            .dropdown {
+                .dropdown {
+                    .nav-link {
+                        color: $dropdown-link-color;
+                    }
+                }
+            }
+        }
+    }
+    .navbar-mainnavigation {
+        .dropdown {
+            .dropdown {
+                .dropdown-toggle:after {
+                    display: inline-block;
+                }
+                ul.dropdown-menu {
+                    left: 90%;
+                    top: 0;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: ($grid-float-breakpoint - 1)) {
+    .navbar-light {
+        .navbar-nav {
+            .dropdown {
+                .dropdown {
+                    .nav-link {
+                        padding-right: 15px;
+                        margin-left: -5px;
+                    }
+                }
+            }
+        }
+    }
+    .navbar-mainnavigation {
+        .dropdown {
+            .dropdown {
+                ul.dropdown-menu {
+                    margin-left: 1px;
+                }
+            }
+        }
+    }
+}
+
+.navbar-light {
+    .navbar-nav {
+        .dropdown {
+            .nav-link {
+                &.active {
+                    color: white;
+                }
+            }
+        }
+    }
+}

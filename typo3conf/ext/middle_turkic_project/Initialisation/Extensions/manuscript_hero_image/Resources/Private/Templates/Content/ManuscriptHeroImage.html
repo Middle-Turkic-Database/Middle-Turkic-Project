@@ -1,0 +1,7 @@
+<f:if condition="{data_tx_manuscriptheroimage_heroimage}">
+    <f:for each="{data_tx_manuscriptheroimage_heroimage}" as="file">
+        <f:image image="{file}" alt="{file.alternative}" title="{file.title}" width="200" /><br />
+        {file.description} / {file.identifier}<br />
+    </f:for>
+</f:if>
+

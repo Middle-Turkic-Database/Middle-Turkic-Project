@@ -1,0 +1,23 @@
+#
+# TCEFORM
+#
+TCEFORM {
+    pages {
+
+    }
+    tt_content {
+        layout.types {
+            textpic {
+                addItems {
+                    300 = Small Circle
+                    305 = First Page Content
+                }
+            }
+            image {
+                addItems {
+                    310 = Footer Logo
+                }
+            }
+        }
+    }
+}

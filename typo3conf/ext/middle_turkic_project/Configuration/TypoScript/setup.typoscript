@@ -1,0 +1,76 @@
+######################
+#### DEPENDENCIES ####
+######################
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:bootstrap_package/Configuration/TypoScript/setup.typoscript">
+#<INCLUDE_TYPOSCRIPT: source="FILE:EXT:middle_turkic_project/Configuration/TypoScript/ContentElement/setup.typoscript">
+
+################
+#### HELPER ####
+################
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:middle_turkic_project/Configuration/TypoScript/Helper/XMLHelper.typoscript">
+
+
+##############
+#### PAGE ####
+##############
+page {
+    includeCSS {
+        fonts = EXT:middle_turkic_project/Resources/Public/Css/fonts.css
+        mdb = EXT:middle_turkic_project/Resources/Public/Css/mdb-free.min.css
+        mdb_datatables = EXT:middle_turkic_project/Resources/Public/Css/datatables.css
+        theme = EXT:middle_turkic_project/Resources/Public/Scss/Theme/theme.scss
+        toastr = https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css
+        toastr.external = 1
+    }
+
+    includeJSLibs {
+
+    }
+
+    includeJS {
+
+    }
+
+    includeJSFooterlibs {
+    }
+
+    includeJSFooter {
+        middle_turkic_project_scripts = EXT:middle_turkic_project/Resources/Public/JavaScript/Dist/scripts.js
+        manuscript_list = EXT:middle_turkic_project/Resources/Public/JavaScript/Dist/manuscriptList.js
+        mdb = EXT:middle_turkic_project/Resources/Public/JavaScript/Dist/mdb.min.js
+        toastr = https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js
+        toastr.external = 1
+        toggle_accardion = EXT:middle_turkic_project/Resources/Public/JavaScript/Dist/toggleAccardion.js
+    }
+
+    10 {
+        dataProcessing {
+            10 {
+                levels = {$page.theme.navigation.mainNavigationLevels}
+            }
+        }
+    }
+}
+
+plugin.tx_filelist {
+    view {
+        partialRootPaths.100 = EXT:middle_turkic_project/Resources/Private/Partials/Page/
+    }
+}
+
+lib.pageTitle = TEXT
+lib.pageTitle.data = page:title
+
+page.headerData.999 = TEXT
+page.headerData.999.value(
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-174566983-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-174566983-1');
+</script>
+
+)

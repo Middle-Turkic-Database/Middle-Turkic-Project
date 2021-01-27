@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.0">
+  <file source-language="en" datatype="plaintext" original="messages" date="2020-07-17T15:19:30+00:00" product-name="manuscript_hero_image">
+    <header/>
+    <body>
+      <trans-unit id="tt_content.tx_manuscriptheroimage_heroimage">
+        <source>Hero Image</source>
+      </trans-unit>
+      <trans-unit id="tt_content.CType.div._manuscriptheroimage_">
+        <source>manuscript_hero_image</source>
+      </trans-unit>
+      <trans-unit id="tt_content.CType.manuscriptheroimage_manuscript_hero_image">
+        <source>Manuscript Page Hero Image</source>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

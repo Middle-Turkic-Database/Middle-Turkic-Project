@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" datatype="messages" original="messages" date="2020-05-26UTC14:47:410">
+        <header>
+            <authorName>Mohsen Emami</authorName>
+            <authorEmail>mohsen.emami@lingfil.uu.se</authorEmail>
+        </header>
+        <body>
+            <trans-unit id="middle_turkic_project_manuscriptcontent.wizard.title" xml:space="preserve">
+                <source>Manuscript Content</source>
+            </trans-unit>
+            <trans-unit id="middle_turkic_project_manuscriptcontent.wizard.description" xml:space="preserve">
+                <source>Shows up the manuscripts content</source>
+            </trans-unit>
+            <trans-unit id="middle_turkic_project_manuscriptcontent" xml:space="preserve">
+                <source>Manuscript Content</source>
+            </trans-unit>
+
+        </body>
+    </file>
+</xliff>

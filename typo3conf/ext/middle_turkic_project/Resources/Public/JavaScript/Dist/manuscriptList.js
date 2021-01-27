@@ -1,0 +1,78 @@
+$(function() {
+    $('.list-group-item').on('click', function() {
+        $('.fa-angle-double-right,.fa-angle-double-down', this)
+            .toggleClass('fa-angle-double-right')
+            .toggleClass('fa-angle-double-down');
+    });
+
+});
+
+// const queryString = window.location.search;
+// const urlParams = new URLSearchParams(queryString);
+// const manuscriptFullName = urlParams.get('manuscript');
+// if (manuscriptFullName != null) {
+//     const manuscriptName = manuscriptFullName.substr(0, manuscriptFullName.lastIndexOf(".xml"));
+//     const section = urlParams.get('tale');
+
+//     $(function() {
+//         $("#manuscriptList.list-group #" + manuscriptName + ".list-group-item").addClass("active")
+//         $("#manuscriptList.list-group #" + manuscriptName + ".list-group-item i.fa-angle-double-right").removeClass("fa-angle-double-right").addClass("fa-angle-double-down");
+//         $("#manuscriptList.list-group #group-list-" + manuscriptName + ".list-group").addClass("show");
+//         $("#manuscriptList.list-group #group-list-" + manuscriptName + ".list-group #section-" + section + ".list-group-item").addClass("active");
+//     });
+
+// }
+
+$(document).ready(function() {
+    $('#dtManuscriptList').DataTable({
+        drawCallback: function() {
+            // $('[data-toggle="tooltip"]').tooltip();
+            $('table.dataTable tbody tr[data-href]').each(function() {
+                $(this).css('cursor', 'pointer').click(function() {
+                    document.location = $(this).attr('data-href');
+                });
+            });
+
+        }
+    });
+    $('.dataTables_length').addClass('bs-select');
+    if($('#manuscriptTabs').length) {
+        $('.manuscript-hero-image').parent().addClass('d-none');
+    };
+
+    $("#msTranscriptContent").load(encodeURI("/mstranscript?msNav=" + $("#msTranscriptContent").data('msnav') + "&msName=" + $("#msTranscriptContent").data('msname')))
+});
+
+// Manuscript Navigation
+$(function() {
+    $('.ms-nav-1st [data-toggle="pill"], .ms-nav-2nd [data-toggle="pill"]').tooltip();
+    $('.ms-nav-1st [data-toggle="pill"], .ms-nav-2nd [data-toggle="pill"]').ready(function() {
+        console.log("test2");
+    });
+});
+
+$(".ms-nav-1st .nav-link").on('show.bs.tab', function(event) {
+    if (!$(".ms-nav-1st .nav-link").hasClass("latest-tab")) {
+        $(event.relatedTarget).addClass("latest-tab");
+    }
+    $(this).removeClass("latest-tab");
+});
+
+$(".ms-nav-2nd .nav-link,.ms-nav-1st .nav-link:not(.dropdown-toggle)").on('show.bs.tab', function() {
+    var transcriptURI = "/mstranscript?msNav=" + $("#msTranscriptContent").data('msnav') + "&msName=" + $("#msTranscriptContent").data('msname') + "&msBook=";
+    if ($(this).closest(".nav").hasClass("ms-nav-1st")) {
+        transcriptURI += $(this).data("bookno");
+    }
+    else {
+        var tabID = $(this).closest(".tab-pane").attr("id");
+        transcriptURI += $(".ms-nav-1st .nav-link[href='#" + tabID + "']").data('bookno');
+        transcriptURI += "&msChapter=";
+        transcriptURI += $(this).data("chapterno");
+    }
+
+    var test = $(this);
+    $("#msTranscriptContent").load(encodeURI(transcriptURI));
+    
+    $(".ms-nav-2nd a.nav-link").removeClass("active");
+    $(".ms-nav-1st .nav-link").removeClass("latest-tab");
+ });

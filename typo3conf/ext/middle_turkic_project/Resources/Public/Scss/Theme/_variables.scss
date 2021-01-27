@@ -1,0 +1,27 @@
+//
+// Variables
+//
+
+//
+// Footer
+//
+$footer-sections: () !default;
+$footer-sections: map-merge(
+    (
+        content: (
+            background:                darken($white, 3%),
+            color:                     $black,
+            link-color:                $gray-600
+        ),
+        meta: (
+            background:                darken($white, 6%),
+            color:                     $black,
+            link-color:                $gray-600
+        )
+    ),
+    $footer-sections
+);
+
+$headings-font-family:        Roboto !default;
+
+$font-size-base:    1.1rem;

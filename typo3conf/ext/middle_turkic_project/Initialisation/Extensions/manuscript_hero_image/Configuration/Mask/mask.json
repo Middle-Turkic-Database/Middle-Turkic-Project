@@ -1,0 +1,68 @@
+{
+    "sys_file_reference": {
+        "sql": {
+            "tx_mask_heroimage": {
+                "sys_file_reference": {
+                    "tx_mask_heroimage": "int(11) unsigned DEFAULT '0' NOT NULL"
+                }
+            }
+        }
+    },
+    "tt_content": {
+        "elements": {
+            "manuscript_hero_image": {
+                "color": "#000000",
+                "columns": [
+                    "tx_mask_heroimage"
+                ],
+                "description": "The image at top of manuscript page",
+                "icon": "fa-image",
+                "key": "manuscript_hero_image",
+                "label": "Manuscript Page Hero Image",
+                "labels": [
+                    "Hero Image"
+                ],
+                "shortLabel": ""
+            }
+        },
+        "sql": {
+            "tx_mask_heroimage": {
+                "tt_content": {
+                    "tx_mask_heroimage": "int(11) unsigned DEFAULT '0' NOT NULL"
+                }
+            }
+        },
+        "tca": {
+            "tx_mask_heroimage": {
+                "config": {
+                    "appearance": {
+                        "collapseAll": "1",
+                        "expandSingle": "1",
+                        "fileUploadAllowed": "1",
+                        "useSortable": "1"
+                    },
+                    "filter": [
+                        {
+                            "parameters": {
+                                "allowedFileExtensions": ""
+                            }
+                        }
+                    ],
+                    "maxitems": "1",
+                    "minitems": "0"
+                },
+                "exclude": "1",
+                "key": "heroimage",
+                "l10n_mode": "",
+                "options": "file"
+            }
+        }
+    },
+    "mask_export": {
+        "extensionName": "manuscript_hero_image",
+        "vendorName": "UppsalaUniversity",
+        "includedElements": [
+            "manuscript_hero_image"
+        ]
+    }
+}

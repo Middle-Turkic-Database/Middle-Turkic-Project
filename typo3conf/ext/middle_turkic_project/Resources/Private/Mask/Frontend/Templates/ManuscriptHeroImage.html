@@ -1,0 +1,36 @@
+<f:if condition="{f:cObject(typoscriptObjectPath:'lib.pageTitle')}">
+    <f:variable name="pageTitle">
+        <f:cObject typoscriptObjectPath="lib.pageTitle" />
+    </f:variable>
+</f:if>
+
+
+<div class="container mt-n4">
+    <div class="align-items-center" style="height:150px;">
+        <f:if condition="{data_tx_manuscriptheroimage_heroimage.0}">
+            <f:then>
+                <div id="{f:format.case(mode: 'lower', value: '{pageTitle}')}" class="manuscript-hero-image rounded-bottom mt-4" style="background-image: url({f:uri.image(image: '{data_tx_manuscriptheroimage_heroimage.0}')});">
+            </f:then>
+            <f:else>
+                <f:variable name="thumbnailImages" value="{v:page.resources.fal(table:'pages', field:'thumbnail', uid:'{data.pid}')}" />
+                <f:if condition="thumbnailImages.0">
+                    <f:then>
+                        <div id="{f:format.case(mode: 'lower', value: '{pageTitle}')}" class="manuscript-hero-image rounded-bottom mt-4" style="background-image: url({f:uri.image(src: '{thumbnailImages.0.url}')});">
+                    </f:then>
+                    <f:else>
+                        <div id="{f:format.case(mode: 'lower', value: '{pageTitle}')}" class="manuscript-hero-image rounded-bottom mt-4">
+                    </f:else>
+                </f:if>
+
+            </f:else>
+        </f:if>
+        <span class="hero-text">
+            <span class="hero-text-main">
+                <i class="fas fa-quote-left align-top"></i>
+                <h1 class="display-4 d-inline align-top">{pageTitle}</h1>
+                <i class="fas fa-quote-right align-top"></i>
+            </span>
+        <h1><small class=" align-text-middle">Manuscripts</small></h1>
+        </span>
+        </div>
+        </div>

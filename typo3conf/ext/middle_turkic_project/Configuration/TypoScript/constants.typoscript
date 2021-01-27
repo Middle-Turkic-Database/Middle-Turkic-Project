@@ -1,0 +1,88 @@
+######################
+#### DEPENDENCIES ####
+######################
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:bootstrap_package/Configuration/TypoScript/constants.typoscript">
+
+
+############
+### PAGE ###
+############
+page {
+    logo {
+        file = EXT:middle_turkic_project/Resources/Public/Images/logo.svg
+        fileInverted = EXT:middle_turkic_project/Resources/Public/Images/logo-inverted.svg
+        height = 100
+        width = 192
+        alt = Middle Turkic Project
+        linktitle = Middle Turkic Project
+    }
+    favicon {
+        file = EXT:middle_turkic_project/Resources/Public/Icons/favicon.ico
+    }
+    fluidtemplate {
+        layoutRootPath = EXT:middle_turkic_project/Resources/Private/Layouts/Page/
+        partialRootPath = EXT:middle_turkic_project/Resources/Private/Partials/Page/
+        templateRootPath = EXT:middle_turkic_project/Resources/Private/Templates/Page/
+    }
+    theme {
+      navigation {
+        type = top
+        # cat=bootstrap package: navigation/151/102; type=int[1-5]; label=Mian Navigation Levels
+        mainNavigationLevels = 3
+      }
+    }
+}
+
+
+##################
+### EXTENSIONS ###
+##################
+plugin.bootstrap_package {
+    view {
+        layoutRootPath = EXT:middle_turkic_project/Resources/Private/Layouts/
+        partialRootPath = EXT:middle_turkic_project/Resources/Private/Partials/
+        templateRootPath = EXT:middle_turkic_project/Resources/Private/Templates/
+    }
+}
+
+
+########################
+### CONTENT ELEMENTS ###
+########################
+plugin.bootstrap_package_contentelements {
+    view {
+        layoutRootPath = EXT:middle_turkic_project/Resources/Private/Layouts/ContentElements/
+        partialRootPath = EXT:middle_turkic_project/Resources/Private/Partials/ContentElements/
+        templateRootPath = EXT:middle_turkic_project/Resources/Private/Templates/ContentElements/
+    }
+}
+
+
+
+################################
+### BOOTSTRAP SCSS CONSTANTS ###
+################################
+plugin.bootstrap_package.settings.scss {
+    primary = #eb3e4a
+    secondary = #013859
+}
+
+#######################################
+### MANUSCRIPT HERO IMAGE CONSTANTS ###
+#######################################
+plugin.tx_manuscriptheroimage.view.layoutRootPath = EXT:middle_turkic_project/Resources/Private/Mask/Frontend/Layouts/
+plugin.tx_manuscriptheroimage.view.partialRootPath = EXT:middle_turkic_project/Resources/Private/Mask/Frontend/Partials/
+plugin.tx_manuscriptheroimage.view.templateRootPath = EXT:middle_turkic_project/Resources/Private/Mask/Frontend/Templates/
+
+###########################
+### reCAPTCHA CONSTANTS ###
+###########################
+plugin.tx_recaptcha {
+    # look at https://www.google.com/recaptcha/admin to register a key for your server
+    # cat=plugin.recaptcha//03; type=string; label= reCAPTCHA public key: Public key of your reCAPTCHA-account
+    public_key = 6LfklrgZAAAAAHtm3pFNFGJwxGdX3mzc5tKaQI5Q
+
+    # look at https://www.google.com/recaptcha/admin to register a key for your server
+    # cat=plugin.recaptcha//04; type=string; label= reCAPTCHA private key: Private key of your reCAPTCHA-account
+    private_key = 6LfklrgZAAAAANCDOiuKpUnrEAJySqDxxNo26IUt
+}

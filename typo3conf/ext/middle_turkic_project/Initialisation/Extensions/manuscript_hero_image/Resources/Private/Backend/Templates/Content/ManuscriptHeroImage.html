@@ -1,0 +1,14 @@
+<f:if condition="{processedRow.tx_manuscriptheroimage_heroimage}">
+    <strong><f:translate key="LLL:EXT:manuscript_hero_image/Resources/Private/Language/locallang_db.xlf:tt_content.tx_manuscriptheroimage_heroimage" /></strong>
+<br><f:for each="{processedRow.tx_manuscriptheroimage_heroimage}" as="item">
+    <ul>
+        <li>
+    <ul>
+        <f:for each="{item.uid_local}" as="file">
+            <li><f:translate key="LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.uid_local" /> {file.table}|{file.uid}|{file.title} (id={item.uid})</li>
+        </f:for>
+    </ul>
+        </li>
+    </ul>
+</f:for>
+</f:if>

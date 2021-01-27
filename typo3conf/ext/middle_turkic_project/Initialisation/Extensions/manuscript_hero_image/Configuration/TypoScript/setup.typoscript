@@ -1,0 +1,19 @@
+tt_content.manuscriptheroimage_manuscript_hero_image = FLUIDTEMPLATE
+tt_content.manuscriptheroimage_manuscript_hero_image {
+    layoutRootPaths.0 = EXT:manuscript_hero_image/Resources/Private/Layouts/
+    layoutRootPaths.10 = {$plugin.tx_manuscriptheroimage.view.layoutRootPath}
+    partialRootPaths.0 = EXT:manuscript_hero_image/Resources/Private/Partials/
+    partialRootPaths.10 = {$plugin.tx_manuscriptheroimage.view.partialRootPath}
+    templateRootPaths.0 = EXT:manuscript_hero_image/Resources/Private/Templates/Content/
+    templateRootPaths.10 = {$plugin.tx_manuscriptheroimage.view.templateRootPath}
+    templateName = ManuscriptHeroImage
+    dataProcessing.10 = TYPO3\CMS\Frontend\DataProcessing\FilesProcessor
+    dataProcessing.10 {
+        if.isTrue.field = tx_manuscriptheroimage_heroimage
+        references {
+            fieldName = tx_manuscriptheroimage_heroimage
+            table = tt_content
+        }
+        as = data_tx_manuscriptheroimage_heroimage
+    }
+}

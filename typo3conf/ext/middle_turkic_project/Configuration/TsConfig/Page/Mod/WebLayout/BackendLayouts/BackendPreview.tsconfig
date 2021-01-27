@@ -1,0 +1,3 @@
+mod.web_layout.tt_content.preview.manuscriptheroimage.templateRootPath = EXT:middle_turkic_project/Resources/Private/Backend/Templates/
+mod.web_layout.tt_content.preview.manuscriptheroimage.layoutRootPath = EXT:middle_turkic_project/Resources/Private/Backend/Layout/
+mod.web_layout.tt_content.preview.manuscriptheroimage.partialRootPath = EXT:middle_turkic_project/Resources/Private/Backend/Partials/

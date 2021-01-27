@@ -1,0 +1,85 @@
+lib.manuscriptArgument = TEXT
+lib.manuscriptNav = COA
+lib.manuscriptPath = COA
+lib.manuscriptDescription = XSLT
+
+[request.getPageArguments().get('manuscript')]
+
+lib.manuscriptArgument.data = GP:manuscript
+
+lib.manuscriptNav {
+   15 = TEXT
+   15.data = leveltitle : -2
+   15.append = COA
+   15.append.10 = TEXT
+   15.append.10.value = /
+   15.case = lower
+   15.if {
+      value.data = leveltitle : -2
+      equals = Manuscripts
+      negate = 1
+   }
+
+   20 = TEXT
+   20.data = page:title
+   20.case = lower
+}
+
+lib.manuscriptPath {
+   10 = TEXT
+   10.value = fileadmin/user_upload/manuscripts/tei/
+
+   20 < lib.manuscriptNav
+}
+
+lib.xpath = XPATH
+lib.xpath {
+   source.cObject < lib.manuscriptPath
+   source.cObject {
+      30 = TEXT
+      30.value = /
+
+      50 < lib.manuscriptArgument
+
+      60 = TEXT
+      60.value = .xml
+   }
+   # set return format
+   return = string
+
+   # result handling
+   resultObj {
+      cObjNum = 1
+      1.current = 1
+   }
+}
+
+lib.manuscriptDescription {
+   source.cObject < lib.xpath
+   source.cObject {
+      expression = /*[local-name()='TEI']
+      expression.insertData = 1
+      return = xml
+   }
+   transformations.1 {
+      stylesheet = fileadmin/user_upload/manuscripts/config/manuscriptDescription.xsl
+      setParameters {
+         xmlAddress.value < lib.xpath.source
+         pageURL.value.typolink {
+            parameter.data = TSFE:id
+            returnLast = url
+            forceAbsoluteUrl = 1
+         }
+         pageURL.value.append = COA
+         pageURL.value.append {
+            10 = TEXT
+            10.value = &manuscript=
+            
+            20 = TEXT
+            20 < lib.manuscriptArgument
+         }
+      }
+   }
+}
+
+[GLOBAL]

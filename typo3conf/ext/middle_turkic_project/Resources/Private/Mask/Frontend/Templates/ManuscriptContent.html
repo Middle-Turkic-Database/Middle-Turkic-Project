@@ -1,0 +1,152 @@
+<f:if condition="{f:cObject(typoscriptObjectPath:'lib.manuscriptArgument')}">
+    <f:variable name="manuscriptArgument">
+        <f:cObject typoscriptObjectPath="lib.manuscriptArgument" />
+    </f:variable>
+</f:if>
+
+<f:if condition="{f:cObject(typoscriptObjectPath:'lib.taleArgument')}">
+    <f:variable name="taleArgument">
+        <f:cObject typoscriptObjectPath="lib.taleArgument" />
+    </f:variable>
+</f:if>
+
+<f:if condition="{f:cObject(typoscriptObjectPath:'lib.author')}">
+    <f:variable name="author">
+        <f:cObject typoscriptObjectPath="lib.author" />
+    </f:variable>
+</f:if>
+
+<f:if condition="{f:cObject(typoscriptObjectPath:'lib.title')}">
+    <f:variable name="title">
+        <f:cObject typoscriptObjectPath="lib.title" />
+    </f:variable>
+</f:if>
+
+<f:if condition="{f:cObject(typoscriptObjectPath:'lib.manuscript')}">
+    <f:variable name="manuscript">
+        <f:cObject typoscriptObjectPath="lib.manuscript" />
+    </f:variable>
+</f:if>
+
+<f:if condition="{manuscriptArgument} && {taleArgument}">
+    <f:then>
+        <div class="manuscript-section-header position-sticky mt-5 mb-3 border-bottom">
+            <h1>{author}</h1>
+            <h4>{title}</h4>
+        </div>
+
+        <div>
+            <ul class="nav nav-tabs" id="manuscriptTabs" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="transliteration-tab" data-toggle="tab" href="#transliteration"
+                        role="tab" aria-controls="transliteration" aria-selected="true">Transliteration</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="corrections-tab" data-toggle="tab" href="#corrections" role="tab"
+                        aria-controls="corrections" aria-selected="false">Corrections</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" id="translation-tab" data-toggle="tab" href="#translation" role="tab"
+                        aria-controls="translation" aria-selected="false">Translation</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" id="wordsFrequency-tab" data-toggle="tab" href="#wordsFrequency"
+                        role="tab" aria-controls="wordsFrequency" aria-selected="false">Words Frequency</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" id="signsFrequency-tab" data-toggle="tab" href="#signsFrequency"
+                        role="tab" aria-controls="signsFrequency" aria-selected="false">Signs Frequency</a>
+                </li>
+            </ul>
+            <div class="tab-content mt-4 ml-3" id="transcriptionTabsContent">
+                <div class="tab-pane fade show active" id="transliteration" role="tabpanel"
+                    aria-labelledby="transliteration-tab">
+                    <f:format.raw>{manuscript}</f:format.raw>
+                </div>
+                <div class="tab-pane fade" id="corrections" role="tabpanel" aria-labelledby="corrections-tab">
+                    <f:format.html parseFuncTSPath="">
+                        <h3>Heading</h3>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget
+                            dolor.
+                            Aenean
+                            massa.
+                            Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus
+                            mus.
+                            Donec
+                            quam
+                            felis,
+                            ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
+                            Donec
+                            pede
+                            justo,
+                            fringilla vel, aliquet nec, vulputate eget, arcu.
+                        </p>
+
+                        <p>
+                            In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis
+                            eu
+                            pede
+                            mollis
+                            pretium.
+                            Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate
+                            eleifend
+                            tellus. Aenean
+                            leo
+                            ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante,
+                            dapibus
+                            in,
+                            viverra quis,
+                            feugiat a, tellus.
+                        </p>
+
+                        <p>
+                            Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet.
+                            Etiam
+                            ultricies nisi
+                            vel
+                            augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas
+                            tempus,
+                            tellus eget
+                            condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed
+                            ipsum.
+                            Nam
+                            quam
+                            nunc,
+                            blandit
+                            vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt
+                            tempus.
+                            Donec
+                            vitae
+                            sapien ut
+                            libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus
+                            tincidunt.
+                            Duis leo.
+                            Sed
+                            fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo
+                            eget
+                            bibendum
+                            sodales,
+                            augue velit cursus nunc,
+                        </p>
+                    </f:format.html>
+                </div>
+                <div class="tab-pane fade" id="translation" role="tabpanel" aria-labelledby="translation-tab">
+                    ...
+                </div>
+                <div class="tab-pane fade" id="wordsFrequency" role="tabpanel" aria-labelledby="wordsFrequency-tab">
+                    ...
+                </div>
+                <div class="tab-pane fade" id="signsFrequency" role="tabpanel" aria-labelledby="signsFrequency-tab">
+                    ...
+                </div>
+            </div>
+        </div>
+    </f:then>
+    <f:else>
+        <div class="d-flex flex-row h-100 align-items-center display-3 text-center" style="opacity:0.1;">
+            <div class="fas fa-hand-point-left"></div>
+            <div>&nbsp; Select a chapter.</div>
+        </div>
+    </f:else>
+</f:if>

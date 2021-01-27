@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.0">
+  <file source-language="en" datatype="plaintext" original="messages" date="2020-07-17T15:19:30+00:00" product-name="manuscript_hero_image">
+    <header/>
+    <body>
+      <trans-unit id="wizards.newContentElement.manuscript_hero_image_title">
+        <source>Manuscript Page Hero Image</source>
+      </trans-unit>
+      <trans-unit id="wizards.newContentElement.manuscript_hero_image_description">
+        <source>The image at top of manuscript page</source>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

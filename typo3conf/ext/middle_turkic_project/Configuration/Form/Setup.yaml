@@ -1,0 +1,17 @@
+TYPO3:
+    CMS:
+        Form:
+            persistenceManager:
+                allowedExtensionPaths:
+                    200: EXT:middle_turkic_project/Resources/Private/Forms/
+            prototypes:
+                standard:
+                    formElementsDefinition:
+                        Form:
+                            renderingOptions:
+                                layoutRootPaths:
+                                    200: 'EXT:middle_turkic_project/Resources/Private/Layouts/Form/'
+                                templateRootPaths:
+                                    200: 'EXT:middle_turkic_project/Resources/Private/Templates/Form/'
+                                partialRootPaths:
+                                    200: 'EXT:middle_turkic_project/Resources/Private/Partials/Form/'

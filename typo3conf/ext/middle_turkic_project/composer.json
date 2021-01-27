@@ -1,0 +1,22 @@
+{
+    "name": "uppsala-university/middle-turkic-project",
+    "type": "typo3-cms-extension",
+    "description": "",
+    "homepage": "http://lingfil.uu.se",
+    "license": ["GPL-2.0-or-later"],
+    "keywords": ["TYPO3 CMS"],
+    "require": {
+        "bk2k/bootstrap-package": "^10.0 || ^11.0",
+        "fluidtypo3/vhs": "^6.0",
+        "causal/file_list": "^2.4",
+        "digicademy/cobj_xpath": "^1.9",
+        "digicademy/cobj_xslt": "^1.9",
+        "uppsalauniversity/manuscript-hero-image": "^0.1.0",
+        "evoweb/recaptcha": "^10.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "UppsalaUniversity\\MiddleTurkicProject\\": "Classes/"
+        }
+    }
+}
