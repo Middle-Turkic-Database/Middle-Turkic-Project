@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://epidoc.stoa.org/schema/latest/tei-epidoc.rng" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<?xml-model href="http://epidoc.stoa.org/schema/latest/tei-epidoc.rng" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xml:space="preserve" xml:lang="en">
+  <teiHeader>
+    <fileDesc>
+      <titleStmt>
+        <title ana="#no"/>
+        <author ana="#no"/>
+      </titleStmt>
+      <publicationStmt>
+        <publisher>Uppsala University, Department of linguistics and philology</publisher>
+        <pubPlace>Uppsala, Sweden</pubPlace>
+        <date>2020</date>
+        <availability status="restricted">
+          <licence target="https://creativecommons.org/licenses/by/4.0/">
+            Creative Commons Attribution 4.0 International</licence>
+        </availability>
+      </publicationStmt>
+      <sourceDesc>
+        <msDesc>
+          <msIdentifier>
+            <settlement>Warsaw, Poland</settlement>
+            <repository>Private archive</repository>
+            <idno>ADub.III.73</idno>
+          </msIdentifier>
+          <msContents>
+            <summary>
+              A Karaim translation of the Torah and the Haftarah
+            </summary>
+          </msContents>
+        </msDesc>
+      </sourceDesc>
+    </fileDesc>
+    <profileDesc>
+      <abstract>
+        <p>
+          <lg>
+            <l>Genesis 1</l>
+          </lg>
+        </p>
+      </abstract>
+    </profileDesc>
+  </teiHeader>
+  <text>
+    <body>
+      <div type="edition">
+        <div type="textpart" subtype="incipit">
+          <ab n="1">
+            <locus>2r</locus>
+            <l n="4"/>
+            <foreign xml:lang="he" style="direction: rtl; unicode-bidi: embed">
+              בראשית ברא אלהים את השמים ואת הארץ
+            </foreign>
+            <l n="5"/>
+            [1] ⸤{Enk baštan jaratty Tenri osol ol keklerni da
+            <l n="6"/>
+            osol ol jerni.
+            <foreign xml:lang="he" style="direction: rtl; unicode-bidi: embed">
+              והארץ
+            </foreign>
+            [2] Da ol jer edi v[eren]
+            <l n="7"/>
+            da bos da qaranġylyq edi jizleri istine ol darjanyn [da]
+            <l n="8"/>
+            jeli Tenrinin suvurdaredi jizleri istine ol suvlar[nyn].
+            <l n="9"/>
+            <foreign xml:lang="he" style="direction: rtl; unicode-bidi: embed">
+              ויאמר
+            </foreign>
+            [3] Da ajtty Tenri bolsun jaryq da boldu jary[q].
+            <l n="10"/>
+            <foreign xml:lang="he" style="direction: rtl; unicode-bidi: embed">
+              וירא
+            </foreign>
+            [4] Da kerdi Tenri osol ol jaryqny ki jaḥsydy da
+            <l n="11"/>
+            ajyrdy Tenri arasyna ol jaryqnyn da arasyna ol
+            <l n="12"/>
+            qaranġylyqnyn.
+            <foreign xml:lang="he" style="direction: rtl; unicode-bidi: embed">
+              ויקרא
+            </foreign>
+            [5] Da atady Tenri jaryqqa kin da
+            <l n="13"/>
+            qaranġyġa atady kece da boldu ingir da boldu [tan]
+            <l n="14"/>
+            bir kin.
+            <foreign xml:lang="he" style="direction: rtl; unicode-bidi: embed">
+              ויאמר
+            </foreign>
+            [6] Da ajtty Tenri bolsun
+            <l n="15"/>
+            raqiaʿ ortasynda ol suvlarnyn da bolsun ajyruvcu
+            <l n="16"/>
+            arasyna suvlarnyn suvlarbyla.
+            <foreign xml:lang="he" style="direction: rtl; unicode-bidi: embed">
+              ויעש
+            </foreign>
+            [7] Da jaratty Ten[ri]
+            <l n="17"/>
+            osol ol raqiaʿny da ajyrdy arasyna ol suvlarnyn ki
+            <l n="18"/>
+            asaġartyn raqiaʿġa da arasyna ol suvlarnyn ki joġarraq
+            <l n="19"/>
+            da boldu alaj.
+            <foreign xml:lang="he" style="direction: rtl; unicode-bidi: embed">
+              ויקרא
+            </foreign>
+            [8] Da atady Tenri raqiaʿġa ⟨da⟩
+            <l n="20"/>
+            kekler da boldu ingir da boldu tan ekinci kin.
+            <l n="21"/>
+            <foreign xml:lang="he" style="direction: rtl; unicode-bidi: embed">
+              ויאמר
+            </foreign>
+            [9] Da ajtty Tenri jumulsunlar ol suvlar
+            <locus>2v</locus>
+            <l n="1"/>
+            tibinden ol keklernin bir orunġa da kerinsin ol
+            <l n="2"/>
+            quru da boldu alaj.
+            <foreign xml:lang="he" style="direction: rtl; unicode-bidi: embed">
+              ויקרא
+            </foreign>
+            [10] Da atady Tenri quruġa
+            <l n="3"/>
+            jer da jumulmaġyna ol suvlarnyn atady tengizler da
+            <l n="4"/>
+            ⟨bol⟩ kerdi Tenri ki jaḥsydy.
+            <foreign xml:lang="he" style="direction: rtl; unicode-bidi: embed">
+              ויאמר
+            </foreign>
+            [11] Da ajtty
+            <l n="5"/>
+            Tenri jasartsyn ol jer jas ot keget urluq etivci
+            <l n="6"/>
+            urluq jemis aġacy qyluvcu jemis ʒynsysajyn ki urluġu
+            <l n="7"/>
+            anyn anda ol jer istine da boldu alaj.
+            <foreign xml:lang="he" style="direction: rtl; unicode-bidi: embed">
+              ותוצא
+            </foreign>
+            [12]
+            <l n="8"/>
+            Da cyġardy ol jer jas ot ⸤urluqlavcu urluq⸣
+            <l n="9"/>
+            ʒynsysajyn da aġac qyluvcu jemis ki urluġu anyn
+            <l n="10"/>
+            anda ʒynsysajyn da kerdi Tenri ki jaḥsydy.
+            <foreign xml:lang="he" style="direction: rtl; unicode-bidi: embed">
+              ויהי
+            </foreign>
+            [13]
+            <l n="11"/>
+            Da boldu ingir da boldu tan icinci kin.
+            <foreign xml:lang="he" style="direction: rtl; unicode-bidi: embed">
+              ויאמר
+            </foreign>
+            [14]
+            <l n="12"/>
+            Da ajtty Tenri bolsun jaryqlyqlar raqiaʿsynda ol
+            <l n="13"/>
+            keklernin ajyrma arasyna ol kinnin da arasyna
+            <l n="14"/>
+            ol kecenin da bolsunlar belgilerge da vaġdalarġa
+            <l n="15"/>
+            da kinlerge da jyllarġa.
+            <foreign xml:lang="he" style="direction: rtl; unicode-bidi: embed">
+              והיו
+            </foreign>
+            [15] Da bolsunlar jaryqlyq-
+            <l n="16"/>
+            larġa raqiaʿsynda ol keklernin jarytma ol jer
+            <l n="17"/>
+            istine da boldu alaj.
+            <foreign xml:lang="he" style="direction: rtl; unicode-bidi: embed">
+              ויעש
+            </foreign>
+            [16] Da jaratty Tenri osol
+            <l n="18"/>
+            eki ol ⸤jaryqlyqlarny ol ullularny⸣ osol ol ullu jaryqny
+            <l n="19"/>
+            erklenmegine ol kinnin da osol ol kici jaryqlyqny
+            <l n="20"/>
+            erklenmegine ol kecenin da osol ol jolduzlarny.
+            <foreign xml:lang="he" style="direction: rtl; unicode-bidi: embed">
+              ויתן
+            </foreign>
+            [17]
+            <l n="21"/>
+            Da berdi Tenri alarny raqiaʿsynda ol keklernin jarytma
+            <l n="22"/>
+            ol jer istine.}⸣
+            <locus>3r</locus>
+            <l n="1"/>
+            <foreign xml:lang="he" style="direction: rtl; unicode-bidi: embed">
+              ⸢משול[ול]⸥
+            </foreign>
+            [18] Da erkĺanḿa kündüz da ⸤ke[č]e[byla da ajyr-
+            <l n="2"/>
+            ma]⸣ arasyna ol jaryqnyn da arasyna ol ⸤qaran[ġylyqnyn da]⸣
+            <l n="3"/>
+            kördü Tenri ki jaḥšydy.
+            <foreign xml:lang="he" style="direction: rtl; unicode-bidi: embed">
+              ויהי
+            </foreign>
+            [19] Da boldu ⸤in[gir da bol-]
+            <l n="4"/>
+            du⸣ tan da dörtünčü kün.
+            <foreign xml:lang="he" style="direction: rtl; unicode-bidi: embed">
+              ויאמר
+            </foreign>
+            [20] Da ⸤ajt[ty Tenri]⸣
+            <l n="5"/>
+            qozlasynlar ol suvlar qozlamaġyn tiri ǯannyn da ⸤qu[š učqa-]
+            <l n="6"/>
+            lasyn⸣ ol jer üstüńa juvuq raqiaʿsyna ol kökler[nin].
+            <l n="7"/>
+            <foreign xml:lang="he" style="direction: rtl; unicode-bidi: embed">
+              ויברא
+            </foreign>
+            [21] Da jaratty Tenri ošol ol ⸤aždahalarny o[l ullular-]
+            <l n="8"/>
+            ny⸣ da ošol ol bar tiri ǯanny ol tebrenedoġanny ⸤[ki qoz-]
+            <l n="9"/>
+            ladylar⸣ ol suvlar ǯynslary sajyn da ošol bar ol ⸤qanatl[y qušnu]⸣
+            <l n="10"/>
+            ǯynsy sajyn da kördü Tenri ki jaḥšydy.
+            <foreign xml:lang="he" style="direction: rtl; unicode-bidi: embed">
+              ויברך
+            </foreign>
+            [22] Da [alġyšla-]
+            <l n="11"/>
+            dy alarny Tenri ajtadoġač jajylyjyz da artyjyz da [toltu-]
+            <l n="12"/>
+            rujuz ošol ol suvlarny tengizlerd́a da ol quš [art-]
+            <l n="13"/>
+            syn jerd́a.
+            <foreign xml:lang="he" style="direction: rtl; unicode-bidi: embed">
+              ויהי
+            </foreign>
+            [23] Da boldu ingir da boldu tan [bešinči]
+            <l n="14"/>
+            kün.
+            <foreign xml:lang="he" style="direction: rtl; unicode-bidi: embed">
+              ויאמר
+            </foreign>
+            [24] Da ajtty Tenri čyġarsyn ol jer [tiri]
+            <l n="15"/>
+            ǯan ǯynsy sajyn tuvarda qomuzda kijigin jernin ⸤ǯyn[sy sajyn]⸣
+            <l n="16"/>
+            da boldu alaj.
+            <foreign xml:lang="he" style="direction: rtl; unicode-bidi: embed">
+              ויעש
+            </foreign>
+            [25] Da jaratty Tenri ošol ⸤ki[jigin ol]⸣
+            <l n="17"/>
+            jernin ǯynsy sajyn da ošol ol tuvarny ǯynsy sajyn da ⸤o[šol bar]⸣
+            <l n="18"/>
+            qomuzun ol jernin ǯynsy sajyn da kördü Tenri ki jaḥšy[dy].
+            <l n="19"/>
+            <foreign xml:lang="he" style="direction: rtl; unicode-bidi: embed">
+              ויאמר
+            </foreign>
+            [26] Da ajtty Tenri jaratajyq adam susumuz [byla]
+            <l n="20"/>
+            uqšašymyzġa köŕa da erklensinĺar balyġynda ⸤[ol ten-]
+            <l n="21"/>
+            giznin⸣ da qušunda ol köklernin da tuvarda da bar ⸤[ol
+            <locus>3v</locus>
+            <l n="1"/>
+            jerd́]a⸣ da bar ol qomuzda ol tebrenedoġan ol jer üstü-
+            <l n="2"/>
+            ńa.
+            <foreign xml:lang="he" style="direction: rtl; unicode-bidi: embed">
+              ויברא
+            </foreign>
+            [27] Da jaratty Tenri ošol ol adamny susu byla
+            <l n="3"/>
+            susu byla malaḫnyn jaratty any erkekni da tišini jaratty
+            <l n="4"/>
+            alarny.
+            <foreign xml:lang="he" style="direction: rtl; unicode-bidi: embed">
+              ויברך
+            </foreign>
+            [28] Da alġyšlady alarny Tenri da ajtty alarġa
+            <l n="5"/>
+            Tenri jajylyjyz da artyjyz da tolturujuz ošol ol jerni
+            <l n="6"/>
+            da tutuvlanyjyz anda da er{r}klenijiz balyġynda ol tengiznin
+            <l n="7"/>
+            da qušunda ol köklernin da bar tiride ol tebrenedoġan
+            <l n="8"/>
+            ol jer üstüńa.
+            <foreign xml:lang="he" style="direction: rtl; unicode-bidi: embed">
+              ויאמר
+            </foreign>
+            [29] Da ajtty Tenri muna
+            <l n="9"/>
+            berdim sizǵa ošol bar kögötnü urluqlavčunu urluq ki
+            <l n="10"/>
+            jüzĺari üstüńa bar ol jernin da ošol bar ol aġačny ki
+            <l n="11"/>
+            anda jemiš aġačy urluqlavču urluq sizǵa bolsun jemǵa.
+            <l n="11"/>
+            <foreign xml:lang="he" style="direction: rtl; unicode-bidi: embed">
+              ולכל
+            </foreign>
+            [30] Da bar kijigińa ol jernin da bar qušuna ol köklernin
+            <l n="13"/>
+            da bar tebrenedoġanġa ol jer üstüńa ki anda tiri ǯan
+            <l n="14"/>
+            ošol bar ješilligin kögötnün jemǵa da boldu alaj.
+            <l n="15"/>
+            <foreign xml:lang="he" style="direction: rtl; unicode-bidi: embed">
+              וירא
+            </foreign>
+            [31] Da kördü Tenri ošol barča neki jaratty da
+            <l n="16"/>
+            muna jaḥšydy astry da boldu ingir da boldu tan ol altyn-
+            <l n="17"/>
+            čy kün.
+          </ab>
+        </div>
+      </div>
+      <div type="apparatus">
+        <listApp>
+          <app>
+            <note></note>
+          </app>
+        </listApp>
+      </div>
+    </body>
+  </text>
+</TEI>
