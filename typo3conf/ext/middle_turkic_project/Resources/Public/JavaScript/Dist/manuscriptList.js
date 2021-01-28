@@ -72,7 +72,7 @@ $(".ms-nav-2nd .nav-link,.ms-nav-1st .nav-link:not(.dropdown-toggle)").on('show.
 
     var test = $(this);
     $("#msTranscriptContent").load(encodeURI(transcriptURI));
-    
+
     $(".ms-nav-2nd a.nav-link").removeClass("active");
     $(".ms-nav-1st .nav-link").removeClass("latest-tab");
  });

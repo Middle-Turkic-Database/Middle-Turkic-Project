@@ -31,17 +31,24 @@
    </xsl:template>
    
    <xsl:template match="tei:ab">
-      <h5><xsl:apply-templates select="tei:locus"/></h5>
-      <p><xsl:apply-templates select="*[not(self::tei:locus)]" /></p>
+      <p><xsl:apply-templates /></p>
    </xsl:template>
    
    <xsl:template match="tei:locus">
-      <xsl:apply-templates />
+      <xsl:copy-of select="$newLine" />
+      <b><em><xsl:apply-templates />: </em></b>
    </xsl:template>
-   
+
    <xsl:template match="tei:l">
-      <xsl:if test="@n > 1">
-         <xsl:copy-of select="$newLine" />
-      </xsl:if>
+      (<xsl:value-of select="./@n"></xsl:value-of>) 
+   </xsl:template>
+
+   <xsl:template match="tei:foreign">
+      <xsl:element name="span">
+         <xsl:attribute name="style">
+            <xsl:value-of select="./@style" />
+         </xsl:attribute>
+         <xsl:apply-templates />
+      </xsl:element>
    </xsl:template>
 </xsl:stylesheet>
