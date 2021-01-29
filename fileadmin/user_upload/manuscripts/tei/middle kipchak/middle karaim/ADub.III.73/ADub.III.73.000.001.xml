@@ -48,16 +48,19 @@
         <div type="textpart" subtype="incipit">
           <ab n="1">
             <locus>2r</locus>
-            <l n="1"/>
-            <foreign xml:lang="he" style="direction: rtl; unicode-bidi: embed">
+            <l n="1">
+              <foreign xml:lang="he" style="unicode-bidi: embed;">
               עתה בעזרת ה אל גבור ונורא אחל לכ[…]
-            </foreign>
-            <l n="2"/>
-            <foreign xml:lang="he" style="direction: rtl; unicode-bidi: embed">
+              </foreign>
+            </l>
+            <l n="2">
+              <foreign xml:lang="he" style="unicode-bidi: embed;">
               פשטי ספר החומש והאל הנאזר בגבורה […]</foreign>
-            <l n="3"/>
-            <foreign xml:lang="he" style="direction: rtl; unicode-bidi: embed">
+            </l>
+            <l n="3">
+              <foreign xml:lang="he" style="unicode-bidi: embed;">
               ויסעדנו מהתחלה עד גמירא ׳ ס א</foreign>
+            </l>
           </ab>
         </div>
       </div>
