@@ -31,16 +31,22 @@
    </xsl:template>
    
    <xsl:template match="tei:ab">
-      <p><xsl:apply-templates /></p>
+      <table><xsl:apply-templates /></table>
    </xsl:template>
    
    <xsl:template match="tei:locus">
-      <xsl:copy-of select="$newLine" />
-      <b><em><xsl:apply-templates />: </em></b>
+      <tr>
+         <td class="pt-3">
+            <h5><xsl:apply-templates /></h5>
+         </td>
+      </tr>
    </xsl:template>
 
    <xsl:template match="tei:l">
-      (<xsl:value-of select="./@n"></xsl:value-of>) 
+      <tr>
+         <td class="align-text-top" style="width: 10%;">(<xsl:value-of select="./@n" />)</td>
+         <td><xsl:apply-templates /></td>
+      </tr>
    </xsl:template>
 
    <xsl:template match="tei:foreign">
