@@ -46,9 +46,6 @@ $(document).ready(function() {
 // Manuscript Navigation
 $(function() {
     $('.ms-nav-1st [data-toggle="pill"], .ms-nav-2nd [data-toggle="pill"]').tooltip();
-    $('.ms-nav-1st [data-toggle="pill"], .ms-nav-2nd [data-toggle="pill"]').ready(function() {
-        console.log("test2");
-    });
 });
 
 $(".ms-nav-1st .nav-link").on('show.bs.tab', function(event) {
