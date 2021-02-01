@@ -21,6 +21,7 @@ page {
         theme = EXT:middle_turkic_project/Resources/Public/Scss/Theme/theme.scss
         toastr = https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css
         toastr.external = 1
+        dot-pulse = EXT:middle_turkic_project/Resources/Public/Css/dot-pulse.css
     }
 
     includeJSLibs {

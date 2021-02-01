@@ -58,12 +58,17 @@ div#transliteration {
   
     &.ms-nav-1st {
       a.nav-link.latest-tab {
-        background-color: Khaki;
+        background-color: lightblue;
+      }
+    }
+
+    &.ms-nav-2nd {
+      a.nav-link {
+        border-radius: 0;
       }
     }
     
     a.nav-link {
-      border-radius: 0;
       border-left: 1px solid white;
       padding: 0;
       height: 25px;

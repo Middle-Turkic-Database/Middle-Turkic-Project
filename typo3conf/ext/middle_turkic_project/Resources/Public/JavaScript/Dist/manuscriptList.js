@@ -7,22 +7,6 @@ $(function() {
 
 });
 
-// const queryString = window.location.search;
-// const urlParams = new URLSearchParams(queryString);
-// const manuscriptFullName = urlParams.get('manuscript');
-// if (manuscriptFullName != null) {
-//     const manuscriptName = manuscriptFullName.substr(0, manuscriptFullName.lastIndexOf(".xml"));
-//     const section = urlParams.get('tale');
-
-//     $(function() {
-//         $("#manuscriptList.list-group #" + manuscriptName + ".list-group-item").addClass("active")
-//         $("#manuscriptList.list-group #" + manuscriptName + ".list-group-item i.fa-angle-double-right").removeClass("fa-angle-double-right").addClass("fa-angle-double-down");
-//         $("#manuscriptList.list-group #group-list-" + manuscriptName + ".list-group").addClass("show");
-//         $("#manuscriptList.list-group #group-list-" + manuscriptName + ".list-group #section-" + section + ".list-group-item").addClass("active");
-//     });
-
-// }
-
 $(document).ready(function() {
     $('#dtManuscriptList').DataTable({
         drawCallback: function() {
@@ -40,7 +24,13 @@ $(document).ready(function() {
         $('.manuscript-hero-image').parent().addClass('d-none');
     };
 
-    $("#msTranscriptContent").load(encodeURI("/mstranscript?msNav=" + $("#msTranscriptContent").data('msnav') + "&msName=" + $("#msTranscriptContent").data('msname')))
+    var transcriptURI = "/mstranscript?msNav=" + $("#msTranscriptContent").data('msnav') + "&msName=" + $("#msTranscriptContent").data('msname');
+
+    $("#msTranscriptContent").hide().load(encodeURI(transcriptURI), function() {
+        $('.loader').fadeOut('fast', function() {
+            $("#msTranscriptContent").fadeIn();
+        });
+    });
 });
 
 // Manuscript Navigation
@@ -67,8 +57,14 @@ $(".ms-nav-2nd .nav-link,.ms-nav-1st .nav-link:not(.dropdown-toggle)").on('show.
         transcriptURI += $(this).data("chapterno");
     }
 
-    var test = $(this);
-    $("#msTranscriptContent").load(encodeURI(transcriptURI));
+    $("#msTranscriptContent").fadeOut(function() {
+        $(".loader").fadeIn('fast');
+        $("#msTranscriptContent").load(encodeURI(transcriptURI), function() {
+            $(".loader").fadeOut('fast', function() {
+                $("#msTranscriptContent").fadeIn('');
+            });
+        });
+    });
 
     $(".ms-nav-2nd a.nav-link").removeClass("active");
     $(".ms-nav-1st .nav-link").removeClass("latest-tab");
