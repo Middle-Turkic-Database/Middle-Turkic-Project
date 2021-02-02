@@ -27,7 +27,7 @@ lib.manuscriptNav {
 
 lib.manuscriptPath {
    10 = TEXT
-   10.value = fileadmin/user_upload/manuscripts/tei/
+   10.value = fileadmin/user_upload/manuscripts/
 
    20 < lib.manuscriptNav
 }
@@ -62,7 +62,7 @@ lib.manuscriptDescription {
       return = xml
    }
    transformations.1 {
-      stylesheet = fileadmin/user_upload/manuscripts/config/manuscriptDescription.xsl
+      stylesheet = EXT:middle_turkic_project/Configuration/MSConvertors/manuscriptDescription.xsl
       setParameters {
          xmlAddress.value < lib.xpath.source
          pageURL.value.typolink {

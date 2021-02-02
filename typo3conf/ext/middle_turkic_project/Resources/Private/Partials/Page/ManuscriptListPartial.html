@@ -52,7 +52,7 @@
             <f:for each="{files -> fl:filter(extensions:'xml')}" as="file" iteration="fileKey">
                 <tr data-href="{f:uri.page(additionalParams:{manuscript:'{v:format.pregReplace(subject:\'{file.name}\', pattern:\'#((?i)\b\.xml\b)(?!.*\1)#\', replacement:\'\')}'})}">
                     <f:format.raw>
-                        <xslt:transform source="fileadmin{file.identifier}" transformations="{0:{stylesheet: 'fileadmin/user_upload/manuscripts/config/manuscriptTable.xsl'}}" />
+                        <xslt:transform source="fileadmin{file.identifier}" transformations="{0:{stylesheet: 'EXT:middle_turkic_project/Configuration/MSConvertors/manuscriptTable.xsl'}}" />
                     </f:format.raw>
                 </tr>
             </f:for>
@@ -63,7 +63,7 @@
 <f:section name="manuscriptContentSection">
     <div>
         <f:format.raw>
-            <xslt:transform source="{manuscriptPath}/{manuscriptArgument}.xml" transformations="{0:{stylesheet: 'fileadmin/user_upload/manuscripts/config/manuscriptJumbotron.xsl'}}" />
+            <xslt:transform source="{manuscriptPath}/{manuscriptArgument}.xml" transformations="{0:{stylesheet: 'EXT:middle_turkic_project/Configuration/MSConvertors/manuscriptJumbotron.xsl'}}" />
         </f:format.raw>
 
         <ul class="nav nav-tabs" id="manuscriptTabs" role="tablist">
@@ -102,7 +102,7 @@
             <div class="tab-pane fade" id="transcription" role="tabpanel" aria-labelledby="transcription-tab">
                 <div>
                     <f:format.raw>
-                        <xslt:transform source="{manuscriptPath}/{manuscriptArgument}.xml" transformations="{0:{stylesheet: 'fileadmin/user_upload/manuscripts/config/manuscriptNavigationBar.xsl'}}" />
+                        <xslt:transform source="{manuscriptPath}/{manuscriptArgument}.xml" transformations="{0:{stylesheet: 'EXT:middle_turkic_project/Configuration/MSConvertors/manuscriptNavigationBar.xsl'}}" />
                     </f:format.raw>
                 </div>
 
