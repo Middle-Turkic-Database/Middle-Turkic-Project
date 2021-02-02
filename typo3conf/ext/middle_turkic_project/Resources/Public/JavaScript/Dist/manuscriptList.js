@@ -20,13 +20,22 @@ $(document).ready(function() {
         }
     });
     $('.dataTables_length').addClass('bs-select');
-    if($('#manuscriptTabs').length) {
+    if ($('#manuscriptTabs').length) {
         $('.manuscript-hero-image').parent().addClass('d-none');
     };
 
     var transcriptURI = "/mstranscript?msNav=" + $("#msTranscriptContent").data('msnav') + "&msName=" + $("#msTranscriptContent").data('msname');
 
-    $("#msTranscriptContent").hide().load(encodeURI(transcriptURI), function() {
+    $("#msTranscriptContent").hide().load(encodeURI(transcriptURI), function(response, status, xhr) {
+        if (status == "error") {
+            var errorMessage = "";
+            if (xhr.readyState == 0) {
+                errorMessage = "An error occured while fetching the manuscript. Check your Internet connection.";
+            } else {
+                errorMessage = "An error occured while fetching the manuscript: " + xhr.status + " " + xhr.statusText;
+            }
+            $("#msTranscriptContent").html(errorMessage);
+        }
         $('.loader').fadeOut('fast', function() {
             $("#msTranscriptContent").fadeIn();
         });
@@ -49,8 +58,7 @@ $(".ms-nav-2nd .nav-link,.ms-nav-1st .nav-link:not(.dropdown-toggle)").on('show.
     var transcriptURI = "/mstranscript?msNav=" + $("#msTranscriptContent").data('msnav') + "&msName=" + $("#msTranscriptContent").data('msname') + "&msBook=";
     if ($(this).closest(".nav").hasClass("ms-nav-1st")) {
         transcriptURI += $(this).data("bookno");
-    }
-    else {
+    } else {
         var tabID = $(this).closest(".tab-pane").attr("id");
         transcriptURI += $(".ms-nav-1st .nav-link[href='#" + tabID + "']").data('bookno');
         transcriptURI += "&msChapter=";
@@ -59,7 +67,16 @@ $(".ms-nav-2nd .nav-link,.ms-nav-1st .nav-link:not(.dropdown-toggle)").on('show.
 
     $("#msTranscriptContent").fadeOut(function() {
         $(".loader").fadeIn('fast');
-        $("#msTranscriptContent").load(encodeURI(transcriptURI), function() {
+        $("#msTranscriptContent").load(encodeURI(transcriptURI), function(response, status, xhr) {
+            if (status == "error") {
+                var errorMessage = "";
+                if (xhr.readyState == 0) {
+                    errorMessage = "An error occured while fetching the manuscript. Check your Internet connection.";
+                } else {
+                    errorMessage = "An error occured while fetching the manuscript: " + xhr.status + " " + xhr.statusText;
+                }
+                $("#msTranscriptContent").html(errorMessage);
+            }
             $(".loader").fadeOut('fast', function() {
                 $("#msTranscriptContent").fadeIn('');
             });
@@ -68,4 +85,4 @@ $(".ms-nav-2nd .nav-link,.ms-nav-1st .nav-link:not(.dropdown-toggle)").on('show.
 
     $(".ms-nav-2nd a.nav-link").removeClass("active");
     $(".ms-nav-1st .nav-link").removeClass("latest-tab");
- });
+});
