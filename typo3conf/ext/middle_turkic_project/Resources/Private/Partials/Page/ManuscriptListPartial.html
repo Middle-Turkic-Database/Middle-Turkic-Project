@@ -71,7 +71,19 @@
                 <a class="nav-link active" id="Description-tab" data-toggle="tab" href="#description" role="tab" aria-controls="description" aria-selected="true">Description</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="transcription-tab" data-toggle="tab" href="#transcription" role="tab" aria-controls="transcription" aria-selected="false">Transcription</a>
+                <f:variable name="transcriptionExists"/>
+                <f:variable name="transcriptionExists">
+                    <f:if condition="{v:media.exists(directory:'{manuscriptPath}/{manuscriptArgument}', then:'1', else:'0')}">
+                        <f:variable name="fileCount">
+                            <f:count><v:media.files path="{manuscriptPath}/{manuscriptArgument}" extensionList="xml" /></f:count>    
+                        </f:variable>
+                        <f:if condition="{fileCount} > 0">
+                            1
+                        </f:if>
+                    </f:if>                    
+                </f:variable>
+                {transcriptionExists -> v:format.trim() -> f:variable(name:'transcriptionExists')}
+                <a class="nav-link{f:if(condition:'{transcriptionExists}', else:' disabled')}" id="transcription-tab" data-toggle="tab" href="#transcription" role="tab" aria-controls="transcription" aria-selected="false">Transcription</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link disabled" id="translation-tab" data-toggle="tab" href="#translation" role="tab" aria-controls="translation" aria-selected="false">Translation</a>
