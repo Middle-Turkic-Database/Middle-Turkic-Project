@@ -39,6 +39,7 @@ $(document).ready(function() {
         $('.loader').fadeOut('fast', function() {
             $("#msTranscriptContent").fadeIn();
         });
+        $('[data-toggle="tooltip"]').tooltip()
     });
 });
 
@@ -80,6 +81,7 @@ $(".ms-nav-2nd .nav-link,.ms-nav-1st .nav-link:not(.dropdown-toggle)").on('show.
             $(".loader").fadeOut('fast', function() {
                 $("#msTranscriptContent").fadeIn('');
             });
+            $('[data-toggle="tooltip"]').tooltip()
         });
     });
 
