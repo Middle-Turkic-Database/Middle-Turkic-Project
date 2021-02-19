@@ -46,20 +46,20 @@
     <body>
       <div type="edition">
         <div type="textpart" subtype="incipit">
-          <ab n="1">
-            <locus>2r</locus>
+          <ab>
+            <milestone unit="pb" n="2r"/>
+            <ref target="fn1" type="noteAnchor">1</ref>
             <l n="1">
+              <milestone unit="lb" n="1"/>
               <foreign xml:lang="he" style="unicode-bidi: embed;">
-              עתה בעזרת ה אל גבור ונורא אחל לכ[…]
+                עתה בעזרת ה אל גבור ונורא אחל לכ[…]
               </foreign>
-            </l>
-            <l n="2">
+              <milestone unit="lb" n="2"/>
               <foreign xml:lang="he" style="unicode-bidi: embed;">
-              פשטי ספר החומש והאל הנאזר בגבורה […]</foreign>
-            </l>
-            <l n="3">
+                פשטי ספר החומש והאל הנאזר בגבורה […]</foreign>
+              <milestone unit="lb" n="3"/>
               <foreign xml:lang="he" style="unicode-bidi: embed;">
-              ויסעדנו מהתחלה עד גמירא ׳ ס א</foreign>
+                ויסעדנו מהתחלה עד גמירא ׳ ס א</foreign>
             </l>
           </ab>
         </div>
@@ -67,7 +67,7 @@
       <div type="apparatus">
         <listApp>
           <app>
-            <note>Verses Gen 1:1–1:17 of the original manuscript are missing because of damage. These fragments were supplemented by another hand in the 19th century in South-Western Karaim. The folios 2r – 2v were erroneously sewn in after folio 1v.</note>
+            <note xml:id="fn1" type="footnote">Verses Gen 1:1–1:17 of the original manuscript are missing because of damage. These fragments were supplemented by another hand in the 19th century in South-Western Karaim. The folios 2r – 2v were erroneously sewn in after folio 1v.</note>
           </app>
         </listApp>
       </div>

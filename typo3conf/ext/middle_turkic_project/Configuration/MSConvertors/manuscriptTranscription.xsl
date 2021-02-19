@@ -83,7 +83,9 @@
          </xsl:attribute>
          <xsl:attribute name="title">
             <xsl:variable name="footnoteContent">
-               <xsl:apply-templates select="key('footnote', @target)" />
+               <div class="text-left">
+                  <xsl:apply-templates select="key('footnote', @target)" />
+               </div>
             </xsl:variable>
             <xsl:call-template name="xml-to-string">
                <xsl:with-param name="node-set" select="common:node-set($footnoteContent)" />
@@ -91,5 +93,11 @@
          </xsl:attribute>
          <xsl:apply-templates />
       </xsl:element>
+   </xsl:template>
+
+   <xsl:template match="tei:emph">
+      <em>
+         <xsl:apply-templates />
+      </em>
    </xsl:template>
 </xsl:stylesheet>

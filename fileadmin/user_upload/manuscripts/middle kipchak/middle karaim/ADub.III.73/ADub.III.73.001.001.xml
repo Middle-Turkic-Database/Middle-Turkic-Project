@@ -236,10 +236,11 @@
               <milestone unit="lb" n="1"/>
             </l>
             <l n="18">
+              ⸤
               <foreign xml:lang="he" style="unicode-bidi: embed;">
-                ⸢משול[ול]⸥<ref target="fn20" type="noteAnchor">20</ref>
+                [משול[ול
               </foreign>
-              [18] Da erkĺanḿa kündüz da ⸤ke[č]e[byla da ajyr-
+              [18]⸣<ref target="fn20" type="noteAnchor">20</ref> Da erkĺanḿa kündüz da ⸤ke[č]e[byla da ajyr-
               <milestone unit="lb" n="2"/>
               ma]⸣<ref target="fn21" type="noteAnchor">21</ref>
               arasyna ol jaryqnyn da arasyna ol ⸤qaran[ġylyqnyn da]⸣<ref target="fn22" type="noteAnchor">22</ref>
@@ -407,24 +408,24 @@
       <div type="apparatus">
         <listApp>
           <app>
-            <note xml:id="fn1" type="footnote">H: veren. | C: viran. | V: heč. | P: veŕac; a printing error or a scribal error.</note>
+            <note xml:id="fn1" type="footnote">H: <emph>veren.</emph> | C: <emph>viran.</emph> | V: <emph>heč.</emph> | P: <emph>veŕac</emph>; a printing error or a scribal error.</note>
             <note xml:id="fn2" type="footnote">TKow.01: deest.</note>
-            <note xml:id="fn3" type="footnote">TKow.01: da. | H: da. | C: da. | V: da. | P: da.</note>
-            <note xml:id="fn4" type="footnote">TKow.01: šuvuldaredi.</note>
-            <note xml:id="fn5" type="footnote">TKow.01: suvlarnyn. | H: suvlarnyn. | C: suvlarnyŋ. | V: suvlarnyn. | P: suklarnyn; a printing error or a scribal error.</note>
-            <note xml:id="fn6" type="footnote">TKow.01: jaryq. | H: jaryq. | C: jaryq. | V: jaryḥ. | P: jaryq.</note>
-            <note xml:id="fn7" type="footnote">TKow.01: tan. | H: tan. | C: ertä. | V: tan.</note>
-            <note xml:id="fn8" type="footnote">TKow.01: qyldy.</note>
-            <note xml:id="fn9" type="footnote">TKow.01: Tenri. | H: Tenri. | C: Täŋri. | V: Tenri.</note>
-            <note xml:id="fn10" type="footnote">TKow.01: joġartyn raqiaʿġa.</note>
-            <note xml:id="fn11" type="footnote">TKow.01: ot kögöt.</note>
-            <note xml:id="fn12" type="footnote">TKow.01: urluq etüvčü urluq.</note>
-            <note xml:id="fn13" type="footnote">TKow.01: jaryqlar.</note>
-            <note xml:id="fn14" type="footnote">TKow.01: jaryq etḿa.</note>
-            <note xml:id="fn15" type="footnote">TKow.01: qyldy.</note>
-            <note xml:id="fn16" type="footnote">TKow.01: ullu jaryqlyqlarny.</note>
-            <note xml:id="fn17" type="footnote">TKow.01: jaryqlyqny.</note>
-            <note xml:id="fn18" type="footnote">TKow.01: jaryq etḿa.</note>
+            <note xml:id="fn3" type="footnote">TKow.01: <emph>da</emph>. | H: <emph>da</emph>. | C: <emph>da</emph>. | V: <emph>da</emph>. | P: <emph>da</emph>.</note>
+            <note xml:id="fn4" type="footnote">TKow.01: <emph>šuvuldaredi</emph>.</note>
+            <note xml:id="fn5" type="footnote">TKow.01: <emph>suvlarnyn</emph>. | H: <emph>suvlarnyn</emph>. | C: <emph>suvlarnyŋ</emph>. | V: <emph>suvlarnyn</emph>. | P: <emph>suklarnyn</emph>; a printing error or a scribal error.</note>
+            <note xml:id="fn6" type="footnote">TKow.01: <emph>jaryq</emph>. | H: <emph>jaryq</emph>. | C: <emph>jaryq</emph>. | V: <emph>jaryḥ</emph>. | P: <emph>jaryq</emph>.</note>
+            <note xml:id="fn7" type="footnote">TKow.01: <emph>tan</emph>. | H: <emph>tan</emph>. | C: <emph>ertä</emph>. | V: <emph>tan</emph>.</note>
+            <note xml:id="fn8" type="footnote">TKow.01: <emph>qyldy</emph>.</note>
+            <note xml:id="fn9" type="footnote">TKow.01: <emph>Tenri</emph>. | H: <emph>Tenri</emph>. | C: <emph>Täŋri</emph>. | V: <emph>Tenri</emph>.</note>
+            <note xml:id="fn10" type="footnote">TKow.01: <emph>joġartyn raqiaʿġa</emph>.</note>
+            <note xml:id="fn11" type="footnote">TKow.01: <emph>ot kögöt</emph>.</note>
+            <note xml:id="fn12" type="footnote">TKow.01: <emph>urluq etüvčü urluq</emph>.</note>
+            <note xml:id="fn13" type="footnote">TKow.01: <emph>jaryqlar</emph>.</note>
+            <note xml:id="fn14" type="footnote">TKow.01: <emph>jaryq etḿa</emph>.</note>
+            <note xml:id="fn15" type="footnote">TKow.01: <emph>qyldy</emph>.</note>
+            <note xml:id="fn16" type="footnote">TKow.01: <emph>ullu jaryqlyqlarny</emph>.</note>
+            <note xml:id="fn17" type="footnote">TKow.01: <emph>jaryqlyqny</emph>.</note>
+            <note xml:id="fn18" type="footnote">TKow.01: <emph>jaryq etḿa</emph>.</note>
             <note xml:id="fn19" type="footnote">Insertion by another hand in South-Western Karaim.</note>
             <note xml:id="fn20" type="footnote">Heb.
               <foreign xml:lang="he" style="unicode-bidi: embed;">
@@ -435,33 +436,33 @@
                 ולמשל.
               </foreign>
             </note>
-            <note xml:id="fn21" type="footnote">TKow.01: keč́abyla da ajyrma. | H: kecede da ajyrma. | C: kečädä da ajyrma.</note>
-            <note xml:id="fn22" type="footnote">TKow.01: qaranġylyqnyn da. | H: qaranġylyqnyn da. | C: qaraŋġuluqnyŋ da.</note>
-            <note xml:id="fn23" type="footnote">TKow.01: ingir da boldu. | H: ingir da boldu. | C: yŋyr da boldy.</note>
-            <note xml:id="fn24" type="footnote">TKow.01: ajtty Tenri. | H: ajtty Tenri. | C: ajtty Täŋri.</note>
-            <note xml:id="fn25" type="footnote">H: qus ucqalasyn. | C: quš učsyn.</note>
-            <note xml:id="fn26" type="footnote">K: raqaiaʿsyna; a scribal error; cf. Gen 1:6–8, Gen 1:14–15. | H: raqiaʿsynyn; different syntax. | C: tabaqasynyŋ. | Cf. Heb.
+            <note xml:id="fn21" type="footnote">TKow.01: <emph>keč́abyla da ajyrma</emph>. | H: <emph>kecede da ajyrma</emph>. | C: <emph>kečädä da ajyrma</emph>.</note>
+            <note xml:id="fn22" type="footnote">TKow.01: <emph>qaranġylyqnyn da</emph>. | H: <emph>qaranġylyqnyn da</emph>. | C: <emph>qaraŋġuluqnyŋ da</emph>.</note>
+            <note xml:id="fn23" type="footnote">TKow.01: <emph>ingir da boldu</emph>. | H: <emph>ingir da boldu</emph>. | C: <emph>yŋyr da boldy</emph>.</note>
+            <note xml:id="fn24" type="footnote">TKow.01: <emph>ajtty Tenri</emph>. | H: <emph>ajtty Tenri</emph>. | C: <emph>ajtty Täŋri</emph>.</note>
+            <note xml:id="fn25" type="footnote">H: <emph>qus ucqalasyn</emph>. | C: <emph>quš učsyn</emph>.</note>
+            <note xml:id="fn26" type="footnote">K: <emph>raqaiaʿsyna</emph>; a scribal error; cf. Gen 1:6–8, Gen 1:14–15. | H: <emph>raqiaʿsynyn</emph>; different syntax. | C: <emph>tabaqasynyŋ</emph>. | Cf. Heb.
               <foreign xml:lang="he" style="unicode-bidi: embed;">
                 רָקִיעַ
               </foreign>
               ‘firmament’.
             </note>
-            <note xml:id="fn27" type="footnote">TKow.01: kökĺarnin. | H: köklernin. | C: kökniŋ.</note>
-            <note xml:id="fn28" type="footnote">TKow.01: ullu aždahalarny. | H: aʒdaġalarny ol ullularny. | C: ulu aǯydaḥylarny.</note>
-            <note xml:id="fn29" type="footnote">TKow.01: ki qozladylar. | H: ki qozladylar. | C: ki qozaladylar.</note>
-            <note xml:id="fn30" type="footnote">TKow.01: qanatly qušnu. | H: qanatly qusnu. | C: qanatly qušny.</note>
-            <note xml:id="fn31" type="footnote">TKow.01: alġyšlady. | H: alġyslady. | C: alġyšlady.</note>
-            <note xml:id="fn32" type="footnote">TKow.01: tolturujuz. | H: tolturunuz. | C: toluŋuz. | Cf. Gen 1:28.</note>
-            <note xml:id="fn33" type="footnote">TKow.01: artsyn. | H: artsyn. | C: köbäjsin.</note>
-            <note xml:id="fn34" type="footnote">TKow.01: bešinči. | H: besinci. | C: bešinǯi.</note>
-            <note xml:id="fn35" type="footnote">TKow.01: tiri. | H: tiri. | C: tiri.</note>
-            <note xml:id="fn36" type="footnote">TKow.01: ǯynsy sajyn. | H: ʒynsy sajyn. | C: ǯinsinä.</note>
-            <note xml:id="fn37" type="footnote">TKow.01: kijigin ol. | H: kijigin ol. | C: kijigin ol.</note>
-            <note xml:id="fn38" type="footnote">TKow.01: ošol bar. | H: osol ol bar. | C: šol barča.</note>
-            <note xml:id="fn39" type="footnote">Cf. Gen. 1:18, 1:21. | TKow.01: jaḥšydy. | H: jaḥsydy. | C: jaḥšydyr.</note>
-            <note xml:id="fn40" type="footnote">Cf. Gen. 1:26. | TKow.01: byla. | H: byla. | C: deest; different syntax.</note>
-            <note xml:id="fn41" type="footnote">TKow.01: ol tengiznin. | H: ol tengiznin. | C: ol teŋizniŋ.</note>
-            <note xml:id="fn42" type="footnote">TKow.01: ol jerd́a. | H: ol jerde. | C: ol jergä.</note>
+            <note xml:id="fn27" type="footnote">TKow.01: <emph>kökĺarnin</emph>. | H: <emph>köklernin</emph>. | C: <emph>kökniŋ</emph>.</note>
+            <note xml:id="fn28" type="footnote">TKow.01: <emph>ullu aždahalarny</emph>. | H: <emph>aʒdaġalarny ol ullularny</emph>. | C: <emph>ulu aǯydaḥylarny</emph>.</note>
+            <note xml:id="fn29" type="footnote">TKow.01: <emph>ki qozladylar</emph>. | H: <emph>ki qozladylar</emph>. | C: <emph>ki qozaladylar</emph>.</note>
+            <note xml:id="fn30" type="footnote">TKow.01: <emph>qanatly qušnu</emph>. | H: <emph>qanatly qusnu</emph>. | C: <emph>qanatly qušny</emph>.</note>
+            <note xml:id="fn31" type="footnote">TKow.01: <emph>alġyšlady</emph>. | H: <emph>alġyslady</emph>. | C: <emph>alġyšlady</emph>.</note>
+            <note xml:id="fn32" type="footnote">TKow.01: <emph>tolturujuz</emph>. | H: <emph>tolturunuz</emph>. | C: <emph>toluŋuz</emph>. | Cf. Gen 1:28.</note>
+            <note xml:id="fn33" type="footnote">TKow.01: <emph>artsyn</emph>. | H: <emph>artsyn</emph>. | C: <emph>köbäjsin</emph>.</note>
+            <note xml:id="fn34" type="footnote">TKow.01: <emph>bešinči</emph>. | H: <emph>besinci</emph>. | C: <emph>bešinǯi</emph>.</note>
+            <note xml:id="fn35" type="footnote">TKow.01: <emph>tiri</emph>. | H: <emph>tiri</emph>. | C: <emph>tiri</emph>.</note>
+            <note xml:id="fn36" type="footnote">TKow.01: <emph>ǯynsy sajyn</emph>. | H: <emph>ʒynsy sajyn</emph>. | C: <emph>ǯinsinä</emph>.</note>
+            <note xml:id="fn37" type="footnote">TKow.01: <emph>kijigin ol</emph>. | H: <emph>kijigin ol</emph>. | C: <emph>kijigin ol</emph>.</note>
+            <note xml:id="fn38" type="footnote">TKow.01: <emph>ošol bar</emph>. | H: <emph>osol ol bar</emph>. | C: <emph>šol barča</emph>.</note>
+            <note xml:id="fn39" type="footnote">Cf. Gen. 1:18, 1:21. | TKow.01: <emph>jaḥšydy</emph>. | H: <emph>jaḥsydy</emph>. | C: <emph>jaḥšydyr</emph>.</note>
+            <note xml:id="fn40" type="footnote">Cf. Gen. 1:26. | TKow.01: <emph>byla</emph>. | H: <emph>byla</emph>. | C: deest; different syntax.</note>
+            <note xml:id="fn41" type="footnote">TKow.01: <emph>ol tengiznin</emph>. | H: <emph>ol tengiznin</emph>. | C: <emph>ol teŋizniŋ</emph>.</note>
+            <note xml:id="fn42" type="footnote">TKow.01: <emph>ol jerd́a</emph>. | H: <emph>ol jerde</emph>. | C: <emph>ol jergä</emph>.</note>
           </app>
         </listApp>
       </div>
