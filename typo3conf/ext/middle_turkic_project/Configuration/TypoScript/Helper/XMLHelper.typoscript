@@ -73,7 +73,7 @@ lib.manuscriptDescription {
          pageURL.value.append = COA
          pageURL.value.append {
             10 = TEXT
-            10.value = &manuscript=
+            10.value = ?manuscript=
             
             20 = TEXT
             20 < lib.manuscriptArgument
