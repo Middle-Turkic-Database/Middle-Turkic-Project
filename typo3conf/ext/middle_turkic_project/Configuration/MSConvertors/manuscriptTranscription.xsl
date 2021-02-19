@@ -8,6 +8,7 @@
                 xmlns:mtdb="http://www.middleturkic.uu.se" exclude-result-prefixes="tei mtdb" extension-element-prefixes="func">
    <xsl:import href="typo3conf/ext/middle_turkic_project/Configuration/MSConvertors/xml-to-string.xsl" />
    <xsl:output method="html" encoding="utf-8" indent="yes" omit-xml-declaration="yes" />
+   <xsl:strip-space elements="*" />
 
    
    <!-- Variables -->
@@ -25,8 +26,8 @@
       <func:result select="($element and not($element/@ana)) or ($element/@ana != '#no')" />
    </func:function>
 
-   <!-- Text extractor for the milestone[@unit='lb'] self closing tag -->
-   <xsl:key name="transText" match="//tei:div[@type='textpart']//node()[not(self::tei:milestone)][not(self::tei:l)][not(parent::tei:foreign)][not(parent::tei:ref)]" use="generate-id(preceding::tei:milestone[@unit='lb'][1])" />
+   <!-- Text extractor for the milestone self closing tag -->
+   <xsl:key name="transText" match="//tei:div[@type='textpart']//node()[not(self::tei:milestone)][not(self::tei:l)][not(parent::tei:foreign)][not(parent::tei:ref)]" use="generate-id(preceding::tei:milestone[1])" />
 
    <!-- Extracts footnote with respect to its xml:id -->
    <xsl:key name="footnote" match="/tei:TEI/tei:text/tei:body/tei:div[@type='apparatus']/tei:listApp/tei:app/tei:note" use="@xml:id" />
@@ -46,7 +47,10 @@
    <xsl:template match="tei:milestone[@unit='pb']">
       <tr>
          <td class="pt-3">
-            <h5><xsl:value-of select="./@n" /></h5>
+            <h5>
+               <xsl:value-of select="./@n" />
+               <xsl:apply-templates select="key('transText', generate-id())" />
+            </h5>
          </td>
       </tr>
    </xsl:template>
