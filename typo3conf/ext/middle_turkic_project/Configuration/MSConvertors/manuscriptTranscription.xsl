@@ -72,31 +72,30 @@
    </xsl:template>
 
    <xsl:template match="tei:ref">      
-      <xsl:element name="sup">
-         <xsl:attribute name="class">
-            <xsl:text>text-primary</xsl:text>
-         </xsl:attribute>
-         <xsl:attribute name="data-toggle">
-            <xsl:text>tooltip</xsl:text>
-         </xsl:attribute>
-         <xsl:attribute name="data-placement">
-            <xsl:text>top</xsl:text>
-         </xsl:attribute>
-         <xsl:attribute name="data-html">
-            <xsl:text>true</xsl:text>
-         </xsl:attribute>
-         <xsl:attribute name="title">
-            <xsl:variable name="footnoteContent">
-               <div class="text-left">
-                  <xsl:apply-templates select="key('footnote', @target)" />
-               </div>
-            </xsl:variable>
-            <xsl:call-template name="xml-to-string">
-               <xsl:with-param name="node-set" select="common:node-set($footnoteContent)" />
-            </xsl:call-template> 
-         </xsl:attribute>
-         <xsl:apply-templates />
-      </xsl:element>
+      <sup>   
+         <xsl:element name="abbr">
+            <xsl:attribute name="data-toggle">
+               <xsl:text>tooltip</xsl:text>
+            </xsl:attribute>
+            <xsl:attribute name="data-placement">
+               <xsl:text>top</xsl:text>
+            </xsl:attribute>
+            <xsl:attribute name="data-html">
+               <xsl:text>true</xsl:text>
+            </xsl:attribute>
+            <xsl:attribute name="title">
+               <xsl:variable name="footnoteContent">
+                  <div class="text-left">
+                     <xsl:apply-templates select="key('footnote', @target)" />
+                  </div>
+               </xsl:variable>
+               <xsl:call-template name="xml-to-string">
+                  <xsl:with-param name="node-set" select="common:node-set($footnoteContent)" />
+               </xsl:call-template> 
+            </xsl:attribute>
+            <xsl:apply-templates />
+         </xsl:element>
+      </sup>
    </xsl:template>
 
    <xsl:template match="tei:emph">

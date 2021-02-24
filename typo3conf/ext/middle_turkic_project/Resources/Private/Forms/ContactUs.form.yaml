@@ -57,10 +57,10 @@ renderables:
                             -
                                 type: Text
                                 identifier: fullname
-                                label: 'Full name and surname'
+                                label: 'Name'
                                 properties:
                                     fluidAdditionalAttributes:
-                                        placeholder: 'Full name and surname'
+                                        placeholder: 'Name'
                                         required: required
                                 validators:
                                     - { identifier: NotEmpty }
@@ -125,8 +125,8 @@ renderables:
                             -
                                 type: ImageUpload
                                 identifier: imageupload
-                                label: 'Image Upload'
+                                label: 'Upload Image'
                                 properties:
                                     fluidAdditionalAttributes:
-                                        placeholder: 'Image Upload'
+                                        placeholder: 'Upload Image'
                                         saveToFileMount: '1:/user_upload/contactFormUploads/'
