@@ -134,6 +134,10 @@ $('.ms-selector-form input#chapterNum[type="number"]').on("input", function() {
     }
 });
 
+$('.ms-selector-form input[type="number"]').on("click", function() {
+    $(this).select();
+});
+
 $(function() {
     var firstMaxChapter = $(".ms-selector-form select#bookSelector option").first().data("chapternum");
     setChapterPars(firstMaxChapter);
