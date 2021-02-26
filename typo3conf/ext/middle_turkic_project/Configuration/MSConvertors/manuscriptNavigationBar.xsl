@@ -26,6 +26,45 @@
       <div class="tab-content" id="pills-tabContent">
         <xsl:apply-templates select="$msItemStruct/tei:title"  mode="msNav2ndLevel"/>
       </div>
+      <form class="form-inline my-2 justify-content-center ms-selector-form">
+        <label class="my-1 mr-2" for="bookSelector">Book:</label>
+        <select class="custom-select my-1 mr-sm-2" id="bookSelector" name="bookSelector">
+          <xsl:apply-templates select="$msItemStruct/tei:title"  mode="bookSelector" />
+        </select>
+        <div class="form-group my-1 mr-2" id="chapterFormGroup">
+          <label class="mr-2" for="chapterNum">
+            Chapter <small>(&lt;<span id="maxChapterLabel"></span>)</small>:
+          </label>        
+          <xsl:element name="input">
+            <xsl:attribute name="type">
+              <xsl:text>number</xsl:text>
+            </xsl:attribute>
+            <xsl:attribute name="class">
+              <xsl:text>form-control</xsl:text>
+            </xsl:attribute>
+            <xsl:attribute name="id">
+              <xsl:text>chapterNum</xsl:text>
+            </xsl:attribute>
+            <xsl:attribute name="name">
+              <xsl:text>chapterNum</xsl:text>
+            </xsl:attribute>
+            <xsl:attribute name="value">
+              <xsl:text>1</xsl:text>
+            </xsl:attribute>
+            <xsl:attribute name="placeholder">
+              <xsl:text>1</xsl:text>
+            </xsl:attribute>
+            <xsl:attribute name="min">
+              <xsl:text>1</xsl:text>
+            </xsl:attribute>
+            <xsl:attribute name="max" />
+            <xsl:attribute name="step">
+              <xsl:text>1</xsl:text>
+            </xsl:attribute>
+          </xsl:element>
+        </div>
+        <button type="submit" class="btn btn-primary my-1">Show</button>
+      </form>
     </xsl:if>
   </xsl:template>
 
@@ -125,6 +164,25 @@
       </xsl:if>
     </xsl:element>
   </xsl:template>
+
+  <xsl:template match="tei:msItemStruct/tei:title" mode="bookSelector">
+  <xsl:element name="option">
+    <xsl:attribute name="value">
+      <xsl:value-of select="@n" />
+    </xsl:attribute>
+    <xsl:attribute name="data-chapternum">
+      <xsl:choose>
+        <xsl:when test="mtdb:exists(tei:measure)">
+          <xsl:value-of select="tei:measure/@quantity"></xsl:value-of>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:text>0</xsl:text>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:attribute>
+    <xsl:copy-of select="text()" />
+  </xsl:element>
+</xsl:template>
 
   <xsl:template name="msNav2ndLevelLoop">
     <xsl:param name="iterator" select="number(1)" />
