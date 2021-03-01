@@ -71,7 +71,6 @@ function setChapterPars(maxChapter = 0) {
         $("#chapterFormGroup").removeClass("d-none");
         $chapterNum.attr('min', 1);
     }
-    $('#maxChapterLabel').html(maxChapter);
     $chapterNum.attr('max', maxChapter);
 };
 
