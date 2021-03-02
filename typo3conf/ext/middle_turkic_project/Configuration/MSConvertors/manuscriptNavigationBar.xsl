@@ -32,7 +32,7 @@
           <xsl:apply-templates select="$msItemStruct/tei:title"  mode="bookSelector" />
         </select>
         <div class="form-group my-1 mr-2" id="chapterFormGroup">
-          <label class="mr-2" for="chapterNum">
+          <label class="mr-sm-2" for="chapterNum">
             Chapter:
           </label>        
           <xsl:element name="input">

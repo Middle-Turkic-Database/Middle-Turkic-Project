@@ -55,39 +55,36 @@ div#transliteration {
 
 // Manuscript Navigation
 .nav.ms-nav {
-  
     &.ms-nav-1st {
-      a.nav-link.latest-tab {
-        background-color: lightblue;
-      }
+        a.nav-link {
+            border-left: 1px solid white;
+            &.latest-tab {
+                background-color: lightblue;
+            }
+        }
     }
-
     &.ms-nav-2nd {
-      a.nav-link {
-        border-radius: 0;
-      }
+        a.nav-link {
+            border-radius: 0;
+            border: 1px solid white;
+            min-width: 20px;
+        }
     }
-    
     a.nav-link {
-      border-left: 1px solid white;
-      padding: 0;
-      height: 25px;
-      
-      &:nth-child(odd) {
-        background-color: lightgray;
-      }
-  
-      &:nth-child(even) {
-        background-color: gainsboro;
-      }
-  
-      &:hover {
-        background-color: DeepSkyBlue !important;
-      }
-  
-      &.active {
-        background-color: Gray;
-      }
+        border-left: 1px solid white;
+        padding: 0;
+        height: 25px;
+        &:nth-child(odd) {
+            background-color: lightgray;
+        }
+        &:nth-child(even) {
+            background-color: gainsboro;
+        }
+        &:hover {
+            background-color: DeepSkyBlue !important;
+        }
+        &.active {
+            background-color: Gray;
+        }
     }
-  }
-  
+}

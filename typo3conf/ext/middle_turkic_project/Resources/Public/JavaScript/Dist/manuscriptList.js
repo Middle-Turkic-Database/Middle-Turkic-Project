@@ -141,3 +141,25 @@ $(function() {
     var firstMaxChapter = $(".ms-selector-form select#bookSelector option").first().data("chapternum");
     setChapterPars(firstMaxChapter);
 });
+
+function setL2NavWidth() {
+    var $secondLevNavLinkList = $(".tab-pane.active > .nav.ms-nav.ms-nav-2nd a.nav-link");
+    var first2ndNavWidth = $secondLevNavLinkList.first().outerWidth();
+    $secondLevNavLinkList.each(function(index) {
+        if (index > 0) {
+            $(this).css("max-width", first2ndNavWidth);
+        }
+    });
+}
+
+$(function() {
+    setL2NavWidth();
+});
+
+$(".ms-nav.ms-nav-1st .nav-link").on('shown.bs.tab', function() {
+    setL2NavWidth();
+});
+
+$(window).resize(function() {
+    setL2NavWidth();
+});
