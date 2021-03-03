@@ -70,6 +70,42 @@
     <f:format.raw>
         <xslt:transform source="{manuscriptFullPath}" transformations="{0:{stylesheet: 'EXT:middle_turkic_project/Configuration/MSConvertors/manuscriptTranscription.xsl'}}" />
     </f:format.raw>
+
+    <div class="accordion mt-5" id="accordion-200">
+        <div class="accordion-item card">
+            <div class="accordion-header card-header" id="accordion-heading-200-1">
+                <h4 class="accordion-title">
+                    <a href="#accordion-200-1" class="accordion-title-link" data-toggle="collapse" aria-expanded="true" aria-controls="accordion-200-1">
+                        <span class="accordion-title-link-text">
+                            <i class="fas fa-file-code accardion-logo"></i>
+                            XML Source
+                        </span>
+                        <span class="accordion-title-link-state"></span>
+                    </a>
+                </h4>
+            </div>
+            <div id="accordion-200-1" class="accordion-collapse collapse show" aria-labelledby="accordion-heading-200-1">
+                <div class="accordion-body card-body">
+                    <div class="accordion-content accordion-content-left">
+                        <div class="accordion-content-item accordion-content-text">
+                            <p>
+                                <a href="{manuscriptFullPath}" class="dotted-underline font-weight-bold" target="_blank">
+                                    <i class="far fa-eye mr-1"></i>
+                                    View the XML (TEI Epidoc)
+                                </a>
+                            </p>
+                            <p>
+                                <a href="{manuscriptFullPath}" class="dotted-underline font-weight-bold" download="">
+                                    <i class="fas fa-file-download mr-1"></i>
+                                    Download the XML (TEI Epidoc)
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </f:section>
 
 <f:section name="manuscriptNotFound">

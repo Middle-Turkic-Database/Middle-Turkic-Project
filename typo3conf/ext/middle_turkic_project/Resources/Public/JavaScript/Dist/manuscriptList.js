@@ -72,6 +72,7 @@ function setChapterPars(maxChapter = 0) {
         $chapterNum.attr('min', 1);
     }
     $chapterNum.attr('max', maxChapter);
+    $chapterNum.attr('size', Math.floor(Math.log10(maxChapter)) + 1)
 };
 
 $(".ms-nav .nav-link").on('click', function() {
