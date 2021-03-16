@@ -6,7 +6,7 @@
   <!-- Variables -->
   
   <!-- xmlAddress Parameter (external parameter) -->
-  <xsl:param name="navPath" select="''" />
+  <xsl:param name="uniqueID" select="generate-id()" />
 
   <!-- End of Variables -->
 
@@ -23,16 +23,16 @@
       <nav class="nav ms-nav ms-nav-1st nav-fill nav-pills flex-column flex-sm-row mb-1">
         <xsl:apply-templates select="$msItemStruct/tei:title"  mode="msNav1stLevel"/>
       </nav>
-      <div class="tab-content" id="pills-tabContent">
+      <div class="tab-content" id="{$uniqueID}-pills-tabContent">
         <xsl:apply-templates select="$msItemStruct/tei:title"  mode="msNav2ndLevel"/>
       </div>
       <form class="form-inline my-2 justify-content-center ms-selector-form">
-        <label class="my-1 mr-2" for="bookSelector">Book:</label>
-        <select class="custom-select my-1 mr-sm-2" id="bookSelector" name="bookSelector">
+        <label class="my-1 mr-2" for="{$uniqueID}-bookSelector">Book:</label>
+        <select class="custom-select my-1 mr-sm-2" id="{$uniqueID}-bookSelector" name="bookSelector">
           <xsl:apply-templates select="$msItemStruct/tei:title"  mode="bookSelector" />
         </select>
-        <div class="form-group my-1 mr-2" id="chapterFormGroup">
-          <label class="mr-sm-2" for="chapterNum">
+        <div class="form-group mr-2" id="{$uniqueID}-chapterFormGroup">
+          <label class="my-1 mr-sm-2" for="{$uniqueID}-chapterNum">
             Chapter:
           </label>        
           <xsl:element name="input">
@@ -40,10 +40,11 @@
               <xsl:text>number</xsl:text>
             </xsl:attribute>
             <xsl:attribute name="class">
-              <xsl:text>form-control</xsl:text>
+              <xsl:text>form-control my-1</xsl:text>
             </xsl:attribute>
             <xsl:attribute name="id">
-              <xsl:text>chapterNum</xsl:text>
+              <xsl:value-of select="$uniqueID" />
+              <xsl:text>-chapterNum</xsl:text>
             </xsl:attribute>
             <xsl:attribute name="name">
               <xsl:text>chapterNum</xsl:text>
@@ -58,6 +59,7 @@
               <xsl:text>1</xsl:text>
             </xsl:attribute>
             <xsl:attribute name="max" />
+            <xsl:attribute name="size" />
             <xsl:attribute name="step">
               <xsl:text>1</xsl:text>
             </xsl:attribute>
@@ -80,14 +82,17 @@
         </xsl:if>
       </xsl:attribute>
       <xsl:attribute name="id">
-        <xsl:text>pills-</xsl:text>
+        <xsl:value-of select="$uniqueID"></xsl:value-of>
+        <xsl:text>-pills-</xsl:text>
         <xsl:value-of select="position()" />
       </xsl:attribute>
       <xsl:attribute name="data-toggle">
         <xsl:text>pill</xsl:text>
       </xsl:attribute>
       <xsl:attribute name="href">
-        <xsl:text>#pills-</xsl:text>
+        <xsl:text>#</xsl:text>
+        <xsl:value-of select="$uniqueID" />
+        <xsl:text>-pills-</xsl:text>
         <xsl:value-of select="position()" />
         <xsl:text>-tab</xsl:text>
       </xsl:attribute>
@@ -95,7 +100,9 @@
         <xsl:text>tab</xsl:text>
       </xsl:attribute>
       <xsl:attribute name="aria-controls">
-        <xsl:text>pills-</xsl:text>
+        <xsl:text>#</xsl:text>
+        <xsl:value-of select="$uniqueID" />
+        <xsl:text>-pills-</xsl:text>
         <xsl:value-of select="position()" />
         <xsl:text>-tab</xsl:text>
       </xsl:attribute>
@@ -117,6 +124,9 @@
       <xsl:attribute name="data-delay">
         <xsl:text>{"show":500, "hide":0}</xsl:text>
       </xsl:attribute>
+      <xsl:attribute name="style">
+        <xsl:text>flex: 1 1 0px</xsl:text>
+      </xsl:attribute>
       <xsl:value-of select="tei:abbr" />
     </xsl:element>
   </xsl:template>
@@ -124,13 +134,14 @@
   <xsl:template match="tei:msItemStruct/tei:title" mode="msNav2ndLevel">
     <xsl:element name="div">
       <xsl:attribute name="class">
-        <xsl:text>tab-pane fade</xsl:text>
+        <xsl:text>tab-pane</xsl:text>
         <xsl:if test="position() &lt; 2">
           <xsl:text> show active</xsl:text>
         </xsl:if>
       </xsl:attribute>
       <xsl:attribute name="id">
-        <xsl:text>pills-</xsl:text>
+        <xsl:value-of select="$uniqueID" />
+        <xsl:text>-pills-</xsl:text>
         <xsl:value-of select="position()"></xsl:value-of>
         <xsl:text>-tab</xsl:text>
       </xsl:attribute>
@@ -138,7 +149,8 @@
         <xsl:text>tabpanel</xsl:text>
       </xsl:attribute>
       <xsl:attribute name="aria-labelleadby">
-        <xsl:text>pills-</xsl:text>
+        <xsl:value-of select="$uniqueID" />
+        <xsl:text>-pills-</xsl:text>
         <xsl:value-of select="position()" />
         <xsl:text>-tab</xsl:text>
       </xsl:attribute>
@@ -166,23 +178,23 @@
   </xsl:template>
 
   <xsl:template match="tei:msItemStruct/tei:title" mode="bookSelector">
-  <xsl:element name="option">
-    <xsl:attribute name="value">
-      <xsl:value-of select="@n" />
-    </xsl:attribute>
-    <xsl:attribute name="data-chapternum">
-      <xsl:choose>
-        <xsl:when test="mtdb:exists(tei:measure)">
-          <xsl:value-of select="tei:measure/@quantity"></xsl:value-of>
-        </xsl:when>
-        <xsl:otherwise>
-          <xsl:text>0</xsl:text>
-        </xsl:otherwise>
-      </xsl:choose>
-    </xsl:attribute>
-    <xsl:copy-of select="text()" />
-  </xsl:element>
-</xsl:template>
+    <xsl:element name="option">
+      <xsl:attribute name="value">
+        <xsl:value-of select="@n" />
+      </xsl:attribute>
+      <xsl:attribute name="data-chapternum">
+        <xsl:choose>
+          <xsl:when test="mtdb:exists(tei:measure)">
+            <xsl:value-of select="tei:measure/@quantity"></xsl:value-of>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:text>0</xsl:text>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:attribute>
+      <xsl:copy-of select="text()" />
+    </xsl:element>
+  </xsl:template>
 
   <xsl:template name="msNav2ndLevelLoop">
     <xsl:param name="iterator" select="number(1)" />
@@ -220,7 +232,6 @@
         </xsl:attribute>
       </xsl:element>  
       
-
       <xsl:call-template name="msNav2ndLevelLoop">
         <xsl:with-param name="iterator" select="$iterator + 1" />
         <xsl:with-param name="max" select="$max" />

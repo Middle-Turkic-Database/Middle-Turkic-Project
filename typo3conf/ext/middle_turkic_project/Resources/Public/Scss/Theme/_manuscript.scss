@@ -88,3 +88,12 @@ div#transliteration {
         }
     }
 }
+
+#msTranscriptContent,
+#msTranslationContent {
+    .table {
+        td.five-percent-width {
+            width: 5%;
+        }
+    }
+}

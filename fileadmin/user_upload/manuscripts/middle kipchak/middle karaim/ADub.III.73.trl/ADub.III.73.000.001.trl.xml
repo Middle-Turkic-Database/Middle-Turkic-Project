@@ -26,7 +26,7 @@
           </msIdentifier>
           <msContents>
             <summary>
-              A Karaim translation of the Torah and the Haftarah
+              A Karaim translation of the Torah and the Haftarah - English translation of the Karaim text
             </summary>
           </msContents>
         </msDesc>
@@ -51,17 +51,11 @@
               <milestone unit="page" n="2r"/>
               <ref target="fn1" type="noteAnchor">1</ref>
               <milestone unit="line" n="1"/>
-              <foreign xml:lang="he" style="unicode-bidi: embed;">
-                עתה בעזרת ה אל גבור ונורא אחל לכ[…]
-              </foreign>
+              <emph>Now, with the help of the mighty and awesome God, I will start to [write]</emph>
               <milestone unit="line" n="2"/>
-              <foreign xml:lang="he" style="unicode-bidi: embed;">
-                <milestone unit="line" n="3"/>
-                פשטי ספר החומש והאל הנאזר בגבורה […]
-              </foreign>
-              <foreign xml:lang="he" style="unicode-bidi: embed;">
-                ויסעדנו מהתחלה עד גמירא ׳ ס א
-              </foreign>
+              <emph>my translation of the Chumash. And God, replete with might, […].</emph>
+              <milestone unit="line" n="3"/>
+              <emph>And we will dine from the beginning until completion. First book.</emph>
             </l>
           </ab>
         </div>
@@ -69,7 +63,7 @@
       <div type="apparatus">
         <listApp>
           <app>
-            <note xml:id="fn1" type="footnote">Verses Gen 1:1–1:17 of the original manuscript are missing because of damage. These fragments were supplemented by another hand in the 19th century in South-Western Karaim. The folios 2r – 2v were erroneously sewn in after folio 1v.</note>
+            <note xml:id="fn1" type="footnote">The beginning of the original manuscript is missing because of damage. The folios 2r–2v were erroneously sewn in after folio 1v.</note>
           </app>
         </listApp>
       </div>

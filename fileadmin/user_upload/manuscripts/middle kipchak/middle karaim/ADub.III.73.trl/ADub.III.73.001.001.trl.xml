@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://epidoc.stoa.org/schema/latest/tei-epidoc.rng" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<?xml-model href="http://epidoc.stoa.org/schema/latest/tei-epidoc.rng" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xml:space="preserve" xml:lang="en">
+  <teiHeader>
+    <fileDesc>
+      <titleStmt>
+        <title ana="#no"/>
+        <author ana="#no"/>
+      </titleStmt>
+      <publicationStmt>
+        <publisher>Uppsala University, Department of linguistics and philology</publisher>
+        <pubPlace>Uppsala, Sweden</pubPlace>
+        <date>2020</date>
+        <availability status="restricted">
+          <licence target="https://creativecommons.org/licenses/by/4.0/">
+            Creative Commons Attribution 4.0 International</licence>
+        </availability>
+      </publicationStmt>
+      <sourceDesc>
+        <msDesc>
+          <msIdentifier>
+            <settlement>Warsaw, Poland</settlement>
+            <repository>Private archive</repository>
+            <idno>ADub.III.73</idno>
+          </msIdentifier>
+          <msContents>
+            <summary>
+              A Karaim translation of the Torah and the Haftarah - English translation of the Karaim text
+            </summary>
+          </msContents>
+        </msDesc>
+      </sourceDesc>
+    </fileDesc>
+    <profileDesc>
+      <abstract>
+        <p>
+          <lg>
+            <l>Genesis 1</l>
+          </lg>
+        </p>
+      </abstract>
+    </profileDesc>
+  </teiHeader>
+  <text>
+    <body>
+      <div type="edition">
+        <div type="textpart" subtype="incipit">
+          <ab>
+            <l>
+              <milestone unit="line" n="4"/>
+              <emph>⸤In the beginning, God created the heavens and the earth.</emph>
+            </l>
+            <l n="1">
+              <milestone unit="line" n="5"/>
+              {<emph>In the very beginning God created the heaven and</emph>
+              <milestone unit="line" n="6"/>
+              <emph>the earth.</emph>
+            </l>
+            <l n="2">
+              <emph>And the earth was</emph>
+              [desolated],
+              <milestone unit="line" n="7"/>
+              <emph>and void, and darkness was over the face of the deep.</emph>
+              [And]
+              <milestone unit="line" n="8"/>
+              <emph>the wind of God was hovering over the face</emph>
+              [of]
+              <emph>the waters.</emph>
+              <milestone unit="line" n="9"/>
+            </l>
+            <l n="3">
+              <emph>And God said, ‘Let there be light,’ and there was light.</emph>
+              <milestone unit="line" n="10"/>
+            </l>
+            <l n="4">
+              <emph>And God saw the light, that it was good. And</emph>
+              <milestone unit="line" n="11"/>
+              <emph>God separated between the light and the</emph>
+              <milestone unit="line" n="12"/>
+              <emph>darkness.</emph>
+            </l>
+            <l n="5">
+              <emph>And God called the light Day, and</emph>
+              <milestone unit="line" n="13"/>
+              <emph>called the darkness Night. And there was evening and there was</emph>
+              [morning]:
+              <milestone unit="line" n="14"/>
+              first<ref target="fn8" type="noteAnchor">1</ref>
+              day.
+            </l>
+            <l n="6">
+              <emph>And God said, ‘Let there be</emph>
+              <milestone unit="line" n="15"/>
+              <emph>a firmament in the midst of the waters, and let it divide</emph>
+              <milestone unit="line" n="16"/>
+              <emph>water from water.’</emph>
+            </l>
+            <l n="7">
+              <emph>And God made</emph>
+              <milestone unit="line" n="17"/>
+              <emph>the firmament, and separated between the waters which were
+              </emph>
+              <milestone unit="line" n="18"/>
+              <emph>under the firmament and the waters which were above:</emph>
+              <milestone unit="line" n="19"/>
+              <emph>and it was so.</emph>
+            </l>
+            <l n="8">
+              <emph>And God called the firmament</emph>
+              <milestone unit="line" n="20"/>
+              <emph>Skies. And there was evening and there was morning: a second day.</emph>
+              <milestone unit="line" n="21"/>
+            </l>
+            <l n="9">
+              <emph>And God said, ‘Let the waters be gathered together</emph>
+              <milestone unit="page" n="2v"/>
+              <milestone unit="line" n="1"/>
+              <emph>under the heaven into one place, and let the dry land appear.’</emph>
+              <milestone unit="line" n="2"/>
+              <emph>And it was so.</emph>
+            </l>
+            <l n="10">
+              <emph>And God called the dry</emph>
+              <milestone unit="line" n="3"/>
+              <emph>land Earth, and the gathering together of the waters he called Seas.</emph>
+              <milestone unit="line" n="4"/>
+              <emph>And God saw that it was good.</emph>
+            </l>
+            <l n="11">
+              <emph>And God said,</emph>
+              <milestone unit="line" n="5"/>
+              <emph>‘Let the earth make plants grow, plants yielding seed,</emph>
+              <milestone unit="line" n="6"/>
+              <emph>and the fruit tree making fruit, in which is their seed, according to its kind,</emph>
+              <milestone unit="line" n="7"/>
+              <email>on the earth.’ And it was so.</email>
+            </l>
+            <l n="12">
+              <milestone unit="line" n="8"/>
+              <emph>And the earth brought forth plants, plants yielding seed</emph>
+              <milestone unit="line" n="9"/>
+              <emph>according to their kind, and trees making fruit, in which is their seed,</emph>
+              <milestone unit="line" n="10"/>
+              <emph>according to its kind. And God saw that it was good.</emph>
+            </l>
+            <l n="13">
+              <milestone unit="line" n="11"/>
+              <emph>And there was evening and there was morning: a third day.</emph>
+            </l>
+            <l n="14">
+              <milestone unit="line" n="12"/>
+              <emph>And God said, ‘Let there be lights in the firmament of the</emph>
+              <milestone unit="line" n="13"/>
+              <emph>skies to distinguish between the day and</emph>
+              <milestone unit="line" n="14"/>
+              <emph>the night. And let them be for signs, and for appointed times,</emph>
+              <milestone unit="line" n="15"/>
+              <emph>and for days, and for years.</emph>
+            </l>
+            <l n="15">
+              <emph>And let them be for lights</emph>
+              <milestone unit="line" n="16"/>
+              <emph>in the firmament of the skies to give light on the earth.’</emph>
+              <milestone unit="line" n="17"/>
+              <emph>And it was so.</emph>
+            </l>
+            <l n="16">
+              <emph>And God made</emph>
+              <milestone unit="line" n="18"/>
+              <emph>two great lights: the great light</emph>
+              <milestone unit="line" n="19"/>
+              <emph>to rule the day, and the small light</emph>
+              <milestone unit="line" n="20"/>
+              <emph>to rule the night, and the stars.</emph>
+            </l>
+            <l n="17">
+              <milestone unit="line" n="21"/>
+              <emph>And God set them in the firmament of the skies to give light</emph>
+              <milestone unit="line" n="22"/>
+              <emph>on the earth,</emph>}⸣<ref target="fn2" type="noteAnchor">2</ref>
+              <milestone unit="page" n="3r"/>
+              <milestone unit="line" n="1"/>
+            </l>
+            <l n="18">
+              And to rule in day time and at night [and to separate]
+              <milestone unit="line" n="2"/>
+              the light from the [darkness. And]
+              <milestone unit="line" n="3"/>
+              God saw that it was good.
+            </l>
+            <l n="19">
+              And there was
+              <milestone unit="line" n="4"/>
+              evening and there was morning and the fourth day.
+            </l>
+            <l n="20">
+              And [God said],
+              <milestone unit="line" n="5"/>
+              ‘Let the waters produce the swarms of living creatures and let [birds
+              <milestone unit="line" n="6"/>
+              fly] above the earth in the near firmament of the skies.’
+              <milestone unit="line" n="7"/>
+            </l>
+            <l n="21">
+              And God created [the great] sea creatures
+              <milestone unit="line" n="8"/>
+              and every living creature that moves [which]
+              <milestone unit="line" n="9"/>
+              the waters [produced], according to their kinds, and every [winged bird]
+              <milestone unit="line" n="10"/>
+              according to its kind: and God saw that it was good.
+            </l>
+            <l n="22">
+              And God [blessed]
+              <milestone unit="line" n="11"/>
+              them, saying, ‘Spread, and multiply, and [fill]
+              <milestone unit="line" n="12"/>
+              the waters in the seas and let birds [multiply]
+              <milestone unit="line" n="13"/>
+              in the earth’.
+            </l>
+            <l n="23">
+              And there was evening and there was morning: the fifth
+              <milestone unit="line" n="14"/>
+              day.
+            </l>
+            <l n="24">
+              And God said, ‘Let the earth bring forth [living]
+              <milestone unit="line" n="15"/>
+              beings according to their kind, livestock, and creeping animals, and the wild animals of the earth according to their kind.’
+              <milestone unit="line" n="16"/>
+              And it was so.
+            </l>
+            <l n="25">
+              And God created the [wild animals] of [the]
+              <milestone unit="line" n="17"/>
+              earth according to their kind and the livestock according to their kinds and every
+              <milestone unit="line" n="18"/>
+              creeping animal of the earth: and God saw that it was good.
+              <milestone unit="line" n="19"/>
+            </l>
+            <l n="26">
+              And God said, ‘Let us create man [in] our appearance,
+              <milestone unit="line" n="20"/>
+              after our likeness and let them rule over the fish of [the sea],
+              <milestone unit="line" n="21"/>
+              and the birds of the skies, and the livestock, and over all [the
+              <milestone unit="page" n="3v"/>
+              <milestone unit="line" n="1"/>
+              earth], and over the creeping animals that move on the earth’.
+              <milestone unit="line" n="2"/>
+            </l>
+            <l n="27">
+              So God created man in his appearance,
+              <milestone unit="line" n="3"/>
+              in the image of angels he created him: he created them male and female.
+              <milestone unit="line" n="4"/>
+            </l>
+            <l n="28">
+              And God blessed them and God said to them
+              <milestone unit="line" n="5"/>
+              ‘Spread and multiply and fill the earth,
+              <milestone unit="line" n="6"/>
+              and subdue it, and rule over the fish of the sea
+              <milestone unit="line" n="7"/>
+              and over the birds of the skies and over every living thing that moves
+              <milestone unit="line" n="8"/>
+              on the earth’.
+            </l>
+            <l n="29">
+              And God said, ‘Lo,
+              <milestone unit="line" n="9"/>
+              I have given you every plant bearing seed, which
+              <milestone unit="line" n="10"/>
+              is on the face of all the earth, and every tree, which
+              <milestone unit="line" n="11"/>
+              has seeds bearing fruit trees; to you it shall be for food.
+              <milestone unit="line" n="12"/>
+            </l>
+            <l n="30">
+              And to every wild animal of the earth, and to every bird of the skies,
+              <milestone unit="line" n="13"/>
+              and to everything that moves on the earth, wherein there is a living being,
+              <milestone unit="line" n="14"/>
+              |I have given| all the green of plants for food.’ And it was so.
+              <milestone unit="line" n="15"/>
+            </l>
+            <l n="31">
+              And God saw everything that he had created, and,
+              <milestone unit="line" n="16"/>
+              lo, it was very good; and there was evening and there was morning: the sixth
+              <milestone unit="line" n="17"/>
+              day.
+            </l>
+          </ab>
+        </div>
+      </div>
+      <div type="apparatus">
+        <listApp>
+          <app>
+            <note xml:id="fn1" type="footnote">Lit. ‘one’.</note>
+            <note xml:id="fn2" type="footnote">Inserted by another hand in South-Western Karaim.</note>
+          </app>
+        </listApp>
+      </div>
+    </body>
+  </text>
+</TEI>
