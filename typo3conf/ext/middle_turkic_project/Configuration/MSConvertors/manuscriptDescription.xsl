@@ -10,7 +10,7 @@
 
    <!-- Variables -->
 
-   <!-- xmlAddress Parameter (external parameter) -->
+   <!-- External parameter -->
    <xsl:param name="xmlAddress" select="'default'" />
    <xsl:param name="pageURL" select="'NO_URL_AVAILABLE'" />
 

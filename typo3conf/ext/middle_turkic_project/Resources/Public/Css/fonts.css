@@ -1,6 +1,110 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto");
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro");
 @font-face {
+    font-family: 'Noto Sans';
+    src: url('../Fonts/NotoSans/NotoSans-Bold.woff2') format('woff2'), url('../Fonts/NotoSans/NotoSans-Bold.woff') format('woff'), url('../Fonts/NotoSans/NotoSans-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Noto Sans';
+    src: url('../Fonts/NotoSans/NotoSans-BoldItalic.woff2') format('woff2'), url('../Fonts/NotoSans/NotoSans-BoldItalic.woff') format('woff'), url('../Fonts/NotoSans/NotoSans-BoldItalic.ttf') format('truetype');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Noto Sans';
+    src: url('../Fonts/NotoSans/NotoSans-Light.woff2') format('woff2'), url('../Fonts/NotoSans/NotoSans-Light.woff') format('woff'), url('../Fonts/NotoSans/NotoSans-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Noto Sans';
+    src: url('../Fonts/NotoSans/NotoSans-LightItalic.woff2') format('woff2'), url('../Fonts/NotoSans/NotoSans-LightItalic.woff') format('woff'), url('../Fonts/NotoSans/NotoSans-LightItalic.ttf') format('truetype');
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Noto Sans';
+    src: url('../Fonts/NotoSans/NotoSans-Italic.woff2') format('woff2'), url('../Fonts/NotoSans/NotoSans-Italic.woff') format('woff'), url('../Fonts/NotoSans/NotoSans-Italic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Noto Sans';
+    src: url('../Fonts/NotoSans/NotoSans-Regular.woff2') format('woff2'), url('../Fonts/NotoSans/NotoSans-Regular.woff') format('woff'), url('../Fonts/NotoSans/NotoSans-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Noto Sans';
+    src: url('../Fonts/NotoSans/NotoSans-Thin.woff2') format('woff2'), url('../Fonts/NotoSans/NotoSans-Thin.woff') format('woff'), url('../Fonts/NotoSans/NotoSans-Thin.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Noto Sans';
+    src: url('../Fonts/NotoSans/NotoSans-ThinItalic.woff2') format('woff2'), url('../Fonts/NotoSans/NotoSans-ThinItalic.woff') format('woff'), url('../Fonts/NotoSans/NotoSans-ThinItalic.ttf') format('truetype');
+    font-weight: 100;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Noto Sans Hebrew';
+    src: url('../Fonts/NotoSansHebrew/NotoSansHebrew-Thin.woff2') format('woff2'),
+        url('../Fonts/NotoSansHebrew/NotoSansHebrew-Thin.woff') format('woff'),
+        url('../Fonts/NotoSansHebrew/NotoSansHebrew-Thin.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Noto Sans Hebrew';
+    src: url('../Fonts/NotoSansHebrew/NotoSansHebrew-Bold.woff2') format('woff2'),
+        url('../Fonts/NotoSansHebrew/NotoSansHebrew-Bold.woff') format('woff'),
+        url('../Fonts/NotoSansHebrew/NotoSansHebrew-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Noto Sans Hebrew';
+    src: url('../Fonts/NotoSansHebrew/NotoSansHebrew-Regular.woff2') format('woff2'),
+        url('../Fonts/NotoSansHebrew/NotoSansHebrew-Regular.woff') format('woff'),
+        url('../Fonts/NotoSansHebrew/NotoSansHebrew-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Noto Sans Hebrew';
+    src: url('../Fonts/NotoSansHebrew/NotoSansHebrew-Light.woff2') format('woff2'),
+        url('../Fonts/NotoSansHebrew/NotoSansHebrew-Light.woff') format('woff'),
+        url('../Fonts/NotoSansHebrew/NotoSansHebrew-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
     font-family: 'Font Awesome 5 Free';
     font-style: normal;
     font-weight: 400;

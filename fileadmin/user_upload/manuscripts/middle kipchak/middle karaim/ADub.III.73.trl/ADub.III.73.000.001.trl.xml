@@ -47,13 +47,13 @@
       <div type="edition">
         <div type="textpart" subtype="incipit">
           <ab>
+            <milestone unit="page" n="2r"/>
+            <ref target="fn1" type="noteAnchor">1</ref>
+            <milestone unit="line" n="1"/>
             <l>
-              <milestone unit="page" n="2r"/>
-              <ref target="fn1" type="noteAnchor">1</ref>
-              <milestone unit="line" n="1"/>
-              <emph>Now, with the help of the mighty and awesome God, I will start to [write]</emph>
+              <emph>Now, with the help of the mighty and awesome God, I will start to [write] </emph>
               <milestone unit="line" n="2"/>
-              <emph>my translation of the Chumash. And God, replete with might, […].</emph>
+              <emph>my translation of the Chumash. And God, replete with might, […]. </emph>
               <milestone unit="line" n="3"/>
               <emph>And we will dine from the beginning until completion. First book.</emph>
             </l>

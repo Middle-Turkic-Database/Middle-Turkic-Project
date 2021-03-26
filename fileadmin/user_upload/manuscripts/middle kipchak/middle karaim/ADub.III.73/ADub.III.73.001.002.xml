@@ -47,12 +47,12 @@
       <div type="edition">
         <div type="textpart" subtype="incipit">
           <ab n="1">
+            <milestone unit="line" n="17"/>
             <l n="1">
-              <milestone unit="line" n="17"/>
               <foreign xml:lang="he" style="unicode-bidi: embed">
                 ויכלו
               </foreign>
-              [1] Da tügendiĺar jaratylmaqlary ol kökler-
+              Da tügendiĺar jaratylmaqlary ol kökler-
               <milestone unit="line" n="18"/>
               nin da ol jernin da bar jyjynlarynyn.
             </l>
@@ -60,7 +60,7 @@
               <foreign xml:lang="he" style="unicode-bidi: embed">
                 ויכל
               </foreign>
-              [2] Da tügelledi
+              Da tügelledi
               <milestone unit="line" n="19"/>
               Tenri ol jedinči künd́a išin özünün ki qyldy da qaldy
               <milestone unit="line" n="20"/>
@@ -70,20 +70,19 @@
               <foreign xml:lang="he" style="unicode-bidi: embed">
                 ויברך
               </foreign>
-              [3]
               <milestone unit="line" n="21"/>
               Da alġyšlady Tenri ošol ol jedinči künnü da aziz etti<ref target="fn1" type="noteAnchor">1</ref>
               <milestone unit="page" n="4r"/>
               <milestone unit="line" n="1"/>
               [any ki anda]<ref target="fn2" type="noteAnchor">2</ref>
               qaldy bar išind́an ⸤ki jaratty Tenr[i]⸣<ref target="fn3" type="noteAnchor">3</ref>.
-              <milestone unit="line" n="2"/>
             </l>
+            <milestone unit="line" n="2"/>
             <l n="4">
               <foreign xml:lang="he" style="unicode-bidi: embed">
                 אלה
               </foreign>
-              [4] Bulardylar tuvmušlary ol köklernin da ⸤[ol jernin]⸣<ref target="fn4" type="noteAnchor">4</ref>
+              Bulardylar tuvmušlary ol köklernin da ⸤[ol jernin]⸣<ref target="fn4" type="noteAnchor">4</ref>
               <milestone unit="line" n="3"/>
               jaratylġanlarynda jaratqan künd́a Adonaj Tenri jerni ⸤[da kök-]
               <milestone unit="line" n="4"/>
@@ -93,7 +92,7 @@
               <foreign xml:lang="he" style="unicode-bidi: embed">
                 וכל
               </foreign>
-              [5] Da bar teregi ol tüznün ⸤burun bol[mastan jerde]⸣<ref target="fn6" type="noteAnchor">6</ref>
+              Da bar teregi ol tüznün ⸤burun bol[mastan jerde]⸣<ref target="fn6" type="noteAnchor">6</ref>
               <milestone unit="line" n="5"/>
               da bar kögötü ol jernin burundan bitti ki javdu[rmady]<ref target="fn7" type="noteAnchor">7</ref>
               <milestone unit="line" n="6"/>
@@ -105,7 +104,7 @@
               <foreign xml:lang="he" style="unicode-bidi: embed">
                 ואיד
               </foreign>
-              [6] Da myhla kötür{ü}lüredi ⸤[ol jer-]
+              Da myhla kötür{ü}lüredi ⸤[ol jer-]
               <milestone unit="line" n="8"/>
               d́an⸣<ref target="fn9" type="noteAnchor">9</ref>
               da suġaryredi ošol bar jüzĺarin ol jernin.
@@ -114,7 +113,7 @@
               <foreign xml:lang="he" style="unicode-bidi: embed">
                 [וייצר]<ref target="fn10" type="noteAnchor">10</ref>
               </foreign>
-              [7] [Da]<ref target="fn11" type="noteAnchor">11</ref>
+              [Da]<ref target="fn11" type="noteAnchor">11</ref>
               <milestone unit="line" n="9"/>
               jaratty Adonaj Tenri ošol ol adamny topraq ol je[rd́an]<ref target="fn12" type="noteAnchor">12</ref>
               <milestone unit="line" n="10"/>
@@ -126,13 +125,13 @@
               <foreign xml:lang="he" style="unicode-bidi: embed">
                 ויטע
               </foreign>
-              [8] Da burundan<ref target="fn14" type="noteAnchor">14</ref>
+              Da burundan<ref target="fn14" type="noteAnchor">14</ref>
               or{n}atty Adonaj [Tenri]<ref target="fn15" type="noteAnchor">15</ref>
               <milestone unit="line" n="12"/>
               baġ bostanda<ref target="fn16" type="noteAnchor">16</ref>
               da qojdu anda ošol ol adamny ki [jaratty].<ref target="fn17" type="noteAnchor">17</ref>
-              <milestone unit="line" n="13"/>
             </l>
+            <milestone unit="line" n="13"/>
             <l n="9">
               <foreign xml:lang="he" style="unicode-bidi: embed">
                 ויצמח
@@ -152,7 +151,7 @@
               <foreign xml:lang="he" style="unicode-bidi: embed">
                 ונהר
               </foreign>
-              [10] Da öźan čyġaredi bostandan ⸤[suġar-]
+              Da öźan čyġaredi bostandan ⸤[suġar-]
               <milestone unit="line" n="17"/>
               ma⸣<ref target="fn21" type="noteAnchor">21</ref>
               ošol ol baġny da andan ajyrylyredi da boluredi d[ört]<ref target="fn22" type="noteAnchor">22</ref>
@@ -167,12 +166,11 @@
               <milestone unit="line" n="19"/>
               ču⸣<ref target="fn23" type="noteAnchor">23</ref>
               ošol bar jernin Ḥavilanyn ki andady ol altyn.
+            </l>
+            <l n="12">
               <foreign xml:lang="he" style="unicode-bidi: embed">
                 וזהב
               </foreign>
-            </l>
-            <l n="12">
-              [12]
               <milestone unit="line" n="20"/>
               Da altyny ol jernin jaḥšydy andady ol inǯi tübü [da ol]<ref target="fn24" type="noteAnchor">24</ref>
               <milestone unit="line" n="21"/>
@@ -182,7 +180,7 @@
               <foreign xml:lang="he" style="unicode-bidi: embed">
                 ושם
               </foreign>
-              [13] Da aty ol ekinči özennin Gi[ḥon]<ref target="fn25" type="noteAnchor">25</ref>
+              Da aty ol ekinči özennin Gi[ḥon]<ref target="fn25" type="noteAnchor">25</ref>
               <milestone unit="page" n="4v"/>
               <milestone unit="line" n="1"/>
               ⸤[ol e]di⸣<ref target="fn26" type="noteAnchor">26</ref>
@@ -203,7 +201,6 @@
               <foreign xml:lang="he" style="unicode-bidi: embed">
                 ויקח
               </foreign>
-              [15]
               <milestone unit="line" n="4"/>
               Da aldy Adonaj Tenri ošol ol adamny da qojdu any baġbostan-
               <milestone unit="line" n="5"/>
@@ -233,7 +230,7 @@
               <foreign xml:lang="he" style="unicode-bidi: embed">
                 ויאמר
               </foreign>
-              [18] Da ajtty
+              Da ajtty
               <milestone unit="line" n="10"/>
               Adonaj Tenri jaḥšy tüvüldü bolma ol adamġa jalġyzġa qylajym
               <milestone unit="line" n="11"/>
@@ -243,7 +240,7 @@
               <foreign xml:lang="he" style="unicode-bidi: embed">
                 וייצר
               </foreign>
-              [19] Da jaratty
+              Da jaratty
               <milestone unit="line" n="12"/>
               Adonaj Tenri ol jerd́an bar kijigin ol jernin da ošol bar qušun
               <milestone unit="line" n="13"/>
@@ -257,18 +254,18 @@
               <foreign xml:lang="he" style="unicode-bidi: embed">
                 ויקרא
               </foreign>
-              [20] Da atady ol adam atlar bar ol tuvar-
+              Da atady ol adam atlar bar ol tuvar-
               <milestone unit="line" n="16"/>
               ġa da qušuna ol köklernin da bar kijigińa ol tüznün
               <milestone unit="line" n="17"/>
               da adam özüńa tapmady bolušluq qaršysyna köŕa.
-              <milestone unit="line" n="18"/>
             </l>
+            <milestone unit="line" n="18"/>
             <l n="21">
               <foreign xml:lang="he" style="unicode-bidi: embed">
                 ויפל
               </foreign>
-              [21] Da saldy Adonaj Tenri qaty juqu ol adam üstüńa
+              Da saldy Adonaj Tenri qaty juqu ol adam üstüńa
               <milestone unit="line" n="19"/>
               da juqlady da aldy birni qaburġalaryndan anyn da bekĺadi et-
               <milestone unit="line" n="20"/>
@@ -278,7 +275,7 @@
               <foreign xml:lang="he" style="unicode-bidi: embed">
                 ויבן
               </foreign>
-              [22] Da qondardy Adonaj Tenri ošol
+              Da qondardy Adonaj Tenri ošol
               <milestone unit="line" n="21"/>
               ol qaburġany ki aldy ol adamdan bolma qatyn da keltirdi
               <milestone unit="page" n="5r"/>
@@ -289,7 +286,7 @@
               <foreign xml:lang="he" style="unicode-bidi: embed">
                 ויאמר
               </foreign>
-              [23] ⸤Da ajtty ol ⸤ada[m bu endi]⸣<ref target="fn28" type="noteAnchor">28</ref>
+              ⸤Da ajtty ol ⸤ada[m bu endi]⸣<ref target="fn28" type="noteAnchor">28</ref>
               <milestone unit="line" n="2"/>
               ol jürüšlü süvekti⸣<ref target="fn29" type="noteAnchor">29</ref>
               süveklerimd́an da ⸤guft[u gufumndan]⸣<ref target="fn30" type="noteAnchor">30</ref>
@@ -300,7 +297,7 @@
               <foreign xml:lang="he" style="unicode-bidi: embed">
                 על
               </foreign>
-              [24] [Anyn üčün]<ref target="fn31" type="noteAnchor">31</ref>
+              [Anyn üčün]<ref target="fn31" type="noteAnchor">31</ref>
               <milestone unit="line" n="4"/>
               kemišedi kiši atasyn da anasyn da jabušady qatynyna [da]<ref target="fn32" type="noteAnchor">32</ref>
               <milestone unit="line" n="5"/>
@@ -310,7 +307,7 @@
               <foreign xml:lang="he" style="unicode-bidi: embed">
                 ויהיו
               </foreign>
-              [25] Da ediĺar eksiĺa[r]i[d́a]<ref target="fn33" type="noteAnchor">33</ref>
+              Da ediĺar eksiĺa[r]i[d́a]<ref target="fn33" type="noteAnchor">33</ref>
               <milestone unit="line" n="6"/>
               jalanġačlar ol adam da qatyny anyn da ujalmasediĺar.
             </l>

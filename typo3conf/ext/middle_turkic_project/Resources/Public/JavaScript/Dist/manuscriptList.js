@@ -50,41 +50,21 @@ function loadTranslation(msNav, msName, msBook = -1, msChapter = -1, $element = 
     loadContent(transcriptURI, $element);
 };
 
-
-
-$(function() {
-    $('.list-group-item').on('click', function() {
-        $('.fa-angle-double-right,.fa-angle-double-down', this)
-            .toggleClass('fa-angle-double-right')
-            .toggleClass('fa-angle-double-down');
-    });
-
-});
-
-$(document).ready(function() {
-    $('#dtManuscriptList').DataTable({
-        drawCallback: function() {
-            $('table.dataTable tbody tr[data-href]').each(function() {
-                $(this).css('cursor', 'pointer').click(function() {
-                    document.location = $(this).attr('data-href');
-                });
-            });
-
+function loadParallel(msNav, msName, msBook = -1, msChapter = -1, $element = $("#msParallelContent")) {
+    var transcriptURI = "/mstranscript?msNav=" + msNav + "&msName=" + msName;
+    if (msBook >= 0) {
+        if (msBook == 0) {
+            msBook = "000";
         }
-    });
-    $('.dataTables_length').addClass('bs-select');
-    if ($('#manuscriptTabs').length) {
-        $('.manuscript-hero-image').parent().addClass('d-none');
-    };
+        transcriptURI += "&msBook=" + msBook;
+        if (msChapter >= 1) {
+            transcriptURI += "&msChapter=" + msChapter;
+        }
+    }
+    transcriptURI += "&type=parallel";
 
-    loadTranscript($("#msTranscriptContent").data('msnav'), $("#msTranscriptContent").data('msname'));
-    loadTranslation($("#msTranscriptContent").data('msnav'), $("#msTranscriptContent").data('msname'));
-});
-
-// Manuscript Navigation
-$(function() {
-    $('.ms-nav-1st [data-toggle="pill"], .ms-nav-2nd [data-toggle="pill"]').tooltip();
-});
+    loadContent(transcriptURI, $element);
+};
 
 function setChapterPars(maxChapter = 0, $formToChange = null) {
     var $chapterNumInputs;
@@ -106,83 +86,6 @@ function setChapterPars(maxChapter = 0, $formToChange = null) {
     $chapterNumInputs.attr('size', Math.floor(Math.log10(maxChapter)) + 1)
 };
 
-$(".ms-nav .nav-link").on('click', function() {
-    $(".ms-nav-2nd a.nav-link").removeClass("active");
-
-    var msBook = -1;
-    var msChapter = -1;
-    if ($(this).closest(".nav").hasClass("ms-nav-1st")) {
-        msBook = $(this).data("bookno");
-        if ($(this).hasClass("dropdown-toggle")) {
-            msChapter = 1;
-        }
-        $(".ms-nav .nav-link[id$='" + $(this).attr('id').match(/pills(.*)$/gm) + "']").tab('show');
-        $("[id$='" + $(this).attr('id').match(/pills(.*)$/gm) + "-tab'] .ms-nav-2nd .nav-link:first-child").tab('show');
-    } else {
-        var tabID = $(this).closest(".tab-pane").attr("id");
-        msBook = $(".ms-nav-1st .nav-link[href='#" + tabID + "']").data('bookno');
-        msChapter = $(this).data("chapterno");
-      
-      $(".ms-nav-2nd .nav-link[data-chapterno=" + $(this).data("chapterno") + "]").tab('show');
-    }
-    loadTranscript($("#msTranscriptContent").data('msnav'), $("#msTranscriptContent").data('msname'), msBook, msChapter);
-    loadTranslation($("#msTranscriptContent").data('msnav'), $("#msTranscriptContent").data('msname'), msBook, msChapter);
-
-    var $bookSelectorInputs = $(".ms-selector-form select[id$='bookSelector']");
-    var $chapterNumInputs = $(".ms-selector-form input[id$='chapterNum']");
-    if (msBook !== -1 & msBook != $bookSelectorInputs.val()) {
-        $bookSelectorInputs.val(msBook);
-        $bookSelectorInputs.change();
-    }
-    if (msChapter !== -1 && msChapter != $chapterNumInputs.val()) {
-        $chapterNumInputs.val(msChapter);
-    }
-});
-
-$(".ms-selector-form select[id$='bookSelector']").change(function() {
-    setChapterPars($("option:selected", this).data("chapternum"), $(this));
-    var $chapterNum = $(":input[name='chapterNum']", this.closest("form.ms-selector-form"));
-    $($chapterNum).val($($chapterNum).attr('min'));
-});
-
-$(".ms-selector-form").on("submit", function(e) {
-    e.preventDefault();
-    var $bookSelector = $(":input[name='bookSelector']", $(this));
-    var bookNum = $(":selected", $bookSelector).val();
-    var chapterNum = $(":input[name='chapterNum']", $(this)).val();
-    
-    $(":input[name='bookSelector']").val(bookNum);
-    $(":input[name='chapterNum']").val(chapterNum);
-    setChapterPars($("option:selected", $bookSelector).data("chapternum"));
-  
-    $(".ms-nav-1st .nav-link[data-bookno='" + bookNum + "']").tab("show");
-    if (chapterNum != '' && chapterNum > 0) {
-        var $secondTabEl = $(".ms-nav-1st a[data-bookno='" + bookNum + "']");
-        $("[id$='" + $secondTabEl.attr('id').match(/pills(.*)$/gm) + "-tab'] .ms-nav-2nd .nav-link:nth-child(" + chapterNum + ")").tab("show");
-    }
-    loadTranscript($("#msTranscriptContent").data('msnav'), $("#msTranscriptContent").data('msname'), bookNum, chapterNum);
-    loadTranslation($("#msTranscriptContent").data('msnav'), $("#msTranscriptContent").data('msname'), bookNum, chapterNum);
-});
-
-$(".ms-selector-form input[id$='chapterNum'][type='number']").on("input", function() {
-    var value = $(this).val();
-
-    if (value !== "" && value.indexOf(".") === -1) {
-        $(this).val(
-            Math.max(Math.min(value, $(this).attr("max")), $(this).attr("min"))
-        );
-    }
-});
-
-$('.ms-selector-form input[type="number"]').on("click", function() {
-    $(this).select();
-});
-
-$(function() {
-    var firstMaxChapter = $(".ms-selector-form select[id$='bookSelector'] option").first().data("chapternum");
-    setChapterPars(firstMaxChapter);
-});
-
 function setL2NavWidth() {
     var $l2NavLinks = $("#manuscriptTabsContent>.tab-pane.show .tab-content>.tab-pane.active>.nav.ms-nav.ms-nav-2nd .nav-link");
     $l2NavLinks.each(function() {
@@ -192,15 +95,132 @@ function setL2NavWidth() {
 }
 
 $(function() {
-    setL2NavWidth();
-});
+    $('.list-group-item').on('click', function() {
+        $('.fa-angle-double-right,.fa-angle-double-down', this)
+            .toggleClass('fa-angle-double-right')
+            .toggleClass('fa-angle-double-down');
+    });
+    
+    $('#dtManuscriptList').DataTable({
+        drawCallback: function() {
+            $('table.dataTable tbody tr[data-href]').each(function() {
+                $(this).css('cursor', 'pointer').click(function() {
+                    document.location = $(this).attr('data-href');
+                });
+            });
 
-$(".ms-nav.ms-nav-1st .nav-link,#manuscriptTabs .nav-link").on('shown.bs.tab', function() {
-    if ($(this).tab().is(":visible")) {
+        }
+    });
+    $('.dataTables_length').addClass('bs-select');
+    if ($('#manuscriptTabs').length) {
+        $('.manuscript-hero-image').parent().addClass('d-none');
+    };
+
+    loadTranscript($("#msTranscriptContent").data('msnav'), $("#msTranscriptContent").data('msname'));
+    loadTranslation($("#msTranscriptContent").data('msnav'), $("#msTranscriptContent").data('msname'));
+    loadParallel($("#msTranscriptContent").data('msnav'), $("#msTranscriptContent").data('msname'));
+
+    $('.ms-nav-1st [data-toggle="pill"], .ms-nav-2nd [data-toggle="pill"]').tooltip();
+
+    var firstMaxChapter = $(".ms-selector-form select[id$='bookSelector'] option").first().data("chapternum");
+    setChapterPars(firstMaxChapter);
+
+    setL2NavWidth();
+
+    $(".ms-nav .nav-link").on('click', function() {
+        $(".ms-nav-2nd a.nav-link").removeClass("active");
+    
+        var msBook = -1;
+        var msChapter = -1;
+        if ($(this).closest(".nav").hasClass("ms-nav-1st")) {
+            msBook = $(this).data("bookno");
+            if ($(this).hasClass("dropdown-toggle")) {
+                msChapter = 1;
+            }
+            $(".ms-nav .nav-link[id$='" + $(this).attr('id').match(/pills(.*)$/gm) + "']").each(function() {
+                $(this).tab("show");
+            });
+            $("[id$='" + $(this).attr('id').match(/pills(.*)$/gm) + "-tab'] .ms-nav-2nd .nav-link:first-child").each(function() {
+                $(this).tab("show");
+            });
+        } else {
+            var tabID = $(this).closest(".tab-pane").attr("id");
+            msBook = $(".ms-nav-1st .nav-link[href='#" + tabID + "']").data('bookno');
+            msChapter = $(this).data("chapterno");
+          
+          $(".ms-nav-2nd .nav-link[data-chapterno=" + $(this).data("chapterno") + "]").each(function() {
+            $(this).tab("show");
+          });
+        }
+        loadTranscript($("#msTranscriptContent").data('msnav'), $("#msTranscriptContent").data('msname'), msBook, msChapter);
+        loadTranslation($("#msTranscriptContent").data('msnav'), $("#msTranscriptContent").data('msname'), msBook, msChapter);
+        loadParallel($("#msTranscriptContent").data('msnav'), $("#msTranscriptContent").data('msname'), msBook, msChapter);
+    
+        var $bookSelectorInputs = $(".ms-selector-form select[id$='bookSelector']");
+        var $chapterNumInputs = $(".ms-selector-form input[id$='chapterNum']");
+        if (msBook !== -1 & msBook != $bookSelectorInputs.val()) {
+            $bookSelectorInputs.val(msBook);
+            $bookSelectorInputs.change();
+        }
+        if (msChapter !== -1 && msChapter != $chapterNumInputs.val()) {
+            $chapterNumInputs.val(msChapter);
+        }
+    });
+    
+    $(".ms-selector-form select[id$='bookSelector']").change(function() {
+        setChapterPars($("option:selected", this).data("chapternum"), $(this));
+        var $chapterNum = $(":input[name='chapterNum']", this.closest("form.ms-selector-form"));
+        $($chapterNum).val($($chapterNum).attr('min'));
+    });
+    
+    $(".ms-selector-form").on("submit", function(e) {
+        e.preventDefault();
+    
+        $(".ms-nav-2nd a.nav-link").removeClass("active");
+        var $bookSelector = $(":input[name='bookSelector']", $(this));
+        var bookNum = $(":selected", $bookSelector).val();
+        var chapterNum = $(":input[name='chapterNum']", $(this)).val();
+        
+        $(":input[name='bookSelector']").val(bookNum);
+        $(":input[name='chapterNum']").val(chapterNum);
+        setChapterPars($("option:selected", $bookSelector).data("chapternum"));
+      
+        $(".ms-nav-1st .nav-link[data-bookno='" + bookNum + "']").each(function() {
+            $(this).tab("show");
+        });
+        if (chapterNum != '' && chapterNum > 0) {
+            var $secondTabEl = $(".ms-nav-1st a[data-bookno='" + bookNum + "']");
+            $("[id$='" + $secondTabEl.attr('id').match(/pills(.*)$/gm) + "-tab'] .ms-nav-2nd .nav-link:nth-child(" + chapterNum + ")").each(function() {
+                $(this).tab("show");
+            });
+        }
+        loadTranscript($("#msTranscriptContent").data('msnav'), $("#msTranscriptContent").data('msname'), bookNum, chapterNum);
+        loadTranslation($("#msTranscriptContent").data('msnav'), $("#msTranscriptContent").data('msname'), bookNum, chapterNum);
+        loadParallel($("#msTranscriptContent").data('msnav'), $("#msTranscriptContent").data('msname'), bookNum, chapterNum);
+    });
+    
+    $(".ms-selector-form input[id$='chapterNum'][type='number']").on("input", function() {
+        var value = $(this).val();
+    
+        if (value !== "" && value.indexOf(".") === -1) {
+            $(this).val(
+                Math.max(Math.min(value, $(this).attr("max")), $(this).attr("min"))
+            );
+        }
+    });
+    
+    $('.ms-selector-form input[type="number"]').on("click", function() {
+        $(this).select();
+    });
+    
+    $(".ms-nav.ms-nav-1st .nav-link,#manuscriptTabs .nav-link").on('shown.bs.tab', function() {
+        if ($(this).tab().is(":visible")) {
+            setL2NavWidth();
+        }
+    });
+    
+    $(window).resize(function() {
         setL2NavWidth();
-    }
+    });
 });
 
-$(window).resize(function() {
-    setL2NavWidth();
-});

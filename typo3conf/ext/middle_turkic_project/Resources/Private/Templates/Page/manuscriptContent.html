@@ -43,9 +43,11 @@
         <f:if condition="{manuscriptChapterExists}">
             <f:then>
                 <f:variable name="manuscriptFullPath">{manuscriptPath}/{manuscriptName}{trlSuffix}/{manuscriptName}.{manuscriptBook}.{manuscriptChapter}{trlSuffix}.xml</f:variable>                
+                <f:variable name="translationFullPath">{manuscriptPath}/{manuscriptName}.trl/{manuscriptName}.{manuscriptBook}.{manuscriptChapter}.trl.xml</f:variable>
             </f:then>
             <f:else>
                 <f:variable name="manuscriptFullPath">{manuscriptPath}/{manuscriptName}{trlSuffix}/{manuscriptName}.{manuscriptBook}{trlSuffix}.xml</f:variable>
+                <f:variable name="translationFullPath">{manuscriptPath}/{manuscriptName}.trl/{manuscriptName}.{manuscriptBook}.trl.xml</f:variable>
             </f:else>
         </f:if>
     </f:then>
@@ -66,9 +68,11 @@
         <f:if condition="{firstTitleType.0} == 'book'">
             <f:then>    
                 <f:variable name="manuscriptFullPath">{manuscriptPath}/{manuscriptName}{trlSuffix}/{manuscriptName}.{firstTitleN}.001{trlSuffix}.xml</f:variable>
+                <f:variable name="translationFullPath">{manuscriptPath}/{manuscriptName}.trl/{manuscriptName}.{firstTitleN}.001.trl.xml</f:variable>
             </f:then>
             <f:else if="{firstTitleType.0} == 'chapter'">
                 <f:variable name="manuscriptFullPath">{manuscriptPath}/{manuscriptName}{trlSuffix}/{manuscriptName}.{firstTitleN}{trlSuffix}.xml</f:variable>
+                <f:variable name="translationFullPath">{manuscriptPath}/{manuscriptName}.trl/{manuscriptName}.{firstTitleN}.trl.xml</f:variable>
             </f:else>
         </f:if>
     </f:else>
@@ -78,19 +82,51 @@
     <f:then>
         <f:variable name="convertorPath" value="EXT:middle_turkic_project/Configuration/MSConvertors/manuscriptTranslation.xsl" />
     </f:then>
+    <f:else if="{docType} == 'parallel'">
+        <f:variable name="convertorPath" value="EXT:middle_turkic_project/Configuration/MSConvertors/manuscriptParallel.xsl" />
+    </f:else>
     <f:else>
         <f:variable name="convertorPath" value="EXT:middle_turkic_project/Configuration/MSConvertors/manuscriptTranscription.xsl" />
     </f:else>
 </f:if>
 
-<v:media.exists file="{manuscriptFullPath}" then="{f:render(section:'renderContent', arguments: '{manuscriptFullPath: manuscriptFullPath, convertorPath: convertorPath}')}" else="{f:render(section:'manuscriptNotFound', arguments: '{docType: docType}')}" />
+<v:media.exists file="{manuscriptFullPath}">
+    <f:then>
+        <f:if condition="{docType} == 'parallel'">
+            <f:then>
+                <v:media.exists file="{translationFullPath}">
+                    <f:then>
+                        <f:render section="renderContent" arguments="{manuscriptFullPath: manuscriptFullPath, translationFullPath: translationFullPath, convertorPath: convertorPath, docType: docType}" />
+                    </f:then>
+                    <f:else>
+                        <f:render section="manuscriptNotFound" arguments="{docType: docType}"/>
+                    </f:else>
+                </v:media.exists>
+            </f:then>
+            <f:else>
+                <f:render section="renderContent" arguments="{manuscriptFullPath: manuscriptFullPath, translationFullPath: translationFullPath, convertorPath: convertorPath, docType: docType}" />
+            </f:else>
+        </f:if>
+    </f:then>
+    <f:else>
+        <f:render section="manuscriptNotFound" arguments="{docType: docType}"/>
+    </f:else>
+</v:media.exists>
 
 <f:section name="renderContent">
-    <f:format.raw>
-        <xslt:transform source="{manuscriptFullPath}" transformations="{0:{stylesheet: '{convertorPath}'}}" />
-    </f:format.raw>
-
-    <f:render section="downloadSource" arguments="{manuscriptFullPath: manuscriptFullPath}" />
+    <f:if condition="{docType} == 'transcription' || {docType} == 'translation'">
+        <f:then>
+            <f:format.raw>
+                <xslt:transform source="{manuscriptFullPath}" transformations="{0:{stylesheet: '{convertorPath}'}}" />
+            </f:format.raw>    
+            <f:render section="downloadSource" arguments="{manuscriptFullPath: manuscriptFullPath}" />    
+        </f:then>
+        <f:else>
+        <f:format.raw>
+                <xslt:transform source="{manuscriptFullPath}" transformations="{0:{stylesheet: '{convertorPath}', setParameters: {translationPath: {value: '{translationFullPath}'}}}}" />
+            </f:format.raw>
+        </f:else>
+    </f:if>
 </f:section>
 
 <f:section name="downloadSource">

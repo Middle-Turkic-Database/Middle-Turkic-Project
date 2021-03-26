@@ -4,12 +4,10 @@
   <xsl:output method="html" encoding="utf-8" indent="yes" omit-xml-declaration="yes" />
 
   <!-- Variables -->
-  
-  <!-- xmlAddress Parameter (external parameter) -->
-  <xsl:param name="uniqueID" select="generate-id()" />
-
   <!-- End of Variables -->
 
+  <!-- xmlAddress Parameter (external parameter) -->
+  <xsl:param name="uniqueID" select="generate-id()" />
 
   <!-- Checks the Existance of an element -->
   <func:function name="mtdb:exists">

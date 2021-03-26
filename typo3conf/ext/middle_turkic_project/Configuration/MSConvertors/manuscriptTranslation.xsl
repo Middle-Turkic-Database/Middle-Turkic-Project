@@ -3,7 +3,8 @@
 <xsl:stylesheet version="1.0"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:tei="http://www.tei-c.org/ns/1.0"
-                xmlns:common="http://exslt.org/common" exclude-result-prefixes="tei" extension-element-prefixes="common">
+                xmlns:func="http://exslt.org/functions"
+                xmlns:common="http://exslt.org/common" exclude-result-prefixes="tei" extension-element-prefixes="func common">
    <xsl:import href="typo3conf/ext/middle_turkic_project/Configuration/MSConvertors/xml-to-string.xsl" />
    <xsl:output method="html" encoding="utf-8" indent="yes" omit-xml-declaration="yes" />
    <xsl:strip-space elements="*" />
@@ -13,6 +14,15 @@
    <!-- Variables -->
    
    <!-- End of Variables -->
+
+   <!-- Checks the Existance of an element -->
+   <func:function name="mtdb:exists">
+      <xsl:param name="element" />
+      <func:result select="($element and not($element/@ana)) or ($element/@ana != '#no')" />
+   </func:function>
+   
+   <!-- Text extractor for the text between lines -->
+   <xsl:key name="betweenLineText" match="//tei:div[@type='textpart']//node()[not(ancestor-or-self::tei:l)][not(parent::tei:foreign)][not(parent::tei:ref)]" use="generate-id(following::tei:l[1])" />
    
    <!-- Extracts footnote with respect to its xml:id -->
    <xsl:key name="footnote" match="/tei:TEI/tei:text/tei:body/tei:div[@type='apparatus']/tei:listApp/tei:app/tei:note" use="@xml:id" />
@@ -28,7 +38,7 @@
    <xsl:template match="tei:ab">
       <div class="row">
          <div class="col-lg-10">
-            <table class="table table-borderless table-sm"><xsl:apply-templates /></table>
+            <table class="table table-borderless table-sm"><xsl:apply-templates select="tei:l"/></table>
          </div>
       </div>
    </xsl:template>
@@ -46,7 +56,10 @@
                [<xsl:value-of select="./@n" />]
             </xsl:if>
          </td>
-         <td><xsl:apply-templates /></td>
+         <td>
+            <xsl:apply-templates select="key('betweenLineText', generate-id())" />
+            <xsl:apply-templates />
+         </td>
       </tr>
    </xsl:template>
    

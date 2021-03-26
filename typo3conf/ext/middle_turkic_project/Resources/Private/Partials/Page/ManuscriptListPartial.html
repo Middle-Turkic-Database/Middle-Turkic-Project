@@ -69,56 +69,67 @@
         </f:format.raw>
 
         <ul class="nav nav-tabs" id="manuscriptTabs" role="tablist">
+            <f:variable name="transcriptionExists">
+                <f:if condition="{v:media.exists(directory:'{manuscriptPath}/{manuscriptArgument}', then:'1', else:'0')}">
+                    <f:variable name="fileCount">
+                        <f:count><v:media.files path="{manuscriptPath}/{manuscriptArgument}" extensionList="xml" /></f:count>    
+                    </f:variable>
+                    <f:if condition="{fileCount} > 0">
+                        1
+                    </f:if>
+                </f:if>                    
+            </f:variable>
+            {transcriptionExists -> v:format.trim() -> f:variable(name:'transcriptionExists')}
+            <f:variable name="translationExists">
+                <f:if condition="{v:media.exists(directory:'{manuscriptPath}/{manuscriptArgument}.trl', then:'1', else:'0')}">
+                    <f:variable name="fileCount">
+                        <f:count><v:media.files path="{manuscriptPath}/{manuscriptArgument}.trl" extensionList="xml" /></f:count>    
+                    </f:variable>
+                    <f:if condition="{fileCount} > 0">
+                        1
+                    </f:if>
+                </f:if>                    
+            </f:variable>
+            {translationExists -> v:format.trim() -> f:variable(name:'translationExists')}
+
             <li class="nav-item">
-                <a class="nav-link" id="Description-tab" data-toggle="tab" href="#description" role="tab" aria-controls="description" aria-selected="true">Description</a>
+                <a class="nav-link active" id="Description-tab" data-toggle="tab" href="#description" role="tab" aria-controls="description" aria-selected="true">Description</a>
             </li>
             <li class="nav-item">
-                <f:variable name="transcriptionExists">
-                    <f:if condition="{v:media.exists(directory:'{manuscriptPath}/{manuscriptArgument}', then:'1', else:'0')}">
-                        <f:variable name="fileCount">
-                            <f:count><v:media.files path="{manuscriptPath}/{manuscriptArgument}" extensionList="xml" /></f:count>    
-                        </f:variable>
-                        <f:if condition="{fileCount} > 0">
-                            1
-                        </f:if>
-                    </f:if>                    
-                </f:variable>
-                {transcriptionExists -> v:format.trim() -> f:variable(name:'transcriptionExists')}
-                <a class="nav-link active{f:if(condition:'{transcriptionExists}', else:' disabled')}" id="transcription-tab" data-toggle="tab" href="#transcription" role="tab" aria-controls="transcription" aria-selected="false">Transcription</a>
+                <a class="nav-link {f:if(condition:'{transcriptionExists}', else:' disabled')}" id="transcription-tab" data-toggle="tab" href="#transcription" role="tab" aria-controls="transcription" aria-selected="false">Transcription</a>
             </li>
             <li class="nav-item">
-                <f:variable name="translationExists">
-                    <f:if condition="{v:media.exists(directory:'{manuscriptPath}/{manuscriptArgument}.trl', then:'1', else:'0')}">
-                        <f:variable name="fileCount">
-                            <f:count><v:media.files path="{manuscriptPath}/{manuscriptArgument}.trl" extensionList="xml" /></f:count>    
-                        </f:variable>
-                        <f:if condition="{fileCount} > 0">
-                            1
-                        </f:if>
-                    </f:if>                    
-                </f:variable>
-                {translationExists -> v:format.trim() -> f:variable(name:'translationExists')}
                 <a class="nav-link{f:if(condition:'{translationExists}', else:' disabled')}" id="translation-tab" data-toggle="tab" href="#translation" role="tab" aria-controls="translation" aria-selected="false">Translation</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link disabled" id="parallel-tab" data-toggle="tab" href="#parallel" role="tab" aria-controls="parallel" aria-selected="false">Parallel</a>
+                <a class="nav-link{f:if(condition:'{transcriptionExists} && {translationExists}', else:' disabled')}" id="parallel-tab" data-toggle="tab" href="#parallel" role="tab" aria-controls="parallel" aria-selected="false">Parallel</a>
             </li>
         </ul>
         <div class="tab-content mt-4 ml-3" id="manuscriptTabsContent">
-            <div class="tab-pane fade" id="description" role="tabpanel" aria-labelledby="description-tab">
+            <div class="tab-pane fade active show" id="description" role="tabpanel" aria-labelledby="description-tab">
                 <f:format.raw>{manuscriptDescription}</f:format.raw>
             </div>
-            <div class="tab-pane fade active show" id="transcription" role="tabpanel" aria-labelledby="transcription-tab">
-                <f:render section="manuscriptNavBar" arguments="{_all}" />
+            <div class="tab-pane fade" id="transcription" role="tabpanel" aria-labelledby="transcription-tab">
+                <f:alias map="{uniqueID: 'trc'}">
+                    <f:render section="manuscriptNavBar" arguments="{_all}" />
+                </f:alias>
                 <div class="mt-3 px-2 loader">Loading<span class="d-inline-block ml-4 dot-pulse"></span></div>
                 <div id="msTranscriptContent" class="mt-3 px-2" data-msnav="{manuscriptNav}" data-msname="{manuscriptArgument}"></div>
             </div>
             <div class="tab-pane fade" id="translation" role="tabpanel" aria-labelledby="translation-tab">
-                <f:render section="manuscriptNavBar" arguments="{_all}" />
+                <f:alias map="{uniqueID: 'trl'}">
+                    <f:render section="manuscriptNavBar" arguments="{_all}" />
+                </f:alias>
                 <div class="mt-3 px-2 loader">Loading<span class="d-inline-block ml-4 dot-pulse"></span></div>
                 <div id="msTranslationContent" class="mt-4 px-2" data-msnav="{manuscriptNav}" data-msname="{manuscriptArgument}"></div>
             </div>
-            <div class="tab-pane fade" id="parallel" role="tabpanel" aria-labelledby="parallel-tab">...</div>
+            <div class="tab-pane fade" id="parallel" role="tabpanel" aria-labelledby="parallel-tab">
+                <f:alias map="{uniqueID: 'prl'}">
+                    <f:render section="manuscriptNavBar" arguments="{_all}" />
+                </f:alias>
+                <div class="mt-3 px-2 loader">Loading<span class="d-inline-block ml-4 dot-pulse"></span></div>
+                <div id="msParallelContent" class="mt-4 px-2" data-msnav="{manuscriptNav}" data-msname="{manuscriptArgument}"></div>
+            </div>
         </div>
     </div>
 </f:section>
@@ -126,7 +137,7 @@
 <f:section name="manuscriptNavBar">
     <div>
         <f:format.raw>
-            <xslt:transform source="{manuscriptPath}/{manuscriptArgument}.xml" transformations="{0:{stylesheet: 'EXT:middle_turkic_project/Configuration/MSConvertors/manuscriptNavigationBar.xsl'}}" />
+            <xslt:transform source="{manuscriptPath}/{manuscriptArgument}.xml" transformations="{0:{stylesheet: 'EXT:middle_turkic_project/Configuration/MSConvertors/manuscriptNavigationBar.xsl', setParameters: {uniqueID: {value: '{uniqueID}'}}}}" />
         </f:format.raw>
     </div>
 </f:section>

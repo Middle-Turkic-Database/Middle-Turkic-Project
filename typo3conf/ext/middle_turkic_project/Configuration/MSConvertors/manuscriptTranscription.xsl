@@ -9,6 +9,7 @@
    <xsl:output method="html" encoding="utf-8" indent="yes" omit-xml-declaration="yes" />
    <xsl:strip-space elements="*" />
 
+
    
    <!-- Variables -->
    
@@ -19,7 +20,7 @@
    <!-- End of Variables -->
    
    <!-- Text extractor for the milestone self closing tag -->
-   <xsl:key name="transText" match="//tei:div[@type='textpart']//node()[not(self::tei:milestone)][not(self::tei:l)][not(parent::tei:foreign)][not(parent::tei:ref)]" use="generate-id(preceding::tei:milestone[1])" />
+   <xsl:key name="transText" match="//tei:div[@type='textpart']//node()[not(self::tei:milestone)][not(parent::tei:foreign)][not(parent::tei:ref)]" use="generate-id(preceding::tei:milestone[1])" />
 
    <!-- Extracts footnote with respect to its xml:id -->
    <xsl:key name="footnote" match="/tei:TEI/tei:text/tei:body/tei:div[@type='apparatus']/tei:listApp/tei:app/tei:note" use="@xml:id" />
@@ -35,7 +36,7 @@
    <xsl:template match="tei:ab">
       <div class="row">
          <div class="col-lg-10">
-            <table><xsl:apply-templates select="//tei:milestone"/></table>
+            <table class="table table-borderless table-sm"><xsl:apply-templates select="//tei:milestone"/></table>
          </div>
       </div>
    </xsl:template>
@@ -53,9 +54,15 @@
 
    <xsl:template match="tei:milestone[@unit='line']">
       <tr>
-         <td class="align-text-top" style="width: 10%;">(<xsl:value-of select="./@n" />)</td>
+         <td class="align-text-top five-percent-width">(<xsl:value-of select="./@n" />)</td>
          <td><xsl:apply-templates select="key('transText', generate-id())" /></td>
       </tr>
+   </xsl:template>
+
+   <xsl:template match="tei:l">
+      <xsl:if test="./@n">
+         [<xsl:value-of select="./@n" />]
+      </xsl:if>
    </xsl:template>
    
    <xsl:template match="tei:foreign">

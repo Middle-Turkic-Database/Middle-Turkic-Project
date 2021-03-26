@@ -47,18 +47,18 @@
       <div type="edition">
         <div type="textpart" subtype="incipit">
           <ab>
+            <milestone unit="page" n="2r"/>
+            <ref target="fn1" type="noteAnchor">1</ref>
+            <milestone unit="line" n="1"/>
             <l>
-              <milestone unit="page" n="2r"/>
-              <ref target="fn1" type="noteAnchor">1</ref>
-              <milestone unit="line" n="1"/>
               <foreign xml:lang="he" style="unicode-bidi: embed;">
                 עתה בעזרת ה אל גבור ונורא אחל לכ[…]
               </foreign>
               <milestone unit="line" n="2"/>
               <foreign xml:lang="he" style="unicode-bidi: embed;">
-                <milestone unit="line" n="3"/>
                 פשטי ספר החומש והאל הנאזר בגבורה […]
               </foreign>
+              <milestone unit="line" n="3"/>
               <foreign xml:lang="he" style="unicode-bidi: embed;">
                 ויסעדנו מהתחלה עד גמירא ׳ ס א
               </foreign>

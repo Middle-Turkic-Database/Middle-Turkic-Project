@@ -90,10 +90,19 @@ div#transliteration {
 }
 
 #msTranscriptContent,
-#msTranslationContent {
+#msTranslationContent,
+#msParallelContent {
     .table {
-        td.five-percent-width {
-            width: 5%;
+        td {
+            &.five-percent-width {
+                width: 5%;
+            }
+            &.nintyfive-percent-width {
+                width: 95%;
+            }
+            &.fortysevenandhalf-percent-width {
+                width: 47.5%;
+            }
         }
     }
 }
