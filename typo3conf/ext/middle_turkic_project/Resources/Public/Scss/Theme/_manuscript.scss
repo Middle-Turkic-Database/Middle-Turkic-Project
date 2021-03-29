@@ -92,8 +92,6 @@ div#transliteration {
 #msTranscriptContent,
 #msTranslationContent,
 #msParallelContent {
-    font-family: "Noto Serif Hebrew", "Noto Serif", "Noto Sans Hebrew", "Noto Sans", #{$google-webfont}, sans-serif;
-
     .table {
         td {
             &.five-percent-width {
