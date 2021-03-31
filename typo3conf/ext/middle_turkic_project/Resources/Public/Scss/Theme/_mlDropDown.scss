@@ -62,3 +62,27 @@
         }
     }
 }
+
+.navbar-dark {
+    .navbar-nav {
+        .nav-link {
+            color: $dropdown-link-color;
+            @include hover-focus() {
+                color: $dropdown-link-hover-color;
+            }
+
+            &.active,
+            &:active {
+                color: $dropdown-link-active-color;
+            }
+
+            &.disabled,
+            &:disabled {
+                color: $dropdown-link-disabled-color;
+            }
+        }
+        .nav-link:not(.dropdown-item) {
+            color: $navbar-dark-color;
+        }
+    }
+}
