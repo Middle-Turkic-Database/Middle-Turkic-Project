@@ -9,19 +9,17 @@ $footer-sections: () !default;
 $footer-sections: map-merge(
     (
         content: (
-            background:                darken($white, 3%),
+            background:                #CCCCCC,
             color:                     $black,
-            link-color:                $gray-600
+            link-color:                $primary
         ),
         meta: (
-            background:                darken($white, 6%),
-            color:                     $black,
-            link-color:                $gray-600
+            background:                #333,
+            color:                     $gray-300,
+            link-color:                $gray-300
         )
     ),
     $footer-sections
 );
-
-$headings-font-family:        Roboto !default;
 
 $font-size-base:    1.1rem;
