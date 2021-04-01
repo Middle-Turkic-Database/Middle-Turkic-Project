@@ -7,7 +7,7 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   sodipodi:docname="Logo.svg"
+   sodipodi:docname="logo.svg"
    inkscape:version="1.0 (4035a4f, 2020-05-01)"
    id="svg8"
    version="1.1"
@@ -17,17 +17,17 @@
   <defs
      id="defs2" />
   <sodipodi:namedview
-     inkscape:window-maximized="1"
+     inkscape:window-maximized="0"
      inkscape:window-y="25"
      inkscape:window-x="0"
-     inkscape:window-height="1067"
-     inkscape:window-width="1792"
+     inkscape:window-height="1387"
+     inkscape:window-width="2560"
      showgrid="false"
      inkscape:document-rotation="0"
      inkscape:current-layer="layer1"
      inkscape:document-units="mm"
      inkscape:cy="1698.8766"
-     inkscape:cx="926.82873"
+     inkscape:cx="563.58591"
      inkscape:zoom="0.12939003"
      inkscape:pageshadow="2"
      inkscape:pageopacity="0.0"
@@ -57,10 +57,10 @@
      inkscape:label="Layer 1"
      transform="translate(80.916908,4.0641775)">
     <a
-       style="fill:#bebebe;fill-opacity:1"
+       style="fill:#8b8b8b;fill-opacity:1"
        id="a85">
       <rect
-         style="fill:#bebebe;stroke-width:3.25729;fill-opacity:1"
+         style="fill:#8b8b8b;stroke-width:3.25729;fill-opacity:1"
          id="rect38"
          width="342.59549"
          height="342.59549"
@@ -71,20 +71,20 @@
        id="text32"
        y="130.80443"
        x="110.41975"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:145.03200000000001069px;line-height:0;font-family:'Libre Baskerville';-inkscape-font-specification:'Libre Baskerville';fill:#c41237;fill-opacity:1;stroke:none;stroke-width:3.62578;"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:145.03200000000001069px;line-height:0;font-family:'Libre Baskerville';-inkscape-font-specification:'Libre Baskerville';fill:#990000;fill-opacity:1;stroke:none;stroke-width:3.62578;"
        xml:space="preserve"><tspan
          y="130.80443"
          x="110.41975"
          id="tspan83"
          sodipodi:role="line"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:88.19440000000000168px;line-height:1.35;font-family:'Libre Baskerville';-inkscape-font-specification:'Libre Baskerville';fill:#c41237;stroke-width:3.62578;fill-opacity:1;">A Database of</tspan><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:88.19440000000000168px;line-height:1.35;font-family:'Libre Baskerville';-inkscape-font-specification:'Libre Baskerville';fill:#990000;stroke-width:3.62578;fill-opacity:1;">A Database of</tspan><tspan
          id="tspan19"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.95;font-family:'Libre Baskerville';-inkscape-font-specification:'Libre Baskerville';fill:#c41237;stroke-width:3.62578;fill-opacity:1;"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.95;font-family:'Libre Baskerville';-inkscape-font-specification:'Libre Baskerville';fill:#990000;stroke-width:3.62578;fill-opacity:1;"
          y="275.26871"
          x="110.41975"
          sodipodi:role="line">Middle Turkic</tspan><tspan
          id="tspan34"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.95;font-family:'Libre Baskerville';-inkscape-font-specification:'Libre Baskerville';fill:#c41237;stroke-width:3.62578;fill-opacity:1;"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.95;font-family:'Libre Baskerville';-inkscape-font-specification:'Libre Baskerville';fill:#990000;stroke-width:3.62578;fill-opacity:1;"
          y="344.15891"
          x="110.41975"
          sodipodi:role="line" /></text>

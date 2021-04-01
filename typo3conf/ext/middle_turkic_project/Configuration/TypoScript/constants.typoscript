@@ -86,3 +86,7 @@ plugin.tx_recaptcha {
     # cat=plugin.recaptcha//04; type=string; label= reCAPTCHA private key: Private key of your reCAPTCHA-account
     private_key = 6LfklrgZAAAAANCDOiuKpUnrEAJySqDxxNo26IUt
 }
+
+plugin.bootstrap_package.settings.scss {   
+    gray-uu = #cccccc
+}
