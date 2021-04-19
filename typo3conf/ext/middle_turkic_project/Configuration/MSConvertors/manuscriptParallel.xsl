@@ -94,7 +94,7 @@
             <xsl:attribute name="title">
                <xsl:variable name="footnoteContent">
                   <div class="text-left">
-                     <xsl:apply-templates select="key('footnote', @target)" />
+                     <xsl:apply-templates select="key('footnote', substring(@target,2))" />
                   </div>
                </xsl:variable>
                <xsl:call-template name="xml-to-string">
