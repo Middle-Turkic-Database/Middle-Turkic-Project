@@ -1,1 +1,0 @@
-Upload Khorezmian manuscripts in this folder.
