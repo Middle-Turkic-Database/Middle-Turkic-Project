@@ -65,6 +65,7 @@ lib.manuscriptDescription {
       stylesheet = EXT:middle_turkic_project/Configuration/MSConvertors/manuscriptDescription.xsl
       setParameters {
          xmlAddress.value < lib.xpath.source
+         manuscriptPath.value.cObject < lib.manuscriptPath
          pageURL.value.typolink {
             parameter.data = TSFE:id
             returnLast = url

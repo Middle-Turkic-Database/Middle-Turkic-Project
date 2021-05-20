@@ -7,7 +7,7 @@
       <titleStmt>
         <title ana="#no"/>
         <author ana="#no"/>
-        <editor role="translator">Jeshua Josef Mordkowicz</editor>
+        <editor role="translator"><persName ref="persons.xml#JJMordkowicz">Jeshua Josef Mordkowicz</persName></editor>
         <respStmt>
           <resp when="2020">Manuscript description by</resp>
           <name>Michał Németh</name>
@@ -19,7 +19,7 @@
       </titleStmt>
       <editionStmt>
         <edition>
-          András, Anita. 2020. ‘A digital edition of the Karaim biblical manuscript ADub.III.83’, in László Károly and Michał Németh (eds)
+          András, Anita. 2021. ‘A digital edition of the Karaim biblical manuscript ADub.III.83’, in László Károly and Michał Németh (eds)
           <emph>A database of Middle Turkic documents</emph>. Uppsala: Department of linguistics and philology. Accessed
           <date when-custom="Now-DayinMonth"/>
           <date when-custom="Now-MonthAbbr"/>
@@ -97,7 +97,7 @@
                 <term type="ink">dark brown</term>
               </handNote>
               <handNote scope="sole" script="Karaim semi-cursive"/>
-              <handNote scribe="copyist">Jeshua Josef Mordkowicz (born 1802, died 1884)</handNote>
+              <handNote scribe="copyist"><persName ref="persons.xml#JJMordkowicz">Jeshua Josef Mordkowicz</persName></handNote>
             </handDesc>
             <scriptDesc>
               <scriptNote>Hebrew (Tiberian vocalisation)</scriptNote>
@@ -114,9 +114,9 @@
               <origPlace>Halych</origPlace>
             </origin>
             <provenance>
-              <name type="person" role="owner">Jeshua Josef Mordkowicz (?–1884?)</name>
-              <name type="person" role="owner">Aleksander Dubiński (?–2002)</name>
-              <name type="person" role="owner">Adam Józef Dubiński (2002–)</name>
+              <name type="person" role="owner"><persName ref="persons.xml#JJMordkowicz">Jeshua Josef Mordkowicz</persName> (?–1884?)</name>
+              <name type="person" role="owner"><persName ref="persons.xml#ADubinski">Aleksander Dubiński</persName> (?–2002)</name>
+              <name type="person" role="owner"><persName ref="persons.xml#AJDubinski">Adam Józef Dubiński</persName> (2002–)</name>
             </provenance>
           </history>
           <additional>

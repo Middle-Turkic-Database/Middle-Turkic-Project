@@ -7,8 +7,7 @@
       <titleStmt>
         <title ana="#no"/>
         <author ana="#no"/>
-        <editor role="translator">Unknown
-        </editor>
+        <editor role="translator">Unknown</editor>
         <respStmt>
           <resp when="2013">Manuscript description by</resp>
           <name>Michał Németh</name>
@@ -103,8 +102,7 @@
                 <term type="ink">black</term>
               </handNote>
               <handNote scope="sole" script="Karaim semi-cursive"/>
-              <handNote scribe="copyist">Jaakov ben Icchak Gugel
-              </handNote>
+              <handNote scribe="copyist"><persName ref="persons.xml#JbIGugel">Jaakov ben Icchak Gugel</persName></handNote>
             </handDesc>
             <scriptDesc>
               <scriptNote>Hebrew (Tiberian vocalisation)</scriptNote>
@@ -123,9 +121,9 @@
               </origPlace>
             </origin>
             <provenance>
-              <name type="person" role="owner">Jaakov ben Icchak Gugel (?–?)</name>
-              <name type="person" role="owner">Józef Sulimowicz (?–1973)</name>
-              <name type="person" role="owner">Anna Sulimowicz (1973–)</name>
+              <name type="person" role="owner"><persName ref="persons.xml#JbIGugel">Jaakov ben Icchak Gugel</persName> (?–?)</name>
+              <name type="person" role="owner"><persName ref="persons.xml#JSulimowicz">Józef Sulimowicz</persName> (?–1973)</name>
+              <name type="person" role="owner"><persName ref="persons.xml#ASulimowicz">Anna Sulimowicz</persName> (1973–)</name>
             </provenance>
           </history>
           <additional>

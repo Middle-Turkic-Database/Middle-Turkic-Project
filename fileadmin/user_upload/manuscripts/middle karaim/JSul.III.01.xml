@@ -7,8 +7,7 @@
       <titleStmt>
         <title ana="#no"/>
         <author ana="#no"/>
-        <editor role="translator">Jeshua Josef Mordkowicz
-        </editor>
+        <editor role="translator"><persName ref="persons.xml#JJMordkowicz">Jeshua Josef Mordkowicz</persName></editor>
         <respStmt>
           <resp when="2012">Manuscript description by</resp>
           <name>Michał Németh</name>
@@ -131,8 +130,7 @@
                 <term type="ink">black</term>
               </handNote>
               <handNote scope="sole" script="Karaim semi-cursive"/>
-              <handNote scribe="copyist">Jeshua Josef Mordkowicz (1802–1884)
-              </handNote>
+              <handNote scribe="copyist"><persName ref="persons.xml#JJMordkowicz">Jeshua Josef Mordkowicz</persName></handNote>
             </handDesc>
             <scriptDesc>
               <scriptNote>Hebrew (Tiberian vocalisation)</scriptNote>
@@ -151,9 +149,9 @@
               </origPlace>
             </origin>
             <provenance>
-              <name type="person" role="owner">Jeshua Josef Mordkowicz (?–1884?)</name>
-              <name type="person" role="owner">Józef Sulimowicz (?–1973)</name>
-              <name type="person" role="owner">Anna Sulimowicz (1973–)</name>
+              <name type="person" role="owner"><persName ref="persons.xml#JJMordkowicz">Jeshua Josef Mordkowicz</persName> (?–1884?)</name>
+              <name type="person" role="owner"><persName ref="persons.xml#JSulimowicz">Józef Sulimowicz</persName> (?–1973)</name>
+              <name type="person" role="owner"><persName ref="persons.xml#ASulimowicz">Anna Sulimowicz</persName> (1973–)</name>
             </provenance>
           </history>
           <additional>

@@ -7,10 +7,10 @@
       <titleStmt>
         <title ana="#no"/>
         <author ana="#no"/>
-        <editor role="translator">Jeshua Josef Mordkowicz,
+        <editor role="translator"><persName ref="persons.xml#JJMordkowicz">Jeshua Josef Mordkowicz</persName>,
           <locus>folios 1r–2v</locus>
         </editor>
-        <editor role="translator">Simcha ben Chananel,
+        <editor role="translator"><persName ref="persons.xml#SbChananel">Simcha ben Chananel</persName>,
           <locus>folios 3r–387v</locus>
         </editor>
         <editor role="translator">Unknown,
@@ -127,10 +127,10 @@
                 <term type="ink">light brown, dark brown, black</term>
               </handNote>
               <handNote scope="sole" script="Karaim semi-cursive"/>
-              <handNote scribe="copyist">Jeshua Josef Mordkowicz (born 1802, died 1884),
+              <handNote scribe="copyist"><persName ref="persons.xml#JJMordkowicz">Jeshua Josef Mordkowicz</persName>,
                 <locus>folios 1r–2v</locus>
               </handNote>
-              <handNote scribe="copyist">Simcha ben Chananel (born ca. 1670, died 1723),
+              <handNote scribe="copyist"><persName ref="persons.xml#SbChananel">Simcha ben Chananel</persName>,
                 <locus>folios 3r–387v</locus>
               </handNote>
               <handNote scribe="copyist">Unknown (early 20th century),
@@ -168,14 +168,14 @@
               </origPlace>
             </origin>
             <provenance>
-              <name type="person" role="owner">Simcha ben Chananel (1720–1723)</name>
-              <name type="person" role="owner">Josef ben Jehuda (?–1768)</name>
-              <name type="person" role="owner">Zecharia ben Shalom (1768–1771?)</name>
-              <name type="person" role="owner">Mordechai ben Zecharia (?)</name>
-              <name type="person" role="owner">Shalom ben Zecharia (?)</name>
-              <name type="person" role="owner">Jeshua Josef Mordkowicz (?–1884?)</name>
-              <name type="person" role="owner">Aleksander Dubiński (?–2002)</name>
-              <name type="person" role="owner">Adam Józef Dubiński (2002–)</name>
+              <name type="person" role="owner"><persName ref="persons.xml#SbChananel">Simcha ben Chananel</persName> (1720–1723)</name>
+              <name type="person" role="owner"><persName ref="persons.xml#JbJehuda">Josef ben Jehuda</persName> (?–1768)</name>
+              <name type="person" role="owner"><persName ref="persons.xml#ZbShalom">Zecharia ben Shalom</persName> (1768–1771?)</name>
+              <name type="person" role="owner"><persName ref="persons.xml#MbZecharia">Mordechai ben Zecharia</persName> (?)</name>
+              <name type="person" role="owner"><persName ref="persons.xml#ShbZecharia">Shalom ben Zecharia</persName> (?)</name>
+              <name type="person" role="owner"><persName ref="persons.xml#JJMordkowicz">Jeshua Josef Mordkowicz</persName> (?–1884?)</name>
+              <name type="person" role="owner"><persName ref="persons.xml#ADubinski">Aleksander Dubiński</persName> (?–2002)</name>
+              <name type="person" role="owner"><persName ref="persons.xml#AJDubinski">Adam Józef Dubiński</persName> (2002–)</name>
             </provenance>
           </history>
           <additional>

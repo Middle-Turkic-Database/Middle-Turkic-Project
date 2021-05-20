@@ -7,7 +7,7 @@
       <titleStmt>
         <title ana="#no"/>
         <author ana="#no"/>
-        <editor role="translator">Hillel ben Josef (folios 86r–87r)
+        <editor role="translator"><persName ref="persons.xml#HbJosef">Hillel ben Josef</persName> (folios 86r–87r)
         </editor>
         <respStmt>
           <resp when="2013">Manuscript description by</resp>
@@ -163,10 +163,10 @@
                 <term type="ink">black, blue</term>
               </handNote>
               <handNote scope="sole" script="Crimean Yevano-Karaitic cursive"/>
-              <handNote scribe="copyist">Abraham ben Shemuel, died 1692
+              <handNote scribe="copyist"><persName ref="persons.xml#AbShemuel">Abraham ben Shemuel</persName>
                 <locus>except folios 86r–87r</locus>
               </handNote>
-              <handNote scribe="copyist">Abraham the young, lived in the 19th century
+              <handNote scribe="copyist"><persName ref="persons.xml#AbrahamY">Abraham the young</persName>
                 <locus>folios 86r–87r</locus>
               </handNote>
             </handDesc>
@@ -187,13 +187,13 @@
               </origPlace>
             </origin>
             <provenance>
-              <name type="person" role="owner">Abraham ben Shemuel (?–ca. 1693)</name>
-              <name type="person" role="owner">the son of Abraham ben Shemuel (ca. 1693)</name>
-              <name type="person" role="owner">Shelomo ha-maskil (ca. 1693–?)</name>
-              <name type="person" role="owner">Abraham the young (19th century)</name>
-              <name type="person" role="owner">Boris Kokenaj (?–1967?)</name>
-              <name type="person" role="owner">Józef Sulimowicz (?–1973)</name>
-              <name type="person" role="owner">Anna Sulimowicz (1973–)</name>
+              <name type="person" role="owner"><persName ref="persons.xml#AbShemuel">Abraham ben Shemuel</persName> (?–ca. 1693)</name>
+              <name type="person" role="owner"><persName ref="persons.xml#SofAbShemuel">the son of Abraham ben Shemuel</persName> (ca. 1693)</name>
+              <name type="person" role="owner"><persName ref="persons.xml#Shhamaskil">Shelomo ha-maskil</persName> (ca. 1693–?)</name>
+              <name type="person" role="owner"><persName ref="persons.xml#AbrahamY">Abraham the young</persName> (19th century)</name>
+              <name type="person" role="owner"><persName ref="persons.xml#BKokenaj">Boris Kokenaj</persName> (?–1967?)</name>
+              <name type="person" role="owner"><persName ref="persons.xml#JSulimowicz">Józef Sulimowicz</persName> (?–1973)</name>
+              <name type="person" role="owner"><persName ref="persons.xml#ASulimowicz">Anna Sulimowicz</persName> (1973–)</name>
             </provenance>
           </history>
           <additional>

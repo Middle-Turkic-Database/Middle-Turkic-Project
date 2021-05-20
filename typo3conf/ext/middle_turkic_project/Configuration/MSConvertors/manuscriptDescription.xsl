@@ -5,12 +5,16 @@
    xmlns:tei="http://www.tei-c.org/ns/1.0"
    xmlns:func="http://exslt.org/functions"
    xmlns:date="http://exslt.org/dates-and-times"
-   xmlns:mtdb="http://www.middleturkic.uu.se" exclude-result-prefixes="tei mtdb" extension-element-prefixes="func date">
+   xmlns:str="http://exslt.org/strings"
+   xmlns:common="http://exslt.org/common"
+   xmlns:mtdb="http://www.middleturkic.uu.se" exclude-result-prefixes="tei mtdb" extension-element-prefixes="func date str common">
+   <xsl:import href="typo3conf/ext/middle_turkic_project/Configuration/MSConvertors/xml-to-string.xsl" />
    <xsl:output method="html" encoding="utf-8" indent="yes" omit-xml-declaration="yes" />
 
    <!-- Variables -->
 
    <!-- External parameter -->
+   <xsl:param name="manuscriptPath" select="'NO_PATH_AVAILABLE'" />
    <xsl:param name="xmlAddress" select="'default'" />
    <xsl:param name="pageURL" select="'NO_URL_AVAILABLE'" />
 
@@ -756,6 +760,58 @@ Download the XML (TEI Epidoc)</a>
       <a href="{./@target}" target="_blank" class="dotted-underline">
          <xsl:apply-templates />
       </a>
+   </xsl:template>
+
+   <xsl:template match="tei:persName">
+      <xsl:variable name="personsFileName" select="substring-before(@ref, '#')" />
+      <xsl:variable name="personsFilePath" select="concat($manuscriptPath, '/authority/', $personsFileName)" />
+      <xsl:variable name="personId" select="substring-after(@ref, '#')" />
+      <xsl:variable name="personInfo">
+         <xsl:variable name="forename" select="document(str:encode-uri($personsFilePath, true()))/tei:TEI/tei:listPerson/tei:person[@xml:id=$personId]/tei:persName/tei:forename" />
+         <xsl:variable name="surname" select="document(str:encode-uri($personsFilePath, true()))/tei:TEI/tei:listPerson/tei:person[@xml:id=$personId]/tei:persName/tei:surname" />
+         <xsl:variable name="birth" select="document(str:encode-uri($personsFilePath, true()))/tei:TEI/tei:listPerson/tei:person[@xml:id=$personId]/tei:birth" />
+         <xsl:variable name="death" select="document(str:encode-uri($personsFilePath, true()))/tei:TEI/tei:listPerson/tei:person[@xml:id=$personId]/tei:death" />
+         <xsl:variable name="description" select="document(str:encode-uri($personsFilePath, true()))/tei:TEI/tei:listPerson/tei:person[@xml:id=$personId]/tei:p" />
+
+         <div>
+            <xsl:value-of select="$forename" />
+            <xsl:value-of select="$surname" />
+         </div>
+         <xsl:if test="mtdb:exists($birth) or mtdb:exists($death)">
+            <div class="mb-2">
+               <xsl:text>(</xsl:text>
+               <xsl:value-of select="$birth" />
+               <xsl:text>--</xsl:text>
+               <xsl:value-of select="$death" />
+               <xsl:text>)</xsl:text>
+            </div>
+         </xsl:if>
+         <xsl:if test="mtdb:exists($description)">
+            <p class="text-left text-light">   
+               <xsl:value-of select="$description" />
+            </p>
+         </xsl:if>
+      </xsl:variable>
+      <xsl:element name="span">
+         <xsl:attribute name="class">
+            <xsl:text>dotted-underline</xsl:text>
+         </xsl:attribute>
+         <xsl:attribute name="data-toggle">
+            <xsl:text>tooltip</xsl:text>
+         </xsl:attribute>
+         <xsl:attribute name="data-placement">
+            <xsl:text>top</xsl:text>
+         </xsl:attribute>
+         <xsl:attribute name="data-html">
+            <xsl:text>true</xsl:text>
+         </xsl:attribute>
+         <xsl:attribute name="title">
+            <xsl:call-template name="xml-to-string">
+               <xsl:with-param name="node-set" select="common:node-set($personInfo)" />
+            </xsl:call-template> 
+         </xsl:attribute>
+         <xsl:apply-templates />
+      </xsl:element>
    </xsl:template>
 
    <xsl:template match="tei:date[@when-custom='Now-DayinMonth']">
