@@ -775,6 +775,7 @@ Download the XML (TEI Epidoc)</a>
 
          <div>
             <xsl:value-of select="$forename" />
+            <xsl:text>&#xA;</xsl:text>
             <xsl:value-of select="$surname" />
          </div>
          <xsl:if test="mtdb:exists($birth) or mtdb:exists($death)">
