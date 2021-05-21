@@ -96,7 +96,7 @@
                   <xsl:with-param name="node-set" select="common:node-set($footnoteContent)" />
                </xsl:call-template> 
             </xsl:attribute>
-            <xsl:apply-templates />
+            <xsl:value-of select="substring(@target, 4)"></xsl:value-of>
          </xsl:element>
       </sup>
    </xsl:template>
