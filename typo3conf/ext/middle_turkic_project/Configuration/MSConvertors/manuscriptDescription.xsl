@@ -235,9 +235,9 @@ Physical Descrition</span>
                            <dt class="col-sm-3">
                                           Support Dimensions
                               <xsl:if test="$supportDimensions/@unit">
-                                             (
+                                             <xsl:text>(</xsl:text>
                                  <xsl:value-of select="$supportDimensions/@unit" />
-                                             )
+                                             <xsl:text>)</xsl:text>
                               </xsl:if>
                            </dt>
                            <dd class="col-sm-9">
@@ -257,9 +257,9 @@ Physical Descrition</span>
                            <dt class="col-sm-3">
                                           Text-block Dimensions
                               <xsl:if test="$textBlockDimensions/@unit">
-                                             (
+                                             <xsl:text>(</xsl:text>
                                  <xsl:value-of select="$textBlockDimensions/@unit" />
-                                             )
+                                             <xsl:text>)</xsl:text>
                               </xsl:if>
                            </dt>
                            <dd class="col-sm-9">
