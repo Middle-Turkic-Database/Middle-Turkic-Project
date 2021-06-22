@@ -1,1 +1,0 @@
-Upload Cuman manuscripts in this folder.
