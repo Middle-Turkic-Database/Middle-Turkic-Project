@@ -4,3 +4,6 @@
 [submodule "fileadmin/user_upload/manuscripts/armeno-kipchak"]
 	path = fileadmin/user_upload/manuscripts/armeno-kipchak
 	url = https://github.com/Middle-Turkic-Database/armeno-kipchak
+[submodule "fileadmin/user_upload/manuscripts/cuman"]
+	path = fileadmin/user_upload/manuscripts/cuman
+	url = https://github.com/Middle-Turkic-Database/cuman.git
