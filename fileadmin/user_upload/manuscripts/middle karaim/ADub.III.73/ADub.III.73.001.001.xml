@@ -2,574 +2,417 @@
 <?xml-model href="http://epidoc.stoa.org/schema/latest/tei-epidoc.rng" schematypens="http://relaxng.org/ns/structure/1.0"?>
 <?xml-model href="http://epidoc.stoa.org/schema/latest/tei-epidoc.rng" schematypens="http://purl.oclc.org/dsdl/schematron"?>
 <TEI xmlns="http://www.tei-c.org/ns/1.0" xml:space="preserve" xml:lang="en">
-  <teiHeader>
-    <fileDesc>
-      <titleStmt>
-        <title ana="#no"/>
-        <author ana="#no"/>
-      </titleStmt>
-      <publicationStmt>
-        <publisher>Uppsala University, Department of linguistics and philology</publisher>
-        <pubPlace>Uppsala, Sweden</pubPlace>
-        <date>2020</date>
-        <availability status="restricted">
-          <licence target="https://creativecommons.org/licenses/by/4.0/">
-            Creative Commons Attribution 4.0 International</licence>
-        </availability>
-      </publicationStmt>
-      <sourceDesc>
-        <msDesc>
-          <msIdentifier>
-            <settlement>Warsaw, Poland</settlement>
-            <repository>Private archive</repository>
-            <idno>ADub.III.73</idno>
-          </msIdentifier>
-          <msContents>
-            <summary>
-              A Karaim translation of the Torah and the Haftarah
-            </summary>
-          </msContents>
-        </msDesc>
-      </sourceDesc>
-    </fileDesc>
-    <profileDesc>
-      <abstract>
-        <p>
-          <lg>
-            <l>Genesis 1</l>
-          </lg>
-        </p>
-      </abstract>
-    </profileDesc>
-  </teiHeader>
-  <text>
-    <body>
-      <div type="edition">
-        <div type="textpart" subtype="incipit">
-          <ab>
-            <milestone unit="line" n="4"/>
-            <l>
-              <foreign xml:lang="he" style="unicode-bidi: embed;">
-                בראשית ברא אלהים את השמים ואת הארץ
-              </foreign>
-            </l>
-            <milestone unit="line" n="5"/>
-            <l n="1">
-              ⸤{Enk baštan jaratty Tenri osol ol keklerni da
-              <milestone unit="line" n="6"/>
-              osol ol jerni.
-            </l>
-            <l n="2">
-              <foreign xml:lang="he" style="unicode-bidi: embed;">
-                והארץ
-              </foreign>
-              Da ol jer edi v[eren]<ref target="#fn1" type="noteAnchor"/>
-              <milestone unit="line" n="7"/>
-              da bos da qaranġylyq edi<ref target="#fn2" type="noteAnchor"/>
-              jizleri istine ol darjanyn [da]<ref target="#fn3" type="noteAnchor"/>
-              <milestone unit="line" n="8"/>
-              jeli Tenrinin suvurdaredi<ref target="#fn4" type="noteAnchor"/>
-              jizleri istine ol suvlar[nyn].<ref target="#fn5" type="noteAnchor"/>
-            </l>
-            <milestone unit="line" n="9"/>
-            <l n="3">
-              <foreign xml:lang="he" style="unicode-bidi: embed;">
-                ויאמר
-              </foreign>
-              Da ajtty Tenri bolsun jaryq da boldu jary[q].<ref target="#fn6" type="noteAnchor"/>
-            </l>
-            <milestone unit="line" n="10"/>
-            <l n="4">
-              <foreign xml:lang="he" style="unicode-bidi: embed;">
-                וירא
-              </foreign>
-              Da kerdi Tenri osol ol jaryqny ki jaḥsydy da
-              <milestone unit="line" n="11"/>
-              ajyrdy Tenri arasyna ol jaryqnyn da arasyna ol
-              <milestone unit="line" n="12"/>
-              qaranġylyqnyn.
-            </l>
-            <l n="5">
-              <foreign xml:lang="he" style="unicode-bidi: embed;">
-                ויקרא
-              </foreign>
-              Da atady Tenri jaryqqa kin da
-              <milestone unit="line" n="13"/>
-              qaranġyġa atady kece da boldu ingir da boldu [tan]<ref target="#fn7" type="noteAnchor"/>
-              <milestone unit="line" n="14"/>
-              bir kin.
-            </l>
-            <l n="6">
-              <foreign xml:lang="he" style="unicode-bidi: embed;">
-                ויאמר
-              </foreign>
-              Da ajtty Tenri bolsun
-              <milestone unit="line" n="15"/>
-              raqiaʿ ortasynda ol suvlarnyn da bolsun ajyruvcu
-              <milestone unit="line" n="16"/>
-              arasyna suvlarnyn suvlarbyla.
-            </l>
-            <l n="7">
-              <foreign xml:lang="he" style="unicode-bidi: embed;">
-                ויעש
-              </foreign>
-              Da jaratty<ref target="#fn8" type="noteAnchor"/>
-              Ten[ri]<ref target="#fn9" type="noteAnchor"/>
-              <milestone unit="line" n="17"/>
-              osol ol raqiaʿny da ajyrdy arasyna ol suvlarnyn ki
-              <milestone unit="line" n="18"/>
-              asaġartyn raqiaʿġa da arasyna ol suvlarnyn ki joġarraq<ref target="#fn10" type="noteAnchor"/>
-              <milestone unit="line" n="19"/>
-              da boldu alaj.
-            </l>
-            <l n="8">
-              <foreign xml:lang="he" style="unicode-bidi: embed;">
-                ויקרא
-              </foreign>
-              Da atady Tenri raqiaʿġa ⟨da⟩
-              <milestone unit="line" n="20"/>
-              kekler da boldu ingir da boldu tan ekinci kin.
-            </l>
-            <milestone unit="line" n="21"/>
-            <l n="9">
-              <foreign xml:lang="he" style="unicode-bidi: embed;">
-                ויאמר
-              </foreign>
-              Da ajtty Tenri jumulsunlar ol suvlar
-              <milestone unit="page" n="2v"/>
-              <milestone unit="line" n="1"/>
-              tibinden ol keklernin bir orunġa da kerinsin ol
-              <milestone unit="line" n="2"/>
-              quru da boldu alaj.
-            </l>
-            <l n="10">
-              <foreign xml:lang="he" style="unicode-bidi: embed;">
-                ויקרא
-              </foreign>
-              Da atady Tenri quruġa
-              <milestone unit="line" n="3"/>
-              jer da jumulmaġyna ol suvlarnyn atady tengizler da
-              <milestone unit="line" n="4"/>
-              ⟨bol⟩ kerdi Tenri ki jaḥsydy.
-            </l>
-            <l n="11">
-              <foreign xml:lang="he" style="unicode-bidi: embed;">
-                ויאמר
-              </foreign>
-              Da ajtty
-              <milestone unit="line" n="5"/>
-              Tenri jasartsyn ol jer jas ot keget urluq etivci
-              <milestone unit="line" n="6"/>
-              urluq jemis aġacy qyluvcu jemis ʒynsysajyn ki urluġu
-              <milestone unit="line" n="7"/>
-              anyn anda ol jer istine da boldu alaj.
-            </l>
-            <l n="12">
-              <foreign xml:lang="he" style="unicode-bidi: embed;">
-                ותוצא
-              </foreign>
-              <milestone unit="line" n="8"/>
-              Da cyġardy ol jer jas ot<ref target="#fn11" type="noteAnchor"/>
-              ⸤urluqlavcu urluq⸣<ref target="#fn12" type="noteAnchor"/>
-              <milestone unit="line" n="9"/>
-              ʒynsysajyn da aġac qyluvcu jemis ki urluġu anyn
-              <milestone unit="line" n="10"/>
-              anda ʒynsysajyn da kerdi Tenri ki jaḥsydy.
-            </l>
-            <l n="13">
-              <foreign xml:lang="he" style="unicode-bidi: embed;">
-                ויהי
-              </foreign>
-              <milestone unit="line" n="11"/>
-              Da boldu ingir da boldu tan icinci kin.
-            </l>
-            <l n="14">
-              <foreign xml:lang="he" style="unicode-bidi: embed;">
-                ויאמר
-              </foreign>
-              <milestone unit="line" n="12"/>
-              Da ajtty Tenri bolsun jaryqlyqlar<ref target="#fn13" type="noteAnchor"/>
-              raqiaʿsynda ol
-              <milestone unit="line" n="13"/>
-              keklernin ajyrma arasyna ol kinnin da arasyna
-              <milestone unit="line" n="14"/>
-              ol kecenin da bolsunlar belgilerge da vaġdalarġa
-              <milestone unit="line" n="15"/>
-              da kinlerge da jyllarġa.
-            </l>
-            <l n="15">
-              <foreign xml:lang="he" style="unicode-bidi: embed;">
-                והיו
-              </foreign>
-              Da bolsunlar jaryqlyq-
-              <milestone unit="line" n="16"/>
-              larġa raqiaʿsynda ol keklernin jarytma<ref target="#fn14" type="noteAnchor"/>
-              ol jer
-              <milestone unit="line" n="17"/>
-              istine da boldu alaj.
-            </l>
-            <l n="16">
-              <foreign xml:lang="he" style="unicode-bidi: embed;">
-                ויעש
-              </foreign>
-              Da jaratty<ref target="#fn15" type="noteAnchor"/>
-              Tenri osol
-              <milestone unit="line" n="18"/>
-              eki ol ⸤jaryqlyqlarny ol ullularny⸣<ref target="#fn15" type="noteAnchor"/>
-              osol ol ullu jaryqny<ref target="#fn17" type="noteAnchor"/>
-              <milestone unit="line" n="19"/>
-              erklenmegine ol kinnin da osol ol kici jaryqlyqny
-              <milestone unit="line" n="20"/>
-              erklenmegine ol kecenin da osol ol jolduzlarny.
-            </l>
-            <l n="17">
-              <foreign xml:lang="he" style="unicode-bidi: embed;">
-                ויתן
-              </foreign>
-              <milestone unit="line" n="21"/>
-              Da berdi Tenri alarny raqiaʿsynda ol keklernin jarytma<ref target="#fn18" type="noteAnchor"/>
-              <milestone unit="line" n="22"/>
-              ol jer istine.}⸣<ref target="#fn19" type="noteAnchor"/>
-            </l>
-            <milestone unit="page" n="3r"/>
-            <milestone unit="line" n="1"/>
-            <l n="18">
-              ⸤
-              <foreign xml:lang="he" style="unicode-bidi: embed;">
-                [משול[ול
-              </foreign>
-              ⸣<ref target="#fn20" type="noteAnchor"/>
-              Da erkĺanḿa kündüz da ⸤ke[č]e[byla da ajyr-
-              <milestone unit="line" n="2"/>
-              ma]⸣<ref target="#fn21" type="noteAnchor"/>
-              arasyna ol jaryqnyn da arasyna ol ⸤qaran[ġylyqnyn da]⸣<ref target="#fn22" type="noteAnchor"/>
-              <milestone unit="line" n="3"/>
-              kördü Tenri ki jaḥšydy.
-            </l>
-            <l n="19">
-              <foreign xml:lang="he" style="unicode-bidi: embed;">
-                ויהי
-              </foreign>
-              Da boldu ⸤in[gir da bol-]
-              <milestone unit="line" n="4"/>
-              du⸣<ref target="#fn23" type="noteAnchor"/>
-              tan da dörtünčü kün.
-            </l>
-            <l n="20">
-              <foreign xml:lang="he" style="unicode-bidi: embed;">
-                ויאמר
-              </foreign>
-              Da ⸤ajt[ty Tenri]⸣<ref target="#fn24" type="noteAnchor"/>
-              <milestone unit="line" n="5"/>
-              qozlasynlar ol suvlar qozlamaġyn tiri ǯannyn da ⸤qu[š učqa-]
-              <milestone unit="line" n="6"/>
-              lasyn⸣<ref target="#fn25" type="noteAnchor"/>
-              ol jer üstüńa juvuq raqiaʿsyna<ref target="#fn26" type="noteAnchor"/>
-              ol kökler[nin].<ref target="#fn27" type="noteAnchor"/>
-            </l>
-            <milestone unit="line" n="7"/>
-            <l n="21">
-              <foreign xml:lang="he" style="unicode-bidi: embed;">
-                ויברא
-              </foreign>
-              Da jaratty Tenri ošol ol ⸤aždahalarny o[l ullular-]
-              <milestone unit="line" n="8"/>
-              ny⸣<ref target="#fn28" type="noteAnchor"/>
-              da ošol ol bar tiri ǯanny ol tebrenedoġanny ⸤[ki qoz-]
-              <milestone unit="line" n="9"/>
-              ladylar⸣<ref target="#fn29" type="noteAnchor"/>
-              ol suvlar ǯynslary sajyn da ošol bar ol ⸤qanatl[y qušnu]⸣<ref target="#fn30" type="noteAnchor"/>
-              <milestone unit="line" n="10"/>
-              ǯynsy sajyn da kördü Tenri ki jaḥšydy.
-            </l>
-            <l n="22">
-              <foreign xml:lang="he" style="unicode-bidi: embed;">
-                ויברך
-              </foreign>
-              Da [alġyšla-]
-              <milestone unit="line" n="11"/>
-              dy<ref target="#fn31" type="noteAnchor"/>
-              alarny Tenri ajtadoġač jajylyjyz da artyjyz da [toltu-]
-              <milestone unit="line" n="12"/>
-              rujuz<ref target="#fn32" type="noteAnchor"/>
-              ošol ol suvlarny tengizlerd́a da ol quš [art-]
-              <milestone unit="line" n="13"/>
-              syn<ref target="#fn33" type="noteAnchor"/>
-              jerd́a.
-            </l>
-            <l n="23">
-              <foreign xml:lang="he" style="unicode-bidi: embed;">
-                ויהי
-              </foreign>
-              Da boldu ingir da boldu tan [bešinči]<ref target="#fn34" type="noteAnchor"/>
-              <milestone unit="line" n="14"/>
-              kün.
-            </l>
-            <l n="24">
-              <foreign xml:lang="he" style="unicode-bidi: embed;">
-                ויא מר
-              </foreign>
-              Da ajtty Tenri čyġarsyn ol jer [tiri]<ref target="#fn35" type="noteAnchor"/>
-              <milestone unit="line" n="15"/>
-              ǯan ǯynsy sajyn tuvarda qomuzda kijigin jernin ⸤ǯyn[sy sajyn]⸣<ref target="#fn36" type="noteAnchor"/>
-              <milestone unit="line" n="16"/>
-              da boldu alaj.
-            </l>
-            <l n="25">
-              <foreign xml:lang="he" style="unicode-bidi: embed;">
-                ויעש
-              </foreign>
-              Da jaratty Tenri ošol ⸤ki[jigin ol]⸣<ref target="#fn37" type="noteAnchor"/>
-              <milestone unit="line" n="17"/>
-              jernin ǯynsy sajyn da ošol ol tuvarny ǯynsy sajyn da ⸤o[šol bar]⸣<ref target="#fn38" type="noteAnchor"/>
-              <milestone unit="line" n="18"/>
-              qomuzun ol jernin ǯynsy sajyn da kördü Tenri ki jaḥšy[dy].<ref target="#fn39" type="noteAnchor"/>
-            </l>
-            <milestone unit="line" n="19"/>
-            <l n="26">
-              <foreign xml:lang="he" style="unicode-bidi: embed;">
-                ויאמר
-              </foreign>
-              Da ajtty Tenri jaratajyq adam susumuz [byla]<ref target="#fn40" type="noteAnchor"/>
-              <milestone unit="line" n="20"/>
-              uqšašymyzġa köŕa da erklensinĺar balyġynda ⸤[ol ten-]
-              <milestone unit="line" n="21"/>
-              giznin⸣<ref target="#fn41" type="noteAnchor"/>
-              da qušunda ol köklernin da tuvarda da bar ⸤[ol
-              <milestone unit="page" n="3v"/>
-              <milestone unit="line" n="1"/>
-              jerd́]a⸣<ref target="#fn42" type="noteAnchor"/>
-              da bar ol qomuzda ol tebrenedoġan ol jer üstü-
-              <milestone unit="line" n="2"/>
-              ńa.
-            </l>
-            <l n="27">
-              <foreign xml:lang="he" style="unicode-bidi: embed;">
-                ויברא
-              </foreign>
-              Da jaratty Tenri ošol ol adamny susu byla
-              <milestone unit="line" n="3"/>
-              susu byla malaḫnyn jaratty any erkekni da tišini jaratty
-              <milestone unit="line" n="4"/>
-              alarny.
-            </l>
-            <l n="28">
-              <foreign xml:lang="he" style="unicode-bidi: embed;">
-                ויברך
-              </foreign>
-              Da alġyšlady alarny Tenri da ajtty alarġa
-              <milestone unit="line" n="5"/>
-              Tenri jajylyjyz da artyjyz da tolturujuz ošol ol jerni
-              <milestone unit="line" n="6"/>
-              da tutuvlanyjyz anda da er{r}klenijiz balyġynda ol tengiznin
-              <milestone unit="line" n="7"/>
-              da qušunda ol köklernin da bar tiride ol tebrenedoġan
-              <milestone unit="line" n="8"/>
-              ol jer üstüńa.
-            </l>
-            <l n="29">
-              <foreign xml:lang="he" style="unicode-bidi: embed;">
-                ויאמר
-              </foreign>
-              Da ajtty Tenri muna
-              <milestone unit="line" n="9"/>
-              berdim sizǵa ošol bar kögötnü urluqlavčunu urluq ki
-              <milestone unit="line" n="10"/>
-              jüzĺari üstüńa bar ol jernin da ošol bar ol aġačny ki
-              <milestone unit="line" n="11"/>
-              anda jemiš aġačy urluqlavču urluq sizǵa bolsun jemǵa.
-            </l>
-            <milestone unit="line" n="12"/>
-            <l n="30">
-              <foreign xml:lang="he" style="unicode-bidi: embed;">
-                ולכל
-              </foreign>
-              Da bar kijigińa ol jernin da bar qušuna ol köklernin
-              <milestone unit="line" n="13"/>
-              da bar tebrenedoġanġa ol jer üstüńa ki anda tiri ǯan
-              <milestone unit="line" n="14"/>
-              ošol bar ješilligin kögötnün jemǵa da boldu alaj.
-            </l>
-            <milestone unit="line" n="15"/>
-            <l n="31">
-              <foreign xml:lang="he" style="unicode-bidi: embed;">
-                וירא
-              </foreign>
-              Da kördü Tenri ošol barča neki jaratty da
-              <milestone unit="line" n="16"/>
-              muna jaḥšydy astry da boldu ingir da boldu tan ol altyn-
-              <milestone unit="line" n="17"/>
-              čy kün.
-            </l>
-          </ab>
-        </div>
-      </div>
-      <div type="apparatus">
-        <listApp>
-          <app>
-            <note xml:id="fn1" type="footnote">H:
-              <emph>veren.</emph>
-              | C:
-              <emph>viran.</emph>
-              | V:
-              <emph>heč.</emph>
-              | P:
-              <emph>veŕac</emph>; a printing error or a scribal error.</note>
-            <note xml:id="fn2" type="footnote">TKow.01: deest.</note>
-            <note xml:id="fn3" type="footnote">TKow.01:
-              <emph>da</emph>. | H:
-              <emph>da</emph>. | C:
-              <emph>da</emph>. | V:
-              <emph>da</emph>. | P:
-              <emph>da</emph>.</note>
-            <note xml:id="fn4" type="footnote">TKow.01:
-              <emph>šuvuldaredi</emph>.</note>
-            <note xml:id="fn5" type="footnote">TKow.01:
-              <emph>suvlarnyn</emph>. | H:
-              <emph>suvlarnyn</emph>. | C:
-              <emph>suvlarnyŋ</emph>. | V:
-              <emph>suvlarnyn</emph>. | P:
-              <emph>suklarnyn</emph>; a printing error or a scribal error.</note>
-            <note xml:id="fn6" type="footnote">TKow.01:
-              <emph>jaryq</emph>. | H:
-              <emph>jaryq</emph>. | C:
-              <emph>jaryq</emph>. | V:
-              <emph>jaryḥ</emph>. | P:
-              <emph>jaryq</emph>.</note>
-            <note xml:id="fn7" type="footnote">TKow.01:
-              <emph>tan</emph>. | H:
-              <emph>tan</emph>. | C:
-              <emph>ertä</emph>. | V:
-              <emph>tan</emph>.</note>
-            <note xml:id="fn8" type="footnote">TKow.01:
-              <emph>qyldy</emph>.</note>
-            <note xml:id="fn9" type="footnote">TKow.01:
-              <emph>Tenri</emph>. | H:
-              <emph>Tenri</emph>. | C:
-              <emph>Täŋri</emph>. | V:
-              <emph>Tenri</emph>.</note>
-            <note xml:id="fn10" type="footnote">TKow.01:
-              <emph>joġartyn raqiaʿġa</emph>.</note>
-            <note xml:id="fn11" type="footnote">TKow.01:
-              <emph>ot kögöt</emph>.</note>
-            <note xml:id="fn12" type="footnote">TKow.01:
-              <emph>urluq etüvčü urluq</emph>.</note>
-            <note xml:id="fn13" type="footnote">TKow.01:
-              <emph>jaryqlar</emph>.</note>
-            <note xml:id="fn14" type="footnote">TKow.01:
-              <emph>jaryq etḿa</emph>.</note>
-            <note xml:id="fn15" type="footnote">TKow.01:
-              <emph>qyldy</emph>.</note>
-            <note xml:id="fn16" type="footnote">TKow.01:
-              <emph>ullu jaryqlyqlarny</emph>.</note>
-            <note xml:id="fn17" type="footnote">TKow.01:
-              <emph>jaryqlyqny</emph>.</note>
-            <note xml:id="fn18" type="footnote">TKow.01:
-              <emph>jaryq etḿa</emph>.</note>
-            <note xml:id="fn19" type="footnote">Insertion by another hand in South-Western Karaim.</note>
-            <note xml:id="fn20" type="footnote">Heb.
-              <foreign xml:lang="he" style="unicode-bidi: embed;">
-                וְלִמְשֹׁל.
-              </foreign>
-              | Catchword:
-              <foreign xml:lang="he" style="unicode-bidi: embed;">
-                ולמשל.
-              </foreign>
-            </note>
-            <note xml:id="fn21" type="footnote">TKow.01:
-              <emph>keč́abyla da ajyrma</emph>. | H:
-              <emph>kecede da ajyrma</emph>. | C:
-              <emph>kečädä da ajyrma</emph>.</note>
-            <note xml:id="fn22" type="footnote">TKow.01:
-              <emph>qaranġylyqnyn da</emph>. | H:
-              <emph>qaranġylyqnyn da</emph>. | C:
-              <emph>qaraŋġuluqnyŋ da</emph>.</note>
-            <note xml:id="fn23" type="footnote">TKow.01:
-              <emph>ingir da boldu</emph>. | H:
-              <emph>ingir da boldu</emph>. | C:
-              <emph>yŋyr da boldy</emph>.</note>
-            <note xml:id="fn24" type="footnote">TKow.01:
-              <emph>ajtty Tenri</emph>. | H:
-              <emph>ajtty Tenri</emph>. | C:
-              <emph>ajtty Täŋri</emph>.</note>
-            <note xml:id="fn25" type="footnote">H:
-              <emph>qus ucqalasyn</emph>. | C:
-              <emph>quš učsyn</emph>.</note>
-            <note xml:id="fn26" type="footnote">K:
-              <emph>raqaiaʿsyna</emph>; a scribal error; cf. Gen 1:6–8, Gen 1:14–15. | H:
-              <emph>raqiaʿsynyn</emph>; different syntax. | C:
-              <emph>tabaqasynyŋ</emph>. | Cf. Heb.
-              <foreign xml:lang="he" style="unicode-bidi: embed;">
-                רָקִיעַ
-              </foreign>
-              ‘firmament’.
-            </note>
-            <note xml:id="fn27" type="footnote">TKow.01:
-              <emph>kökĺarnin</emph>. | H:
-              <emph>köklernin</emph>. | C:
-              <emph>kökniŋ</emph>.</note>
-            <note xml:id="fn28" type="footnote">TKow.01:
-              <emph>ullu aždahalarny</emph>. | H:
-              <emph>aʒdaġalarny ol ullularny</emph>. | C:
-              <emph>ulu aǯydaḥylarny</emph>.</note>
-            <note xml:id="fn29" type="footnote">TKow.01:
-              <emph>ki qozladylar</emph>. | H:
-              <emph>ki qozladylar</emph>. | C:
-              <emph>ki qozaladylar</emph>.</note>
-            <note xml:id="fn30" type="footnote">TKow.01:
-              <emph>qanatly qušnu</emph>. | H:
-              <emph>qanatly qusnu</emph>. | C:
-              <emph>qanatly qušny</emph>.</note>
-            <note xml:id="fn31" type="footnote">TKow.01:
-              <emph>alġyšlady</emph>. | H:
-              <emph>alġyslady</emph>. | C:
-              <emph>alġyšlady</emph>.</note>
-            <note xml:id="fn32" type="footnote">TKow.01:
-              <emph>tolturujuz</emph>. | H:
-              <emph>tolturunuz</emph>. | C:
-              <emph>toluŋuz</emph>. | Cf. Gen 1:28.</note>
-            <note xml:id="fn33" type="footnote">TKow.01:
-              <emph>artsyn</emph>. | H:
-              <emph>artsyn</emph>. | C:
-              <emph>köbäjsin</emph>.</note>
-            <note xml:id="fn34" type="footnote">TKow.01:
-              <emph>bešinči</emph>. | H:
-              <emph>besinci</emph>. | C:
-              <emph>bešinǯi</emph>.</note>
-            <note xml:id="fn35" type="footnote">TKow.01:
-              <emph>tiri</emph>. | H:
-              <emph>tiri</emph>. | C:
-              <emph>tiri</emph>.</note>
-            <note xml:id="fn36" type="footnote">TKow.01:
-              <emph>ǯynsy sajyn</emph>. | H:
-              <emph>ʒynsy sajyn</emph>. | C:
-              <emph>ǯinsinä</emph>.</note>
-            <note xml:id="fn37" type="footnote">TKow.01:
-              <emph>kijigin ol</emph>. | H:
-              <emph>kijigin ol</emph>. | C:
-              <emph>kijigin ol</emph>.</note>
-            <note xml:id="fn38" type="footnote">TKow.01:
-              <emph>ošol bar</emph>. | H:
-              <emph>osol ol bar</emph>. | C:
-              <emph>šol barča</emph>.</note>
-            <note xml:id="fn39" type="footnote">Cf. Gen. 1:18, 1:21. | TKow.01:
-              <emph>jaḥšydy</emph>. | H:
-              <emph>jaḥsydy</emph>. | C:
-              <emph>jaḥšydyr</emph>.</note>
-            <note xml:id="fn40" type="footnote">Cf. Gen. 1:26. | TKow.01:
-              <emph>byla</emph>. | H:
-              <emph>byla</emph>. | C: deest; different syntax.</note>
-            <note xml:id="fn41" type="footnote">TKow.01:
-              <emph>ol tengiznin</emph>. | H:
-              <emph>ol tengiznin</emph>. | C:
-              <emph>ol teŋizniŋ</emph>.</note>
-            <note xml:id="fn42" type="footnote">TKow.01:
-              <emph>ol jerd́a</emph>. | H:
-              <emph>ol jerde</emph>. | C:
-              <emph>ol jergä</emph>.</note>
-          </app>
-        </listApp>
-      </div>
-    </body>
-  </text>
+	<teiHeader>
+		<fileDesc>
+			<titleStmt><title ana="#no"/><author ana="#no"/></titleStmt>
+			<publicationStmt>
+				<publisher>Uppsala University, Department of linguistics and philology</publisher>
+				<pubPlace>Uppsala, Sweden</pubPlace>
+				<date>2020</date>
+				<availability status="restricted">
+					<licence target="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International</licence>
+				</availability>
+			</publicationStmt>
+			<sourceDesc>
+				<msDesc>
+					<msIdentifier>
+						<settlement>Warsaw, Poland</settlement>
+						<repository>Private archive</repository>
+						<idno>ADub.III.73</idno>
+					</msIdentifier>
+					<msContents>
+						<summary ana="#no">A Karaim translation of the Torah and the Haftarah</summary>
+					</msContents>
+				</msDesc>
+			</sourceDesc>
+		</fileDesc>
+		<profileDesc>
+			<abstract>
+				<p>
+					<lg>
+						<l>Genesis 1</l>
+					</lg>
+				</p>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text>
+		<body>
+			<div type="edition">
+				<div type="textpart" subtype="chapter">
+					<ab>
+						<title>
+							<supplied reason="lost">Genesis 1</supplied>
+						</title><milestone unit="line" n="4"/>
+						<l>
+							<foreign xml:lang="he" style="unicode-bidi: embed;">בראשית ברא אלהים את השמים ואת הארץ</foreign>
+						</l><milestone unit="line" n="5"/>
+						<l n="1"><seg type="commented" n="#seg001"/><addSpan spanTo="#add001"/>
+							<emph>Enk baštan jaratty Tenri osol ol keklerni da</emph><milestone unit="line" n="6"/>
+							<emph>osol ol jerni.</emph>
+						</l>
+						<l n="2">
+							<foreign xml:lang="he" style="unicode-bidi: embed;">והארץ
+							</foreign>
+							<emph>Da ol jer edi v</emph>
+							<supplied reason="lost">eren</supplied><ref target="#fn1" type="noteAnchor"/><milestone unit="line" n="7"/>
+							<emph>da bos da qaranɣylyq edi</emph><ref target="#fn2" type="noteAnchor"/>
+							<emph>
+								jizleri istine ol darjanyn</emph>
+							<supplied reason="lost">da</supplied><ref target="#fn3" type="noteAnchor"/><milestone unit="line" n="8"/>
+							<emph>jeli Tenrinin suvurdaredi</emph><ref target="#fn4" type="noteAnchor"/>
+							<emph>
+								jizleri istine ol suvlar</emph>
+							<supplied reason="lost">nyn</supplied><ref target="#fn5" type="noteAnchor"/>.</l><milestone unit="line" n="9"/>
+						<l n="3">
+							<foreign xml:lang="he" style="unicode-bidi: embed;">ויאמר
+							</foreign>
+							<emph>Da ajtty</emph>
+							<emph>Tenri bolsun jaryq da boldu jary</emph>
+							<supplied reason="lost">q</supplied><ref target="#fn6" type="noteAnchor"/>.</l><milestone unit="line" n="10"/>
+						<l n="4">
+							<foreign xml:lang="he" style="unicode-bidi: embed;">וירא
+							</foreign>
+							<emph>Da kerdi Tenri osol ol jaryqny ki jaḥsydy da</emph><milestone unit="line" n="11"/>
+							<emph>ajyrdy Tenri arasyna ol jaryqnyn da arasyna ol</emph><milestone unit="line" n="12"/>
+							<emph>qaranɣylyqnyn.</emph>
+						</l>
+						<l n="5">
+							<foreign xml:lang="he" style="unicode-bidi: embed;">ויקרא
+							</foreign>
+							<emph>Da atady Tenri jaryqqa kin da</emph><milestone unit="line" n="13"/>
+							<emph>qaranɣyɣa atady kece da boldu ingir da boldu</emph>
+							<supplied reason="lost">tan</supplied><ref target="#fn7" type="noteAnchor"/><milestone unit="line" n="14"/>
+							<emph>bir kin</emph>.</l>
+						<l n="6">
+							<foreign xml:lang="he" style="unicode-bidi: embed;">ויאמר
+							</foreign>
+							<emph>Da ajtty Tenri bolsun</emph><milestone unit="line" n="15"/>
+							<emph>raqiaʿ ortasynda ol suvlarnyn da bolsun ajyruvcu</emph><milestone unit="line" n="16"/>
+							<emph>arasyna suvlarnyn suvlarbyla</emph>.</l>
+						<l n="7">
+							<foreign xml:lang="he" style="unicode-bidi: embed;">ויעש
+							</foreign>
+							<emph>Da jaratty</emph><ref target="#fn8" type="noteAnchor"/>
+							<emph>
+								Ten</emph>
+							<supplied reason="lost">ri</supplied><ref target="#fn9" type="noteAnchor"/><milestone unit="line" n="17"/>
+							<emph>osol ol raqiaʿny da ajyrdy arasyna ol suvlarnyn ki</emph><milestone unit="line" n="18"/>
+							<emph>asaɣartyn raqiaʿɣa da arasyna ol suvlarnyn ki joɣarraq</emph><ref target="#fn10" type="noteAnchor"/><milestone unit="line" n="19"/>
+							<emph>da boldu alaj</emph>.</l>
+						<l n="8">
+							<foreign xml:lang="he" style="unicode-bidi: embed;">ויקרא
+							</foreign>
+							<emph>Da atady Tenri raqiaʿɣa
+							</emph><delSpan spanTo="#del001"/>
+							<emph>da</emph><anchor xml:id="del001"/><milestone unit="line" n="20"/>
+							<emph>kekler da boldu</emph>
+							<emph>ingir da boldu tan ekinci kin</emph>.</l><milestone unit="line" n="21"/>
+						<l n="9">
+							<foreign xml:lang="he" style="unicode-bidi: embed;">ויאמר
+							</foreign>
+							<emph>Da ajtty Tenri jumulsunlar ol suvlar</emph><milestone unit="page" n="2v"/><milestone unit="line" n="1"/>
+							<emph>tibinden ol keklernin bir orunɣa da kerinsin ol</emph><milestone unit="line" n="2"/>
+							<emph>quru da boldu alaj</emph>.</l>
+						<l n="10">
+							<foreign xml:lang="he" style="unicode-bidi: embed;">ויקרא
+							</foreign>
+							<emph>Da atady Tenri quruɣa</emph><milestone unit="line" n="3"/>
+							<emph>jer da jumulmaɣyna ol suvlarnyn atady tengizler da</emph><milestone unit="line" n="4"/><delSpan spanTo="#del002"/>
+							<emph>bol</emph><anchor xml:id="del002"/>
+							<emph>kerdi Tenri ki jaḥsydy</emph>.</l>
+						<l n="11">
+							<foreign xml:lang="he" style="unicode-bidi: embed;">ויאמר
+							</foreign>
+							<emph>Da ajtty</emph><milestone unit="line" n="5"/>
+							<emph>Tenri</emph>
+							<emph>jasartsyn ol jer jas ot keget urluq etivci</emph><milestone unit="line" n="6"/>
+							<emph>urluq</emph>
+							<emph>jemis aɣacy qyluvcu jemis ʒynsysajyn ki urluɣu</emph><milestone unit="line" n="7"/>
+							<emph>anyn</emph>
+							<emph>anda ol jer istine da boldu alaj</emph>.</l>
+						<l n="12">
+							<foreign xml:lang="he" style="unicode-bidi: embed;">ותוצא</foreign><milestone unit="line" n="8"/>
+							<emph>Da cyɣardy ol jer jas ot</emph><ref target="#fn11" type="noteAnchor"/>
+							<emph>
+								<seg type="commented" n="#seg002"/>urluqlavcu urluq<anchor type="commented" xml:id="seg002"/></emph><ref target="#fn12" type="noteAnchor"/><milestone unit="line" n="9"/>
+							<emph>ʒynsysajyn da aɣac qyluvcu jemis ki urluɣu anyn</emph><milestone unit="line" n="10"/>
+							<emph>anda ʒynsysajyn da kerdi Tenri ki jaḥsydy</emph>.</l>
+						<l n="13">
+							<foreign xml:lang="he" style="unicode-bidi: embed;">ויהי</foreign><milestone unit="line" n="11"/>
+							<emph>Da boldu ingir da boldu tan icinci kin</emph>.</l>
+						<l n="14">
+							<foreign xml:lang="he" style="unicode-bidi: embed;">ויאמר</foreign><milestone unit="line" n="12"/>
+							<emph>Da ajtty Tenri bolsun jaryqlyqlar</emph><ref target="#fn13" type="noteAnchor"/>
+							<emph>
+								raqiaʿsynda ol</emph><milestone unit="line" n="13"/>
+							<emph>keklernin ajyrma arasyna ol kinnin da arasyna</emph><milestone unit="line" n="14"/>
+							<emph>ol kecenin da bolsunlar belgilerge da vaɣdalarɣa</emph><milestone unit="line" n="15"/>
+							<emph>da kinlerge da jyllarɣa</emph>.</l>
+						<l n="15">
+							<foreign xml:lang="he" style="unicode-bidi: embed;">והיו
+							</foreign>
+							<emph>Da bolsunlar jaryqlyq-</emph><milestone unit="line" n="16"/>
+							<emph>larɣa raqiaʿsynda ol keklernin jarytma</emph><ref target="#fn14" type="noteAnchor"/>
+							<emph>
+								ol jer</emph><milestone unit="line" n="17"/>
+							<emph>istine da boldu alaj</emph>.</l>
+						<l n="16">
+							<foreign xml:lang="he" style="unicode-bidi: embed;">ויעש
+							</foreign>
+							<emph>Da jaratty</emph><ref target="#fn15" type="noteAnchor"/>
+							<emph>
+								Tenri osol</emph><milestone unit="line" n="18"/>
+							<emph>eki ol
+								<seg type="commented" n="#seg003"/>jaryqlyqlarny ol ullularny<anchor type="commented" xml:id="seg003"/></emph><ref target="#fn16" type="noteAnchor"/>
+							<emph>
+								osol ol ullu jaryqny</emph><ref target="#fn17" type="noteAnchor"/><milestone unit="line" n="19"/>
+							<emph>erklenmegine ol kinnin da osol ol kici jaryqlyqny
+							</emph><milestone unit="line" n="20"/>
+							<emph>erklenmegine ol kecenin da osol ol jolduzlarny</emph>.</l>
+						<l n="17">
+							<foreign xml:lang="he" style="unicode-bidi: embed;">ויתן</foreign><milestone unit="line" n="21"/>
+							<emph>Da berdi Tenri alarny raqiaʿsynda ol keklernin jarytma</emph><ref target="#fn18" type="noteAnchor"/><milestone unit="line" n="22"/>
+							<emph>ol jer istine.</emph><anchor xml:id="add001"/><anchor type="commented" xml:id="seg001"/><ref target="#fn19" type="noteAnchor"/></l><milestone unit="page" n="3r"/><milestone unit="line" n="1"/>
+						<l n="18"><ref target="#fn20" type="noteAnchor"/>
+							<seg type="commented" n="#seg004"/>
+							<foreign xml:lang="he" style="unicode-bidi: embed;">משול</foreign>
+							<supplied reason="lost">
+								<foreign xml:lang="he" style="unicode-bidi: embed;">ול</foreign>
+							</supplied><anchor type="commented" xml:id="seg004"/>
+							Da erkĺanḿa kündüz da
+							<seg type="commented" n="#seg005"/>ke<supplied reason="lost">č</supplied>e<supplied reason="lost">byla da ajyr-</supplied><milestone unit="line" n="2"/>
+							<supplied reason="lost">ma</supplied><anchor type="commented" xml:id="seg005"/><ref target="#fn21" type="noteAnchor"/>
+							arasyna ol jaryqnyn da arasyna ol
+							<seg type="commented" n="#seg006"/>qaran<supplied reason="lost">ɣylyqnyn da</supplied><anchor type="commented" xml:id="seg006"/><ref target="#fn22" type="noteAnchor"/><milestone unit="line" n="3"/>kördü Tenri ki jaḥšydy.</l>
+						<l n="19">
+							<foreign xml:lang="he" style="unicode-bidi: embed;">ויהי
+							</foreign>Da boldu
+							<seg type="commented" n="#seg007"/>in<supplied reason="lost">gir da bol-</supplied><milestone unit="line" n="4"/>du<anchor type="commented" xml:id="seg007"/><ref target="#fn23" type="noteAnchor"/>
+							tan da dörtünčü kün.</l>
+						<l n="20">
+							<foreign xml:lang="he" style="unicode-bidi: embed;">ויאמר
+							</foreign>Da
+							<seg type="commented" n="#seg008"/>ajt<supplied reason="lost">ty Tenri</supplied><anchor type="commented" xml:id="seg008"/><ref target="#fn24" type="noteAnchor"/><milestone unit="line" n="5"/>qozlasynlar ol suvlar qozlamaɣyn tiri ǯannyn da
+							<seg type="commented" n="#seg009"/>qu<supplied reason="lost">š učqa-</supplied><milestone unit="line" n="6"/>lasyn<anchor type="commented" xml:id="seg009"/><ref target="#fn25" type="noteAnchor"/>
+							ol jer üstüńa juvuq raqiaʿsyna<ref target="#fn26" type="noteAnchor"/>
+							ol kökler<supplied reason="lost">nin</supplied><ref target="#fn27" type="noteAnchor"/>.</l><milestone unit="line" n="7"/>
+						<l n="21">
+							<foreign xml:lang="he" style="unicode-bidi: embed;">ויברא
+							</foreign>Da jaratty Tenri ošol ol
+							<seg type="commented" n="#seg010"/>aždahalarny o<supplied reason="lost">l ullular-</supplied><milestone unit="line" n="8"/>ny<anchor type="commented" xml:id="seg010"/><ref target="#fn28" type="noteAnchor"/>
+							da ošol ol bar tiri ǯanny ol tebrenedoɣanny
+							<seg type="commented" n="#seg011"/>
+							<supplied reason="lost">ki qoz-</supplied><milestone unit="line" n="9"/>ladylar<anchor type="commented" xml:id="seg011"/><ref target="#fn29" type="noteAnchor"/>
+							ol suvlar ǯynslary sajyn da ošol bar ol
+							<seg type="commented" n="#seg012"/>qanatl<supplied reason="lost">y qušnu</supplied><anchor type="commented" xml:id="seg012"/><ref target="#fn30" type="noteAnchor"/><milestone unit="line" n="10"/>ǯynsy sajyn da kördü Tenri ki jaḥšydy.</l>
+						<l n="22">
+							<foreign xml:lang="he" style="unicode-bidi: embed;">ויברך
+							</foreign>Da
+							<supplied reason="lost">alɣyšla-</supplied><milestone unit="line" n="11"/>dy<ref target="#fn31" type="noteAnchor"/>
+							alarny Tenri ajtadoɣač jajylyjyz da artyjyz da
+							<supplied reason="lost">toltu-</supplied><milestone unit="line" n="12"/>rujuz<ref target="#fn32" type="noteAnchor"/>
+							ošol ol suvlarny tengizlerd́a da ol quš
+							<supplied reason="lost">art-</supplied><milestone unit="line" n="13"/>syn<ref target="#fn33" type="noteAnchor"/>
+							jerd́a.</l>
+						<l n="23">
+							<foreign xml:lang="he" style="unicode-bidi: embed;">ויהי
+							</foreign>Da boldu ingir da boldu tan
+							<supplied reason="lost">bešinči</supplied><ref target="#fn34" type="noteAnchor"/><milestone unit="line" n="14"/>kün.</l>
+						<l n="24">
+							<foreign xml:lang="he" style="unicode-bidi: embed;">ויאמר
+							</foreign>Da ajtty Tenri čyɣarsyn ol jer
+							<supplied reason="lost">tiri</supplied><ref target="#fn35" type="noteAnchor"/><milestone unit="line" n="15"/>ǯan ǯynsy sajyn tuvarda qomuzda kijigin jernin
+							<seg type="commented" n="#seg013"/>ǯyn<supplied reason="lost">sy sajyn</supplied><anchor type="commented" xml:id="seg013"/><ref target="#fn36" type="noteAnchor"/><milestone unit="line" n="16"/>da boldu alaj.</l>
+						<l n="25">
+							<foreign xml:lang="he" style="unicode-bidi: embed;">ויעש
+							</foreign>Da jaratty Tenri ošol
+							<seg type="commented" n="#seg014"/>ki<supplied reason="lost">jigin ol</supplied><anchor type="commented" xml:id="seg014"/><ref target="#fn37" type="noteAnchor"/><milestone unit="line" n="17"/>jernin ǯynsy sajyn da ošol ol tuvarny ǯynsy sajyn da
+							<seg type="commented" n="#seg015"/>o<supplied reason="lost">šol bar</supplied><anchor type="commented" xml:id="seg015"/><ref target="#fn38" type="noteAnchor"/><milestone unit="line" n="18"/>qomuzun ol jernin ǯynsy sajyn da kördü Tenri ki jaḥšy<supplied reason="lost">dy</supplied><ref target="#fn39" type="noteAnchor"/>.</l><milestone unit="line" n="19"/>
+						<l n="26">
+							<foreign xml:lang="he" style="unicode-bidi: embed;">ויאמר
+							</foreign>Da ajtty Tenri jaratajyq adam susumuz
+							<supplied reason="lost">byla</supplied><ref target="#fn40" type="noteAnchor"/><milestone unit="line" n="20"/>uqšašymyzɣa köŕa da erklensinĺar balyɣynda
+							<seg type="commented" n="#seg016"/>
+							<supplied reason="lost">ol ten-</supplied><milestone unit="line" n="21"/>giznin<anchor type="commented" xml:id="seg016"/><ref target="#fn41" type="noteAnchor"/>
+							da qušunda ol köklernin da tuvarda da bar
+							<seg type="commented" n="#seg017"/>
+							<supplied reason="lost">ol</supplied><milestone unit="page" n="3v"/><milestone unit="line" n="1"/>
+							<supplied reason="lost">jerd́</supplied>a<anchor type="commented" xml:id="seg017"/><ref target="#fn42" type="noteAnchor"/>
+							da bar ol qomuzda ol tebrenedoɣan ol jer üstü-<milestone unit="line" n="2"/>ńa.</l>
+						<l n="27">
+							<foreign xml:lang="he" style="unicode-bidi: embed;">ויברא
+							</foreign>Da jaratty Tenri ošol ol adamny susu byla<milestone unit="line" n="3"/>susu byla malaḫnyn jaratty any erkekni da tišini jaratty<milestone unit="line" n="4"/>alarny.</l>
+						<l n="28">
+							<foreign xml:lang="he" style="unicode-bidi: embed;">ויברך
+							</foreign>Da alɣyšlady alarny Tenri da ajtty alarɣa<milestone unit="line" n="5"/>Tenri jajylyjyz da artyjyz da tolturujuz ošol ol jerni<milestone unit="line" n="6"/>da tutuvlanyjyz anda da er<addSpan spanTo="#add002"/>r<anchor xml:id="add002"/>klenijiz balyɣynda ol tengiznin<milestone unit="line" n="7"/>da qušunda ol köklernin da bar tiride ol tebrenedoɣan<milestone unit="line" n="8"/>ol jer üstüńa.</l>
+						<l n="29">
+							<foreign xml:lang="he" style="unicode-bidi: embed;">ויאמר
+							</foreign>Da ajtty Tenri muna<milestone unit="line" n="9"/>berdim sizǵa ošol bar kögötnü urluqlavčunu urluq ki<milestone unit="line" n="10"/>jüzĺari üstüńa bar ol jernin da ošol bar ol aɣačny ki<milestone unit="line" n="11"/>anda jemiš aɣačy urluqlavču urluq sizǵa bolsun jemǵa.</l><milestone unit="line" n="12"/>
+						<l n="30">
+							<foreign xml:lang="he" style="unicode-bidi: embed;">ולכל
+							</foreign>Da bar kijigińa ol jernin da bar qušuna ol köklernin<milestone unit="line" n="13"/>da bar tebrenedoɣanɣa ol jer üstüńa ki anda tiri ǯan<milestone unit="line" n="14"/>ošol bar ješilligin kögötnün jemǵa da boldu alaj.</l><milestone unit="line" n="15"/>
+						<l n="31">
+							<foreign xml:lang="he" style="unicode-bidi: embed;">וירא
+							</foreign>Da kördü Tenri ošol barča neki jaratty da<milestone unit="line" n="16"/>muna jaḥšydy astry da boldu ingir da boldu tan ol altyn-<milestone unit="line" n="17"/>čy kün.</l>
+					</ab>
+				</div>
+			</div>
+			<div type="apparatus">
+				<listApp>
+					<app>
+						<note xml:id="fn1" type="footnote">H:
+							<emph>veren</emph>. | C:
+							<emph>viran</emph>. | V:
+							<emph>h́eč́</emph>. | P:
+							<emph>veŕac</emph>; a printing error or a scribal error.</note>
+						<note xml:id="fn2" type="footnote">TKow.01: deest.</note>
+						<note xml:id="fn3" type="footnote">TKow.01:
+							<emph>da</emph>. | H:
+							<emph>da</emph>. | C:
+							<emph>da</emph>. | V:
+							<emph>da</emph>. | P:
+							<emph>da</emph>.</note>
+						<note xml:id="fn4" type="footnote">TKow.01:
+							<emph>šuvuldaredi</emph>.</note>
+						<note xml:id="fn5" type="footnote">TKow.01:
+							<emph>suvlarnyn</emph>. | H:
+							<emph>suvlarnyn</emph>. | C:
+							<emph>suvlarnyŋ</emph>. | V:
+							<emph>suvlarnyn</emph>. | P:
+							<emph>suklarnyn</emph>; a printing error or a scribal error.</note>
+						<note xml:id="fn6" type="footnote">TKow.01:
+							<emph>jaryq</emph>. | H:
+							<emph>jaryq</emph>. | C:
+							<emph>jaryq</emph>. | V:
+							<emph>jaryḥ</emph>. | P:
+							<emph>jaryq</emph>.</note>
+						<note xml:id="fn7" type="footnote">TKow.01:
+							<emph>tan</emph>. | H:
+							<emph>tan</emph>. | C:
+							<emph>ertä</emph>. | V:
+							<emph>tan</emph>.</note>
+						<note xml:id="fn8" type="footnote">TKow.01:
+							<emph>qyldy</emph>.</note>
+						<note xml:id="fn9" type="footnote">TKow.01:
+							<emph>Tenri</emph>. | H:
+							<emph>Tenri</emph>. | C:
+							<emph>Täŋri</emph>. | V:
+							<emph>T́eńri</emph>.</note>
+						<note xml:id="fn10" type="footnote">TKow.01:
+							<emph>joɣartyn</emph>
+							<emph>raqiaʿɣa</emph>.</note>
+						<note xml:id="fn11" type="footnote">TKow.01:
+							<emph>ot kögöt</emph>.</note>
+						<note xml:id="fn12" type="footnote">TKow.01:
+							<emph>urluq etüvčü urluq</emph>.</note>
+						<note xml:id="fn13" type="footnote">TKow.01:
+							<emph>jaryqlar</emph>.</note>
+						<note xml:id="fn14" type="footnote">TKow.01:
+							<emph>jaryq etḿa</emph>.</note>
+						<note xml:id="fn15" type="footnote">TKow.01:
+							<emph>qyldy</emph>.</note>
+						<note xml:id="fn16" type="footnote">TKow.01:
+							<emph>ullu jaryqlyqlarny</emph>.</note>
+						<note xml:id="fn17" type="footnote">TKow.01:
+							<emph>jaryqlyqny</emph>.</note>
+						<note xml:id="fn18" type="footnote">TKow.01:
+							<emph>jaryq etḿa</emph>.</note>
+						<note xml:id="fn19" type="footnote">Insertion by another hand in South-Western Karaim.</note>
+						<note xml:id="fn20" type="footnote">Heb.
+							<foreign xml:lang="he" style="unicode-bidi: embed;">וְלִמְשֹׁל</foreign>. | Catchword:
+							<foreign xml:lang="he" style="unicode-bidi: embed;">ולמשל</foreign>.</note>
+						<note xml:id="fn21" type="footnote">TKow.01:
+							<emph>keč́abyla da ajyrma</emph>. | H:
+							<emph>kecede da ajyrma</emph>. | C:
+							<emph>kečädä da ajyrma</emph>.</note>
+						<note xml:id="fn22" type="footnote">TKow.01:
+							<emph>qaranɣylyqnyn da</emph>. | H:
+							<emph>qaranɣylyqnyn da</emph>. | C:
+							<emph>qaraŋɣuluqnyŋ da</emph>.</note>
+						<note xml:id="fn23" type="footnote">TKow.01:
+							<emph>ingir da boldu</emph>. | H:
+							<emph>ingir da boldu</emph>. | C:
+							<emph>yŋyr da boldy</emph>.</note>
+						<note xml:id="fn24" type="footnote">TKow.01:
+							<emph>ajtty Tenri</emph>. | H:
+							<emph>ajtty Tenri</emph>. | C:
+							<emph>ajtty Täŋri</emph>.</note>
+						<note xml:id="fn25" type="footnote">H:
+							<emph>qus ucqalasyn</emph>. | C:
+							<emph>quš učsyn</emph>.</note>
+						<note xml:id="fn26" type="footnote">K:
+							<emph>raqaiaʿsyna</emph>; a scribal error; cf. Gen 1:6–8, Gen 1:14–15. | H:
+							<emph>raqiaʿsynyn</emph>; different syntax. | C:
+							<emph>tabaqasynyŋ</emph>. | Cf. Heb.
+							<foreign xml:lang="he" style="unicode-bidi: embed;">רָקִיעַ
+							</foreign>‘firmament’.</note>
+						<note xml:id="fn27" type="footnote">TKow.01:
+							<emph>kökĺarnin</emph>. | H:
+							<emph>köklernin</emph>. | C:
+							<emph>kökniŋ</emph>.</note>
+						<note xml:id="fn28" type="footnote">TKow.01:
+							<emph>ullu aždahalarny</emph>. | H:
+							<emph>aʒdaɣalarny ol ullularny</emph>. | C:
+							<emph>ulu aǯydaḥylarny</emph>.</note>
+						<note xml:id="fn29" type="footnote">TKow.01:
+							<emph>ki qozladylar</emph>. | H:
+							<emph>ki qozladylar</emph>. | C:
+							<emph>ki qozaladylar</emph>.</note>
+						<note xml:id="fn30" type="footnote">TKow.01:
+							<emph>qanatly qušnu</emph>. | H:
+							<emph>qanatly qusnu</emph>. | C:
+							<emph>qanatly qušny</emph>.</note>
+						<note xml:id="fn31" type="footnote">TKow.01:
+							<emph>alɣyšlady</emph>. | H:
+							<emph>alɣyslady</emph>. | C:
+							<emph>alɣyšlady</emph>.</note>
+						<note xml:id="fn32" type="footnote">TKow.01:
+							<emph>tolturujuz</emph>. | H:
+							<emph>tolturunuz</emph>. | C:
+							<emph>toluŋuz</emph>. | Cf. Gen 1:28.</note>
+						<note xml:id="fn33" type="footnote">TKow.01:
+							<emph>artsyn</emph>. | H:
+							<emph>artsyn</emph>. | C:
+							<emph>köbäjsin</emph>.</note>
+						<note xml:id="fn34" type="footnote">TKow.01:
+							<emph>bešinči</emph>. | H:
+							<emph>besinci</emph>. | C:
+							<emph>bešinǯi</emph>.</note>
+						<note xml:id="fn35" type="footnote">TKow.01:
+							<emph>tiri</emph>. | H:
+							<emph>tiri</emph>. | C:
+							<emph>tiri</emph>.</note>
+						<note xml:id="fn36" type="footnote">TKow.01:
+							<emph>ǯynsy sajyn</emph>. | H:
+							<emph>ʒynsy sajyn</emph>. | C:
+							<emph>ǯinsinä</emph>.</note>
+						<note xml:id="fn37" type="footnote">TKow.01:
+							<emph>kijigin ol</emph>. | H:
+							<emph>kijigin ol</emph>. | C:
+							<emph>kijigin ol</emph>.</note>
+						<note xml:id="fn38" type="footnote">TKow.01:
+							<emph>ošol bar</emph>. | H:
+							<emph>osol ol bar</emph>. | C:
+							<emph>šol barča</emph>.</note>
+						<note xml:id="fn39" type="footnote">Cf. Gen. 1:18, 1:21. | TKow.01:
+							<emph>jaḥšydy</emph>. | H:
+							<emph>jaḥsydy</emph>. | C:
+							<emph>jaḥšydyr</emph>.</note>
+						<note xml:id="fn40" type="footnote">Cf. Gen. 1:26. | TKow.01:
+							<emph>byla</emph>. | H:
+							<emph>byla</emph>. | C: deest; different syntax.</note>
+						<note xml:id="fn41" type="footnote">TKow.01:
+							<emph>ol tengiznin</emph>. | H:
+							<emph>ol tengiznin</emph>. | C:
+							<emph>ol teŋizniŋ</emph>.</note>
+						<note xml:id="fn42" type="footnote">TKow.01:
+							<emph>ol jerd́a</emph>. | H:
+							<emph>ol jerde</emph>. | C:
+							<emph>ol jergä</emph>.</note>
+					</app>
+				</listApp>
+			</div>
+		</body>
+	</text>
 </TEI>

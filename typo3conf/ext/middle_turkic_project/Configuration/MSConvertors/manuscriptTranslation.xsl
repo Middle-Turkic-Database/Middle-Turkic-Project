@@ -22,7 +22,7 @@
    </func:function>
    
    <!-- Text extractor for the text between lines -->
-   <xsl:key name="betweenLineText" match="//tei:div[@type='textpart']//node()[not(ancestor-or-self::tei:l)][not(parent::tei:foreign)][not(parent::tei:ref)]" use="generate-id(following::tei:l[1])" />
+   <xsl:key name="betweenLineText" match="//tei:div[@type='textpart']//node()[not(ancestor-or-self::tei:l)][not(parent::tei:foreign)][not(parent::tei:ref)][not(ancestor-or-self::tei:title)]" use="generate-id(following::tei:l[1])" />
    
    <!-- Extracts footnote with respect to its xml:id -->
    <xsl:key name="footnote" match="/tei:TEI/tei:text/tei:body/tei:div[@type='apparatus']/tei:listApp/tei:app/tei:note" use="@xml:id" />
@@ -36,24 +36,39 @@
    </xsl:template>
    
    <xsl:template match="tei:ab">
-      <div class="row">
-         <div class="col-lg-10">
-            <table class="table table-borderless table-sm"><xsl:apply-templates select="tei:l"/></table>
-         </div>
-      </div>
+       <div class="row">
+           <div class="col-lg-10">
+               <table class="table table-borderless table-sm">
+                   <tr>
+                       <td class="pt-3" colspan="2">
+                           <h5>
+                               <xsl:apply-templates select="tei:title" />
+                           </h5>
+                       </td>
+                   </tr>
+                   <xsl:apply-templates select="tei:l"/>
+               </table>
+           </div>
+       </div>
    </xsl:template>
 
    <xsl:template match="tei:milestone[@unit='page']">
-      <xsl:text>(</xsl:text>
+      <xsl:text> (</xsl:text>
       <xsl:value-of select="@n" />
-      <xsl:text>)</xsl:text>
+      <xsl:text>) </xsl:text>
    </xsl:template>
-
+    
+<!--  <xsl:template match="tei:milestone[@unit='line']">
+       <xsl:text> (</xsl:text>
+       <xsl:value-of select="@n"/>
+       <xsl:text>) </xsl:text>
+   </xsl:template>
+-->
    <xsl:template match="tei:l">
       <tr>
          <td class="align-text-top five-percent-width">
             <xsl:if test="./@n">
-               [<xsl:value-of select="./@n" />]
+               <xsl:text> [</xsl:text><xsl:value-of select="./@n" /><xsl:text>] </xsl:text>
             </xsl:if>
          </td>
          <td>
@@ -100,9 +115,43 @@
       <xsl:text> </xsl:text>
    </xsl:template>
 
+   <xsl:template match="tei:gap[@reason='lost']">
+      <xsl:text> […]</xsl:text>
+   </xsl:template>
+   
+   <xsl:template match="tei:supplied[@reason='lost']">
+      <xsl:text>[</xsl:text>
+      <xsl:apply-templates />
+      <xsl:text>]</xsl:text>
+   </xsl:template>
+   
    <xsl:template match="tei:emph">
       <em>
          <xsl:apply-templates />
       </em>
+   </xsl:template>
+   
+   <xsl:template match="tei:addSpan">
+      <xsl:text>{</xsl:text>
+   </xsl:template>
+   
+   <xsl:template match="tei:anchor[starts-with(@xml:id, 'add')]">
+      <xsl:text>}</xsl:text>
+   </xsl:template>
+   
+   <xsl:template match="tei:delSpan">
+      <xsl:text>&lt;</xsl:text>
+   </xsl:template>
+   
+   <xsl:template match="tei:anchor[starts-with(@xml:id, 'del')]">
+      <xsl:text>&gt;</xsl:text>
+   </xsl:template>
+   
+   <xsl:template match="tei:seg[@type='commented']">
+      <xsl:text> ⸢</xsl:text>
+   </xsl:template>
+   
+   <xsl:template match="tei:anchor[@type='commented']">
+      <xsl:text>⸣</xsl:text>
    </xsl:template>
 </xsl:stylesheet>
