@@ -1,3 +1,6 @@
 [submodule "fileadmin/user_upload/manuscripts/chagatai"]
 	path = fileadmin/user_upload/manuscripts/chagatai
 	url = https://github.com/Middle-Turkic-Database/chagatai
+[submodule "fileadmin/user_upload/manuscripts/armeno-kipchak"]
+	path = fileadmin/user_upload/manuscripts/armeno-kipchak
+	url = https://github.com/Middle-Turkic-Database/armeno-kipchak
