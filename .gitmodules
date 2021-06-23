@@ -7,3 +7,6 @@
 [submodule "fileadmin/user_upload/manuscripts/cuman"]
 	path = fileadmin/user_upload/manuscripts/cuman
 	url = https://github.com/Middle-Turkic-Database/cuman.git
+[submodule "fileadmin/user_upload/manuscripts/middle karaim"]
+	path = fileadmin/user_upload/manuscripts/middle karaim
+	url = https://github.com/Middle-Turkic-Database/middle-karaim.git
