@@ -10,3 +10,15 @@
 [submodule "fileadmin/user_upload/manuscripts/middle karaim"]
 	path = fileadmin/user_upload/manuscripts/middle karaim
 	url = https://github.com/Middle-Turkic-Database/middle-karaim.git
+[submodule "fileadmin/user_upload/manuscripts/khwarezmian turkic"]
+	path = fileadmin/user_upload/manuscripts/khwarezmian turkic
+	url = https://github.com/Middle-Turkic-Database/khwarezmian-turkic.git
+[submodule "fileadmin/user_upload/manuscripts/mamluk turkic"]
+	path = fileadmin/user_upload/manuscripts/mamluk turkic
+	url = https://github.com/Middle-Turkic-Database/mamluk-turkic
+[submodule "fileadmin/user_upload/manuscripts/volga bulgar"]
+	path = fileadmin/user_upload/manuscripts/volga bulgar
+	url = https://github.com/Middle-Turkic-Database/volga-bulgar
+[submodule "fileadmin/user_upload/manuscripts/volga turki"]
+	path = fileadmin/user_upload/manuscripts/volga turki
+	url = https://github.com/Middle-Turkic-Database/volga-turki.git
