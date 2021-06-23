@@ -1,1 +1,0 @@
-Upload Volga Turki manuscripts in this folder.

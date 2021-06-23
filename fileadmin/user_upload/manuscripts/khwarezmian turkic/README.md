@@ -1,1 +1,0 @@
-Upload Khwarezmian Turkic manuscripts in this folder.
