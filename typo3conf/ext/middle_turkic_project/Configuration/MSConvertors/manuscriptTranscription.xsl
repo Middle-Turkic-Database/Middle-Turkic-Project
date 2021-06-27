@@ -108,6 +108,12 @@
             <xsl:value-of select="substring(@target, 4)"></xsl:value-of>
          </xsl:element>
       </sup>
+      <xsl:variable name="firstFSiblingName" select="local-name(following-sibling::*[1])"/>
+       <xsl:if test="$firstFSiblingName = 'supplied' or
+           $firstFSiblingName = 'addSpan' or
+           $firstFSiblingName = 'delSpan'">
+           <xsl:text> </xsl:text>
+       </xsl:if>
    </xsl:template>
     
    <xsl:template match="tei:gap[@reason='lost']">
@@ -147,7 +153,6 @@
                             not($thirdFSiblingName = 'supplied'))">
            <xsl:text>]</xsl:text>
        </xsl:if>
-       <!-- <xsl:text>]</xsl:text> -->
    </xsl:template>
 
    <xsl:template match="tei:emph">

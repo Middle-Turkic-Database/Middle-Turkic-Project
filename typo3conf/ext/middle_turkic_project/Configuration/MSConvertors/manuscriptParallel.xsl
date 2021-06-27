@@ -53,6 +53,21 @@
       <xsl:text>)</xsl:text>
    </xsl:template>
 
+<!--   <xsl:template match="tei:milestone[@unit='line']">
+       <xsl:variable name="firstPSiblingName" select="local-name(preceding-sibling::*[1])"/>
+       <xsl:if test="$firstPSiblingName = 'supplied' or
+                     $firstPSiblingName = 'anchor'">
+           <xsl:text> </xsl:text>
+       </xsl:if>
+   </xsl:template>
+-->
+    
+    <xsl:template match="tei:milestone[@unit='line']">
+        <xsl:text> (</xsl:text>
+        <xsl:value-of select="@n"/>
+        <xsl:text>) </xsl:text>
+    </xsl:template>
+    
    <xsl:template match="tei:l">
       <tr>
          <td class="align-text-top five-percent-width">
@@ -111,7 +126,13 @@
             <xsl:value-of select="substring(@target, 4)"/>
          </xsl:element>
       </sup>
-      <xsl:text></xsl:text>
+       <xsl:variable name="firstFSiblingName" select="local-name(following-sibling::*[1])"/>
+       <xsl:if test="$firstFSiblingName = 'supplied' or
+           $firstFSiblingName = 'addSpan' or
+           $firstFSiblingName = 'delSpan' or
+           $firstFSiblingName = 'milestone'">
+           <xsl:text> </xsl:text>
+       </xsl:if>
    </xsl:template>
 
    <xsl:template match="tei:gap[@reason = 'lost']">
