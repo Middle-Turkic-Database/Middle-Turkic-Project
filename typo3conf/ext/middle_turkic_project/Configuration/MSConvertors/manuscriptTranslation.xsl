@@ -1,173 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <xsl:stylesheet version="1.0"
-                xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:tei="http://www.tei-c.org/ns/1.0"
-                xmlns:func="http://exslt.org/functions"
-                xmlns:common="http://exslt.org/common" exclude-result-prefixes="tei" extension-element-prefixes="func common">
-   <xsl:import href="typo3conf/ext/middle_turkic_project/Configuration/MSConvertors/xml-to-string.xsl" />
-   <xsl:output method="html" encoding="utf-8" indent="yes" omit-xml-declaration="yes" />
-   <xsl:strip-space elements="*" />
-
-
-   
-   <!-- Variables -->
-   
-   <!-- End of Variables -->
-
-   <!-- Checks the Existance of an element -->
-   <func:function name="mtdb:exists">
-      <xsl:param name="element" />
-      <func:result select="($element and not($element/@ana)) or ($element/@ana != '#no')" />
-   </func:function>
-   
-   <!-- Text extractor for the text between lines -->
-   <xsl:key name="betweenLineText" match="//tei:div[@type='textpart']//node()[not(ancestor-or-self::tei:l)][not(parent::tei:foreign)][not(parent::tei:ref)][not(ancestor-or-self::tei:title)]" use="generate-id(following::tei:l[1])" />
-   
-   <!-- Extracts footnote with respect to its xml:id -->
-   <xsl:key name="footnote" match="/tei:TEI/tei:text/tei:body/tei:div[@type='apparatus']/tei:listApp/tei:app/tei:note" use="@xml:id" />
-   
-   <xsl:template match="/">   
-      <xsl:apply-templates select="/tei:TEI/tei:text/tei:body/tei:div[@type='edition']/tei:div[@type='textpart']" />
-   </xsl:template>
-   
-   <xsl:template match="tei:div[@type='textpart']">
-      <xsl:apply-templates />
-   </xsl:template>
-   
-   <xsl:template match="tei:ab">
-       <div class="row">
-           <div class="col-lg-10">
-               <table class="table table-borderless table-sm">
-                   <tr>
-                       <td class="pt-3" colspan="2">
-                           <h5>
-                               <xsl:apply-templates select="tei:title" />
-                           </h5>
-                       </td>
-                   </tr>
-                   <xsl:apply-templates select="tei:l"/>
-               </table>
-           </div>
-       </div>
-   </xsl:template>
-
-   <xsl:template match="tei:milestone[@unit='page']">
-      <xsl:text> (</xsl:text>
-      <xsl:value-of select="@n" />
-      <xsl:text>)</xsl:text>
-       <xsl:variable name="firstFSiblingName" select="local-name(following-sibling::node()[1])"/>
-       <xsl:if test="not($firstFSiblingName = 'ref')">
-           <xsl:text> </xsl:text>
-       </xsl:if>
-   </xsl:template>
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:tei="http://www.tei-c.org/ns/1.0"
+    exclude-result-prefixes="tei">
+    <xsl:import href="typo3conf/ext/middle_turkic_project/Configuration/MSConvertors/commonFunctions.xsl"/>
+    <xsl:output method="html" encoding="utf-8" indent="yes" omit-xml-declaration="yes" />
+    <xsl:strip-space elements="*" />
     
-<!--   <xsl:template match="tei:milestone[@unit='line']">
-       <xsl:variable name="firstPSiblingName" select="local-name(preceding-sibling::*[1])"/>
-       <xsl:if test="$firstPSiblingName = 'supplied' or
-                     $firstPSiblingName = 'anchor'">
-           <xsl:text> </xsl:text>
-       </xsl:if>
-   </xsl:template>
--->    
-  <xsl:template match="tei:milestone[@unit='line']">
-       <xsl:text> (</xsl:text>
-       <xsl:value-of select="@n"/>
-       <xsl:text>)</xsl:text>
-      <xsl:variable name="firstFSiblingName" select="local-name(following-sibling::node()[1])"/>
-      <xsl:if test="not($firstFSiblingName = 'ref')">
-          <xsl:text> </xsl:text>
-      </xsl:if>
-   </xsl:template>
-
-   <xsl:template match="tei:l">
-      <tr>
-         <td class="align-text-top five-percent-width">
-            <xsl:if test="./@n">
-               <xsl:text> [</xsl:text><xsl:value-of select="./@n" /><xsl:text>] </xsl:text>
-            </xsl:if>
-         </td>
-         <td>
-            <xsl:apply-templates select="key('betweenLineText', generate-id())" />
-            <xsl:apply-templates />
-         </td>
-      </tr>
-   </xsl:template>
-   
-   <xsl:template match="tei:foreign">
-      <xsl:element name="span">
-         <xsl:attribute name="style">
-            <xsl:value-of select="./@style" />
-         </xsl:attribute>
-         <xsl:apply-templates />
-      </xsl:element>
-   </xsl:template>
-
-   <xsl:template match="tei:ref">      
-      <sup>   
-         <xsl:element name="abbr">
-            <xsl:attribute name="data-toggle">
-               <xsl:text>tooltip</xsl:text>
-            </xsl:attribute>
-            <xsl:attribute name="data-placement">
-               <xsl:text>top</xsl:text>
-            </xsl:attribute>
-            <xsl:attribute name="data-html">
-               <xsl:text>true</xsl:text>
-            </xsl:attribute>
-            <xsl:attribute name="title">
-               <xsl:variable name="footnoteContent">
-                  <div class="text-left">
-                     <xsl:apply-templates select="key('footnote', substring(@target,2))" />
-                  </div>
-               </xsl:variable>
-               <xsl:call-template name="xml-to-string">
-                  <xsl:with-param name="node-set" select="common:node-set($footnoteContent)" />
-               </xsl:call-template> 
-            </xsl:attribute>
-            <xsl:value-of select="substring(@target, 4)"></xsl:value-of>
-         </xsl:element>
-      </sup>
-      <xsl:text> </xsl:text>
-   </xsl:template>
-
-   <xsl:template match="tei:gap[@reason='lost']">
-      <xsl:text> […]</xsl:text>
-   </xsl:template>
-   
-   <xsl:template match="tei:supplied[@reason='lost']">
-      <xsl:text>[</xsl:text>
-      <xsl:apply-templates />
-      <xsl:text>]</xsl:text>
-   </xsl:template>
-   
-   <xsl:template match="tei:emph">
-      <em>
-         <xsl:apply-templates />
-      </em>
-   </xsl:template>
-   
-   <xsl:template match="tei:addSpan">
-      <xsl:text>{</xsl:text>
-   </xsl:template>
-   
-   <xsl:template match="tei:anchor[starts-with(@xml:id, 'add')]">
-      <xsl:text>}</xsl:text>
-   </xsl:template>
-   
-   <xsl:template match="tei:delSpan">
-      <xsl:text>&lt;</xsl:text>
-   </xsl:template>
-   
-   <xsl:template match="tei:anchor[starts-with(@xml:id, 'del')]">
-      <xsl:text>&gt;</xsl:text>
-   </xsl:template>
-   
-   <xsl:template match="tei:seg[@type='commented']">
-      <xsl:text> ⸢</xsl:text>
-   </xsl:template>
-   
-   <xsl:template match="tei:anchor[@type='commented']">
-      <xsl:text>⸣</xsl:text>
-   </xsl:template>
+    <!-- Variables -->
+    <xsl:variable name="traverseType">
+        <xsl:choose>
+            <xsl:when test="count(//tei:milestone[@unit='line']) &gt; 0">
+                <xsl:text>line-by-line</xsl:text>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:text>verse-by-verse</xsl:text>
+            </xsl:otherwise>
+        </xsl:choose>
+        
+    </xsl:variable>
+    
+    <!-- End of Variables -->
 </xsl:stylesheet>
