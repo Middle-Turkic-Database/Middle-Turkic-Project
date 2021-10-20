@@ -18,7 +18,7 @@
     
     <!-- Text extractor for the first continued line from the last section (no milestone-page exists at the beginning) -->
     <xsl:key name="continuiedLineText"
-        match="//tei:div[@type = 'textpart']//node()[not(parent::tei:supplied)][not(self::tei:milestone)][not(parent::tei:foreign)][not(parent::tei:ref)][not(parent::tei:emph)][not(ancestor-or-self::tei:title)]"
+        match="//tei:div[@type = 'textpart']//node()[not(parent::tei:supplied)][not(self::tei:milestone)][not(parent::tei:foreign)][not(parent::tei:ref)][not(parent::tei:emph)][not(self::tei:l)][not(ancestor-or-self::tei:title)]"
         use="generate-id(following::tei:milestone[1])"/>
 
     <!-- Text extractor for the text between lines -->
@@ -122,10 +122,20 @@
 
     <xsl:template name="milestone-line-line-by-line">
         <xsl:variable name="continuedLineText" select="key('continuiedLineText', generate-id())"/>
-        <xsl:if test="position() = 1 and not($continuedLineText = '')">
+        <!-- If there is a continued line from previous section -->
+        <xsl:if test="position() = 1 and $continuedLineText != ''">
             <tr>
                 <td class="align-text-top five-percent-width"></td>
-                <td><xsl:apply-templates select="key('continuiedLineText', generate-id())"/>
+                <td>
+                    <xsl:for-each select="$continuedLineText">
+                        <!-- If the element is the first child of the upper l element and l has an n attribute -->
+                        <xsl:if test="node() = parent::node()/node()[1] and parent::node()/@n">
+                            <xsl:text> [</xsl:text>
+                            <xsl:value-of select="parent::node()/@n"/>
+                            <xsl:text>] </xsl:text>
+                        </xsl:if>
+                        <xsl:apply-templates />
+                    </xsl:for-each>
                 </td>
             </tr>
         </xsl:if>
