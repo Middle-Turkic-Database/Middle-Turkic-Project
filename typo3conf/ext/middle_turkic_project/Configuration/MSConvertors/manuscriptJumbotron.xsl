@@ -25,6 +25,8 @@
             select="/tei:TEI/tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:author"/>
         <xsl:variable name="summary"
             select="/tei:TEI/tei:teiHeader/tei:fileDesc/tei:sourceDesc/tei:msDesc/tei:msContents/tei:summary"/>
+        <xsl:variable name="shelfmark"
+            select="/tei:TEI/tei:teiHeader/tei:fileDesc/tei:sourceDesc/tei:msDesc/tei:msIdentifier/tei:idno"/>
 
         <xsl:if test="mtdb:exists($title) or mtdb:exists($author) or mtdb:exists($summary)">
             <div class="jumbotron mx-1 mt-1">
@@ -37,6 +39,7 @@
                     <p class="lead">
                      Author:
                      
+                        
                         <xsl:value-of select="$author"/>
                     </p>
                 </xsl:if>
@@ -47,7 +50,13 @@
                 <xsl:if test="mtdb:exists($summary)">
                     <h4>Summary</h4>
                     <p>
-                        <xsl:value-of select="$summary"/>
+                        <xsl:if test="$shelfmark">
+                            <xsl:value-of select="$shelfmark"/>
+                            <xsl:text>: </xsl:text>
+                        </xsl:if>
+                        <span class="jumbotron-text">
+                            <xsl:value-of select="$summary"/>
+                        </span>
                     </p>
                 </xsl:if>
             </div>
