@@ -111,7 +111,7 @@
         <xsl:value-of select="@n" />
       </xsl:attribute>
       <xsl:attribute name="title">
-        <xsl:copy-of select="text()" />
+        <xsl:copy-of select="normalize-space(text()[normalize-space()][1])"/>
       </xsl:attribute>
       <xsl:attribute name="data-placement">
         <xsl:text>top</xsl:text>
