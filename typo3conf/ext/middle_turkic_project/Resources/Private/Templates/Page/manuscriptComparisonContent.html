@@ -1,0 +1,107 @@
+{namespace xslt=Digicademy\CobjXslt\ViewHelpers} {namespace xpath = Digicademy\CobjXpath\ViewHelpers}
+
+<f:if condition="{f:cObject(typoscriptObjectPath:'lib.manuscriptPath')}">
+    <f:variable name="manuscriptPath">
+        <f:cObject typoscriptObjectPath="lib.manuscriptPath" />
+    </f:variable>
+    {manuscriptPath -> v:format.trim() -> f:variable(name:"manuscriptPath")}
+</f:if>
+<f:if condition="{f:cObject(typoscriptObjectPath:'lib.manuscript1Name')}">
+    <f:variable name="manuscript1Name">
+        <f:cObject typoscriptObjectPath="lib.manuscript1Name" />
+    </f:variable>
+    {manuscript1Name -> v:format.trim() -> f:variable(name:"manuscript1Name")}
+</f:if>
+<f:if condition="{f:cObject(typoscriptObjectPath:'lib.manuscript2Name')}">
+    <f:variable name="manuscript2Name">
+        <f:cObject typoscriptObjectPath="lib.manuscript2Name" />
+    </f:variable>
+    {manuscript2Name -> v:format.trim() -> f:variable(name:"manuscript2Name")}
+</f:if>
+<f:if condition="{f:cObject(typoscriptObjectPath:'lib.manuscriptBook')}">
+    <f:variable name="manuscriptBook">
+        <f:cObject typoscriptObjectPath="lib.manuscriptBook" />
+    </f:variable>
+    <f:variable name="manuscriptBookExists" value="true" /> {manuscriptBook -> v:format.trim() -> v:format.trim(characters:"'") -> f:format.padding(padLength:"3", padString:"0", padType:"left") -> f:variable(name:"manuscriptBook")}
+</f:if>
+<f:if condition="{f:cObject(typoscriptObjectPath:'lib.manuscriptChapter')}">
+    <f:variable name="manuscriptChapter">
+        <f:cObject typoscriptObjectPath="lib.manuscriptChapter" />
+    </f:variable>
+    <f:variable name="manuscriptChapterExists" value="true" /> {manuscriptChapter -> v:format.trim() -> v:format.trim(characters:"'") -> f:format.padding(padLength:"3", padString:"0", padType:"left") -> f:variable(name:"manuscriptChapter")}
+</f:if>
+
+<f:if condition="{manuscriptBookExists}">
+    <f:then>
+        <f:if condition="{manuscriptChapterExists}">
+            <f:then>
+                <f:variable name="manuscript1FullPath">{manuscriptPath}/{manuscript1Name}/{manuscript1Name}.{manuscriptBook}.{manuscriptChapter}.xml</f:variable>
+                <f:variable name="manuscript2FullPath">{manuscriptPath}/{manuscript2Name}/{manuscript2Name}.{manuscriptBook}.{manuscriptChapter}.xml</f:variable>
+            </f:then>
+            <f:else>
+                <f:variable name="manuscript1FullPath">{manuscriptPath}/{manuscript1Name}/{manuscript1Name}.{manuscriptBook}.xml</f:variable>
+                <f:variable name="manuscript2FullPath">{manuscriptPath}/{manuscript2Name}/{manuscript2Name}.{manuscriptBook}.xml</f:variable>
+            </f:else>
+        </f:if>
+    </f:then>
+    <f:else>
+        <f:variable name="firstTitle"><xpath:query source="{manuscriptPath}/{manuscript1Name}.xml" expression="/tei:TEI/tei:teiHeader/tei:fileDesc/tei:sourceDesc/tei:msDesc/tei:msContents/tei:msItemStruct/tei:title[1]" namespace="tei|http://www.tei-c.org/ns/1.0" return="xml" /></f:variable>
+
+        <f:variable name="firstTitleType"><xpath:query expression="/title/@type">
+            {firstTitle.0}
+        </xpath:query></f:variable>
+
+        <f:variable name="firstTitleN"><xpath:query expression="/title/@n">
+            {firstTitle.0}
+        </xpath:query></f:variable>
+        <f:variable name="firstTitleN"><v:format.trim>
+            <f:format.padding padLength="3" padString="0" padType="left" value="{firstTitleN.0 -> v:format.trim()}" />
+        </v:format.trim></f:variable>
+
+
+        <f:if condition="{firstTitleType.0} == 'book'">
+            <f:then>
+                <f:variable name="manuscript1FullPath">{manuscriptPath}/{manuscript1Name}/{manuscript1Name}.{firstTitleN}.001.xml</f:variable>
+                <f:variable name="manuscript2FullPath">{manuscriptPath}/{manuscript2Name}/{manuscript1Name}.{firstTitleN}.001.xml</f:variable>
+            </f:then>
+            <f:else if="{firstTitleType.0} == 'chapter'">
+                <f:variable name="manuscript1FullPath">{manuscriptPath}/{manuscript1Name}/{manuscript1Name}.{firstTitleN}.xml</f:variable>
+                <f:variable name="manuscript2FullPath">{manuscriptPath}/{manuscript2Name}/{manuscript2Name}.{firstTitleN}.xml</f:variable>
+            </f:else>
+        </f:if>
+    </f:else>
+</f:if>
+
+<v:media.exists file="{manuscript1FullPath}">
+    <f:then>
+        <v:media.exists file="{manuscript2FullPath}">
+            <f:then>
+                <f:render section="renderContent" arguments="{_all}" />
+            </f:then>
+            <f:else>
+                <f:render section="manuscriptNotFound"/>
+            </f:else>
+        </v:media.exists>
+    </f:then>
+    <f:else>
+        <f:render section="manuscriptNotFound"/>
+    </f:else>
+</v:media.exists>
+
+<f:section name="renderContent">
+    <f:variable name="msConvertorPath" value="EXT:middle_turkic_project/Configuration/MSConvertors/manuscriptComparison.xsl" />
+    <div id="msComparisonContent">
+        <f:format.raw>
+            <xslt:transform source="{manuscript1FullPath}" transformations="{0:{stylesheet: '{msConvertorPath}', setParameters: {
+                manuscript1Name:{value: '{manuscript1Name}'},
+                manuscript2Name:{value: '{manuscript2Name}'},
+                manuscript2FullPath:{value: '{manuscript2FullPath}'}}}}" />
+        </f:format.raw>
+    </div>
+</f:section>
+
+<f:section name="manuscriptNotFound">
+    <h2 class="my-4">
+        Manuscripts Are Not Available for Comparison!
+    </h2>
+</f:section>

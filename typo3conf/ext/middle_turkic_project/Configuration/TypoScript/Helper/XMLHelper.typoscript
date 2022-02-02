@@ -84,3 +84,58 @@ lib.manuscriptDescription {
 }
 
 [GLOBAL]
+
+[page["title"] == "Comparison"]
+lib.comparisonMatrix = FILES
+lib.comparisonMatrix {
+   folders = typo3conf/ext/middle_turkic_project/Configuration/ComparisonMaps/
+   folders.recursive = 1
+   renderObj = COA
+   renderObj {
+      stdWrap.if {
+         value.data = file:current:name
+         equals = map.csv
+      }
+      10 = TEXT
+      10.value = "
+      20 = TEXT
+      20.data = file:current:identifier
+      20.stdWrap.replacement {
+         10 {
+            search = /typo3conf/ext/middle_turkic_project/Configuration/ComparisonMaps/
+            replace = 
+         }
+         20 {
+            search = /map.csv
+            replace = 
+         }
+         // 30 {
+         //    search = # #
+         //    replace = _
+         //    useRegExp = 1
+         // }
+      }
+      30 = TEXT
+      30.value = ":"
+      40 = TEXT
+      40.data = file:current:contents
+      50 = TEXT
+      50.value = ",
+   }
+}
+lib.comparisonMatrix.stdWrap.replacement {
+   10 {
+      search = #(.*),$#
+      replace = \1}
+      useRegExp = 1
+   }
+   20 {
+      search = #(.*)[\n\r]+(.*)#i
+      replace = \1\n\2
+      useRegExp = 1
+   }
+}
+lib.comparisonMatrix.stdWrap.prepend = TEXT
+lib.comparisonMatrix.stdWrap.prepend.value = {
+
+[GLOBAL]

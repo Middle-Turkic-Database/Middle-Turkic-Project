@@ -1,0 +1,1 @@
+Upload Cumanian comparison maps in this folder.

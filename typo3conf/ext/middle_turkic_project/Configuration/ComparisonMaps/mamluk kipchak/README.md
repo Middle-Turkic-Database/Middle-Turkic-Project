@@ -1,0 +1,1 @@
+Upload Mamluk Kipchak comparison maps in this folder.

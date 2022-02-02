@@ -1,0 +1,103 @@
+<f:if condition="{f:cObject(typoscriptObjectPath:'lib.comparisonMatrix')}">
+    <f:variable name="comparisonMatrix">
+        <f:cObject typoscriptObjectPath="lib.comparisonMatrix" />
+    </f:variable>
+    {comparisonMatrix -> v:format.trim() -> f:variable(name:"comparisonMatrix")}
+</f:if>
+
+<f:if condition="{f:cObject(typoscriptObjectPath:'lib.manuscriptPath')}">
+    <f:variable name="manuscriptPath">
+        <f:cObject typoscriptObjectPath="lib.manuscriptPath" />
+    </f:variable>
+    {manuscriptPath -> v:format.trim() -> f:variable(name:"manuscriptPath")}
+</f:if>
+
+<div class="container">
+    <f:render section="msComparisonSettings" />
+    <f:render section="msComparisonSelection" arguments="{msMenu: msMenu}"/>
+    <div id="msComparisonFrame">
+        <div class="mt-3 px-2 loader d-none">Loading<span class="d-inline-block ml-4 dot-pulse"></span></div>
+        <div id="msNavBar"></div>
+        <div id="msComparisonContent"></div>
+    </div>
+</div>
+
+<f:section name="msComparisonSettings">
+    <div class="accordion my-3" id="msComparisonSettingsAccordion">
+        <div class="accordion-item card">
+            <div class="accordion-header card-header" id="settingsHeading">
+                <h4 class="accordion-title">
+                    <a href="#settingsCollapse" class="accordion-title-link collapsed" data-toggle="collapse" aria-expanded="false" aria-controls="settingsCollapse">
+                        <span class="accordion-title-link-text">
+                                <i class="fas fa-cog accardion-logo"></i>
+                                Settings
+                            </span>
+                        <span class="accordion-title-link-state"></span>
+                    </a>
+                </h4>
+            </div>
+            <div id="settingsCollapse" class="collapse" aria-labelledby="settingsHeading" data-parent="#msComparisonSettingsAccordion">
+                <div class="card-body">
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="toggleComparisonTable">
+                        <label class="custom-control-label" for="toggleComparisonTable">Single Column View</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</f:section>
+
+<f:section name="msComparisonSelection">
+    <form id="ms-comparison-form" class="card card-header my-3">
+        <div class="form-row justify-content-center">
+            <div class="form-group col-auto">
+                <label for="msComparisonMSSet">Manuscript Set</label>
+                <select class="custom-select" id="msComparisonMSSet">
+                    <option selected disabled>Choose...</option>
+                    <f:render section="createMsSetSlectionOptions" arguments="{msMenu: msMenu}" />
+                </select>
+            </div>
+        </div>
+        <div class="form-row justify-content-center align-items-end d-none" id="msComparisonBookSelect">
+            <div class="form-group col-md-3">
+                <label for="msComparisonSelect1">First Edition</label>
+                <select class="custom-select" id="msComparisonSelect1">
+                    <option selected disabled>Choose...</option>
+                </select>
+            </div>
+            <div class="form-group col-md-3">
+                <label for="msComparisonSelect2">Second Edition</label>
+                <select class="custom-select" id="msComparisonSelect2">
+                    <option selected>Choose...</option>
+                </select>
+            </div>
+            <div class="form-group col-auto">
+                <button type="submit" class="btn btn-primary" disabled>Compare</button>
+            </div>
+        </div>
+    </form>
+</f:section>
+
+<f:section name="createMsSetSlectionOptions">
+    <f:for each="{msMenu}" as="msMenuItem">
+        <f:if condition="{msNav}">
+            <f:variable name="msNav" value="{msNav}/" />
+        </f:if>
+        <f:variable name="msNav" value="{msNav}{msMenuItem.title -> f:format.case(mode='lower')}" />
+        <f:if condition="{msMenuItem.children}">
+            <f:then>
+                <f:render section="createMsSetSlectionOptions" arguments="{msMenu: msMenuItem.children, msNav: msNav}" />
+            </f:then>
+            <f:else>
+                <option value="{msNav}">{msMenuItem.title}</option>
+            </f:else>
+        </f:if>
+        <v:format.pregReplace subject="{msNav}" pattern="#/?{msMenuItem.title -> f:format.case(mode='lower')}$#" replacement="" as="msNav"/>
+    </f:for>
+</f:section>
+
+<script>
+    var comparisonMatrix = `<f:format.raw>{comparisonMatrix}</f:format.raw>`;
+</script>
+<f:asset.script identifier="diffmatchpatch" src="EXT:middle_turkic_project/Resources/Public/JavaScript/Dist/diff_match_patch.js" />

@@ -1,0 +1,31 @@
+{namespace xslt=Digicademy\CobjXslt\ViewHelpers} {namespace xpath = Digicademy\CobjXpath\ViewHelpers}
+
+<f:if condition="{f:cObject(typoscriptObjectPath:'lib.manuscriptPath')}">
+    <f:variable name="manuscriptPath">
+        <f:cObject typoscriptObjectPath="lib.manuscriptPath" />
+    </f:variable>
+    {manuscriptPath -> v:format.trim() -> f:variable(name:"manuscriptPath")}
+</f:if>
+
+<f:if condition="{f:cObject(typoscriptObjectPath:'lib.manuscriptName')}">
+    <f:variable name="manuscriptName">
+        <f:cObject typoscriptObjectPath="lib.manuscriptName" />
+    </f:variable>
+    {manuscriptName -> v:format.trim() -> f:variable(name:"manuscriptName")}
+</f:if>
+
+<f:if condition="{f:cObject(typoscriptObjectPath:'lib.uniqueID')}">
+    <f:then>
+        <f:variable name="uniqueID">
+            <f:cObject typoscriptObjectPath="lib.uniqueID" />
+        </f:variable>
+        {uniqueID -> v:format.trim() -> f:variable(name:"uniqueID")}
+    </f:then>
+</f:if>
+
+<f:variable name="manuscriptFullPath">{manuscriptPath}/{manuscriptName}.xml</f:variable>
+<v:media.exists file="{manuscriptFullPath}">
+    <f:format.raw>
+        <xslt:transform source="{manuscriptFullPath}" transformations="{0:{stylesheet: 'EXT:middle_turkic_project/Configuration/MSConvertors/manuscriptNavigationBar.xsl', setParameters: {uniqueID: {value: '{uniqueID}'}}}}" />
+    </f:format.raw>
+</v:media.exists>

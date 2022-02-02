@@ -1,6 +1,6 @@
-function loadContent(URI, $element) {
+function loadContent(URI, $element, callback) {
     $element.hide(0, function() {
-        $(".loader").fadeIn('fast');
+        $(this).siblings(".loader").fadeIn('fast');
         $(this).load(encodeURI(URI), function(response, status, xhr) {
             if (status == "error") {
                 var errorMessage = "";
@@ -11,13 +11,41 @@ function loadContent(URI, $element) {
                 }
                 $element.html(errorMessage);
             }
-            $('.loader').fadeOut('fast', function() {
+            $(this).siblings(".loader").fadeOut('fast', function() {
                 $element.fadeIn();
             });
-            $('[data-toggle="tooltip"]').tooltip()
+            $('[data-toggle="tooltip"]').tooltip();
+            if (typeof callback === 'function') {
+                callback();
+            }
         });
     });
-}
+};
+
+function loadNavBar(msNav, msName, uniqueID, $element = $("#msComparisonFrame>#msComparisonContent")) {
+    var navBarURI = "/msnavbar?msNav=" + msNav + "&msName=" + msName + "&uniqueID=" + uniqueID;
+    $element.hide(0, function() {
+        $(this).load(encodeURI(navBarURI), function(response, status, xhr) {
+            if (status == "error") {
+                var errorMessage = "";
+                if (xhr.readyState == 0) {
+                    errorMessage = "An error occured while fetching the Manuscript Navigation Bar. Check your Internet connection.";
+                } else {
+                    errorMessage = "An error occured while fetching the manuscript: " + xhr.status + " " + xhr.statusText;
+                }
+                $element.html(errorMessage);
+            }
+            $(this).siblings(".loader").fadeOut('fast', function() {
+                $element.fadeIn();
+            });
+            var firstMaxChapter = $(".ms-selector-form select[id$='bookSelector'] option").first().data("chapternum");
+            setChapterPars(firstMaxChapter);
+            setL2NavWidth();
+            $('.ms-nav-1st [data-toggle="pill"], .ms-nav-2nd [data-toggle="pill"]').tooltip();
+        });
+    });
+};
+
 
 function loadTranscript(msNav, msName, msBook = -1, msChapter = -1, $element = $("#msTranscriptContent")) {
     var transcriptURI = "/mstranscript?msNav=" + msNav + "&msName=" + msName;
@@ -66,6 +94,31 @@ function loadParallel(msNav, msName, msBook = -1, msChapter = -1, $element = $("
     loadContent(transcriptURI, $element);
 };
 
+function loadComparisonContent(msNav, ms1Name, ms2Name, msBook = -1, msChapter = -1, $element = $("#msComparisonFrame>#msComparisonContent")) {
+    var comparisonURI = "/mscomparison?msNav=" + msNav + "&ms1Name=" + ms1Name + "&ms2Name=" + ms2Name;
+    if (msBook >= 0) {
+        if (msBook == 0) {
+            msBook = "000";
+        }
+        comparisonURI += "&msBook=" + msBook;
+        if (msChapter >= 1) {
+            comparisonURI += "&msChapter=" + msChapter;
+        }
+    }
+    console.log(comparisonURI);
+    loadContent(comparisonURI, $element, function() {
+        createSingleColumnTable();
+        toggleComparisonView();
+    });        
+        //compare();
+};
+
+function loadComparison(msNav, ms1Name, ms2Name, msBook = -1, msChapter = -1, $element = $("#msComparisonFrame")) {
+    loadNavBar(msNav, ms1Name, 'cmp', $element.children("#msNavBar"));
+    loadComparisonContent(msNav, ms1Name, ms2Name, msBook, msChapter, $element.children("#msComparisonContent"));
+};
+
+
 function setChapterPars(maxChapter = 0, $formToChange = null) {
     var $chapterNumInputs;
     if ($formToChange === null) {
@@ -93,6 +146,32 @@ function setL2NavWidth() {
         $(this).css("max-width", $(this).parent().find(".nav-link").first().outerWidth());
     });
 }
+
+function csvToArray(str, delimiter = ",") {
+    var arr = [];
+    const rows = str.split("\n");
+    for (let row = 0; row < rows.length; row++) {
+        const columns = rows[row].split(",");
+        arr[row] = [];
+        for (let column = 0; column < columns.length; column++) {
+            arr[row][column] = columns[column];
+        }
+    }
+
+    return arr;
+}
+
+function toggleComparisonView() {
+    if ($("#toggleComparisonTable").is(":checked")) {
+        $("#msComparisonTable").addClass("d-none");
+        $("#msComparisonTableSingleColumn").removeClass("d-none");
+    }
+    else {
+        $("#msComparisonTableSingleColumn").addClass("d-none");
+        $("#msComparisonTable").removeClass("d-none");
+    }
+}
+
 
 $(function() {
     $('.list-group-item').on('click', function() {
@@ -127,7 +206,7 @@ $(function() {
 
     setL2NavWidth();
 
-    $(".ms-nav .nav-link").on('click', function() {
+    $(document).on('click', ".ms-nav .nav-link", function() {
         $(".ms-nav-2nd a.nav-link").removeClass("active");
     
         var msBook = -1;
@@ -155,6 +234,11 @@ $(function() {
         loadTranscript($("#msTranscriptContent").data('msnav'), $("#msTranscriptContent").data('msname'), msBook, msChapter);
         loadTranslation($("#msTranscriptContent").data('msnav'), $("#msTranscriptContent").data('msname'), msBook, msChapter);
         loadParallel($("#msTranscriptContent").data('msnav'), $("#msTranscriptContent").data('msname'), msBook, msChapter);
+        loadComparisonContent($("#msComparisonMSSet>option:selected").val(),
+                        $("#msComparisonSelect1>option:selected").val(),
+                        $("#msComparisonSelect2>option:selected").val(),
+                        msBook,
+                        msChapter);
     
         var $bookSelectorInputs = $(".ms-selector-form select[id$='bookSelector']");
         var $chapterNumInputs = $(".ms-selector-form input[id$='chapterNum']");
@@ -167,15 +251,14 @@ $(function() {
         }
     });
     
-    $(".ms-selector-form select[id$='bookSelector']").change(function() {
+    $(document).on('change', ".ms-selector-form select[id$='bookSelector']", function() {
         setChapterPars($("option:selected", this).data("chapternum"), $(this));
         var $chapterNum = $(":input[name='chapterNum']", this.closest("form.ms-selector-form"));
         $($chapterNum).val($($chapterNum).attr('min'));
     });
     
-    $(".ms-selector-form").on("submit", function(e) {
+    $(document).on('submit', ".ms-selector-form", function(e) {
         e.preventDefault();
-    
         $(".ms-nav-2nd a.nav-link").removeClass("active");
         var $bookSelector = $(":input[name='bookSelector']", $(this));
         var bookNum = $(":selected", $bookSelector).val();
@@ -197,9 +280,14 @@ $(function() {
         loadTranscript($("#msTranscriptContent").data('msnav'), $("#msTranscriptContent").data('msname'), bookNum, chapterNum);
         loadTranslation($("#msTranscriptContent").data('msnav'), $("#msTranscriptContent").data('msname'), bookNum, chapterNum);
         loadParallel($("#msTranscriptContent").data('msnav'), $("#msTranscriptContent").data('msname'), bookNum, chapterNum);
+        loadComparisonContent($("#msComparisonMSSet>option:selected").val(),
+                        $("#msComparisonSelect1>option:selected").val(),
+                        $("#msComparisonSelect2>option:selected").val(),
+                        bookNum,
+                        chapterNum);
     });
     
-    $(".ms-selector-form input[id$='chapterNum'][type='number']").on("input", function() {
+    $(document).on('input', ".ms-selector-form input[id$='chapterNum'][type='number']", function() {
         var value = $(this).val();
     
         if (value !== "" && value.indexOf(".") === -1) {
@@ -209,11 +297,11 @@ $(function() {
         }
     });
     
-    $('.ms-selector-form input[type="number"]').on("click", function() {
+    $(document).on('click', '.ms-selector-form input[type="number"]', function() {
         $(this).select();
     });
     
-    $(".ms-nav.ms-nav-1st .nav-link,#manuscriptTabs .nav-link").on('shown.bs.tab', function() {
+    $(document).on('shown.bs.tab', ".ms-nav.ms-nav-1st .nav-link,#manuscriptTabs .nav-link", function() {
         if ($(this).tab().is(":visible")) {
             setL2NavWidth();
         }
@@ -222,5 +310,165 @@ $(function() {
     $(window).resize(function() {
         setL2NavWidth();
     });
+    
+    var comparisonMap = new Map();
+    if (typeof comparisonMatrix !== 'undefined') {
+        comparisonMatrix = JSON.parse(comparisonMatrix.replace(/\n/g, '\\n'));
+        for (let msSet in comparisonMatrix) {
+            comparisonMap.set(msSet, new Map());
+            var msSetCmpMatrix = csvToArray(comparisonMatrix[msSet]);
+            for (let row = 0; row < msSetCmpMatrix.length; row++) {
+                for (let column = 0; column < msSetCmpMatrix[0].length; column++) {
+                    if (row === 0) {
+                        comparisonMap.get(msSet).set(msSetCmpMatrix[row][column], []);
+                    }
+                    else if (msSetCmpMatrix[row][column] == 1) {
+                        comparisonMap.get(msSet).get(msSetCmpMatrix[0][row - 1]).push(msSetCmpMatrix[0][column]);
+                    }
+                }
+            }
+        }
+    }
+
+    $("#msComparisonMSSet").change(function() {
+        $(this).closest('form').find(':submit').prop('disabled', true);
+        var currentCmpMap = comparisonMap.get($(this).children("option:selected").val());
+        var optionText = "<option selected disabled>Choose...</option>";
+        $("#msComparisonSelect2").html(optionText);
+        if (typeof(currentCmpMap) !== 'undefined') {
+            currentCmpMap.forEach((relatedEditions, editionName) => {
+                optionText += "<option value='" + editionName + "'>" + editionName + "</option>";
+            });
+            $("#msComparisonSelect1").html(optionText);
+            $("#msComparisonBookSelect").removeClass("d-none");
+        }
+        else {
+            $("#msComparisonBookSelect").addClass("d-none");
+        }
+    });
+
+    $("#msComparisonSelect1").change(function() {
+        $(this).closest('form').find(':submit').prop('disabled', true);
+        var permitted2ndEditions = comparisonMap.get($("#msComparisonMSSet").children("option:selected").val()).get($(this).children("option:selected").val());
+        var optionText = "<option selected disabled>Choose...</option>";
+        if (permitted2ndEditions) {
+            permitted2ndEditions.forEach(editionName => {
+                optionText += "<option value='" + editionName + "'>" + editionName + "</option>";
+            });
+        }
+        $("#msComparisonSelect2").html(optionText);
+    });
+
+    $("#msComparisonSelect2").change(function() {
+        $(this).closest('form').find(':submit').prop('disabled', false);
+    })
+
+    $("#ms-comparison-form").on("submit", function(e) {
+        e.preventDefault();
+
+        $(this).siblings(".loader").removeClass("d-none");
+        loadComparison($("form#ms-comparison-form select#msComparisonMSSet").children("option:selected").val(),
+                        $("form#ms-comparison-form select#msComparisonSelect1").children("option:selected").val(),
+                        $("form#ms-comparison-form select#msComparisonSelect2").children("option:selected").val());
+    });
+
+    $("#toggleComparisonTable").change(function() {
+        toggleComparisonView();
+    });
 });
 
+function trimWhiteSpace(str) {
+    const regText = "\\s{2,}";
+    const reg = new RegExp(regText, 'gm');
+    return str.replace(reg, ' ');
+}
+
+function createSingleColumnTable($comparisonTable = $("table#msComparisonTable")) {
+    if ($comparisonTable.length < 1) {
+        return;
+    }
+    var leftFragment = document.createDocumentFragment();
+    var rightFragment = document.createDocumentFragment();
+    var singleColumnTableFragment = document.createDocumentFragment();
+    var singleColumnTableElement = document.createElement('table');
+    var singleColumnTheadElement = document.createElement('thead');
+    var singleColumnHeadRowElement = document.createElement('tr');
+    var singleColumnFirstHeadColumnElement = document.createElement('th');
+    var singleColumnSecondHeadColumnElement = document.createElement('th');
+    var singleColumnFirstHeadFlexElement = document.createElement('div');
+    var singleColumnSecondHeadFlexElement = document.createElement('div');
+    var singleColumnTbodyElement = document.createElement('tbody');
+    var el = Array.from($comparisonTable.find("tbody td.pr-4"));
+    
+    singleColumnTableElement.id = 'msComparisonTableSingleColumn';
+    singleColumnTableElement.classList.add("table", "table-borderless", "table-sm", "table-striped", "d-none");
+    singleColumnFirstHeadColumnElement.classList.add("align-middle", "five-percent-width");
+    singleColumnFirstHeadColumnElement.scope = "col";
+    singleColumnFirstHeadColumnElement.appendChild(document.createTextNode('#'));
+    singleColumnHeadRowElement.appendChild(singleColumnFirstHeadColumnElement);
+    singleColumnSecondHeadColumnElement.classList.add("d-flex", "flex-wrap");
+    singleColumnFirstHeadFlexElement.classList.add("pr-4");
+    singleColumnFirstHeadFlexElement.style.color = "limegreen";
+    const firstMsName = $comparisonTable.find("thead tr td:nth-child(2)").text();
+    const secondMsName = $comparisonTable.find("thead tr td:nth-child(3)").text();
+    singleColumnFirstHeadFlexElement.appendChild(document.createTextNode(firstMsName));
+    singleColumnSecondHeadColumnElement.appendChild(singleColumnFirstHeadFlexElement);
+    singleColumnSecondHeadFlexElement.classList.add("pr-4");
+    singleColumnSecondHeadFlexElement.style.color = "red";
+    singleColumnSecondHeadFlexElement.appendChild(document.createTextNode(secondMsName));
+    singleColumnSecondHeadColumnElement.appendChild(singleColumnSecondHeadFlexElement);
+    singleColumnHeadRowElement.appendChild(singleColumnSecondHeadColumnElement);
+    singleColumnTheadElement.appendChild(singleColumnHeadRowElement);
+    singleColumnTableElement.appendChild(singleColumnTheadElement);
+    var dmp = new diff_match_patch();
+    el.forEach((firstMsCell) => {
+        firstMsCell_trimmed = trimWhiteSpace(firstMsCell.textContent);
+        secondMsCell_trimmed = trimWhiteSpace(firstMsCell.nextElementSibling.textContent);
+        var diff = dmp.diff_main(firstMsCell_trimmed, secondMsCell_trimmed);
+        var rowElement = document.createElement('tr');
+        var indexColumnElement = document.createElement('td');
+        var compareTextElement = document.createElement('td');
+        var index = firstMsCell.previousElementSibling.textContent;
+        indexColumnElement = firstMsCell.previousElementSibling.cloneNode(true);
+        rowElement.appendChild(indexColumnElement);
+        dmp.diff_cleanupSemantic(diff);
+        diff.forEach((part) => {
+            if (part[0] === -1) {
+                var span = document.createElement('span');
+                span.style.color = 'limegreen';
+                span.appendChild(document.createTextNode(part[1]));
+                leftFragment.appendChild(span);
+                compareTextElement.appendChild(span.cloneNode(true));
+            }
+            else if (part[0] === 1) {
+                var span = document.createElement('span');
+                span.style.color = 'red';
+                span.appendChild(document.createTextNode(part[1]));
+                rightFragment.append(span);
+                compareTextElement.appendChild(span.cloneNode(true));
+            } else {
+                leftFragment.appendChild(document.createTextNode(part[1]));
+                rightFragment.appendChild(document.createTextNode(part[1]));
+                compareTextElement.appendChild(document.createTextNode(part[1]));
+            }
+        })
+
+        firstMsCell.replaceChildren(leftFragment);
+        firstMsCell.nextElementSibling.replaceChildren(rightFragment);
+        rowElement.appendChild(compareTextElement);
+        singleColumnTbodyElement.appendChild(rowElement);
+    })
+    singleColumnTableElement.appendChild(singleColumnTbodyElement);
+    singleColumnTableFragment.appendChild(singleColumnTableElement);
+    $comparisonTable.after(singleColumnTableFragment);
+
+    const hebrewLetters = "ְֱֲֳִֵֶַָֹֺֻּֽ֑֖֛֢֣֤֥֦֧֪֚֭֮֒֓֔֕֗֘֙֜֝֞֟֠֡֨֩֫֬֯־ֿ׀ׁׂ׃ׅׄ׆ׇאבגדהוזחטיךכלםמןנסעףפץצקרשתװױײ׳״"
+    const startingSpan = '<span style="color: limegreen">'
+    var regText = "([" +
+        hebrewLetters +
+        "][" +
+        hebrewLetters +
+        " ]*)"
+    const reg = new RegExp(regText, 'gm');
+    document.getElementById("msComparisonTable").innerHTML = document.getElementById("msComparisonTable").innerHTML.replace(reg, '<span style="unicode-bidi: embed;">$1</span>');
+}

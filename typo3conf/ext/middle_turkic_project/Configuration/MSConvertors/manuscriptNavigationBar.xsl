@@ -4,6 +4,7 @@
   <xsl:output method="html" encoding="utf-8" indent="yes" omit-xml-declaration="yes" />
 
   <!-- Variables -->
+  
   <!-- End of Variables -->
 
   <!-- xmlAddress Parameter (external parameter) -->
@@ -111,7 +112,7 @@
         <xsl:value-of select="@n" />
       </xsl:attribute>
       <xsl:attribute name="title">
-        <xsl:copy-of select="normalize-space(text()[normalize-space()][1])"/>
+          <xsl:copy-of select="normalize-space(text()[normalize-space()][1])"/>
       </xsl:attribute>
       <xsl:attribute name="data-placement">
         <xsl:text>top</xsl:text>

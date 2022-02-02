@@ -62,6 +62,21 @@ plugin.tx_filelist {
 lib.pageTitle = TEXT
 lib.pageTitle.data = page:title
 
+tt_content {
+    mscomparisonelement =< lib.contentElement
+    mscomparisonelement {
+        templateName = MsComparisonElement
+        dataProcessing.10 = TYPO3\CMS\Frontend\DataProcessing\MenuProcessor
+        dataProcessing.10 {
+            levels = {$page.theme.navigation.mainNavigationLevels}
+            as = msMenu
+            includeSpacer = 0
+            special = directory
+            special.value = 6
+        }
+    }
+}
+
 page.headerData.999 = TEXT
 page.headerData.999.value(
     <!-- Global site tag (gtag.js) - Google Analytics -->

@@ -1,0 +1,16 @@
+mod.wizards.newContentElement.wizardItems {
+   // add the content element to the tab "common"
+   special {
+      elements {
+         mscomparisonelement {
+            iconIdentifier = content-text-columns
+            title = LLL:EXT:middle_turkic_project/Resources/Private/Language/locallang.xlf:mscomparisonelement_title
+            description = LLL:EXT:middle_turkic_project/Resources/Private/Language/locallang.xlf:mscomparisonelement_description
+            tt_content_defValues {
+               CType = mscomparisonelement
+            }
+         }
+      }
+      show := addToList(mscomparisonelement)
+   }
+}

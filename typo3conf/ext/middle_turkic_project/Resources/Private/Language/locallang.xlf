@@ -6,6 +6,12 @@
             <authorEmail>mohsen.emami@lingfil.uu.se</authorEmail>
         </header>
         <body>
+            <trans-unit id="mscomparisonelement_title">
+                <source>Manuscript Comparison</source>
+            </trans-unit>
+            <trans-unit id="mscomparisonelement_description">
+                <source>Manuscript Comparison Content Element</source>
+            </trans-unit>
         </body>
     </file>
 </xliff>

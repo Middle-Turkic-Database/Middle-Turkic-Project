@@ -1,0 +1,1 @@
+Upload Khwarezmian comparison maps in this folder.
