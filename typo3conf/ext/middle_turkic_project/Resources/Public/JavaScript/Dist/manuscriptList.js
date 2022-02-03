@@ -366,7 +366,8 @@ $(function() {
     $("#ms-comparison-form").on("submit", function(e) {
         e.preventDefault();
 
-        $(this).siblings(".loader").removeClass("d-none");
+        $("#msComparisonFrame").addClass("border");
+        $("#msTitle").html($("form#ms-comparison-form select#msComparisonMSSet").children("option:selected").html());$(".loader").removeClass("d-none");
         loadComparison($("form#ms-comparison-form select#msComparisonMSSet").children("option:selected").val(),
                         $("form#ms-comparison-form select#msComparisonSelect1").children("option:selected").val(),
                         $("form#ms-comparison-form select#msComparisonSelect2").children("option:selected").val());

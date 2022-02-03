@@ -15,10 +15,11 @@
 <div class="container">
     <f:render section="msComparisonSettings" />
     <f:render section="msComparisonSelection" arguments="{msMenu: msMenu}"/>
-    <div id="msComparisonFrame">
-        <div class="mt-3 px-2 loader d-none">Loading<span class="d-inline-block ml-4 dot-pulse"></span></div>
+    <div id="msComparisonFrame" class="p-1 mb-2 rounded">
+        <h3 id="msTitle" class="row justify-content-center"></h2>
         <div id="msNavBar"></div>
         <div id="msComparisonContent"></div>
+        <div class="mt-3 px-2 loader d-none">Loading<span class="d-inline-block ml-4 dot-pulse"></span></div>
     </div>
 </div>
 

@@ -33,7 +33,7 @@
     </xsl:template>
     
     <xsl:template match="tei:ab">
-        <div class="row">
+        <div class="row mx-0">
             <xsl:element name="table">
                 <xsl:attribute name="id">
                     <xsl:text>msComparisonTable</xsl:text>
