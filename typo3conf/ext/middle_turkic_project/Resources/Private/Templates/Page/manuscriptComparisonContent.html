@@ -90,14 +90,12 @@
 
 <f:section name="renderContent">
     <f:variable name="msConvertorPath" value="EXT:middle_turkic_project/Configuration/MSConvertors/manuscriptComparison.xsl" />
-    <div id="msComparisonContent">
-        <f:format.raw>
-            <xslt:transform source="{manuscript1FullPath}" transformations="{0:{stylesheet: '{msConvertorPath}', setParameters: {
-                manuscript1Name:{value: '{manuscript1Name}'},
-                manuscript2Name:{value: '{manuscript2Name}'},
-                manuscript2FullPath:{value: '{manuscript2FullPath}'}}}}" />
-        </f:format.raw>
-    </div>
+    <f:format.raw>
+        <xslt:transform source="{manuscript1FullPath}" transformations="{0:{stylesheet: '{msConvertorPath}', setParameters: {
+            manuscript1Name:{value: '{manuscript1Name}'},
+            manuscript2Name:{value: '{manuscript2Name}'},
+            manuscript2FullPath:{value: '{manuscript2FullPath}'}}}}" />
+    </f:format.raw>
 </f:section>
 
 <f:section name="manuscriptNotFound">
