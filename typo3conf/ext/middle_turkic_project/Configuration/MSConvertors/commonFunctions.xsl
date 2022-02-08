@@ -17,7 +17,7 @@
         use="generate-id(preceding::tei:milestone[1])"/>
     
     <!-- Text extractor for the first continued line from the last section (no milestone-page exists at the beginning) -->
-    <xsl:key name="continuiedLineText"
+    <xsl:key name="continuedLineText"
         match="//tei:div[@type = 'textpart']//node()[not(parent::tei:supplied)][not(self::tei:milestone)][not(parent::tei:foreign)][not(parent::tei:ref)][not(parent::tei:emph)][not(self::tei:l)][not(ancestor-or-self::tei:title)]"
         use="generate-id(following::tei:milestone[1])"/>
 
@@ -121,7 +121,7 @@
     </xsl:template>
 
     <xsl:template name="milestone-line-line-by-line">
-        <xsl:variable name="continuedLineText" select="key('continuiedLineText', generate-id())"/>
+        <xsl:variable name="continuedLineText" select="key('continuedLineText', generate-id())"/>
         <!-- If there is a continued line from previous section -->
         <xsl:if test="position() = 1 and $continuedLineText != ''">
             <tr>
@@ -134,7 +134,7 @@
                             <xsl:value-of select="parent::node()/@n"/>
                             <xsl:text>] </xsl:text>
                         </xsl:if>
-                        <xsl:apply-templates />
+                        <xsl:apply-templates select="." />
                     </xsl:for-each>
                 </td>
             </tr>
