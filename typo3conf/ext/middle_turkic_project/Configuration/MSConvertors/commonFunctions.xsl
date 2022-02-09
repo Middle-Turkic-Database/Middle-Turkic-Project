@@ -192,6 +192,7 @@
                 <xsl:value-of select="./@style"/>
             </xsl:attribute>
             <xsl:apply-templates/>
+            <xsl:text> </xsl:text>
         </xsl:element>
     </xsl:template>
 
