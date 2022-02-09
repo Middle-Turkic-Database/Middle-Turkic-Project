@@ -105,7 +105,6 @@ function loadComparisonContent(msNav, ms1Name, ms2Name, msBook = -1, msChapter =
             comparisonURI += "&msChapter=" + msChapter;
         }
     }
-    console.log(comparisonURI);
     loadContent(comparisonURI, $element, function() {
         createSingleColumnTable();
         toggleComparisonView();

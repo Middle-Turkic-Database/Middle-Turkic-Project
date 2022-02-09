@@ -62,7 +62,7 @@
         <f:if condition="{firstTitleType.0} == 'book'">
             <f:then>
                 <f:variable name="manuscript1FullPath">{manuscriptPath}/{manuscript1Name}/{manuscript1Name}.{firstTitleN}.001.xml</f:variable>
-                <f:variable name="manuscript2FullPath">{manuscriptPath}/{manuscript2Name}/{manuscript1Name}.{firstTitleN}.001.xml</f:variable>
+                <f:variable name="manuscript2FullPath">{manuscriptPath}/{manuscript2Name}/{manuscript2Name}.{firstTitleN}.001.xml</f:variable>
             </f:then>
             <f:else if="{firstTitleType.0} == 'chapter'">
                 <f:variable name="manuscript1FullPath">{manuscriptPath}/{manuscript1Name}/{manuscript1Name}.{firstTitleN}.xml</f:variable>
