@@ -69,26 +69,55 @@
     </xsl:template>
     
     <xsl:template match="tei:l">
-        <tr>
-            <td class="align-text-top five-percent-width">
-                <xsl:if test="./@n">
-                    <xsl:text>[</xsl:text>
-                    <xsl:value-of select="./@n"/>
-                    <xsl:text>]</xsl:text>
-                </xsl:if>
-            </td>
-            <td class="fortysevenandhalf-percent-width pr-4">
-                <xsl:apply-templates select="key('betweenLineText', generate-id())"/>
-                <xsl:apply-templates/>
-            </td>
-            <td class="fortysevenandhalf-percent-width pr-3">
-                <xsl:variable name="xml-id" select="./@xml:id"/>
-                <xsl:apply-templates
-                    select="key('betweenLineText', generate-id($secondManusciprtABPart/tei:l[@xml:id=$xml-id]))"
-                />
-                <xsl:apply-templates select="$secondManusciprtABPart/tei:l[@xml:id=$xml-id]/node()" />
-            </td>
-        </tr>
+        <xsl:if test="position()=1">
+            <xsl:if test="not(@n = $secondManusciprtABPart/l[1]/@n)">
+                <tr>
+                    <td class="align-text-top five-percent-width" />
+                    <td class="fortysevenandhalf-percent-width pr-4">
+                        <xsl:if test="not(@n)">
+                            <xsl:apply-templates select="key('betweenLineText', generate-id())"/>
+                            <xsl:apply-templates/>
+                        </xsl:if>
+                    </td>
+                    <td class="fortysevenandhalf-percent-width pr-3">
+                        <xsl:if test="@n">
+                            <!-- Using foreach loop to change context to the second document -->
+                            <xsl:for-each select="$secondManusciprtABPart">
+                                <xsl:apply-templates
+                                    select="key('betweenLineText', generate-id(.//tei:l[position() = 1]))"
+                                />
+                            </xsl:for-each>
+                            <xsl:apply-templates select="$secondManusciprtABPart/tei:l[1]/node()" />
+                        </xsl:if>
+                    </td>
+                </tr>
+            </xsl:if>
+        </xsl:if>
+        <xsl:if test="not(position() = 1) or not(@n = $secondManusciprtABPart/l[1]/@n) and @n">
+            <tr>
+                <td class="align-text-top five-percent-width">
+                    <xsl:if test="./@n">
+                        <xsl:text>[</xsl:text>
+                        <xsl:value-of select="./@n"/>
+                        <xsl:text>]</xsl:text>
+                    </xsl:if>
+                </td>
+                <td class="fortysevenandhalf-percent-width pr-4">
+                    <xsl:apply-templates select="key('betweenLineText', generate-id())"/>
+                    <xsl:apply-templates/>
+                </td>
+                <td class="fortysevenandhalf-percent-width pr-3">
+                    <xsl:variable name="xml-id" select="./@xml:id"/>
+                    <xsl:if test="$secondManusciprtABPart/tei:l[@xml:id=$xml-id]">
+                        <!-- Using foreach loop to change context to the second document -->
+                        <xsl:for-each select="$secondManusciprtABPart">
+                            <xsl:apply-templates select="key('betweenLineText', generate-id(.//tei:l[@xml:id=$xml-id]))" />
+                        </xsl:for-each>
+                    </xsl:if>
+                    <xsl:apply-templates select="$secondManusciprtABPart/tei:l[@xml:id=$xml-id]/node()" />
+                </td>
+            </tr>
+        </xsl:if>
     </xsl:template>
     
     <xsl:template match="tei:milestone[@unit = 'line']">
