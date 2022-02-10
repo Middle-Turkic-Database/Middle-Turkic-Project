@@ -70,7 +70,7 @@
     
     <xsl:template match="tei:l">
         <xsl:if test="position()=1">
-            <xsl:if test="not(@n = $secondManusciprtABPart/l[1]/@n)">
+            <xsl:if test="not(@n = $secondManusciprtABPart/tei:l[1]/@n)">
                 <tr>
                     <td class="align-text-top five-percent-width" />
                     <td class="fortysevenandhalf-percent-width pr-4">
@@ -93,7 +93,7 @@
                 </tr>
             </xsl:if>
         </xsl:if>
-        <xsl:if test="not(position() = 1) or not(@n = $secondManusciprtABPart/tei:l[1]/@n) and @n">
+        <xsl:if test="not(position() = 1) or not(@n = $secondManusciprtABPart/l[1]/@n) and @n">
             <tr>
                 <td class="align-text-top five-percent-width">
                     <xsl:if test="./@n">
