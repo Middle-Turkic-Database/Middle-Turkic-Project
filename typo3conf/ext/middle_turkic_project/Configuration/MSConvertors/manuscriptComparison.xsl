@@ -44,10 +44,11 @@
                 <thead>
                     <tr>
                         <td class="align-text-top five-percent-width">#</td>
-                        <td class="fortysevenandhalf-percent-width pr-4">
+                        <td class="fortyfive-percent-width pr-4">
                             <xsl:value-of select="$manuscript1Name"/>
                         </td>
-                        <td class="fortysevenandhalf-percent-width pr-3">
+                        <td class="align-text-top five-percent-width">#</td>
+                        <td class="fortyfive-percent-width pr-3">
                             <xsl:value-of select="$manuscript2Name"/>
                         </td>
                     </tr>
@@ -55,10 +56,11 @@
                 <tbody>
                     <tr>
                         <td class="align-text-top five-percent-width" />
-                        <td class="fortysevenandhalf-percent-width pr-4">
+                        <td class="fortyfive-percent-width pr-4">
                             <xsl:apply-templates select="tei:title" />
                         </td>
-                        <td class="fortysevenandhalf-percent-width pr-3">
+                        <td class="align-text-top five-percent-width" />
+                        <td class="fortyfive-percent-width pr-3">
                             <xsl:apply-templates select="$secondManusciprtABPart/tei:title" />
                         </td>
                     </tr>
@@ -69,17 +71,20 @@
     </xsl:template>
     
     <xsl:template match="tei:l">
-        <xsl:if test="position()=1">
+        <!-- If there is an opening verse in right manuscript which does not exist
+             in the left manuscript and viceversa -->
+        <xsl:if test="position() = 1">
             <xsl:if test="not(@n = $secondManusciprtABPart/tei:l[1]/@n)">
                 <tr>
                     <td class="align-text-top five-percent-width" />
-                    <td class="fortysevenandhalf-percent-width pr-4">
+                    <td class="fortyfive-percent-width pr-4 left-column">
                         <xsl:if test="not(@n)">
                             <xsl:apply-templates select="key('betweenLineText', generate-id())"/>
                             <xsl:apply-templates/>
                         </xsl:if>
                     </td>
-                    <td class="fortysevenandhalf-percent-width pr-3">
+                    <td class="align-text-top five-percent-width" />
+                    <td class="fortyfive-percent-width pr-3 right-column">
                         <xsl:if test="@n">
                             <!-- Using foreach loop to change context to the second document -->
                             <xsl:for-each select="$secondManusciprtABPart">
@@ -94,6 +99,7 @@
             </xsl:if>
         </xsl:if>
         <xsl:if test="not(position() = 1) or not(@n = $secondManusciprtABPart/tei:l[1]/@n) and @n">
+            <xsl:variable name="xml-id" select="./@xml:id"/>
             <tr>
                 <td class="align-text-top five-percent-width">
                     <xsl:if test="./@n">
@@ -102,22 +108,31 @@
                         <xsl:text>]</xsl:text>
                     </xsl:if>
                 </td>
-                <td class="fortysevenandhalf-percent-width pr-4">
+                <td class="fortyfive-percent-width pr-4 left-column">
                     <xsl:apply-templates select="key('betweenLineText', generate-id())"/>
                     <xsl:apply-templates/>
                 </td>
-                <td class="fortysevenandhalf-percent-width pr-3">
-                    <xsl:variable name="xml-id" select="./@xml:id"/>
+                <td class="align-text-top five-percent-width">
+                    <xsl:if test="$secondManusciprtABPart/tei:l[@xml:id=$xml-id]/@n">
+                        <xsl:text>[</xsl:text>
+                        <xsl:value-of select="$secondManusciprtABPart/tei:l[@xml:id=$xml-id]/@n" />
+                        <xsl:text>]</xsl:text>
+                    </xsl:if>
+                </td>
+                <td class="fortyfive-percent-width pr-3 right-column">
                     <xsl:if test="$secondManusciprtABPart/tei:l[@xml:id=$xml-id]">
-                        <!-- Using foreach loop to change context to the second document -->
+                       <!-- Using foreach loop to change context to the second document -->
                         <xsl:for-each select="$secondManusciprtABPart">
-                            <xsl:apply-templates select="key('betweenLineText', generate-id(.//tei:l[@xml:id=$xml-id]))" />
-                        </xsl:for-each>
+                           <xsl:apply-templates select="key('betweenLineText', generate-id(.//tei:l[@xml:id=$xml-id]))" />
+                       </xsl:for-each>
                     </xsl:if>
                     <xsl:apply-templates select="$secondManusciprtABPart/tei:l[@xml:id=$xml-id]/node()" />
                 </td>
             </tr>
         </xsl:if>
+        <!-- If there is an ending verse in right manuscript which does not exist
+             in the left manuscript -->
+        
     </xsl:template>
     
     <xsl:template match="tei:milestone[@unit = 'line']">

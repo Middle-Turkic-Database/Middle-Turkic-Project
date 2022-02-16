@@ -199,7 +199,7 @@ $(function() {
     loadParallel($("#msTranscriptContent").data('msnav'), $("#msTranscriptContent").data('msname'));
 
     $('.ms-nav-1st [data-toggle="pill"], .ms-nav-2nd [data-toggle="pill"]').tooltip();
-
+    
     var firstMaxChapter = $(".ms-selector-form select[id$='bookSelector'] option").first().data("chapternum");
     setChapterPars(firstMaxChapter);
 
@@ -366,7 +366,8 @@ $(function() {
         e.preventDefault();
 
         $("#msComparisonFrame").addClass("border");
-        $("#msTitle").html($("form#ms-comparison-form select#msComparisonMSSet").children("option:selected").html());$(".loader").removeClass("d-none");
+        $("#msTitle").html($("form#ms-comparison-form select#msComparisonMSSet").children("option:selected").html());
+        $(".loader").removeClass("d-none");
         loadComparison($("form#ms-comparison-form select#msComparisonMSSet").children("option:selected").val(),
                         $("form#ms-comparison-form select#msComparisonSelect1").children("option:selected").val(),
                         $("form#ms-comparison-form select#msComparisonSelect2").children("option:selected").val());
@@ -398,7 +399,7 @@ function createSingleColumnTable($comparisonTable = $("table#msComparisonTable")
     var singleColumnFirstHeadFlexElement = document.createElement('div');
     var singleColumnSecondHeadFlexElement = document.createElement('div');
     var singleColumnTbodyElement = document.createElement('tbody');
-    var el = Array.from($comparisonTable.find("tbody td.pr-4"));
+    var el = Array.from($comparisonTable.find("tbody td.left-column"));
     
     singleColumnTableElement.id = 'msComparisonTableSingleColumn';
     singleColumnTableElement.classList.add("table", "table-borderless", "table-sm", "table-striped", "d-none");
@@ -421,15 +422,16 @@ function createSingleColumnTable($comparisonTable = $("table#msComparisonTable")
     singleColumnTheadElement.appendChild(singleColumnHeadRowElement);
     singleColumnTableElement.appendChild(singleColumnTheadElement);
     var dmp = new diff_match_patch();
-    el.forEach((firstMsCell) => {
-        firstMsCell_trimmed = trimWhiteSpace(firstMsCell.textContent);
-        secondMsCell_trimmed = trimWhiteSpace(firstMsCell.nextElementSibling.textContent);
+    el.forEach((leftMsCell) => {
+        var rightMsCell = $(leftMsCell).siblings("td.right-column")
+        firstMsCell_trimmed = trimWhiteSpace(leftMsCell.textContent);
+        secondMsCell_trimmed = trimWhiteSpace(rightMsCell.html());
         var diff = dmp.diff_main(firstMsCell_trimmed, secondMsCell_trimmed);
         var rowElement = document.createElement('tr');
         var indexColumnElement = document.createElement('td');
         var compareTextElement = document.createElement('td');
-        var index = firstMsCell.previousElementSibling.textContent;
-        indexColumnElement = firstMsCell.previousElementSibling.cloneNode(true);
+        var index = leftMsCell.previousElementSibling.textContent;
+        indexColumnElement = leftMsCell.previousElementSibling.cloneNode(true);
         rowElement.appendChild(indexColumnElement);
         dmp.diff_cleanupSemantic(diff);
         diff.forEach((part) => {
@@ -453,8 +455,8 @@ function createSingleColumnTable($comparisonTable = $("table#msComparisonTable")
             }
         })
 
-        firstMsCell.replaceChildren(leftFragment);
-        firstMsCell.nextElementSibling.replaceChildren(rightFragment);
+        leftMsCell.replaceChildren(leftFragment);
+        rightMsCell.html(rightFragment);
         rowElement.appendChild(compareTextElement);
         singleColumnTbodyElement.appendChild(rowElement);
     })
