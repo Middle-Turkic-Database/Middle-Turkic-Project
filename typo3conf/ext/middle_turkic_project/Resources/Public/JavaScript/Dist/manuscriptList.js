@@ -199,7 +199,7 @@ $(function() {
     loadParallel($("#msTranscriptContent").data('msnav'), $("#msTranscriptContent").data('msname'));
 
     $('.ms-nav-1st [data-toggle="pill"], .ms-nav-2nd [data-toggle="pill"]').tooltip();
-    
+
     var firstMaxChapter = $(".ms-selector-form select[id$='bookSelector'] option").first().data("chapternum");
     setChapterPars(firstMaxChapter);
 

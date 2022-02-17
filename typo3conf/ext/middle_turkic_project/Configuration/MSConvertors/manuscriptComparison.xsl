@@ -71,6 +71,7 @@
     </xsl:template>
     
     <xsl:template match="tei:l">
+        <xsl:variable name="xml-id" select="./@xml:id"/>
         <!-- If there is an opening verse in right manuscript which does not exist
              in the left manuscript and viceversa -->
         <xsl:if test="position() = 1">
@@ -99,7 +100,6 @@
             </xsl:if>
         </xsl:if>
         <xsl:if test="not(position() = 1) or not(@n = $secondManusciprtABPart/tei:l[1]/@n) and @n">
-            <xsl:variable name="xml-id" select="./@xml:id"/>
             <tr>
                 <td class="align-text-top five-percent-width">
                     <xsl:if test="./@n">
@@ -132,7 +132,19 @@
         </xsl:if>
         <!-- If there is an ending verse in right manuscript which does not exist
              in the left manuscript -->
-        
+        <xsl:if test="position() = last()">
+            <xsl:for-each select="$secondManusciprtABPart/tei:l[@xml:id = $xml-id]/following-sibling::tei:l">
+                <tr>
+                    <td class="align-text-top five-percent-width" />
+                    <td class="fortyfive-percent-width pre-4 left-column" />
+                    <td class="align-text-top five-percent-width" />
+                    <td class="fortyfive-percent-width pre-3 right-column">
+                        <xsl:apply-templates select="key('betweenLineText', generate-id(.))" />
+                        <xsl:apply-templates select="./node()" />
+                    </td>
+                </tr>
+            </xsl:for-each>
+        </xsl:if>
     </xsl:template>
     
     <xsl:template match="tei:milestone[@unit = 'line']">
