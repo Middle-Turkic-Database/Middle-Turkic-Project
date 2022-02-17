@@ -137,7 +137,13 @@
                 <tr>
                     <td class="align-text-top five-percent-width" />
                     <td class="fortyfive-percent-width pre-4 left-column" />
-                    <td class="align-text-top five-percent-width" />
+                    <td class="align-text-top five-percent-width">
+                        <xsl:if test="./@n">
+                            <xsl:text>[</xsl:text>
+                            <xsl:value-of select="./@n" />
+                            <xsl:text>]</xsl:text>
+                        </xsl:if>
+                    </td>
                     <td class="fortyfive-percent-width pre-3 right-column">
                         <xsl:apply-templates select="key('betweenLineText', generate-id(.))" />
                         <xsl:apply-templates select="./node()" />
