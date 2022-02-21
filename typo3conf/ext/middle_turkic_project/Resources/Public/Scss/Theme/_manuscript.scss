@@ -56,11 +56,8 @@ div#transliteration {
 // Manuscript Navigation
 .nav.ms-nav {
     &.ms-nav-1st {
-        a.nav-link {
-            border-left: 1px solid white;
-            &.latest-tab {
-                background-color: lightblue;
-            }
+        a.nav-link.latest-tab {
+            background-color: lightblue;
         }
     }
     &.ms-nav-2nd {
@@ -103,6 +100,9 @@ div#transliteration {
             }
             &.fortysevenandhalf-percent-width {
                 width: 47.5%;
+            }
+            &.fortyfive-percent-width {
+                width: 45%;
             }
         }
     }
