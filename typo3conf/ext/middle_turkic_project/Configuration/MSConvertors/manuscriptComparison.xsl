@@ -99,7 +99,7 @@
                 </tr>
             </xsl:if>
         </xsl:if>
-        <xsl:if test="not(position() = 1) or not(@n = $secondManusciprtABPart/tei:l[1]/@n) and @n">
+        <xsl:if test="not(position() = 1) or (not(@n = $secondManusciprtABPart/tei:l[1]/@n) and @n)">
             <tr>
                 <td class="align-text-top five-percent-width">
                     <xsl:if test="./@n">
@@ -121,15 +121,17 @@
                 </td>
                 <td class="fortyfive-percent-width pr-3 right-column">
                     <xsl:if test="$secondManusciprtABPart/tei:l[@xml:id=$xml-id]">
-                       <!-- Using foreach loop to change context to the second document -->
+                        <!-- Using foreach loop to change context to the second document -->
                         <xsl:for-each select="$secondManusciprtABPart">
-                           <xsl:apply-templates select="key('betweenLineText', generate-id(.//tei:l[@xml:id=$xml-id]))" />
-                       </xsl:for-each>
+                            <xsl:apply-templates select="key('betweenLineText', generate-id(.//tei:l[@xml:id=$xml-id]))" />
+                        </xsl:for-each>
                     </xsl:if>
                     <xsl:apply-templates select="$secondManusciprtABPart/tei:l[@xml:id=$xml-id]/node()" />
                 </td>
             </tr>
         </xsl:if>
+        
+        
         <!-- If there is an ending verse in right manuscript which does not exist
              in the left manuscript -->
         <xsl:if test="position() = last()">
