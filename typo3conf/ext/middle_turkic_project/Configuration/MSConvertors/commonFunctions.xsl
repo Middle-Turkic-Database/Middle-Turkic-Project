@@ -140,7 +140,18 @@
             </tr>
         </xsl:if>
         <tr>
-            <td class="align-text-top seven-percent-width">
+            <xsl:element name="td">
+                <xsl:attribute name="class">
+                    <xsl:text>align-text-top </xsl:text>
+                    <xsl:choose>
+                        <xsl:when test="not(//tei:milestone[@unit = 'line']/@next or //tei:milestone[@unit=line]/@prev)">
+                            <xsl:text>five-percent-width</xsl:text>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:text>seven-percent-width</xsl:text>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:attribute>
                 <xsl:text>(</xsl:text>
                 <xsl:if test="./@prev">
                     <xsl:text>…</xsl:text>
@@ -150,7 +161,7 @@
                     <xsl:text>…</xsl:text>
                 </xsl:if>
                 <xsl:text>)</xsl:text>
-            </td>
+            </xsl:element>
             <td>
                 <xsl:apply-templates select="key('transText', generate-id())"/>
             </td>
