@@ -140,9 +140,15 @@
             </tr>
         </xsl:if>
         <tr>
-            <td class="align-text-top five-percent-width">
+            <td class="align-text-top seven-percent-width">
                 <xsl:text>(</xsl:text>
+                <xsl:if test="./@prev">
+                    <xsl:text>…</xsl:text>
+                </xsl:if>
                 <xsl:value-of select="./@n"/>
+                <xsl:if test="./@next">
+                    <xsl:text>…</xsl:text>
+                </xsl:if>
                 <xsl:text>)</xsl:text>
             </td>
             <td>
