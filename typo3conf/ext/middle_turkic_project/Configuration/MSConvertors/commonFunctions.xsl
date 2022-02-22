@@ -144,7 +144,7 @@
                 <xsl:attribute name="class">
                     <xsl:text>align-text-top </xsl:text>
                     <xsl:choose>
-                        <xsl:when test="not(//tei:milestone[@unit = 'line']/@next or //tei:milestone[@unit=line]/@prev)">
+                        <xsl:when test="not(//tei:milestone[@unit = 'line']/@next or //tei:milestone[@unit= 'line']/@prev)">
                             <xsl:text>five-percent-width</xsl:text>
                         </xsl:when>
                         <xsl:otherwise>
