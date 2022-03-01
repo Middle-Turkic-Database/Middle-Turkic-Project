@@ -23,7 +23,7 @@
 
     <!-- Text extractor for the text between lines -->
     <xsl:key name="betweenLineText"
-        match="//tei:div[@type = 'textpart']//node()[not(ancestor-or-self::tei:l)][not(parent::tei:foreign)][not(parent::tei:ref)][not(ancestor-or-self::tei:title)]"
+        match="//tei:div[@type = 'textpart']//node()[not(ancestor-or-self::tei:l)][not(ancestor-or-self::tei:lg)][not(parent::tei:foreign)][not(parent::tei:ref)][not(ancestor-or-self::tei:title)]"
         use="generate-id(following::tei:l[1])"/>
 
     <!-- Extracts footnote with respect to its xml:id -->
@@ -56,7 +56,7 @@
                     </xsl:attribute>
                     <xsl:choose>
                         <xsl:when test="$traverseType = 'verse-by-verse'">
-                            <xsl:apply-templates select="tei:l"/>
+                            <xsl:apply-templates select="tei:l | tei:lg"/>
                         </xsl:when>
                         <xsl:otherwise>
                             <xsl:apply-templates select="//tei:milestone"/>
@@ -167,6 +167,35 @@
             </td>
         </tr>
     </xsl:template>
+    
+    <xsl:template match="tei:lg">
+        <xsl:choose>
+            <xsl:when test="$traverseType = 'verse-by-verse'">
+                <xsl:call-template name="lg-verse-by-verse" />
+            </xsl:when>
+        </xsl:choose>
+    </xsl:template>
+    
+    <xsl:template name="lg-verse-by-verse">
+        <tr>
+            <td class="align-text-top five-percent-width">
+                <xsl:if test="count(./tei:l[@n]) > 0">
+                    <xsl:text>[</xsl:text>
+                    <xsl:value-of select="./tei:l[@n][1]/@n"/>
+                    <xsl:text>-</xsl:text>
+                    <xsl:value-of select="./tei:l[@n][last()]/@n"/>
+                    <xsl:text>]</xsl:text>
+                </xsl:if>
+            </td>
+            <td>
+                <xsl:for-each select="tei:l">
+                    <xsl:apply-templates select="key('betweenLineText', generate-id())"/>
+                    <xsl:apply-templates/>
+                    <xsl:text> </xsl:text>
+                </xsl:for-each>
+            </td>
+        </tr>
+    </xsl:template>
 
     <xsl:template match="tei:l">
         <xsl:choose>
@@ -197,9 +226,23 @@
 
     <xsl:template name="l-line-by-line">
         <xsl:if test="./@n">
-            <xsl:text> [</xsl:text>
+            <xsl:variable name="parent" select="local-name(parent::*)"/>
+            <xsl:variable name="neighbor" select="local-name(preceding-sibling::*[1])"/>
+            <xsl:variable name="neighbor-of-parent" select="local-name(parent::*/preceding-sibling::*[1])" />
+            <xsl:if test="$neighbor = 'l' or
+                            $neighbor = 'lg' or
+                            $parent = 'lg' and
+                                ($neighbor-of-parent = 'l' or
+                                 $neighbor-of-parent = 'lg')">
+                <xsl:text> </xsl:text>
+            </xsl:if>
+            <xsl:text>[</xsl:text>
             <xsl:value-of select="./@n"/>
-            <xsl:text>] </xsl:text>
+            <xsl:text>]</xsl:text>
+            <xsl:if test="child::node()[1][self::text()][normalize-space()!=''] or
+                            local-name(child::node()[1]) = 'foreign'">
+                <xsl:text> </xsl:text>
+            </xsl:if>
         </xsl:if>
     </xsl:template>
 
