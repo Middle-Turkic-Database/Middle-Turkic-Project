@@ -365,7 +365,7 @@
         <xsl:text>{</xsl:text>
     </xsl:template>
 
-    <xsl:template match="tei:anchor[starts-with(@xml:id, 'add')]">
+    <xsl:template match="tei:anchor[starts-with(@xml:id, 'add') and not(@next)]">
         <xsl:text>}</xsl:text>
     </xsl:template>
 
@@ -373,7 +373,7 @@
         <xsl:text>&lt;</xsl:text>
     </xsl:template>
 
-    <xsl:template match="tei:anchor[starts-with(@xml:id, 'del')]">
+    <xsl:template match="tei:anchor[starts-with(@xml:id, 'del') and not(@next)]">
         <xsl:text>&gt;</xsl:text>
     </xsl:template>
 
