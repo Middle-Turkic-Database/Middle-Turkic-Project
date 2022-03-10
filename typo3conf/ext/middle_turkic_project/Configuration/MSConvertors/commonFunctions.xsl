@@ -30,6 +30,63 @@
     <xsl:key name="footnote"
         match="/tei:TEI/tei:text/tei:body/tei:div[@type = 'apparatus']/tei:listApp/tei:app/tei:note"
         use="@xml:id"/>
+    
+    <!-- Renders verse number for l and lg elements -->
+    <xsl:template name="renderVerseIndex">
+        <xsl:choose>
+            <xsl:when test="name() = 'l'">
+                <xsl:if test="@n">
+                    <xsl:text>[</xsl:text>
+                    <xsl:value-of select="@n"/>
+                    <xsl:text>]</xsl:text>
+                </xsl:if>
+            </xsl:when>
+            <xsl:when test="name() = 'lg'">
+                <xsl:if test="count(./tei:l[@n]) > 0">
+                    <xsl:if test="count(./tei:l[@n]) > 0">
+                        <xsl:text>[</xsl:text>
+                        <xsl:value-of select="./tei:l[@n][1]/@n"/>
+                        <xsl:text>-</xsl:text>
+                        <xsl:value-of select="./tei:l[@n][last()]/@n"/>
+                        <xsl:text>]</xsl:text>
+                    </xsl:if>
+                </xsl:if>
+            </xsl:when>
+        </xsl:choose>
+    </xsl:template>
+    
+    <!-- Renders verse content for l and lg elements -->
+    <xsl:template name="renderVerseContent">
+        <xsl:param name="node" select="."></xsl:param>
+        <xsl:choose>
+            <xsl:when test="name($node) = 'lg'">
+                <xsl:call-template name="renderLgContent">
+                    <xsl:with-param name="node" select="$node" />
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="name($node) = 'l'">
+                <xsl:call-template name="renderLContent">
+                    <xsl:with-param name="node" select="$node" />
+                </xsl:call-template>
+            </xsl:when>
+        </xsl:choose>
+    </xsl:template>
+    
+    <!-- Renders verse content for lg elements -->
+    <xsl:template name="renderLgContent">
+        <xsl:param name="node" select="." />
+        <xsl:for-each select="$node/tei:l">
+            <xsl:call-template name="renderLContent" />
+            <xsl:text> </xsl:text>
+        </xsl:for-each>
+    </xsl:template>
+    
+    <!-- Renders verse content for l elements -->
+    <xsl:template name="renderLContent">
+        <xsl:param name="node" select="." />
+        <xsl:apply-templates select="key('betweenLineText', generate-id($node))" />
+        <xsl:apply-templates select="$node/node()" />
+    </xsl:template>
 
     <xsl:template match="/">
         <xsl:apply-templates

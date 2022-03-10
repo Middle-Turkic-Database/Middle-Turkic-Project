@@ -24,27 +24,20 @@
     <xsl:template match="tei:lg">
         <tr>
             <td class="align-text-top seven-percent-width">
-                <xsl:if test="count(./tei:l[@n]) > 0">
-                    <xsl:text>[</xsl:text>
-                    <xsl:value-of select="./tei:l[@n][1]/@n"/>
-                    <xsl:text>-</xsl:text>
-                    <xsl:value-of select="./tei:l[@n][last()]/@n"/>
-                    <xsl:text>]</xsl:text>
-                </xsl:if>
+                <xsl:call-template name="renderVerseIndex" />
             </td>
             <td class="fortysixandhalf-percent-width pr-4">
-                <xsl:for-each select="./tei:l">
-                    <xsl:apply-templates select="key('betweenLineText', generate-id())" />
-                    <xsl:apply-templates />
-                </xsl:for-each>
+                <xsl:call-template name="renderVerseContent" />
             </td>
             <td class="fortysixandhalf-percent-width pr-3">
                 <xsl:variable name="abPosition" select="count(../preceding-sibling::tei:ab) + 1"/>
                 <xsl:variable name="lgPosition" select="position()"/>
-                <xsl:for-each select="($translationAbPart[$abPosition]/tei:l|$translationAbPart[$abPosition]/tei:lg)[$lgPosition]/tei:l">
-                    <xsl:apply-templates select="key('betweenLineText', generate-id())" />
-                    <xsl:apply-templates />
-                    <xsl:text> </xsl:text>
+                <!-- Using for-each to change context -->
+                <xsl:for-each select="$translationAbPart">
+                    <xsl:apply-templates select="key('betweenLineText', generate-id(./tei:l[1]))" />
+                    <xsl:call-template name="renderVerseContent">
+                        <xsl:with-param name="node" select="($translationAbPart[$abPosition]/tei:l|$translationAbPart[$abPosition]/tei:lg)[$lgPosition]" />
+                    </xsl:call-template>
                 </xsl:for-each>
             </td>
         </tr>
@@ -64,11 +57,7 @@
                         </xsl:otherwise>
                     </xsl:choose>
                 </xsl:attribute>
-                <xsl:if test="./@n">
-                    <xsl:text>[</xsl:text>
-                    <xsl:value-of select="./@n"/>
-                    <xsl:text>]</xsl:text>
-                </xsl:if>
+                <xsl:call-template name="renderVerseIndex" />
             </xsl:element>
             <xsl:element name="td">
                 <xsl:attribute name="class">
@@ -82,8 +71,7 @@
                         </xsl:otherwise>
                     </xsl:choose>
                 </xsl:attribute>
-                <xsl:apply-templates select="key('betweenLineText', generate-id())"/>
-                <xsl:apply-templates/>
+                <xsl:call-template name="renderVerseContent" />
             </xsl:element>
             <xsl:element name="td">
                 <xsl:attribute name="class">
@@ -99,15 +87,12 @@
                 </xsl:attribute>
                 <xsl:variable name="abPosition" select="count(../preceding-sibling::tei:ab) + 1"/>
                 <xsl:variable name="lPosition" select="position()"/>
-                <xsl:variable name="translationVerse" select="($translationAbPart[$abPosition]/tei:l|$translationAbPart[$abPosition]/tei:lg)[$lPosition]"/>
-                <xsl:for-each select="$translationVerse">
-                    <xsl:apply-templates
-                        select="key('betweenLineText', generate-id($translationVerse))"
-                    />
+                <!-- Using for-each to change context -->
+                <xsl:for-each select="$translationAbPart">
+                    <xsl:call-template name="renderVerseContent">
+                        <xsl:with-param name="node" select="($translationAbPart[$abPosition]/tei:l|$translationAbPart[$abPosition]/tei:lg)[$lPosition]" />
+                    </xsl:call-template>
                 </xsl:for-each>
-                <xsl:apply-templates
-                    select="$translationVerse/node()"
-                />
             </xsl:element>
         </tr>
     </xsl:template>
