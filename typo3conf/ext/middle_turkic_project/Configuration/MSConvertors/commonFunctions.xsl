@@ -236,20 +236,10 @@
     <xsl:template name="lg-verse-by-verse">
         <tr>
             <td class="align-text-top five-percent-width">
-                <xsl:if test="count(./tei:l[@n]) > 0">
-                    <xsl:text>[</xsl:text>
-                    <xsl:value-of select="./tei:l[@n][1]/@n"/>
-                    <xsl:text>-</xsl:text>
-                    <xsl:value-of select="./tei:l[@n][last()]/@n"/>
-                    <xsl:text>]</xsl:text>
-                </xsl:if>
+                <xsl:call-template name="renderVerseIndex" />
             </td>
             <td>
-                <xsl:for-each select="tei:l">
-                    <xsl:apply-templates select="key('betweenLineText', generate-id())"/>
-                    <xsl:apply-templates/>
-                    <xsl:text> </xsl:text>
-                </xsl:for-each>
+                <xsl:call-template name="renderVerseContent" />
             </td>
         </tr>
     </xsl:template>
@@ -268,15 +258,10 @@
     <xsl:template name="l-verse-by-verse">
         <tr>
             <td class="align-text-top five-percent-width">
-                <xsl:if test="./@n">
-                    <xsl:text> [</xsl:text>
-                    <xsl:value-of select="./@n"/>
-                    <xsl:text>] </xsl:text>
-                </xsl:if>
+                <xsl:call-template name="renderVerseIndex" />
             </td>
             <td>
-                <xsl:apply-templates select="key('betweenLineText', generate-id())"/>
-                <xsl:apply-templates/>
+                <xsl:call-template name="renderVerseContent" />
             </td>
         </tr>
     </xsl:template>
