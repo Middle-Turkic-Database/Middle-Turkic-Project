@@ -21,29 +21,7 @@
     <!-- Fetch manuscript translation document -->
     <xsl:variable name="translationAbPart" select="document(str:encode-uri($translationPath, true()))/tei:TEI/tei:text/tei:body/tei:div[@type = 'edition']/tei:div[@type = 'textpart']/tei:ab"/>
     
-    <xsl:template match="tei:lg">
-        <tr>
-            <td class="align-text-top seven-percent-width">
-                <xsl:call-template name="renderVerseIndex" />
-            </td>
-            <td class="fortysixandhalf-percent-width pr-4">
-                <xsl:call-template name="renderVerseContent" />
-            </td>
-            <td class="fortysixandhalf-percent-width pr-3">
-                <xsl:variable name="abPosition" select="count(../preceding-sibling::tei:ab) + 1"/>
-                <xsl:variable name="lgPosition" select="position()"/>
-                <!-- Using for-each to change context -->
-                <xsl:for-each select="$translationAbPart">
-                    <xsl:apply-templates select="key('betweenLineText', generate-id(./tei:l[1]))" />
-                    <xsl:call-template name="renderVerseContent">
-                        <xsl:with-param name="node" select="($translationAbPart[$abPosition]/tei:l|$translationAbPart[$abPosition]/tei:lg)[$lgPosition]" />
-                    </xsl:call-template>
-                </xsl:for-each>
-            </td>
-        </tr>
-    </xsl:template>
-    
-    <xsl:template match="tei:l">
+    <xsl:template match="tei:l | tei:lg">
         <tr>
             <xsl:element name="td">
                 <xsl:attribute name="class">
@@ -85,13 +63,23 @@
                         </xsl:otherwise>
                     </xsl:choose>
                 </xsl:attribute>
-                <xsl:variable name="abPosition" select="count(../preceding-sibling::tei:ab) + 1"/>
-                <xsl:variable name="lPosition" select="position()"/>
                 <!-- Using for-each to change context -->
+                <xsl:variable name="abPosition" select="count(../preceding-sibling::tei:ab) + 1"/>
+                <xsl:variable name="l-lgPosition" select="position()"/>
+                <xsl:variable name="elementName" select="name()" />
                 <xsl:for-each select="$translationAbPart">
-                    <xsl:call-template name="renderVerseContent">
-                        <xsl:with-param name="node" select="($translationAbPart[$abPosition]/tei:l|$translationAbPart[$abPosition]/tei:lg)[$lPosition]" />
-                    </xsl:call-template>
+                    <xsl:choose>
+                        <xsl:when test="$elementName = 'lg'">
+                            <xsl:call-template name="renderVerseContent">
+                                <xsl:with-param name="node" select="($translationAbPart[$abPosition]/tei:l|$translationAbPart[$abPosition]/tei:lg)[$l-lgPosition]" />
+                            </xsl:call-template>
+                        </xsl:when>
+                        <xsl:when test="$elementName = 'l'">
+                            <xsl:call-template name="renderVerseContent">
+                                <xsl:with-param name="node" select="($translationAbPart[$abPosition]/tei:l|$translationAbPart[$abPosition]/tei:lg)[$l-lgPosition]" />
+                            </xsl:call-template>
+                        </xsl:when>
+                    </xsl:choose>
                 </xsl:for-each>
             </xsl:element>
         </tr>
