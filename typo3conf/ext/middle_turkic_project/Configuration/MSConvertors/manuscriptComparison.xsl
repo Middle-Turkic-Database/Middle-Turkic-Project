@@ -61,14 +61,14 @@
                 </xsl:attribute>
                 <thead>
                     <tr>
-                        <td class="align-text-top index pr-2">#</td>
-                        <td class="pr-3 w-50">
+                        <th class="align-text-top index pr-2">#</th>
+                        <th class="pr-3 w-50">
                             <xsl:value-of select="$manuscript1Name"/>
-                        </td>
-                        <td class="align-text-top index pr-2">#</td>
-                        <td class="pr-3 w-50">
+                        </th>
+                        <th class="align-text-top index pr-2">#</th>
+                        <th class="pr-3 w-50">
                             <xsl:value-of select="$manuscript2Name"/>
-                        </td>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
