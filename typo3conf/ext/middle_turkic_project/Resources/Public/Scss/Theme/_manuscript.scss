@@ -91,24 +91,11 @@ div#transliteration {
 #msParallelContent,
 #msComparisonContent {
     .table {
+        table-layout: fixed;
         td {
-            &.five-percent-width {
-                width: 5%;
-            }
-            &.seven-percent-width {
-                width: 7%;
-            }
-            &.nintyfive-percent-width {
-                width: 95%;
-            }
-            &.fortysevenandhalf-percent-width {
-                width: 47.5%;
-            }
-            &.fortysixandhalf-percent-width {
-                width: 46.5%;
-            }
-            &.fortyfive-percent-width {
-                width: 45%;
+            word-wrap: break-word;
+            &.index {
+                white-space: nowrap;
             }
         }
     }

@@ -33,21 +33,22 @@
     
     <!-- Renders verse number for l and lg elements -->
     <xsl:template name="renderVerseIndex">
+        <xsl:param name="node" select="." />
         <xsl:choose>
             <xsl:when test="name() = 'l'">
-                <xsl:if test="@n">
+                <xsl:if test="$node/@n">
                     <xsl:text>[</xsl:text>
-                    <xsl:value-of select="@n"/>
+                    <xsl:value-of select="$node/@n"/>
                     <xsl:text>]</xsl:text>
                 </xsl:if>
             </xsl:when>
             <xsl:when test="name() = 'lg'">
-                <xsl:if test="count(./tei:l[@n]) > 0">
-                    <xsl:if test="count(./tei:l[@n]) > 0">
+                <xsl:if test="count($node/tei:l[@n]) > 0">
+                    <xsl:if test="count($node/tei:l[@n]) > 0">
                         <xsl:text>[</xsl:text>
-                        <xsl:value-of select="./tei:l[@n][1]/@n"/>
+                        <xsl:value-of select="$node/tei:l[@n][1]/@n"/>
                         <xsl:text>-</xsl:text>
-                        <xsl:value-of select="./tei:l[@n][last()]/@n"/>
+                        <xsl:value-of select="$node/tei:l[@n][last()]/@n"/>
                         <xsl:text>]</xsl:text>
                     </xsl:if>
                 </xsl:if>
@@ -56,17 +57,16 @@
     </xsl:template>
     
     <!-- Renders verse content for l and lg elements -->
-    <xsl:template name="renderVerseContent">
-        <xsl:param name="node" select="."></xsl:param>
+    <xsl:template match="tei:l|tei:lg" mode="renderVerseContent">
         <xsl:choose>
-            <xsl:when test="name($node) = 'lg'">
+            <xsl:when test="name() = 'lg'">
                 <xsl:call-template name="renderLgContent">
-                    <xsl:with-param name="node" select="$node" />
+                    <xsl:with-param name="node" select="."/>
                 </xsl:call-template>
             </xsl:when>
-            <xsl:when test="name($node) = 'l'">
+            <xsl:when test="name() = 'l'">
                 <xsl:call-template name="renderLContent">
-                    <xsl:with-param name="node" select="$node" />
+                    <xsl:with-param name="node" select="." />
                 </xsl:call-template>
             </xsl:when>
         </xsl:choose>
@@ -87,6 +87,30 @@
         <xsl:apply-templates select="key('betweenLineText', generate-id($node))" />
         <xsl:apply-templates select="$node/node()" />
     </xsl:template>
+    
+    <!-- Render superscript -->
+    <xsl:template name="renderSup">
+        <xsl:param name="title" />
+        <xsl:param name="value" />
+        <sup>
+            <xsl:element name="abbr">
+                <xsl:attribute name="data-toggle">
+                    <xsl:text>tooltip</xsl:text>
+                </xsl:attribute>
+                <xsl:attribute name="data-placement">
+                    <xsl:text>top</xsl:text>
+                </xsl:attribute>
+                <xsl:attribute name="data-html">
+                    <xsl:text>true</xsl:text>
+                </xsl:attribute>
+                <xsl:attribute name="title">
+                    <xsl:value-of select="$title"/>
+                </xsl:attribute>
+                <xsl:value-of select="$value"/>
+            </xsl:element>
+        </sup>
+        
+    </xsl:template>
 
     <xsl:template match="/">
         <xsl:apply-templates
@@ -106,7 +130,7 @@
                 </h5>
                 <xsl:element name="table">
                     <xsl:attribute name="class">
-                        <xsl:text>table table-borderless table-sm</xsl:text>
+                        <xsl:text>table table-borderless table-sm d-block</xsl:text>
                         <xsl:if test="$stripedTable = true()">
                             <xsl:text> table-striped</xsl:text>
                         </xsl:if>
@@ -178,37 +202,8 @@
     </xsl:template>
 
     <xsl:template name="milestone-line-line-by-line">
-        <xsl:variable name="continuedLineText" select="key('continuedLineText', generate-id())"/>
-        <!-- If there is a continued line from previous section -->
-        <xsl:if test="position() = 1 and $continuedLineText != ''">
-            <tr>
-                <td class="align-text-top five-percent-width"></td>
-                <td>
-                    <xsl:for-each select="$continuedLineText">
-                        <!-- If the element is the first child of the upper l element and l has an n attribute -->
-                        <xsl:if test="node() = parent::node()/node()[1] and parent::node()/@n">
-                            <xsl:text> [</xsl:text>
-                            <xsl:value-of select="parent::node()/@n"/>
-                            <xsl:text>] </xsl:text>
-                        </xsl:if>
-                        <xsl:apply-templates select="." />
-                    </xsl:for-each>
-                </td>
-            </tr>
-        </xsl:if>
         <tr>
-            <xsl:element name="td">
-                <xsl:attribute name="class">
-                    <xsl:text>align-text-top </xsl:text>
-                    <xsl:choose>
-                        <xsl:when test="not(//tei:milestone[@unit = 'line']/@next or //tei:milestone[@unit= 'line']/@prev)">
-                            <xsl:text>five-percent-width</xsl:text>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <xsl:text>seven-percent-width</xsl:text>
-                        </xsl:otherwise>
-                    </xsl:choose>
-                </xsl:attribute>
+            <td class="align-text-top index pr-2">
                 <xsl:text>(</xsl:text>
                 <xsl:if test="./@prev">
                     <xsl:text>…</xsl:text>
@@ -218,7 +213,7 @@
                     <xsl:text>…</xsl:text>
                 </xsl:if>
                 <xsl:text>)</xsl:text>
-            </xsl:element>
+            </td>
             <td>
                 <xsl:apply-templates select="key('transText', generate-id())"/>
             </td>
@@ -235,11 +230,11 @@
     
     <xsl:template name="lg-verse-by-verse">
         <tr>
-            <td class="align-text-top five-percent-width">
+            <td class="align-text-top index pr-2">
                 <xsl:call-template name="renderVerseIndex" />
             </td>
             <td>
-                <xsl:call-template name="renderVerseContent" />
+                <xsl:apply-templates mode="renderVerseContent" select="." />
             </td>
         </tr>
     </xsl:template>
@@ -257,11 +252,11 @@
 
     <xsl:template name="l-verse-by-verse">
         <tr>
-            <td class="align-text-top five-percent-width">
+            <td class="align-text-top index pr-2">
                 <xsl:call-template name="renderVerseIndex" />
             </td>
             <td>
-                <xsl:call-template name="renderVerseContent" />
+                <xsl:apply-templates mode="renderVerseContent" select="." />
             </td>
         </tr>
     </xsl:template>
@@ -300,30 +295,21 @@
 
 
     <xsl:template match="tei:ref">
-        <sup>
-            <xsl:element name="abbr">
-                <xsl:attribute name="data-toggle">
-                    <xsl:text>tooltip</xsl:text>
-                </xsl:attribute>
-                <xsl:attribute name="data-placement">
-                    <xsl:text>top</xsl:text>
-                </xsl:attribute>
-                <xsl:attribute name="data-html">
-                    <xsl:text>true</xsl:text>
-                </xsl:attribute>
-                <xsl:attribute name="title">
-                    <xsl:variable name="footnoteContent">
-                        <div class="text-left">
-                            <xsl:apply-templates select="key('footnote', substring(@target, 2))"/>
-                        </div>
-                    </xsl:variable>
-                    <xsl:call-template name="xml-to-string">
-                        <xsl:with-param name="node-set" select="common:node-set($footnoteContent)"/>
-                    </xsl:call-template>
-                </xsl:attribute>
+        <xsl:call-template name="renderSup">
+            <xsl:with-param name="title">
+                <xsl:variable name="footnoteContent">
+                    <div class="text-left">
+                        <xsl:apply-templates select="key('footnote', substring(@target, 2))"/>
+                    </div>
+                </xsl:variable>
+                <xsl:call-template name="xml-to-string">
+                    <xsl:with-param name="node-set" select="common:node-set($footnoteContent)"/>
+                </xsl:call-template>
+            </xsl:with-param>
+            <xsl:with-param name="value">
                 <xsl:value-of select="substring(@target, 4)"/>
-            </xsl:element>
-        </sup>
+            </xsl:with-param>
+        </xsl:call-template>
         <xsl:variable name="firstFSiblingName" select="local-name(following-sibling::*[1])"/>
         <xsl:if test="
                 $firstFSiblingName = 'supplied' or

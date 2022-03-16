@@ -10,10 +10,28 @@
     <xsl:param name="manuscript1Name" select="''" />
     <xsl:param name="manuscript2Name" select="''" />
     <xsl:param name="manuscript2FullPath" select="''"/>
+    <xsl:param name="prevMS1FullPath" select="''" />
+    <xsl:param name="nextMS1FullPath" select="''" />
+    <xsl:param name="prevMS2FullPath" select="''" />
+    <xsl:param name="nextMS2FullPath" select="''" />
     
     <!-- Fetch second manuscript document -->
-    <xsl:variable name="secondManuscript" select="document(str:encode-uri($manuscript2FullPath, true()))"/>
-    <xsl:variable name="secondManusciprtABPart" select="$secondManuscript/tei:TEI/tei:text/tei:body/tei:div[@type = 'edition']/tei:div[@type = 'textpart']/tei:ab" />
+    <xsl:variable name="ms1AbPart" select="/tei:TEI/tei:text/tei:body/tei:div[@type='edition']/tei:div[@type='textpart']/tei:ab"/>
+    
+    <xsl:variable name="ms2" select="document(str:encode-uri($manuscript2FullPath, true()))"/>
+    <xsl:variable name="ms2AbPart" select="$ms2/tei:TEI/tei:text/tei:body/tei:div[@type = 'edition']/tei:div[@type = 'textpart']/tei:ab" />
+    
+    <xsl:variable name="prevMs1" select="document(str:encode-uri($prevMS1FullPath, true()))"/>
+    <xsl:variable name="prevMs1AbPart" select="$prevMs1/tei:TEI/tei:text/tei:body/tei:div[@type = 'edition']/tei:div[@type = 'textpart']/tei:ab"/>
+    
+    <xsl:variable name="prevMs2" select="document(str:encode-uri($prevMS2FullPath, true()))"/>
+    <xsl:variable name="prevMs2AbPart" select="$prevMs2/tei:TEI/tei:text/tei:body/tei:div[@type = 'edition']/tei:div[@type = 'textpart']/tei:ab"/>
+    
+    <xsl:variable name="nextMs1" select="document(str:encode-uri($nextMS1FullPath, true()))"/>
+    <xsl:variable name="nextMs1AbPart" select="$nextMs1/tei:TEI/tei:text/tei:body/tei:div[@type = 'edition']/tei:div[@type = 'textpart']/tei:ab"/>
+    
+    <xsl:variable name="nextMs2" select="document(str:encode-uri($nextMS2FullPath, true()))"/>
+    <xsl:variable name="nextMs2AbPart" select="$nextMs2/tei:TEI/tei:text/tei:body/tei:div[@type = 'edition']/tei:div[@type = 'textpart']/tei:ab"/>
     
     <!-- Variables -->
     
@@ -39,120 +57,147 @@
                     <xsl:text>msComparisonTable</xsl:text>
                 </xsl:attribute>
                 <xsl:attribute name="class">
-                    <xsl:text>table table-borderless table-sm table-striped</xsl:text>
+                    <xsl:text>table table-borderless table-sm table-striped d-block</xsl:text>
                 </xsl:attribute>
                 <thead>
                     <tr>
-                        <td class="align-text-top five-percent-width">#</td>
-                        <td class="fortyfive-percent-width pr-4">
+                        <td class="align-text-top index pr-2">#</td>
+                        <td class="pr-3 w-50">
                             <xsl:value-of select="$manuscript1Name"/>
                         </td>
-                        <td class="align-text-top five-percent-width">#</td>
-                        <td class="fortyfive-percent-width pr-3">
+                        <td class="align-text-top index pr-2">#</td>
+                        <td class="pr-3 w-50">
                             <xsl:value-of select="$manuscript2Name"/>
                         </td>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td class="align-text-top five-percent-width" />
-                        <td class="fortyfive-percent-width pr-4">
+                        <td />
+                        <td class="pr-3">
                             <xsl:apply-templates select="tei:title" />
                         </td>
-                        <td class="align-text-top five-percent-width" />
-                        <td class="fortyfive-percent-width pr-3">
-                            <xsl:apply-templates select="$secondManusciprtABPart/tei:title" />
+                        <td />
+                        <td class="pr-3">
+                            <xsl:apply-templates select="$ms2AbPart/tei:title" />
                         </td>
                     </tr>
-                    <xsl:apply-templates select="tei:l" />
+                    <xsl:apply-templates select="tei:l | tei:lg" />
                 </tbody>
             </xsl:element>
         </div>
     </xsl:template>
     
-    <xsl:template match="tei:l">
+    <xsl:template match="tei:l | tei:lg">
         <xsl:variable name="xml-id" select="./@xml:id"/>
+        <xsl:variable name="ms2Verse" select = "($prevMs2AbPart/tei:l|
+                                                $prevMs2AbPart/tei:lg|
+                                                $ms2AbPart/tei:l|
+                                                $ms2AbPart/tei:lg|
+                                                $nextMs2AbPart/tei:l|
+                                                $nextMs2AbPart/tei:lg)[@xml:id = $xml-id]" />
         <!-- If there is an opening verse in right manuscript which does not exist
-             in the left manuscript and viceversa -->
-        <xsl:if test="position() = 1">
-            <xsl:if test="not(@n = $secondManusciprtABPart/tei:l[1]/@n)">
-                <tr>
-                    <td class="align-text-top five-percent-width" />
-                    <td class="fortyfive-percent-width pr-4 left-column">
-                        <xsl:if test="not(@n)">
-                            <xsl:apply-templates select="key('betweenLineText', generate-id())"/>
-                            <xsl:apply-templates/>
-                        </xsl:if>
-                    </td>
-                    <td class="align-text-top five-percent-width" />
-                    <td class="fortyfive-percent-width pr-3 right-column">
-                        <xsl:if test="@n">
-                            <!-- Using foreach loop to change context to the second document -->
-                            <xsl:for-each select="$secondManusciprtABPart">
-                                <xsl:apply-templates
-                                    select="key('betweenLineText', generate-id(.//tei:l[position() = 1]))"
-                                />
-                            </xsl:for-each>
-                            <xsl:apply-templates select="$secondManusciprtABPart/tei:l[1]/node()" />
-                        </xsl:if>
-                    </td>
-                </tr>
-            </xsl:if>
+             in the left one -->
+        <xsl:if test="position() = 1 and not(($ms1AbPart/tei:l|$ms1AbPart/tei:lg)[@xml:id=($ms2AbPart/tei:l | $ms2AbPart/tei:lg)[1]/@xml:id])">
+            <xsl:apply-templates select="($ms2AbPart/tei:l | $ms2AbPart/tei:lg)[1]" mode="missingLeftVerseStart" />
         </xsl:if>
-        <xsl:if test="not(position() = 1) or @n = $secondManusciprtABPart/tei:l[1]/@n or @n">
-            <tr>
-                <td class="align-text-top five-percent-width">
-                    <xsl:if test="./@n">
-                        <xsl:text>[</xsl:text>
-                        <xsl:value-of select="./@n"/>
-                        <xsl:text>]</xsl:text>
-                    </xsl:if>
-                </td>
-                <td class="fortyfive-percent-width pr-4 left-column">
-                    <xsl:apply-templates select="key('betweenLineText', generate-id())"/>
-                    <xsl:apply-templates/>
-                </td>
-                <td class="align-text-top five-percent-width">
-                    <xsl:if test="$secondManusciprtABPart/tei:l[@xml:id=$xml-id]/@n">
-                        <xsl:text>[</xsl:text>
-                        <xsl:value-of select="$secondManusciprtABPart/tei:l[@xml:id=$xml-id]/@n" />
-                        <xsl:text>]</xsl:text>
-                    </xsl:if>
-                </td>
-                <td class="fortyfive-percent-width pr-3 right-column">
-                    <xsl:if test="$secondManusciprtABPart/tei:l[@xml:id=$xml-id]">
-                        <!-- Using foreach loop to change context to the second document -->
-                        <xsl:for-each select="$secondManusciprtABPart">
-                            <xsl:apply-templates select="key('betweenLineText', generate-id(.//tei:l[@xml:id=$xml-id]))" />
-                        </xsl:for-each>
-                    </xsl:if>
-                    <xsl:apply-templates select="$secondManusciprtABPart/tei:l[@xml:id=$xml-id]/node()" />
-                </td>
-            </tr>
-        </xsl:if>
-        
-        
+        <tr>
+            <td class="pr-2 index">
+                <xsl:call-template name="renderVerseIndex" />
+            </td>
+            <td class="pr-3 w-50 left-column">
+                <xsl:apply-templates mode="renderVerseContent" select="." />
+            </td>
+            <td class="pr-2 index">
+                <xsl:call-template name="renderVerseIndex">
+                    <xsl:with-param name="node" select="$ms2Verse" />
+                </xsl:call-template>
+                <xsl:if test="$ms2Verse/ancestor::tei:ab != $ms2AbPart">
+                    <xsl:call-template name="renderSup">
+                        <xsl:with-param name="title">
+                            <xsl:apply-templates select="$ms2Verse/ancestor::tei:ab/tei:title" />
+                        </xsl:with-param>
+                        <xsl:with-param name="value">&#10013;</xsl:with-param>
+                    </xsl:call-template>
+                </xsl:if>
+            </td>
+            <td class="pr-3 w-50 right-column">
+                <xsl:apply-templates mode="renderVerseContent" select="$ms2Verse" />
+            </td>
+        </tr>
         <!-- If there is an ending verse in right manuscript which does not exist
-             in the left manuscript -->
-        <xsl:if test="position() = last()">
-            <xsl:for-each select="$secondManusciprtABPart/tei:l[@xml:id = $xml-id]/following-sibling::tei:l">
-                <tr>
-                    <td class="align-text-top five-percent-width" />
-                    <td class="fortyfive-percent-width pre-4 left-column" />
-                    <td class="align-text-top five-percent-width">
-                        <xsl:if test="./@n">
-                            <xsl:text>[</xsl:text>
-                            <xsl:value-of select="./@n" />
-                            <xsl:text>]</xsl:text>
-                        </xsl:if>
-                    </td>
-                    <td class="fortyfive-percent-width pre-3 right-column">
-                        <xsl:apply-templates select="key('betweenLineText', generate-id(.))" />
-                        <xsl:apply-templates select="./node()" />
-                    </td>
-                </tr>
-            </xsl:for-each>
+             in the left one -->
+        <xsl:if test="position() = last() and not(($ms1AbPart/tei:l | $ms1AbPart/tei:lg)[@xml:id=($ms2AbPart/tei:l | $ms2AbPart/tei:lg)[last()]/@xml:id])">
+            <xsl:apply-templates select="($ms2AbPart/tei:l | $ms2AbPart/tei:lg)[last()]" mode="missingLeftVerseEnd" />
         </xsl:if>
+    </xsl:template>
+    
+    <xsl:template match="tei:l | tei:lg" mode="missingLeftVerseStart" >
+        <xsl:variable name="xml-id" select="./@xml:id"/>
+        <xsl:variable name="verseInPrevMs" select="($prevMs1AbPart/tei:l | $prevMs1AbPart/tei:lg)[@xml:id = $xml-id]"/>
+        <tr>
+            <td class="align-text-top pr-2 index">
+                <xsl:if test="$verseInPrevMs">
+                    <xsl:call-template name="renderVerseIndex">
+                        <xsl:with-param name="node" select="($prevMs1AbPart/tei:l | $prevMs1AbPart/tei:lg)[@xml:id = $xml-id]" />
+                    </xsl:call-template>
+                    <xsl:call-template name="renderSup">
+                        <xsl:with-param name="title">
+                            <xsl:apply-templates select="$prevMs1AbPart/tei:title" />
+                        </xsl:with-param>
+                        <xsl:with-param name="value">&#10013;</xsl:with-param>
+                    </xsl:call-template>
+                </xsl:if>
+            </td>
+            <td class="pr-3 w-50 left-column">
+                <xsl:apply-templates mode="renderVerseContent" select="$verseInPrevMs" />
+            </td>
+            <td class="align-text-top pr-2 index">
+                <xsl:call-template name="renderVerseIndex" />
+            </td>
+            <td class="pr-3 w-50 right-column">
+                <xsl:apply-templates mode="renderVerseContent" select="." />
+            </td>
+        </tr>
+        <xsl:variable name="following-verse" select="(following-sibling::tei:l|following-sibling::tei:lg)[1]"/>
+        <xsl:if test="not(($ms1AbPart/tei:l|$ms1AbPart/tei:lg)[@xml:id = $following-verse/@xml:id])">
+            <xsl:apply-templates select="$following-verse" mode="missingLeftVerseStart" />
+        </xsl:if>
+    </xsl:template>
+    
+    <xsl:template match="tei:l | tei:lg" mode="missingLeftVerseEnd">
+        <xsl:variable name="xml-id" select="./@xml:id" />
+        <xsl:variable name="prevSiblingVerse" select="(preceding-sibling::tei:l | preceding-sibling::tei:lg)[last()]"/>
+        <xsl:if test="not(($ms1AbPart/tei:l | $ms1AbPart/tei:lg)[@xml:id=$prevSiblingVerse/@xml:id])">
+            <xsl:apply-templates select="$prevSiblingVerse" mode="missingLeftVerseEnd" />
+        </xsl:if>
+        <xsl:variable name="verseInNextMs" select="($nextMs1AbPart/tei:l | $nextMs1AbPart/tei:lg)[@xml:id=$xml-id]"/>
+        <tr>
+            <td class="pr-2 index">
+                <xsl:if test="$verseInNextMs">
+                    <xsl:call-template name="renderVerseIndex">
+                        <xsl:with-param name="node" select="$verseInNextMs" />
+                    </xsl:call-template>
+                    <xsl:call-template name="renderSup">
+                        <xsl:with-param name="title">
+                            <xsl:apply-templates select="$nextMs1AbPart/tei:title" />
+                        </xsl:with-param>
+                        <xsl:with-param name="value">&#10013;</xsl:with-param>
+                    </xsl:call-template>
+                </xsl:if>
+            </td>
+            <td class="pr-3 w-50 left-column">
+                <xsl:if test="$verseInNextMs">
+                    <xsl:apply-templates select="$verseInNextMs" mode="renderVerseContent" />
+                </xsl:if>
+            </td>
+            <td class="pr-2 index">
+                <xsl:call-template name="renderVerseIndex"/>
+            </td>
+            <td class="pr-3 w-50 right-column">
+                <xsl:apply-templates select="." mode="renderVerseContent" />
+            </td>
+        </tr>
     </xsl:template>
     
     <xsl:template match="tei:milestone[@unit = 'line']">

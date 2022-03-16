@@ -23,65 +23,25 @@
     
     <xsl:template match="tei:l | tei:lg">
         <tr>
-            <xsl:element name="td">
-                <xsl:attribute name="class">
-                    <xsl:text>align-text-top</xsl:text>
-                    <xsl:choose>
-                        <xsl:when test="$translationAbPart/tei:lg">
-                            <xsl:text> seven-percent-width</xsl:text>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <xsl:text> five-percent-width</xsl:text>
-                        </xsl:otherwise>
-                    </xsl:choose>
-                </xsl:attribute>
+            <td class="align-text-top index pr-2">
                 <xsl:call-template name="renderVerseIndex" />
-            </xsl:element>
-            <xsl:element name="td">
-                <xsl:attribute name="class">
-                    <xsl:text>pr-4</xsl:text>
-                    <xsl:choose>
-                        <xsl:when test="$translationAbPart/tei:lg">
-                            <xsl:text> fortysixandhalf-percent-width</xsl:text>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <xsl:text> fortysevenandhalf-percent-width</xsl:text>
-                        </xsl:otherwise>
-                    </xsl:choose>
-                </xsl:attribute>
-                <xsl:call-template name="renderVerseContent" />
-            </xsl:element>
-            <xsl:element name="td">
-                <xsl:attribute name="class">
-                    <xsl:text>pr-3</xsl:text>
-                    <xsl:choose>
-                        <xsl:when test="$translationAbPart/tei:lg">
-                            <xsl:text> fortysixandhalf-percent-width</xsl:text>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <xsl:text> fortysevenandhalf-percent-width</xsl:text>
-                        </xsl:otherwise>
-                    </xsl:choose>
-                </xsl:attribute>
-                <!-- Using for-each to change context -->
+            </td>
+            <td class="pr-3 w-50">
+                <xsl:apply-templates mode="renderVerseContent" select="."/>
+            </td>
+            <td class="pr-3 w-50">
                 <xsl:variable name="abPosition" select="count(../preceding-sibling::tei:ab) + 1"/>
                 <xsl:variable name="l-lgPosition" select="position()"/>
                 <xsl:variable name="elementName" select="name()" />
-                <xsl:for-each select="$translationAbPart">
                     <xsl:choose>
                         <xsl:when test="$elementName = 'lg'">
-                            <xsl:call-template name="renderVerseContent">
-                                <xsl:with-param name="node" select="($translationAbPart[$abPosition]/tei:l|$translationAbPart[$abPosition]/tei:lg)[$l-lgPosition]" />
-                            </xsl:call-template>
+                            <xsl:apply-templates mode="renderVerseContent" select="($translationAbPart[$abPosition]/tei:l|$translationAbPart[$abPosition]/tei:lg)[$l-lgPosition]" />
                         </xsl:when>
                         <xsl:when test="$elementName = 'l'">
-                            <xsl:call-template name="renderVerseContent">
-                                <xsl:with-param name="node" select="($translationAbPart[$abPosition]/tei:l|$translationAbPart[$abPosition]/tei:lg)[$l-lgPosition]" />
-                            </xsl:call-template>
+                            <xsl:apply-templates mode="renderVerseContent" select="($translationAbPart[$abPosition]/tei:l|$translationAbPart[$abPosition]/tei:lg)[$l-lgPosition]" />
                         </xsl:when>
                     </xsl:choose>
-                </xsl:for-each>
-            </xsl:element>
+            </td>
         </tr>
     </xsl:template>
 </xsl:stylesheet>

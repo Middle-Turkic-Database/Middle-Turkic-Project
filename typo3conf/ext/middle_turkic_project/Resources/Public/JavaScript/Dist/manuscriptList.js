@@ -473,4 +473,5 @@ function createSingleColumnTable($comparisonTable = $("table#msComparisonTable")
         " ]*)"
     const reg = new RegExp(regText, 'gm');
     document.getElementById("msComparisonTable").innerHTML = document.getElementById("msComparisonTable").innerHTML.replace(reg, '<span style="unicode-bidi: embed;">$1</span>');
+    $('[data-toggle="tooltip"]').tooltip();
 }

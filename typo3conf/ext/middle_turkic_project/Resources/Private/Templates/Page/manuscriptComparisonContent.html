@@ -28,7 +28,13 @@
     <f:variable name="manuscriptChapter">
         <f:cObject typoscriptObjectPath="lib.manuscriptChapter" />
     </f:variable>
-    <f:variable name="manuscriptChapterExists" value="true" /> {manuscriptChapter -> v:format.trim() -> v:format.trim(characters:"'") -> f:format.padding(padLength:"3", padString:"0", padType:"left") -> f:variable(name:"manuscriptChapter")}
+    <f:variable name="manuscriptChapterExists" value="true" />
+    {manuscriptChapter -> v:format.trim() -> v:format.trim(characters:"'") -> f:variable(name:"msChapterTrimmed")}
+    <f:variable name="prevChapter" value="{msChapterTrimmed - 1}" />
+    {prevChapter -> f:format.padding(padLength:"3", padString:"0", padType:"left") -> f:variable(name:"prevChapter")}
+    <f:variable name="nextChapter" value="{msChapterTrimmed + 1}" />
+    {nextChapter -> f:format.padding(padLength:"3", padString:"0", padType:"left") -> f:variable(name:"nextChapter")}
+    {manuscriptChapter -> v:format.trim() -> v:format.trim(characters:"'") -> f:format.padding(padLength:"3", padString:"0", padType:"left") -> f:variable(name:"manuscriptChapter")}
 </f:if>
 
 <f:if condition="{manuscriptBookExists}">
@@ -36,7 +42,19 @@
         <f:if condition="{manuscriptChapterExists}">
             <f:then>
                 <f:variable name="manuscript1FullPath">{manuscriptPath}/{manuscript1Name}/{manuscript1Name}.{manuscriptBook}.{manuscriptChapter}.xml</f:variable>
+                <v:media.exists file="{manuscriptPath}/{manuscript1Name}/{manuscript1Name}.{manuscriptBook}.{prevChapter}.xml">
+                    <f:variable name="prevMS1FullPath" value="{manuscriptPath}/{manuscript1Name}/{manuscript1Name}.{manuscriptBook}.{prevChapter}.xml" />
+                </v:media.exists>
+                <v:media.exists file="{manuscriptPath}/{manuscript1Name}/{manuscript1Name}.{manuscriptBook}.{nextChapter}.xml">
+                    <f:variable name="nextMS1FullPath" value="{manuscriptPath}/{manuscript1Name}/{manuscript1Name}.{manuscriptBook}.{nextChapter}.xml" />
+                </v:media.exists>
                 <f:variable name="manuscript2FullPath">{manuscriptPath}/{manuscript2Name}/{manuscript2Name}.{manuscriptBook}.{manuscriptChapter}.xml</f:variable>
+                <v:media.exists file="{manuscriptPath}/{manuscript2Name}/{manuscript2Name}.{manuscriptBook}.{prevChapter}.xml">
+                    <f:variable name="prevMS2FullPath" value="{manuscriptPath}/{manuscript2Name}/{manuscript2Name}.{manuscriptBook}.{prevChapter}.xml" />
+                </v:media.exists>
+                <v:media.exists file="{manuscriptPath}/{manuscript2Name}/{manuscript2Name}.{manuscriptBook}.{nextChapter}.xml">
+                    <f:variable name="nextMS2FullPath" value="{manuscriptPath}/{manuscript2Name}/{manuscript2Name}.{manuscriptBook}.{nextChapter}.xml" />
+                </v:media.exists>
             </f:then>
             <f:else>
                 <f:variable name="manuscript1FullPath">{manuscriptPath}/{manuscript1Name}/{manuscript1Name}.{manuscriptBook}.xml</f:variable>
@@ -62,7 +80,13 @@
         <f:if condition="{firstTitleType.0} == 'book'">
             <f:then>
                 <f:variable name="manuscript1FullPath">{manuscriptPath}/{manuscript1Name}/{manuscript1Name}.{firstTitleN}.001.xml</f:variable>
+                <v:media.exists file="{manuscriptPath}/{manuscript1Name}/{manuscript1Name}.{firstTitleN}.002.xml">
+                    <f:variable name="nextMS1FullPath" value="{manuscriptPath}/{manuscript1Name}/{manuscript1Name}.{firstTitleN}.002.xml" />
+                </v:media.exists>
                 <f:variable name="manuscript2FullPath">{manuscriptPath}/{manuscript2Name}/{manuscript2Name}.{firstTitleN}.001.xml</f:variable>
+                <v:media.exists file="{manuscriptPath}/{manuscript2Name}/{manuscript2Name}.{firstTitleN}.002.xml">
+                    <f:variable name="nextMS2FullPath" value="{manuscriptPath}/{manuscript2Name}/{manuscript2Name}.{firstTitleN}.002.xml" />
+                </v:media.exists>
             </f:then>
             <f:else if="{firstTitleType.0} == 'chapter'">
                 <f:variable name="manuscript1FullPath">{manuscriptPath}/{manuscript1Name}/{manuscript1Name}.{firstTitleN}.xml</f:variable>
@@ -90,12 +114,17 @@
 
 <f:section name="renderContent">
     <f:variable name="msConvertorPath" value="EXT:middle_turkic_project/Configuration/MSConvertors/manuscriptComparison.xsl" />
-    <f:format.raw>
-        <xslt:transform source="{manuscript1FullPath}" transformations="{0:{stylesheet: '{msConvertorPath}', setParameters: {
-            manuscript1Name:{value: '{manuscript1Name}'},
-            manuscript2Name:{value: '{manuscript2Name}'},
-            manuscript2FullPath:{value: '{manuscript2FullPath}'}}}}" />
-    </f:format.raw>
+        <f:format.raw>
+            <xslt:transform source="{manuscript1FullPath}" transformations="{0:{stylesheet: '{msConvertorPath}', setParameters: {
+                manuscript1Name:{value: '{manuscript1Name}'},
+                manuscript2Name:{value: '{manuscript2Name}'},
+                manuscript2FullPath:{value: '{manuscript2FullPath}'},
+                prevMS1FullPath:{value: '{prevMS1FullPath}'},
+                nextMS1FullPath:{value: '{nextMS1FullPath}'},
+                prevMS2FullPath:{value: '{prevMS2FullPath}'},
+                nextMS2FullPath:{value: '{nextMS2FullPath}'}
+            }}}" />
+        </f:format.raw>
 </f:section>
 
 <f:section name="manuscriptNotFound">
