@@ -414,8 +414,8 @@ function createSingleColumnTable($comparisonTable = $("table#msComparisonTable")
     singleColumnSecondHeadColumnElement.classList.add("d-flex", "flex-wrap");
     singleColumnFirstHeadFlexElement.classList.add("pr-4");
     singleColumnFirstHeadFlexElement.style.color = "limegreen";
-    const firstMsName = $comparisonTable.find("thead tr td:nth-child(2)").text();
-    const secondMsName = $comparisonTable.find("thead tr td:nth-child(4)").text();
+    const firstMsName = $comparisonTable.find("thead tr th:nth-child(2)").text();
+    const secondMsName = $comparisonTable.find("thead tr th:nth-child(4)").text();
     singleColumnFirstHeadFlexElement.appendChild(document.createTextNode(firstMsName));
     singleColumnSecondHeadColumnElement.appendChild(singleColumnFirstHeadFlexElement);
     singleColumnSecondHeadFlexElement.classList.add("pr-4");
