@@ -162,11 +162,15 @@ function csvToArray(str, delimiter = ",") {
 
 function toggleComparisonView() {
     if ($("#toggleComparisonTable").is(":checked")) {
+        $("#msComparisonTable").removeClass("d-block");
         $("#msComparisonTable").addClass("d-none");
+        $("#msComparisonTableSingleColumn").addClass("d-block");
         $("#msComparisonTableSingleColumn").removeClass("d-none");
     }
     else {
+        $("#msComparisonTableSingleColumn").removeClass("d-block");
         $("#msComparisonTableSingleColumn").addClass("d-none");
+        $("#msComparisonTable").addClass("d-block");
         $("#msComparisonTable").removeClass("d-none");
     }
 }
@@ -411,7 +415,7 @@ function createSingleColumnTable($comparisonTable = $("table#msComparisonTable")
     singleColumnFirstHeadFlexElement.classList.add("pr-4");
     singleColumnFirstHeadFlexElement.style.color = "limegreen";
     const firstMsName = $comparisonTable.find("thead tr td:nth-child(2)").text();
-    const secondMsName = $comparisonTable.find("thead tr td:nth-child(3)").text();
+    const secondMsName = $comparisonTable.find("thead tr td:nth-child(4)").text();
     singleColumnFirstHeadFlexElement.appendChild(document.createTextNode(firstMsName));
     singleColumnSecondHeadColumnElement.appendChild(singleColumnFirstHeadFlexElement);
     singleColumnSecondHeadFlexElement.classList.add("pr-4");
