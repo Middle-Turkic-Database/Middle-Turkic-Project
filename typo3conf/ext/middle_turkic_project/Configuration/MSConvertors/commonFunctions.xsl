@@ -310,7 +310,7 @@
                 <xsl:value-of select="substring(@target, 4)"/>
             </xsl:with-param>
         </xsl:call-template>
-        <xsl:variable name="firstFSiblingName" select="local-name(following-sibling::*[1])"/>
+        <xsl:variable name="firstFSiblingName" select="local-name(following-sibling::node()[1])"/>
         <xsl:if test="
                 $firstFSiblingName = 'supplied' or
                 $firstFSiblingName = 'addSpan' or
