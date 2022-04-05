@@ -109,7 +109,6 @@
                 <xsl:value-of select="$value"/>
             </xsl:element>
         </sup>
-        
     </xsl:template>
 
     <xsl:template match="/">
@@ -276,11 +275,8 @@
             <xsl:text>[</xsl:text>
             <xsl:value-of select="./@n"/>
             <xsl:text>]</xsl:text>
-            <xsl:if test="child::node()[1][self::text()][normalize-space()!=''] or
-                            local-name(child::node()[1]) = 'foreign'">
                 <xsl:text> </xsl:text>
             </xsl:if>
-        </xsl:if>
     </xsl:template>
 
     <xsl:template match="tei:foreign">
@@ -289,7 +285,6 @@
                 <xsl:value-of select="./@style"/>
             </xsl:attribute>
             <xsl:apply-templates/>
-            <xsl:text> </xsl:text>
         </xsl:element>
     </xsl:template>
 
