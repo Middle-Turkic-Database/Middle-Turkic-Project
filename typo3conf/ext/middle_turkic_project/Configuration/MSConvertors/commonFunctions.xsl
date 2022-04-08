@@ -302,7 +302,7 @@
                 </xsl:call-template>
             </xsl:with-param>
             <xsl:with-param name="value">
-                <xsl:value-of select="substring(@target, 4)"/>
+                <xsl:value-of select="@n"/>
             </xsl:with-param>
         </xsl:call-template>
         <xsl:variable name="firstFSiblingName" select="local-name(following-sibling::node()[1])"/>
@@ -388,7 +388,7 @@
         <xsl:text>{</xsl:text>
     </xsl:template>
 
-    <xsl:template match="tei:anchor[starts-with(@xml:id, 'add') and not(@next)]">
+    <xsl:template match="tei:anchor[@type='addSpan']">
         <xsl:text>}</xsl:text>
     </xsl:template>
 
@@ -396,7 +396,7 @@
         <xsl:text>&lt;</xsl:text>
     </xsl:template>
 
-    <xsl:template match="tei:anchor[starts-with(@xml:id, 'del') and not(@next)]">
+    <xsl:template match="tei:anchor[@type='delSpan']">
         <xsl:text>&gt;</xsl:text>
     </xsl:template>
 
@@ -408,6 +408,8 @@
         <xsl:text>⸣</xsl:text>
     </xsl:template>
 
-
+    <xsl:template match="tei:space">
+        <xsl:text> </xsl:text>
+    </xsl:template>
 
 </xsl:stylesheet>
