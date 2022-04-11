@@ -96,7 +96,7 @@ General Information</span>
 
                            <dt class="col-sm-3">Notes</dt>
                            <dd class="col-sm-9">
-                              <xsl:variable name="note" select="/tei:TEI/tei:teiHeader/tei:fileDesc/tei:sourceDesc/tei:msDesc/tei:msContents/tei:msItem/tei:note" />
+                              <xsl:variable name="note" select="/tei:TEI/tei:teiHeader/tei:fileDesc/tei:notesStmt/tei:note" />
                               <xsl:choose>
                                  <xsl:when test="mtdb:exists($note)">
                                     <xsl:apply-templates select="$note" />
