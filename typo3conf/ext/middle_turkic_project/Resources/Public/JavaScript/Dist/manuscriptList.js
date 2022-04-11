@@ -194,6 +194,9 @@ $(function() {
         }
     });
     $('.dataTables_length').addClass('bs-select');
+    if ($('#manuscriptTabs').length) {
+        $('.manuscript-hero-image').parent().addClass('d-none');
+    };
 
     loadTranscript($("#msTranscriptContent").data('msnav'), $("#msTranscriptContent").data('msname'));
     loadTranslation($("#msTranscriptContent").data('msnav'), $("#msTranscriptContent").data('msname'));
