@@ -202,20 +202,27 @@
 
     <xsl:template name="milestone-line-line-by-line">
         <tr>
-            <td class="align-text-top index pr-2">
-                <xsl:text>(</xsl:text>
-                <xsl:if test="./@prev">
-                    <xsl:text>…</xsl:text>
+            <xsl:if test="./@n">
+                <td class="align-text-top index pr-2">
+                    <xsl:text>(</xsl:text>
+                    <xsl:if test="./@prev">
+                        <xsl:text>…</xsl:text>
+                    </xsl:if>
+                    <xsl:value-of select="./@n"/>
+                    <xsl:if test="./@next">
+                        <xsl:text>…</xsl:text>
+                    </xsl:if>
+                    <xsl:text>)</xsl:text>
+                </td>
+            </xsl:if>
+            <xsl:element name="td">
+                <xsl:if test="not(./@n)">
+                    <xsl:attribute name="colspan">
+                        <xsl:text>2</xsl:text>
+                    </xsl:attribute>
                 </xsl:if>
-                <xsl:value-of select="./@n"/>
-                <xsl:if test="./@next">
-                    <xsl:text>…</xsl:text>
-                </xsl:if>
-                <xsl:text>)</xsl:text>
-            </td>
-            <td>
                 <xsl:apply-templates select="key('transText', generate-id())"/>
-            </td>
+            </xsl:element>
         </tr>
     </xsl:template>
     
