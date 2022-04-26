@@ -1,5 +1,7 @@
 {namespace fl=Causal\FileList\ViewHelpers} {namespace xslt=Digicademy\CobjXslt\ViewHelpers}
 
+<script src="{f:uri.resource(path:'JavaScript/Dist/manuscripts.js', extensionName: 'middle_turkic_project')}" type="module"></script>
+
 <f:if condition="{f:cObject(typoscriptObjectPath:'lib.manuscriptArgument')}">
     <f:variable name="manuscriptArgument">
         <f:cObject typoscriptObjectPath="lib.manuscriptArgument" />
@@ -135,7 +137,7 @@
 </f:section>
 
 <f:section name="manuscriptNavBar">
-    <div>
+    <div id="msNavBar">
         <f:format.raw>
             <xslt:transform source="{manuscriptPath}/{manuscriptArgument}.xml" transformations="{0:{stylesheet: 'EXT:middle_turkic_project/Configuration/MSConvertors/manuscriptNavigationBar.xsl', setParameters: {uniqueID: {value: '{uniqueID}'}}}}" />
         </f:format.raw>

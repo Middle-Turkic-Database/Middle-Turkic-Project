@@ -36,8 +36,6 @@ page {
     }
 
     includeJSFooter {
-        middle_turkic_project_scripts = EXT:middle_turkic_project/Resources/Public/JavaScript/Dist/scripts.js
-        manuscript_list = EXT:middle_turkic_project/Resources/Public/JavaScript/Dist/manuscriptList.js
         mdb = EXT:middle_turkic_project/Resources/Public/JavaScript/Dist/mdb.min.js
         toastr = https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js
         toastr.external = 1

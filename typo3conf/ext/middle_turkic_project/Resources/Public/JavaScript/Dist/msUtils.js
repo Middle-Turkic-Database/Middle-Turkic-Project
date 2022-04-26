@@ -1,0 +1,168 @@
+export function loadContent(URI, $element, callback) {
+    $element.hide(0, function() {
+        $(this).siblings(".loader").fadeIn('fast');
+        $(this).load(encodeURI(URI), function(response, status, xhr) {
+            if (status == "error") {
+                var errorMessage = "";
+                if (xhr.readyState == 0) {
+                    errorMessage = "An error occured while fetching the manuscript. Check your Internet connection.";
+                } else {
+                    errorMessage = "An error occured while fetching the manuscript: " + xhr.status + " " + xhr.statusText;
+                }
+                $element.html(errorMessage);
+            }
+            $(this).siblings(".loader").fadeOut('fast', function() {
+                $element.fadeIn();
+            });
+            $('[data-toggle="tooltip"]').tooltip();
+            if (typeof callback === 'function') {
+                callback();
+            }
+        });
+    });
+};
+
+export function setChapterPars(maxChapter = 0, $formToChange = null) {
+    var $chapterNumInputs;
+    if ($formToChange === null) {
+     $chapterNumInputs = $(".ms-selector-form input[type='number'][id$='chapterNum']");
+    }
+    else {
+      $chapterNumInputs = $formToChange.closest(".ms-selector-form").find("input[type='number'][id$='chapterNum']");
+    }
+    if (maxChapter < 1) {
+        $(".ms-selector-form [id$='chapterFormGroup'").addClass("d-none");
+        $chapterNumInputs.attr('min', maxChapter);
+        $chapterNumInputs.val(maxChapter);
+    } else {
+        $(".ms-selector-form [id$='chapterFormGroup'").removeClass("d-none");
+        $chapterNumInputs.attr('min', 1);
+    }
+    $chapterNumInputs.attr('max', maxChapter);
+    $chapterNumInputs.attr('size', Math.floor(Math.log10(maxChapter)) + 1)
+};
+
+export function enableNavBarTooltip() {
+    $('.ms-nav-1st [data-toggle="pill"], .ms-nav-2nd [data-toggle="pill"]').tooltip();
+}
+
+export function setL2NavWidth() {
+    var $l2NavLinks = $("#msNavBar .nav.ms-nav.ms-nav-2nd .nav-link");
+    $l2NavLinks.each(function() {
+        $(this).css("max-width", '');
+        $(this).css("max-width", $(this).parent().find(".nav-link").first().outerWidth());
+    });
+}
+
+export function navLinkClicked(element) {
+    $(".ms-nav-2nd a.nav-link").removeClass("active");
+    var msBook = -1;
+    var msChapter = -1;
+    if ($(element).closest(".nav").hasClass("ms-nav-1st")) {
+        msBook = $(element).data("bookno");
+        if ($(element).hasClass("dropdown-toggle")) {
+            msChapter = 1;
+        }
+        $(".ms-nav .nav-link[id$='" + $(element).attr('id').match(/pills(.*)$/gm) + "']").each(function() {
+            $(this).tab("show");
+        });
+        $("[id$='" + $(element).attr('id').match(/pills(.*)$/gm) + "-tab'] .ms-nav-2nd .nav-link:first-child").each(function() {
+            $(this).tab("show");
+        });
+    } else {
+        var tabID = $(element).closest(".tab-pane").attr("id");
+        msBook = $(".ms-nav-1st .nav-link[href='#" + tabID + "']").data('bookno');
+        msChapter = $(element).data("chapterno");
+        
+        $(".ms-nav-2nd .nav-link[data-chapterno=" + $(element).data("chapterno") + "]").each(function() {
+            $(this).tab("show");
+        });
+    }
+    var $bookSelectorInputs = $(".ms-selector-form select[id$='bookSelector']");
+    var $chapterNumInputs = $(".ms-selector-form input[id$='chapterNum']");
+    if (msBook !== -1 & msBook != $bookSelectorInputs.val()) {
+        $bookSelectorInputs.val(msBook);
+        $bookSelectorInputs.change();
+    }
+    if (msChapter !== -1 && msChapter != $chapterNumInputs.val()) {
+        $chapterNumInputs.val(msChapter);
+    }
+
+    return {msBook, msChapter};
+}
+
+function bookSelectorChanged(element) {
+    setChapterPars($("option:selected", element).data("chapternum"), $(element));
+    var $chapterNum = $(":input[name='chapterNum']", element.closest("form.ms-selector-form"));
+    $($chapterNum).val($($chapterNum).attr('min'));
+}
+
+export function msSelectorFormSubmitted (element, e) {
+    e.preventDefault();
+    $(".ms-nav-2nd a.nav-link").removeClass("active");
+    var $bookSelector = $(":input[name='bookSelector']", $(element));
+    var bookNum = $(":selected", $bookSelector).val();
+    var chapterNum = $(":input[name='chapterNum']", $(element)).val();
+    
+    $(":input[name='bookSelector']").val(bookNum);
+    $(":input[name='chapterNum']").val(chapterNum);
+    setChapterPars($("option:selected", $bookSelector).data("chapternum"));
+    
+    $(".ms-nav-1st .nav-link[data-bookno='" + bookNum + "']").each(function() {
+        $(this).tab("show");
+    });
+    if (chapterNum != '' && chapterNum > 0) {
+        var $secondTabEl = $(".ms-nav-1st a[data-bookno='" + bookNum + "']");
+        $("[id$='" + $secondTabEl.attr('id').match(/pills(.*)$/gm) + "-tab'] .ms-nav-2nd .nav-link:nth-child(" + chapterNum + ")").each(function() {
+            $(this).tab("show");
+        });
+    }
+
+    return {bookNum, chapterNum};
+}
+
+export function msSelectorFormInput (element) {
+    var value = $(element).val();
+    
+    if (value !== "" && value.indexOf(".") === -1) {
+        $(element).val(
+            Math.max(Math.min(value, $(element).attr("max")), $(element).attr("min"))
+        );
+    }
+}
+
+export function msSelectorFormInputClicked (element) {
+    $(element).select();
+}
+
+export function navLink1Shown (element) {
+    if ($(element).tab().is(":visible")) {
+        setL2NavWidth();
+    }
+}
+
+export function windowResized() {
+    setL2NavWidth();
+}
+
+export function initialize() {
+    $(document).on('change', ".ms-selector-form select[id$='bookSelector']", function() {
+        bookSelectorChanged(this);
+    });
+
+    $(document).on('input', ".ms-selector-form input[id$='chapterNum'][type='number']", function() {
+        msSelectorFormInput(this);
+    });
+
+    $(document).on('click', '.ms-selector-form input[type="number"]', function() {
+        msSelectorFormInputClicked(this);
+    });
+
+    $(document).on('shown.bs.tab', ".ms-nav.ms-nav-1st .nav-link,#manuscriptTabs .nav-link", function() {
+        navLink1Shown (this);
+    });
+
+    $(window).resize(function() {
+        windowResized();
+    });
+}
