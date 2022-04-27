@@ -83,7 +83,7 @@
       <xsl:attribute name="id">
         <xsl:value-of select="$uniqueID"></xsl:value-of>
         <xsl:text>-pills-</xsl:text>
-        <xsl:value-of select="position()" />
+        <xsl:value-of select="@n" />
       </xsl:attribute>
       <xsl:attribute name="data-toggle">
         <xsl:text>pill</xsl:text>
@@ -92,7 +92,7 @@
         <xsl:text>#</xsl:text>
         <xsl:value-of select="$uniqueID" />
         <xsl:text>-pills-</xsl:text>
-        <xsl:value-of select="position()" />
+        <xsl:value-of select="@n" />
         <xsl:text>-tab</xsl:text>
       </xsl:attribute>
       <xsl:attribute name="role">
@@ -102,7 +102,7 @@
         <xsl:text>#</xsl:text>
         <xsl:value-of select="$uniqueID" />
         <xsl:text>-pills-</xsl:text>
-        <xsl:value-of select="position()" />
+        <xsl:value-of select="@n" />
         <xsl:text>-tab</xsl:text>
       </xsl:attribute>
       <xsl:attribute name="aria-selected">
@@ -141,7 +141,7 @@
       <xsl:attribute name="id">
         <xsl:value-of select="$uniqueID" />
         <xsl:text>-pills-</xsl:text>
-        <xsl:value-of select="position()"></xsl:value-of>
+        <xsl:value-of select="@n"></xsl:value-of>
         <xsl:text>-tab</xsl:text>
       </xsl:attribute>
       <xsl:attribute name="role">
@@ -150,7 +150,7 @@
       <xsl:attribute name="aria-labelleadby">
         <xsl:value-of select="$uniqueID" />
         <xsl:text>-pills-</xsl:text>
-        <xsl:value-of select="position()" />
+        <xsl:value-of select="@n" />
         <xsl:text>-tab</xsl:text>
       </xsl:attribute>
       <xsl:if test="mtdb:exists(tei:measure)">

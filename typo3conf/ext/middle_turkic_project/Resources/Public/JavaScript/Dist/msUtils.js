@@ -54,40 +54,40 @@ export function setL2NavWidth() {
     });
 }
 
+export function updateNavigation(msBook = -1, msChapter = -1) {
+    if (msBook < 0) return;
+    $(".ms-nav-2nd a.nav-link").removeClass("active");
+    $(".ms-nav-1st .nav-link[id|='trc-pills'],[id|='trl-pills'],[id|='prl-pills'],[id|='cmp-pills']").filter("[id$='" + msBook + "']").tab("show");
+    if (msChapter > 0) {
+        $(".tab-pane.active>.ms-nav-2nd .nav-link[data-chapterno='" + msChapter + "']").tab("show");
+    }
+
+    var $bookSelectorInputs = $(".ms-selector-form select[id$='bookSelector']");
+    var $chapterNumInputs = $(".ms-selector-form input[id$='chapterNum']");
+    if (msBook > 0 & msBook != $bookSelectorInputs.val()) {
+        $bookSelectorInputs.val(msBook);
+        $bookSelectorInputs.change();
+    }
+    if (msChapter > 0 && msChapter != $chapterNumInputs.val()) {
+        $chapterNumInputs.val(msChapter);
+    }
+}
+
 export function navLinkClicked(element) {
     $(".ms-nav-2nd a.nav-link").removeClass("active");
     var msBook = -1;
     var msChapter = -1;
     if ($(element).closest(".nav").hasClass("ms-nav-1st")) {
-        msBook = $(element).data("bookno");
+        msBook = $(element).data('bookno');
         if ($(element).hasClass("dropdown-toggle")) {
             msChapter = 1;
         }
-        $(".ms-nav .nav-link[id$='" + $(element).attr('id').match(/pills(.*)$/gm) + "']").each(function() {
-            $(this).tab("show");
-        });
-        $("[id$='" + $(element).attr('id').match(/pills(.*)$/gm) + "-tab'] .ms-nav-2nd .nav-link:first-child").each(function() {
-            $(this).tab("show");
-        });
     } else {
         var tabID = $(element).closest(".tab-pane").attr("id");
         msBook = $(".ms-nav-1st .nav-link[href='#" + tabID + "']").data('bookno');
         msChapter = $(element).data("chapterno");
-        
-        $(".ms-nav-2nd .nav-link[data-chapterno=" + $(element).data("chapterno") + "]").each(function() {
-            $(this).tab("show");
-        });
     }
-    var $bookSelectorInputs = $(".ms-selector-form select[id$='bookSelector']");
-    var $chapterNumInputs = $(".ms-selector-form input[id$='chapterNum']");
-    if (msBook !== -1 & msBook != $bookSelectorInputs.val()) {
-        $bookSelectorInputs.val(msBook);
-        $bookSelectorInputs.change();
-    }
-    if (msChapter !== -1 && msChapter != $chapterNumInputs.val()) {
-        $chapterNumInputs.val(msChapter);
-    }
-
+    updateNavigation(msBook, msChapter);
     return {msBook, msChapter};
 }
 
@@ -99,24 +99,11 @@ function bookSelectorChanged(element) {
 
 export function msSelectorFormSubmitted (element, e) {
     e.preventDefault();
-    $(".ms-nav-2nd a.nav-link").removeClass("active");
     var $bookSelector = $(":input[name='bookSelector']", $(element));
     var bookNum = $(":selected", $bookSelector).val();
     var chapterNum = $(":input[name='chapterNum']", $(element)).val();
     
-    $(":input[name='bookSelector']").val(bookNum);
-    $(":input[name='chapterNum']").val(chapterNum);
-    setChapterPars($("option:selected", $bookSelector).data("chapternum"));
-    
-    $(".ms-nav-1st .nav-link[data-bookno='" + bookNum + "']").each(function() {
-        $(this).tab("show");
-    });
-    if (chapterNum != '' && chapterNum > 0) {
-        var $secondTabEl = $(".ms-nav-1st a[data-bookno='" + bookNum + "']");
-        $("[id$='" + $secondTabEl.attr('id').match(/pills(.*)$/gm) + "-tab'] .ms-nav-2nd .nav-link:nth-child(" + chapterNum + ")").each(function() {
-            $(this).tab("show");
-        });
-    }
+    updateNavigation(bookNum, chapterNum);
 
     return {bookNum, chapterNum};
 }
