@@ -1,7 +1,5 @@
 {namespace fl=Causal\FileList\ViewHelpers} {namespace xslt=Digicademy\CobjXslt\ViewHelpers}
 
-<script src="{f:uri.resource(path:'JavaScript/Dist/manuscripts.js', extensionName: 'middle_turkic_project')}" type="module"></script>
-
 <f:if condition="{f:cObject(typoscriptObjectPath:'lib.manuscriptArgument')}">
     <f:variable name="manuscriptArgument">
         <f:cObject typoscriptObjectPath="lib.manuscriptArgument" />
@@ -143,3 +141,5 @@
         </f:format.raw>
     </div>
 </f:section>
+
+<f:asset.script identifier="manuscripts" src="EXT:middle_turkic_project/Resources/Public/JavaScript/Dist/manuscripts.js" type="module" />

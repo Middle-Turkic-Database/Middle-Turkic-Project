@@ -1,5 +1,3 @@
-<script src="{f:uri.resource(path:'JavaScript/Dist/msComparison.js', extensionName: 'middle_turkic_project')}" type="module"></script>
-
 <f:if condition="{f:cObject(typoscriptObjectPath:'lib.comparisonMatrix')}">
     <f:variable name="comparisonMatrix">
         <f:cObject typoscriptObjectPath="lib.comparisonMatrix" />
@@ -104,3 +102,4 @@
     var comparisonMatrix = `<f:format.raw>{comparisonMatrix}</f:format.raw>`;
 </script>
 <f:asset.script identifier="diffmatchpatch" src="EXT:middle_turkic_project/Resources/Public/JavaScript/Dist/diff_match_patch.js" />
+<f:asset.script identifier="msComparison" src="EXT:middle_turkic_project/Resources/Public/JavaScript/Dist/msComparison.js" type="module" />
