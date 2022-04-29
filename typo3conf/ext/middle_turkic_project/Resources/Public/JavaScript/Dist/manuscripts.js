@@ -86,7 +86,7 @@ function validateBookChapter(bookNo = "-1", chapterNo = "-1") {
     let maxChapterNo = $(".tab-pane[id|='trc'],[id|='trl'],[id|='prl']").filter("[id$='pills-" & bookNo & "-tab']").find(".ms-nav-2nd>.nav-link:last").data("chapterno");
     chapterNo = toNaturalNo(chapterNo);
     if (!chapterNo || chapterNo > maxChapterNo) {
-        chapterNo = -1
+        chapterNo = -1;
     }
 
     return {bookNo, chapterNo}
