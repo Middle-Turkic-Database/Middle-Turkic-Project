@@ -64,7 +64,7 @@ export function updateNavigation(msBook = -1, msChapter = -1) {
 
     var $bookSelectorInputs = $(".ms-selector-form select[id$='bookSelector']");
     var $chapterNumInputs = $(".ms-selector-form input[id$='chapterNum']");
-    if (msBook > 0 & msBook != $bookSelectorInputs.val()) {
+    if (msBook > -1 & msBook != $bookSelectorInputs.val()) {
         $bookSelectorInputs.val(msBook);
         $bookSelectorInputs.change();
     }
@@ -87,6 +87,7 @@ export function navLinkClicked(element) {
         msBook = $(".ms-nav-1st .nav-link[href='#" + tabID + "']").data('bookno');
         msChapter = $(element).data("chapterno");
     }
+    console.log(msBook, msChapter);
     updateNavigation(msBook, msChapter);
     return {msBook, msChapter};
 }

@@ -7,6 +7,28 @@
     {manuscriptArgument -> v:format.trim() -> f:variable(name:"manuscriptArgument")}
 </f:if>
 
+<f:if condition="{f:cObject(typoscriptObjectPath:'lib.manuscriptBook')}">
+    <f:variable name="manuscriptBook">
+        <f:cObject typoscriptObjectPath="lib.manuscriptBook" />
+    </f:variable>
+    {manuscriptBook -> v:format.trim() -> v:format.trim(characters:"'") -> f:variable(name:"manuscriptBook")}
+</f:if>
+
+<f:if condition="{f:cObject(typoscriptObjectPath:'lib.manuscriptChapter')}">
+    <f:variable name="manuscriptChapter">
+        <f:cObject typoscriptObjectPath="lib.manuscriptChapter" />
+    </f:variable>
+    {manuscriptChapter -> v:format.trim() -> v:format.trim(characters:"'") -> f:variable(name:"manuscriptChapter")}
+</f:if>
+
+<f:variable name="docType" value="description" />
+<f:if condition="{f:cObject(typoscriptObjectPath:'lib.docType')}">
+    <f:variable name="docType">
+        <f:cObject typoscriptObjectPath="lib.docType" />
+    </f:variable>
+    {docType -> v:format.trim() -> f:variable(name:"docType")}
+</f:if>
+
 <f:if condition="{f:cObject(typoscriptObjectPath:'lib.manuscriptDescription')}">
     <f:variable name="manuscriptDescription">
         <f:cObject typoscriptObjectPath="lib.manuscriptDescription" />
@@ -96,7 +118,7 @@
                 <a class="nav-link active" id="Description-tab" data-toggle="tab" href="#description" role="tab" aria-controls="description" aria-selected="true">Description</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {f:if(condition:'{transcriptionExists}', else:' disabled')}" id="transcription-tab" data-toggle="tab" href="#transcription" role="tab" aria-controls="transcription" aria-selected="false">Transcription</a>
+                <a class="nav-link{f:if(condition:'{transcriptionExists}', else:' disabled')}" id="transcription-tab" data-toggle="tab" href="#transcription" role="tab" aria-controls="transcription" aria-selected="false">Transcription</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link{f:if(condition:'{translationExists}', else:' disabled')}" id="translation-tab" data-toggle="tab" href="#translation" role="tab" aria-controls="translation" aria-selected="false">Translation</a>
@@ -142,4 +164,9 @@
     </div>
 </f:section>
 
+<script>
+    var manuscriptBook = `<f:format.raw>{manuscriptBook}</f:format.raw>`;
+    var manuscriptChapter = `<f:format.raw>{manuscriptChapter}</f:format.raw>`;
+    var docType = `<f:format.raw>{docType}</f:format.raw>`;
+</script>
 <f:asset.script identifier="manuscripts" src="EXT:middle_turkic_project/Resources/Public/JavaScript/Dist/manuscripts.js" type="module" />

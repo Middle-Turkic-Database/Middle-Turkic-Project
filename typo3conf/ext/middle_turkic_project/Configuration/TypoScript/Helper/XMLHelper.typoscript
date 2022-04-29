@@ -1,4 +1,7 @@
 lib.manuscriptArgument = TEXT
+lib.manuscriptBook = TEXT
+lib.manuscriptChapter = TEXT
+lib.docType = TEXT
 lib.manuscriptNav = COA
 lib.manuscriptPath = COA
 lib.manuscriptDescription = XSLT
@@ -83,6 +86,21 @@ lib.manuscriptDescription {
    }
 }
 
+[GLOBAL]
+
+# 6 is the id# of the manuscripts root page.
+[6 in tree.rootLineIds && request.getPageArguments().get('msBook')]
+   lib.manuscriptBook.data = GP:msBook
+   lib.manuscriptBook.wrap = '|'
+[GLOBAL]
+
+[6 in tree.rootLineIds && request.getPageArguments().get('msChapter')]
+   lib.manuscriptChapter.data = GP:msChapter
+   lib.manuscriptChapter.wrap = '|'
+[GLOBAL]
+
+[6 in tree.rootLineIds && request.getPageArguments().get('type')]
+	lib.docType.data = GP:type
 [GLOBAL]
 
 [page["title"] == "Comparison"]

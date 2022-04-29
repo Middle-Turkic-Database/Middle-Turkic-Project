@@ -62,6 +62,42 @@ function loadParallel(msNav, msName, msBook = -1, msChapter = -1, $element = $("
     msUtils.loadContent(transcriptURI, $element);
 };
 
+function toNaturalNo(str) {
+    if (typeof(str) != 'string') return false;
+
+    let number = parseInt(str);
+    if (!isNaN(str) && !isNaN(number) && number >=0) {
+        return number;
+    }
+    else {
+        return false;
+    }
+}
+
+function validateBookChapter(bookNo = "-1", chapterNo = "-1") {
+    bookNo = toNaturalNo(bookNo);
+    let arrayBookNos = $(".ms-nav-1st:first .nav-link").map(function() {
+        return $(this).data("bookno");
+    }).get();
+    if (!bookNo || $.inArray(bookNo, arrayBookNos) == -1) {
+        return {bookNo : -1, chapterNo : -1};
+    }
+
+    let maxChapterNo = $(".tab-pane[id|='trc'],[id|='trl'],[id|='prl']").filter("[id$='pills-" & bookNo & "-tab']").find(".ms-nav-2nd>.nav-link:last").data("chapterno");
+    chapterNo = toNaturalNo(chapterNo);
+    if (!chapterNo || chapterNo > maxChapterNo) {
+        chapterNo = -1
+    }
+
+    return {bookNo, chapterNo}
+}
+
+function changeMsTab(docType) {
+    if (docType !== 'description' && docType !== 'transcription' && docType !== 'translation' && docType !== 'parallel') return;
+    
+    $("#" + docType + "-tab.nav-link").tab("show");
+}
+
 $(function() {
     msUtils.initialize();
 
@@ -72,7 +108,6 @@ $(function() {
                     document.location = $(this).attr('data-href');
                 });
             });
-
         }
     });
 
@@ -80,10 +115,15 @@ $(function() {
     if ($('#manuscriptTabs').length) {
         $('.manuscript-hero-image').parent().addClass('d-none');
     };
+    let {bookNo, chapterNo} = validateBookChapter(manuscriptBook, manuscriptChapter)
+    loadTranscript($("#msTranscriptContent").data('msnav'), $("#msTranscriptContent").data('msname'), bookNo, chapterNo);
+    loadTranslation($("#msTranscriptContent").data('msnav'), $("#msTranscriptContent").data('msname'), bookNo, chapterNo);
+    loadParallel($("#msTranscriptContent").data('msnav'), $("#msTranscriptContent").data('msname'), bookNo, chapterNo);
+    msUtils.updateNavigation(bookNo, chapterNo);
 
-    loadTranscript($("#msTranscriptContent").data('msnav'), $("#msTranscriptContent").data('msname'));
-    loadTranslation($("#msTranscriptContent").data('msnav'), $("#msTranscriptContent").data('msname'));
-    loadParallel($("#msTranscriptContent").data('msnav'), $("#msTranscriptContent").data('msname'));
+    if (docType === 'transcription' || docType === 'transcription' || docType === 'parallel') {
+        changeMsTab(docType);
+    }
 
     msUtils.enableNavBarTooltip();
     var firstMaxChapter = $(".ms-selector-form select[id$='bookSelector'] option").first().data("chapternum");
