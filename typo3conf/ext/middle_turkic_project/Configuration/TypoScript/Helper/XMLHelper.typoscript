@@ -6,7 +6,7 @@ lib.manuscriptNav = COA
 lib.manuscriptPath = COA
 lib.manuscriptDescription = XSLT
 
-[request.getPageArguments().get('manuscript')]
+[request.getPageArguments() && request.getPageArguments().get('manuscript')]
 
 lib.manuscriptArgument.data = GP:manuscript
 
