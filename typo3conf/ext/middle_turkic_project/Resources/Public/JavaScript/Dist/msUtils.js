@@ -57,7 +57,7 @@ export function setL2NavWidth() {
 export function updateNavigation(msBook = -1, msChapter = -1) {
     if (msBook < 0) return;
     $(".ms-nav-2nd a.nav-link").removeClass("active");
-    $(".ms-nav-1st .nav-link[id|='trc-pills'],[id|='trl-pills'],[id|='prl-pills'],[id|='cmp-pills']").filter("[id$='" + msBook + "']").tab("show");
+    $(".ms-nav-1st .nav-link[id|='trc-pills'],[id|='trl-pills'],[id|='prl-pills'],[id|='cmp-pills']").filter("[id$='-" + msBook + "']").tab("show");
     if (msChapter > 0) {
         $(".tab-pane.active>.ms-nav-2nd .nav-link[data-chapterno='" + msChapter + "']").tab("show");
     }
@@ -87,7 +87,6 @@ export function navLinkClicked(element) {
         msBook = $(".ms-nav-1st .nav-link[href='#" + tabID + "']").data('bookno');
         msChapter = $(element).data("chapterno");
     }
-    console.log(msBook, msChapter);
     updateNavigation(msBook, msChapter);
     return {msBook, msChapter};
 }
