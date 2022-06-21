@@ -182,7 +182,7 @@ General Information</span>
                   <a href="#accordion-100-2" class="accordion-title-link collapsed" data-toggle="collapse" aria-expanded="false" aria-controls="accordion-100-2">
                      <span class="accordion-title-link-text">
                         <i class="fas fa-ruler-combined accardion-logo"/>
-Physical Descrition</span>
+Physical Description</span>
                      <span class="accordion-title-link-state"></span>
                   </a>
                </h4>
