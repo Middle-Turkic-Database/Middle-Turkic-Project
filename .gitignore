@@ -24,5 +24,3 @@ typo3conf/ext/manuscript_hero_image/
 logs/
 
 .log
-
-github_webhook.php
