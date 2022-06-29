@@ -1,6 +1,6 @@
 <?php
 
-require '../../../vendor/autoload.php';
+require '../../../../typo3_src/vendor/autoload.php';
 \TYPO3\CMS\Core\Core\SystemEnvironmentBuilder::run(0, \TYPO3\CMS\Core\Core\SystemEnvironmentBuilder::REQUESTTYPE_FE);
 
 use \TYPO3\CMS\Core\Core\Environment;
@@ -228,7 +228,7 @@ function logMessage($message)
   if (!isset($repositoryName)) {
     $repositoryName = "General";
   }
-  $logsFolderPath = Environment::getProjectPath() . "/typo3conf/ext/middle_turkic_project/logs";
+  $logsFolderPath = Environment::getProjectPath() . "/htdocs/typo3conf/ext/middle_turkic_project/logs";
   if (!is_dir($logsFolderPath)) {
     mkdir($logsFolderPath);
   }
