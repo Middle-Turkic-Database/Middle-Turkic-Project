@@ -121,7 +121,7 @@ $(function() {
     loadParallel($("#msTranscriptContent").data('msnav'), $("#msTranscriptContent").data('msname'), bookNo, chapterNo);
     msUtils.updateNavigation(bookNo, chapterNo);
 
-    if (docType === 'transcription' || docType === 'transcription' || docType === 'parallel') {
+    if (docType === 'transcription' || docType === 'translation' || docType === 'parallel') {
         changeMsTab(docType);
     }
 
