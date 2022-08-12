@@ -82,8 +82,8 @@ function validateBookChapter(bookNo = "-1", chapterNo = "-1") {
     if (!bookNo || $.inArray(bookNo, arrayBookNos) == -1) {
         return {bookNo : -1, chapterNo : -1};
     }
-
-    let maxChapterNo = $(".tab-pane[id|='trc'],[id|='trl'],[id|='prl']").filter("[id$='pills-" & bookNo & "-tab']").find(".ms-nav-2nd>.nav-link:last").data("chapterno");
+    
+    let maxChapterNo = $(".tab-pane[id|='trc'],[id|='trl'],[id|='prl']").filter("[id$='pills-" + bookNo + "-tab']").find(".ms-nav-2nd>.nav-link:last").data("chapterno");
     chapterNo = toNaturalNo(chapterNo);
     if (!chapterNo || chapterNo > maxChapterNo) {
         chapterNo = -1;
@@ -115,6 +115,12 @@ $(function() {
     if ($('#manuscriptTabs').length) {
         $('.manuscript-hero-image').parent().addClass('d-none');
     };
+
+    const params = new URLSearchParams(window.location.search);
+    manuscriptBook = params.get('msBook');
+    manuscriptChapter = params.get('msChapter');
+    docType = params.get('type');
+
     let {bookNo, chapterNo} = validateBookChapter(manuscriptBook, manuscriptChapter)
     loadTranscript($("#msTranscriptContent").data('msnav'), $("#msTranscriptContent").data('msname'), bookNo, chapterNo);
     loadTranslation($("#msTranscriptContent").data('msnav'), $("#msTranscriptContent").data('msname'), bookNo, chapterNo);
