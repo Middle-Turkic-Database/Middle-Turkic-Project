@@ -117,9 +117,9 @@ $(function() {
     };
 
     const params = new URLSearchParams(window.location.search);
-    manuscriptBook = params.get('msBook');
-    manuscriptChapter = params.get('msChapter');
-    docType = params.get('type');
+    var manuscriptBook = params.get('msBook');
+    var manuscriptChapter = params.get('msChapter');
+    var docType = params.get('type');
 
     let {bookNo, chapterNo} = validateBookChapter(manuscriptBook, manuscriptChapter)
     loadTranscript($("#msTranscriptContent").data('msnav'), $("#msTranscriptContent").data('msname'), bookNo, chapterNo);
