@@ -1,5 +1,4 @@
 User-agent: *
-Disallow:
 Disallow: /fileadmin/
 Disallow: /uploads/
 Sitemap: https://middleturkic.lingfil.uu.se/?sitemap=pages&amp;type=1533906435
