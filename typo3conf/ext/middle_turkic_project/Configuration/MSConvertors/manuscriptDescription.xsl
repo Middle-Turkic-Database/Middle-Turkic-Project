@@ -829,5 +829,6 @@ Download the XML (TEI Epidoc)</a>
 
    <xsl:template match="tei:ref[@target='currentPageURL']">
       <xsl:value-of select="$pageURL"/>
+      <xsl:text>&amp;no_cache=1</xsl:text>
    </xsl:template>
 </xsl:stylesheet>
