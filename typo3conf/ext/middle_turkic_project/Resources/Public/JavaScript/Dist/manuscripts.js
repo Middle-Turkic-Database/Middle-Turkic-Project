@@ -116,11 +116,6 @@ $(function() {
         $('.manuscript-hero-image').parent().addClass('d-none');
     };
 
-    const params = new URLSearchParams(window.location.search);
-    var manuscriptBook = params.get('msBook');
-    var manuscriptChapter = params.get('msChapter');
-    var docType = params.get('type');
-
     let {bookNo, chapterNo} = validateBookChapter(manuscriptBook, manuscriptChapter)
     loadTranscript($("#msTranscriptContent").data('msnav'), $("#msTranscriptContent").data('msname'), bookNo, chapterNo);
     loadTranslation($("#msTranscriptContent").data('msnav'), $("#msTranscriptContent").data('msname'), bookNo, chapterNo);

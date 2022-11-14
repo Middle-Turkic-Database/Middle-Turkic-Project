@@ -1,0 +1,30 @@
+routeEnhancers:
+  Manuscript:
+    type: Simple
+    limitToPages: [13]
+    routePath: '/{manuscript}/{type}/{bookNo}/{chapterNo}'
+    _arguments:
+      bookNo: msBook
+      chapterNo: msChapter
+    defaults:
+      type: 'description'
+      bookNo: ''
+      chapterNo: ''
+    requirements:
+      manuscript: '^(?i:adub.iii.73|adub.iii.83|adub.iii.84|jsul.i.04|jsul.iii.01|jsul.iii.02|jsul.iii.65|tkow.02|jsul.iv.02a)$'
+      type: '^(?:description|transcription|translation|parallel)$'
+      bookNo: '^[0-9]{1,2}$'
+      chapterNo: '^[0-9]{1,3}$'
+    aspects:
+      manuscript:
+        type: StaticSameCaseMapper
+      type:
+        type: StaticLowerCaseMapper
+      bookNo:
+        type: StaticRangeMapper
+        start: '0'
+        end: '40'
+      chapterNo:
+        type: StaticRangeMapper
+        start: '1'
+        end: '100'

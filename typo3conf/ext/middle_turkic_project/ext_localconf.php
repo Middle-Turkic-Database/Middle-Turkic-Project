@@ -74,3 +74,11 @@ if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('form')) {
         }
     '));
 }
+
+/***************
+ * Registering Aspects
+ */
+$GLOBALS['TYPO3_CONF_VARS']['SYS']['routing']['aspects']['StaticLowerCaseMapper'] =
+    \UppsalaUniversity\MiddleTurkicProject\Routing\Aspects\StaticLowerCaseMapper::class;
+$GLOBALS['TYPO3_CONF_VARS']['SYS']['routing']['aspects']['StaticSameCaseMapper'] =
+    \UppsalaUniversity\MiddleTurkicProject\Routing\Aspects\StaticSameCaseMapper::class;
