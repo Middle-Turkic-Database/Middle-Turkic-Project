@@ -73,6 +73,11 @@ tt_content {
             special.value = 6
         }
     }
+
+    searchelement =< lib.contentElement
+    searchelement {
+        templateName = SearchElement
+    }
 }
 
 page.headerData.999 = TEXT

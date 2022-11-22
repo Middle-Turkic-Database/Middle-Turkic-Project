@@ -8,7 +8,7 @@ use \TYPO3\CMS\Core\Core\Environment;
 logMessage('A new webhook received.');
 $headers = getallheaders();
 $content = file_get_contents('php://input');
-//file_put_contents(Environment::getProjectPath() . "/htdocs/typo3conf/ext/middle_turkic_project/logs/content.json", $content);
+file_put_contents(Environment::getProjectPath() . "/htdocs/typo3conf/ext/middle_turkic_project/logs/content.json", $content);
 
 
 try {

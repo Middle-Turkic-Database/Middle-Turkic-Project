@@ -12,6 +12,12 @@
             <trans-unit id="mscomparisonelement_description">
                 <source>Manuscript Comparison Content Element</source>
             </trans-unit>
+            <trans-unit id="searchelement_title">
+                <source>Search</source>
+            </trans-unit>
+            <trans-unit id="searchelement_description">
+                <source>Search Content Element</source>
+            </trans-unit>
         </body>
     </file>
 </xliff>

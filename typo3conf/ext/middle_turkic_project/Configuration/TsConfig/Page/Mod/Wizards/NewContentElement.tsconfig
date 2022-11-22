@@ -10,7 +10,16 @@ mod.wizards.newContentElement.wizardItems {
                CType = mscomparisonelement
             }
          }
+         
+         searchelement {
+            iconIdentifier = mimetypes-x-content-form-search
+            title = LLL:EXT:middle_turkic_project/Resources/Private/Language/locallang.xlf:searchelement_title
+            description = LLL:EXT:middle_turkic_project/Resources/Private/Language/locallang.xlf:searchelement_description
+            tt_content_defValues {
+               CType = searchelement
+            }
+         }
       }
-      show := addToList(mscomparisonelement)
+      show := addToList(mscomparisonelement, searchelement)
    }
 }

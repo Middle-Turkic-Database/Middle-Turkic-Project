@@ -1,0 +1,57 @@
+{namespace xslt=Digicademy\CobjXslt\ViewHelpers} {namespace xpath = Digicademy\CobjXpath\ViewHelpers} {namespace vh=UppsalaUniversity\MiddleTurkicProject\ViewHelpers}
+<f:if condition="{f:cObject(typoscriptObjectPath:'lib.query')}">
+    <f:variable name="query">
+        <f:cObject typoscriptObjectPath="lib.query" />
+    </f:variable>
+    {query -> v:format.trim() -> v:format.url.encode() -> f:variable(name:"query")}
+</f:if>
+<f:variable name="pageNo">
+    <f:if condition="{f:cObject(typoscriptObjectPath:'lib.pageNo')}">
+        <f:then>
+            <f:cObject typoscriptObjectPath="lib.pageNo" />
+        </f:then>
+        <f:else>
+            1
+        </f:else>
+    </f:if>
+</f:variable>
+{pageNo -> v:format.trim() -> f:variable(name:"pageNo")}
+<f:comment>
+    <f:if condition="{f:cObject(typoscriptObjectPath:'lib.pageNo')}">
+        <f:variable name="pageNo">
+            <f:cObject typoscriptObjectPath="lib.pageNo" />
+        </f:variable>
+        {pageNo -> v:format.trim() -> f:variable(name:"pageNo")}
+    </f:if>
+</f:comment>
+<f:variable name="numResults">
+    <f:if condition="{f:cObject(typoscriptObjectPath:'lib.numResults')}">
+        <f:then>
+            <f:cObject typoscriptObjectPath="lib.numResults" />
+        </f:then>
+        <f:else>
+            10
+        </f:else>
+    </f:if>
+</f:variable>
+{numResults -> v:format.trim() -> f:variable(name:"numResults")}
+<f:comment>
+    <f:if condition="{f:cObject(typoscriptObjectPath:'lib.numResults')}">
+        <f:variable name="numResults">
+            <f:cObject typoscriptObjectPath="lib.numResults" />
+        </f:variable>
+        {numResults -> v:format.trim() -> f:variable(name:"numResults")}
+    </f:if>
+</f:comment>
+
+
+<f:variable name="result">
+    <vh:baseX ftQuery="{query}" pageNo="{f:if(condition:'{pageNo}', then:'{pageNo}', else:'1')}" numResults="{f:if(condition:'{numResults}', then:'{numResults}', else:'10')}" />
+</f:variable>
+
+<f:format.raw>
+    <xslt:transform source="{result}" transformations="{0:{stylesheet: 'EXT:middle_turkic_project/Configuration/MSConvertors/manuscriptSearch.xsl', setParameters: {
+        pageNo:{value:'{pageNo}'},
+        numResults:{value:'{numResults}'}
+    }}}" />
+</f:format.raw>
