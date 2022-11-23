@@ -6,50 +6,42 @@
     <xsl:import
         href="typo3conf/ext/middle_turkic_project/Configuration/MSConvertors/commonFunctions.xsl" />
     <xsl:output method="html" encoding="utf-8" indent="yes" omit-xml-declaration="yes" />
-
+    
     <xsl:variable name="traverseType">
         <xsl:text>verse-by-verse</xsl:text>
     </xsl:variable>
-
+    
     <!-- External parameter -->
-    <xsl:param name="pageNo" select="'1'" />
-    <xsl:param name="numResults" select="'10'" />
-
+    
     <!-- Variables -->
     <xsl:variable name="lowercase" select="'abcdefghijklmnopqrstuvwxyz'" />
     <xsl:variable name="uppercase" select="'ABCDEFGHIJKLMNOPQRSTUVWXYZ'" />
-    <xsl:variable name="totalPages" select="ceiling(/results/count div $numResults)"/>
-
+    <xsl:variable name="totalPages" select="ceiling(/results/info/count div /results/info/numResults)"/>
+    <xsl:variable name="pageNo" select="/results/info/pageNo"/>
+    
     <xsl:template match="/">
         <xsl:apply-templates />
         <xsl:call-template name="renderSearchPagination"/>
     </xsl:template>
-
-    <xsl:template match="count">
+    
+    <xsl:template match="info">
         <xsl:choose>
-            <xsl:when test=". = 0">
+            <xsl:when test="./count = 0">
                 No results found!
             </xsl:when>
             <xsl:otherwise>
                 <div class="text-muted mb-3 small">
                     <xsl:text>Showing results </xsl:text>
-                    <xsl:value-of select="($pageNo - 1) * $numResults + 1"/>
+                    <xsl:value-of select="./resultFrom"/>
                     <xsl:text>-</xsl:text>
-                    <xsl:choose>
-                        <xsl:when test="$pageNo * $numResults &gt; .">
-                            <xsl:value-of select="."/>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <xsl:value-of select="$pageNo * $numResults"/>
-                        </xsl:otherwise>
-                    </xsl:choose>
+                    <xsl:value-of select="./resultTo"/>
                     <xsl:text> of </xsl:text>
-                    <xsl:value-of select="."/>
+                    <xsl:value-of select="./count"/>
                 </div>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-
+    
     <xsl:template match="result">
         <xsl:variable name="href">
             <xsl:text>/manuscripts</xsl:text>
@@ -76,8 +68,8 @@
                 </xsl:if>
             </xsl:if>
         </xsl:variable>
-        <a class="card mb-2" href="{$href}" target="_blank">
-            <div class="card-header py-2">
+        <div class="card mb-2">
+            <a class="card-header py-2" href="{$href}" target="_blank">
                 <xsl:if test="./@msSetName">
                     <xsl:value-of select="./@msSetName" />
                     <br />
@@ -87,67 +79,60 @@
                     <xsl:text> - </xsl:text>
                     <xsl:value-of select="./@docType" />
                 </xsl:if>
-            </div>
+            </a>
+            
             <div class="card-body">
                 <h5 class="card-title">
-                    <xsl:apply-templates select="./summary" />
-                    <xsl:if test="./@chapterFullName">
-                        <xsl:text> - </xsl:text>
-                        <xsl:value-of select="./@chapterFullName" />
-                    </xsl:if>
+                    <a class="text-muted" href="{$href}" target="_blank">
+                        <xsl:apply-templates select="./summary" />
+                        <xsl:if test="./@chapterFullName">
+                            <xsl:text> - </xsl:text>
+                            <xsl:value-of select="./@chapterFullName" />
+                        </xsl:if>
+                    </a>
                 </h5>
                 <p class="card-text text-dark">
                     <xsl:apply-templates select="./content" />
                 </p>
             </div>
-        </a>
+        </div>
     </xsl:template>
-
+    
     <xsl:template match="summary">
         <xsl:apply-templates />
     </xsl:template>
-
+    
     <xsl:template match="content">
         <xsl:apply-templates />
     </xsl:template>
-
+    
     <xsl:template match="tei:mark">
         <mark>
             <xsl:apply-templates />
         </mark>
     </xsl:template>
-
+    
     <xsl:template match="tei:ref" />
     
     <xsl:template name="renderSearchPagination">
         <xsl:if test="number($totalPages) &gt; 1">
             <nav id="searchPaginationNav" aria-label="Page navigation search">
                 <ul class="pagination pagination-circle pg-red justify-content-center d-flex flex-wrap">
-                    <xsl:element name="li">
-                        <xsl:attribute name="class">
-                            <xsl:text>page-item</xsl:text>
-                            <xsl:if test="$pageNo = '1'">
-                                <xsl:text> disabled</xsl:text>
-                            </xsl:if>
-                        </xsl:attribute>
-                        <a class="page-link" href="#" title="First" aria-label="First" data-target="first">
-                            <span aria-hidden="true">&#171;</span>
-                            <span class="sr-only">First</span>
-                        </a>
-                    </xsl:element>
-                    <xsl:element name="li">
-                        <xsl:attribute name="class">
-                            <xsl:text>page-item</xsl:text>
-                            <xsl:if test="$pageNo = '1'">
-                                <xsl:text> disabled</xsl:text>
-                            </xsl:if>
-                        </xsl:attribute>
-                        <a class="page-link" href="#" title="Previous" aria-label="Previous" data-target="previous">
-                            <span aria-hidden="true">&#8249;</span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                    </xsl:element>
-                    <xsl:if test="$pageNo > 3 and $totalPages - $pageNo > 1">
+                    <xsl:if test="$pageNo &gt; 1">
+                        <li class="page-item">
+                            <a class="page-link" href="#" title="First" aria-label="First" data-target="first">
+                                <span aria-hidden="true">&#171;</span>
+                                <span class="sr-only">First</span>
+                            </a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="#" title="Previous" aria-label="Previous" data-target="previous">
+                                <span aria-hidden="true">&#8249;</span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                        </li>
+                    </xsl:if>
+                    <xsl:if test="$pageNo > 3 and $totalPages > 5">
                         <li class="page-item">
                             <a class="page-link" href="#" title="Previous 5 pages" aria-label="Previous 5 pages" data-target="previousset">
                                 <xsl:text>...</xsl:text>
@@ -178,38 +163,20 @@
                             </a>
                         </li>
                     </xsl:if>
-                    <xsl:element name="li">
-                        <xsl:attribute name="class">
-                            <xsl:text>page-item</xsl:text>
-                            <xsl:if test="$pageNo = $totalPages">
-                                <xsl:text> disabled</xsl:text>
-                            </xsl:if>
-                        </xsl:attribute>
-                    </xsl:element>
-                    <xsl:element name="li">
-                        <xsl:attribute name="class">
-                            <xsl:text>page-item</xsl:text>
-                            <xsl:if test="$pageNo = $totalPages">
-                                <xsl:text> disabled</xsl:text>
-                            </xsl:if>
-                        </xsl:attribute>
-                        <a class="page-link" href="#" title="Next" aria-label="Next" data-target="next">
-                            <span aria-hidden="true">&#8250;</span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </xsl:element>
-                    <xsl:element name="li">
-                        <xsl:attribute name="class">
-                            <xsl:text>page-item</xsl:text>
-                            <xsl:if test="$pageNo = $totalPages">
-                                <xsl:text> disabled</xsl:text>
-                            </xsl:if>
-                        </xsl:attribute>
-                        <a class="page-link" href="#" title="Last" aria-label="Last" data-target="last">
-                            <span aria-hidden="true">&#187;</span>
-                            <span class="sr-only">Last</span>
-                        </a>
-                    </xsl:element>
+                    <xsl:if test="$pageNo != $totalPages">
+                        <li class="page-item">
+                            <a class="page-link" href="#" title="Next" aria-label="Next" data-target="next">
+                                <span aria-hidden="true">&#8250;</span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="#" title="Last" aria-label="Last" data-target="last">
+                                <span aria-hidden="true">&#187;</span>
+                                <span class="sr-only">Last</span>
+                            </a>
+                        </li>
+                    </xsl:if>
                 </ul>
             </nav>
         </xsl:if>
@@ -236,5 +203,5 @@
             </xsl:call-template>
         </xsl:if>
     </xsl:template>
-
+    
 </xsl:stylesheet>

@@ -16,14 +16,6 @@
     </f:if>
 </f:variable>
 {pageNo -> v:format.trim() -> f:variable(name:"pageNo")}
-<f:comment>
-    <f:if condition="{f:cObject(typoscriptObjectPath:'lib.pageNo')}">
-        <f:variable name="pageNo">
-            <f:cObject typoscriptObjectPath="lib.pageNo" />
-        </f:variable>
-        {pageNo -> v:format.trim() -> f:variable(name:"pageNo")}
-    </f:if>
-</f:comment>
 <f:variable name="numResults">
     <f:if condition="{f:cObject(typoscriptObjectPath:'lib.numResults')}">
         <f:then>
@@ -50,8 +42,5 @@
 </f:variable>
 
 <f:format.raw>
-    <xslt:transform source="{result}" transformations="{0:{stylesheet: 'EXT:middle_turkic_project/Configuration/MSConvertors/manuscriptSearch.xsl', setParameters: {
-        pageNo:{value:'{pageNo}'},
-        numResults:{value:'{numResults}'}
-    }}}" />
+    <xslt:transform source="{result}" transformations="{0:{stylesheet: 'EXT:middle_turkic_project/Configuration/MSConvertors/manuscriptSearch.xsl'}}" />
 </f:format.raw>

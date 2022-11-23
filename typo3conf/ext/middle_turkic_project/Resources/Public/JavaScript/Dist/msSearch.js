@@ -34,22 +34,22 @@ $(function() {
         let target = $(this).data("target")
         switch(target) {
             case "first":
-                console.log($(this).data("target"));
+                loadSearchResults(1)
                 break;
             case "previous":
-                console.log($(this).data("target"));
+                loadSearchResults($("nav#searchPaginationNav li.page-item.active a").data("target") - 1);
                 break;
             case "previousset":
-                console.log($(this).data("target"));
+                loadSearchResults($("nav#searchPaginationNav li.page-item.active a").data("target") - 5);
                 break;
             case "last":
-                console.log($(this).data("target"));
+                loadSearchResults(1000000);
                 break;
             case "next":
-                console.log($(this).data("target"));
+                loadSearchResults($("nav#searchPaginationNav li.page-item.active a").data("target") + 1);
                 break;
             case "nextset":
-                console.log($(this).data("target"));
+                loadSearchResults($("nav#searchPaginationNav li.page-item.active a").data("target") + 5);
                 break;
             default:
                 loadSearchResults(target);
