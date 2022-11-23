@@ -1,5 +1,5 @@
 export function loadContent(URI, $element, callback) {
-    $element.hide(0, function() {
+    $element.slideUp('slow', function() {
         $(this).siblings(".loader").fadeIn('fast');
         $(this).load(encodeURI(URI), function(response, status, xhr) {
             if (status == "error") {
@@ -12,7 +12,7 @@ export function loadContent(URI, $element, callback) {
                 $element.html(errorMessage);
             }
             $(this).siblings(".loader").fadeOut('fast', function() {
-                $element.fadeIn();
+                $element.slideDown('slow');
             });
             $('[data-toggle="tooltip"]').tooltip();
             if (typeof callback === 'function') {
