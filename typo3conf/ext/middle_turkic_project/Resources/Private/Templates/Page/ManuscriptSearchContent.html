@@ -27,18 +27,33 @@
     </f:if>
 </f:variable>
 {numResults -> v:format.trim() -> f:variable(name:"numResults")}
-<f:comment>
-    <f:if condition="{f:cObject(typoscriptObjectPath:'lib.numResults')}">
-        <f:variable name="numResults">
-            <f:cObject typoscriptObjectPath="lib.numResults" />
-        </f:variable>
-        {numResults -> v:format.trim() -> f:variable(name:"numResults")}
-    </f:if>
-</f:comment>
-
+<f:if condition="{f:cObject(typoscriptObjectPath:'lib.msSet')}">
+    <f:variable name="msSet">
+        <f:cObject typoscriptObjectPath="lib.msSet" />
+    </f:variable>
+    {msSet -> v:format.trim() -> f:variable(name:"msSet")}
+</f:if>
+<f:if condition="{f:cObject(typoscriptObjectPath:'lib.msEditions')}">
+    <f:variable name="msEditions">
+        <f:cObject typoscriptObjectPath="lib.msEditions" />
+    </f:variable>
+    {msEditions -> v:format.trim() -> f:variable(name:"msEditions")}
+</f:if>
+<f:if condition="{f:cObject(typoscriptObjectPath:'lib.msBooks')}">
+    <f:variable name="msBooks">
+        <f:cObject typoscriptObjectPath="lib.msBooks" />
+    </f:variable>
+    {msBooks -> v:format.trim() -> f:variable(name:"msBooks")}
+</f:if>
 
 <f:variable name="result">
-    <vh:baseX ftQuery="{query}" pageNo="{f:if(condition:'{pageNo}', then:'{pageNo}', else:'1')}" numResults="{f:if(condition:'{numResults}', then:'{numResults}', else:'10')}" />
+    <vh:baseX
+        ftQuery = "{query}"
+        pageNo = "{f:if(condition:'{pageNo}', then:'{pageNo}', else:'1')}"
+        numResults = "{f:if(condition:'{numResults}', then:'{numResults}', else:'10')}"
+        msSet = "{msSet}"
+        msEditions = "{msEditions}"
+        msBooks = "{msBooks}" />
 </f:variable>
 
 <f:format.raw>

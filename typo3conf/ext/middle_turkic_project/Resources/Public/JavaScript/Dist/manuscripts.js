@@ -5,6 +5,7 @@
  */
 
 import * as msUtils from './msUtils.js';
+import * as loadContent from './loadContent.js';
 
 if(typeof jQuery=='undefined') {
     var headTag = document.getElementsByTagName("head")[0];
@@ -27,7 +28,7 @@ function loadTranscript(msNav, msName, msBook = -1, msChapter = -1, $element = $
         }
     }
 
-    msUtils.loadContent(transcriptURI, $element);
+    loadContent.loadContent(transcriptURI, $element);
 };
 
 function loadTranslation(msNav, msName, msBook = -1, msChapter = -1, $element = $("#msTranslationContent")) {
@@ -43,7 +44,7 @@ function loadTranslation(msNav, msName, msBook = -1, msChapter = -1, $element = 
     }
     transcriptURI += "&type=translation";
 
-    msUtils.loadContent(transcriptURI, $element);
+    loadContent.loadContent(transcriptURI, $element);
 };
 
 function loadParallel(msNav, msName, msBook = -1, msChapter = -1, $element = $("#msParallelContent")) {
@@ -59,7 +60,7 @@ function loadParallel(msNav, msName, msBook = -1, msChapter = -1, $element = $("
     }
     transcriptURI += "&type=parallel";
 
-    msUtils.loadContent(transcriptURI, $element);
+    loadContent.loadContent(transcriptURI, $element);
 };
 
 function toNaturalNo(str) {

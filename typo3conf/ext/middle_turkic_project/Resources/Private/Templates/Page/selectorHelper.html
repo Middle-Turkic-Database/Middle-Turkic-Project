@@ -1,0 +1,47 @@
+<f:spaceless>
+
+{namespace xpath = Digicademy\CobjXpath\ViewHelpers}
+{namespace vh = UppsalaUniversity\MiddleTurkicProject\ViewHelpers}
+
+<f:if condition="{f:cObject(typoscriptObjectPath:'lib.msSet')}">
+    <f:variable name="msSet">
+        <f:cObject typoscriptObjectPath="lib.msSet" />
+    </f:variable>
+    {msSet -> v:format.trim() -> f:variable(name:"msSet")}
+</f:if>
+
+<f:if condition="{f:cObject(typoscriptObjectPath:'lib.msEditions')}">
+    <f:variable name="msEditions">
+        <f:cObject typoscriptObjectPath="lib.msEditions" />
+    </f:variable>
+    {msEditions -> v:format.trim() -> f:variable(name:"msEditions")}
+</f:if>
+
+<f:if condition="{msSet}">
+    <f:if condition="{msEditions}">
+        <f:then>
+            <f:for each="{msEditions -> v:format.json.decode() -> v:iterator.unique()}" as="edition">
+                <f:variable name="metadataFilePath">fileadmin/user_upload/manuscripts/{msSet}/{edition}.xml</f:variable>
+                <f:variable name="titles">{xpath:query(source:'{metadataFilePath}', expression:'/tei:TEI/tei:teiHeader/tei:fileDesc/tei:sourceDesc/tei:msDesc/tei:msContents/tei:msItemStruct/tei:title', namespace:'tei|http://www.tei-c.org/ns/1.0',return:'xml')}</f:variable>
+                <f:if condition="{titles}">
+                    <f:for each="{titles}" as="title">
+                        {xpath:query(source:'{title}', expression:'/title/@n', return:'string') -> v:iterator.first() -> f:variable(name:"bookNo")}
+                        {xpath:query(source:'{title}', expression:'/title', return:'string') -> v:iterator.first() -> v:format.trim() -> f:variable(name:"bookName")}
+                        <f:comment>{books -> vh:iterator.push(add:'{bookName}', key:'{bookNo}') -> f:variable(name:"books")}</f:comment>
+                        {books -> vh:iterator.push(add:'{bookName: "{bookName}", bookNo:"{bookNo}"}') -> f:variable(name:"books")}
+                    </f:for>
+                </f:if>
+            </f:for>
+            <f:format.raw>
+                {books -> f:format.json() -> v:format.trim()}
+            </f:format.raw>
+        </f:then>
+        <f:else>
+            <f:format.raw>
+                {v:media.files(path:'fileadmin/user_upload/manuscripts/{msSet}', extensionList:'xml') -> v:iterator.values() -> v:format.pregReplace(pattern:'/.xml/', replacement:'') -> f:format.json()}
+            </f:format.raw>
+        </f:else>    
+    </f:if>
+</f:if>
+
+</f:spaceless>

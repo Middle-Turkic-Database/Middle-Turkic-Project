@@ -5,6 +5,7 @@
  */
 
 import * as msUtils from "./msUtils.js";
+import * as loadContent from "./loadContent.js"
 
 if(typeof jQuery=='undefined') {
     var headTag = document.getElementsByTagName("head")[0];
@@ -51,7 +52,7 @@ function loadComparisonContent(msNav, ms1Name, ms2Name, msBook = -1, msChapter =
             comparisonURI += "&msChapter=" + msChapter;
         }
     }
-    msUtils.loadContent(comparisonURI, $element, function() {
+    loadContent.loadContent(comparisonURI, $element, function() {
         createSingleColumnTable();
         toggleComparisonView();
     });        

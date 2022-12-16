@@ -60,7 +60,9 @@
 
 <f:section name="manuscriptListSection">
     <f:if condition="{wrongManuscript}">
-        <script src="{f:uri.resource(path:'JavaScript/Dist/manuscriptNotFound.js', extensionName: 'middle_turkic_project')}"></script>
+        <script src="{f:uri.resource(path:'JavaScript/Dist/showToastr.js', extensionName: 'middle_turkic_project')}">
+            showToastr('warning', 'The requested manuscript is not available!');
+        </script>
     </f:if>
     <table id="dtManuscriptList" class="table table-responsive table-striped table-bordered table-sm" cellspacing="0" width="100%">
         <thead>
@@ -171,4 +173,3 @@
 </script>
 
 <f:asset.script identifier="manuscripts" src="EXT:middle_turkic_project/Resources/Public/JavaScript/Dist/manuscripts.js" type="module" />
-

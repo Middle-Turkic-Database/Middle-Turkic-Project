@@ -260,3 +260,7 @@
 .fa-cog:before {
     content: "\f013";
 }
+
+.fa-filter:before {
+    content: "\f0b0";
+}

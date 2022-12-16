@@ -32,17 +32,30 @@ class BaseXViewHelper extends AbstractViewHelper
         $this->registerArgument('ftQuery', 'string', 'The full text query', true);
         $this->registerArgument('pageNo', 'integer', 'Page number to return', false, 1);
         $this->registerArgument('numResults', 'integer', 'Number of results in each page', false, 10);
+        $this->registerArgument('msSet', 'string', 'Manuscript Set to search', false, '');
+        $this->registerArgument('msEditions', 'string', 'Manuscript Editions to search', false, '');
+        $this->registerArgument('msBooks', 'string', 'Manuscript Books to search', false, '');
     }
 
     public static function renderStatic(array $arguments, Closure $renderChildrenClosure, RenderingContextInterface $renderingContext)
     {
-        $logger = GeneralUtility::makeInstance(LogManager::class)->getLogger(__CLASS__);
-
         $BaseXURL = getenv('BaseXURL');
         $BaseXUser = getenv('BaseXUser');
         $BaseXPassword = getenv('BaseXPass');
 
+        $logger = GeneralUtility::makeInstance(LogManager::class)->getLogger(__CLASS__);
+
         $url = sprintf("$BaseXURL/rest?run=search.xqm&q=%s&pageNo=%d&numResults=%d", $arguments['ftQuery'], $arguments['pageNo'], $arguments['numResults']);
+        if ($arguments['msSet'] != '') {
+            $url = $url . sprintf("&MSToSearch=%s", $arguments['msSet']);
+        }
+        if ($arguments['msEditions'] != '') {
+            $url = $url . sprintf("&editionsToSearch=%s", $arguments['msEditions']);
+        }
+        if ($arguments['msBooks'] != '') {
+            $url = $url . sprintf("&booksToSearch=%s", $arguments['msBooks']);
+        }
+        $url = str_replace(' ', '%20', $url);
         $ch_session = curl_init();
         curl_setopt_array($ch_session,
             array(
@@ -83,9 +96,6 @@ class BaseXViewHelper extends AbstractViewHelper
             }
             $response = $xml->saveXML();
         }
-
-
-        // return (string)$xml->result[0]->summary[0]->__toString();
 
         return $response;
     }

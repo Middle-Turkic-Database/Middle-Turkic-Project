@@ -29,7 +29,6 @@ page {
     }
 
     includeJS {
-
     }
 
     includeJSFooterlibs {
@@ -77,12 +76,20 @@ tt_content {
     searchelement =< lib.contentElement
     searchelement {
         templateName = SearchElement
+        dataProcessing.10 = TYPO3\CMS\Frontend\DataProcessing\MenuProcessor
+        dataProcessing.10 {
+            levels = {$page.theme.navigation.mainNavigationLevels}
+            as = msMenu
+            includeSpacer = 0
+            special = directory
+            special.value = 6
+        }
     }
 }
 
 page.headerData.999 = TEXT
 page.headerData.999.value(
-    <!-- Global site tag (gtag.js) - Google Analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-174566983-1"></script>
 <script>
   window.dataLayer = window.dataLayer || [];

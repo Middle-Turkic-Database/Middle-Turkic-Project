@@ -1,4 +1,4 @@
-window.onload = function() {
+export function showToastr(toastType = 'warning', message = 'Something went wrong! Please try again.') {
     toastr.options = {
         "closeButton": true,
         "debug": false,
@@ -17,5 +17,5 @@ window.onload = function() {
         "hideMethod": "fadeOut"
     };
 
-    toastr["warning"]("The requested manuscript is not available!");
+    toastr[toastType](message);
 }
