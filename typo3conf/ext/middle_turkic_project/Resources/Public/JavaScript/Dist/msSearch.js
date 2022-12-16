@@ -69,15 +69,20 @@ function loadEditionSelect($element = $("form#ms-search-form select#searchMsEdit
         data: {msSet: getMsSet()},
     })
     .done(function(editions) {
-        var optionsText = "";
-        for (const edition in editions) {
-            const editionName = editions[edition];
-            optionsText = optionsText + `<option selected value="${editionName}">${editionName}</option>`;
+        if (editions.length > 0) {
+            var optionsText = "";
+            for (const edition in editions) {
+                const editionName = editions[edition];
+                optionsText = optionsText + `<option selected value="${editionName}">${editionName}</option>`;
+            }
+            $element.html(optionsText);
+            $element.prop("disabled", false);
+            $element.focus();
+            enableFetchBooksBtn();
         }
-        $element.html(optionsText);
-        $element.prop("disabled", false);
-        $element.focus();
-        enableFetchBooksBtn();
+        else {
+            showToastr('info', 'Could not load editions or there are not editions for this manuscript set.');
+        }
     })
     .fail(function () {
       showToastr('error', 'Could not load editions. Please try again!');
@@ -101,7 +106,7 @@ function loadBookSelect($element = $("form#ms-search-form select#searchMsBooks")
 };
 
 function getMsSet($element = $("form#ms-search-form select#searchMsSet option:selected")) {
-    return $element.val();
+    return $element.val().toLowerCase();
 }
 
 function getMsEditions($element = $("form#ms-search-form select#searchMsEditions option:selected")) {
