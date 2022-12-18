@@ -179,7 +179,6 @@ $(function() {
             searchConfig.msSet = getMsSet();
             searchConfig.msEditions = getMsEditions();
             searchConfig.msBooks = getMsBooks();
-            console.log(searchConfig.msBooks);
             loadSearchResults();
         }
     });

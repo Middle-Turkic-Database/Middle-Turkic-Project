@@ -598,7 +598,7 @@ Authorship</span>
                               <xsl:variable name="editionStmt" select="/tei:TEI/tei:teiHeader/tei:fileDesc/tei:editionStmt" />
                               <xsl:choose>
                                  <xsl:when test="mtdb:exists($editionStmt)">
-                                    <xsl:apply-templates select="$editionStmt" />
+                                     <xsl:apply-templates select="$editionStmt" />
                                  </xsl:when>
                                  <xsl:otherwise>
                                     <xsl:copy-of select="$mDash" />
@@ -767,11 +767,11 @@ Download the XML (TEI Epidoc)</a>
       <xsl:variable name="personsFilePath" select="concat($manuscriptPath, '/authority/', $personsFileName)" />
       <xsl:variable name="personId" select="substring-after(@ref, '#')" />
       <xsl:variable name="personInfo">
-         <xsl:variable name="forename" select="document(str:encode-uri($personsFilePath, true()))/tei:TEI/tei:listPerson/tei:person[@xml:id=$personId]/tei:persName/tei:forename" />
-         <xsl:variable name="surname" select="document(str:encode-uri($personsFilePath, true()))/tei:TEI/tei:listPerson/tei:person[@xml:id=$personId]/tei:persName/tei:surname" />
-         <xsl:variable name="birth" select="document(str:encode-uri($personsFilePath, true()))/tei:TEI/tei:listPerson/tei:person[@xml:id=$personId]/tei:birth" />
-         <xsl:variable name="death" select="document(str:encode-uri($personsFilePath, true()))/tei:TEI/tei:listPerson/tei:person[@xml:id=$personId]/tei:death" />
-         <xsl:variable name="description" select="document(str:encode-uri($personsFilePath, true()))/tei:TEI/tei:listPerson/tei:person[@xml:id=$personId]/tei:p" />
+         <xsl:variable name="forename" select="document(str:encode-uri($personsFilePath, true()))/tei:TEI/tei:teiHeader/tei:profileDesc/tei:particDesc/tei:listPerson/tei:person[@xml:id=$personId]/tei:persName/tei:forename" />
+         <xsl:variable name="surname" select="document(str:encode-uri($personsFilePath, true()))/tei:TEI/tei:teiHeader/tei:profileDesc/tei:particDesc/tei:listPerson/tei:person[@xml:id=$personId]/tei:persName/tei:surname" />
+         <xsl:variable name="birth" select="document(str:encode-uri($personsFilePath, true()))/tei:TEI/tei:teiHeader/tei:profileDesc/tei:particDesc/tei:listPerson/tei:person[@xml:id=$personId]/tei:birth" />
+         <xsl:variable name="death" select="document(str:encode-uri($personsFilePath, true()))/tei:TEI/tei:teiHeader/tei:profileDesc/tei:particDesc/tei:listPerson/tei:person[@xml:id=$personId]/tei:death" />
+         <xsl:variable name="description" select="document(str:encode-uri($personsFilePath, true()))/tei:TEI/tei:teiHeader/tei:profileDesc/tei:particDesc/tei:listPerson/tei:person[@xml:id=$personId]/tei:note" />
 
          <div>
             <xsl:value-of select="$forename" />
