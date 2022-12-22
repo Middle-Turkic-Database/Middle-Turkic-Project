@@ -10,6 +10,8 @@
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:middle_turkic_project/Configuration/TypoScript/Helper/XMLHelper.typoscript">
 
 
+config.contentObjectExceptionHandler = 0
+
 ##############
 #### PAGE ####
 ##############

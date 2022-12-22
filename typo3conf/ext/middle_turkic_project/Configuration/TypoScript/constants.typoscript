@@ -27,9 +27,29 @@ page {
     theme {
       navigation {
         type = top
-        # cat=bootstrap package: navigation/151/102; type=int[1-5]; label=Mian Navigation Levels
         mainNavigationLevels = 3
+        style = inverse
       }
+      copyright {
+        enable = 1
+        text = 2020 <a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener" target="_blank">Creative Commons Attribution 4.0 International</a>
+      }
+      meta {
+        enable = 1
+      }
+      language {
+        enable = 0
+      }
+      googleFont {
+        enable = 0
+      }
+    }
+    preloader {
+        logo {
+            file = EXT:middle_turkic_project/Resources/Public/Images/Logo.svg
+            height = 300
+            width = 500
+        }
     }
 }
 
@@ -63,8 +83,20 @@ plugin.bootstrap_package_contentelements {
 ### BOOTSTRAP SCSS CONSTANTS ###
 ################################
 plugin.bootstrap_package.settings.scss {
-    primary = #eb3e4a
+    red = #990000
+    gray-uu = #cccccc
+    primary = $red
     secondary = #013859
+    dark = $gray-uu
+    card-color = $gray-600
+    enable-rounded = true
+    enable-responsive-font-sizes = true
+    toast-max-width = none
+    font-family-base = "Noto Sans Hebrew", "Noto Sans", "#{$google-webfont}", sans-serif
+    headings-font-family = Roboto
+    navbar-dark-color = $black
+    navbar-dark-active-color = $black
+    navbar-dark-hover-color = $black
 }
 
 #######################################
@@ -85,8 +117,4 @@ plugin.tx_recaptcha {
     # look at https://www.google.com/recaptcha/admin to register a key for your server
     # cat=plugin.recaptcha//04; type=string; label= reCAPTCHA private key: Private key of your reCAPTCHA-account
     private_key = 6LfklrgZAAAAANCDOiuKpUnrEAJySqDxxNo26IUt
-}
-
-plugin.bootstrap_package.settings.scss {   
-    gray-uu = #cccccc
 }
