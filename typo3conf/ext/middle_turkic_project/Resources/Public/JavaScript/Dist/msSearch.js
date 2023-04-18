@@ -15,7 +15,7 @@ let searchConfig = {
     msBooks: [],
 }
 
-var datasetNames = ['middle karaim'];
+var datasetNames = ['middle-karaim'];
 
 if (typeof jQuery == 'undefined') {
     var headTag = document.getElementsByTagName("head")[0];
