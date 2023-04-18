@@ -16,6 +16,7 @@ let searchConfig = {
 }
 
 var datasetNames = ['middle-karaim'];
+var datasetEditions = ["ADub.III.73", "ADub.III.83", "ADub.III.84", "F305-01", "JSul.I.04", "JSul.III.01", "JSul.III.02", "JSul.III.65", "JSul.IV.02A", "TKow.02"]
 
 if (typeof jQuery == 'undefined') {
     var headTag = document.getElementsByTagName("head")[0];
@@ -51,6 +52,18 @@ function loadSearchResults(pageNo = 1, $element = $("#searchResults")) {
         });
         searchURL = `${searchURL}]`
     }
+    else {
+        searchURL = `${searchURL}&msEditions=[`;
+        datasetEditions.forEach((edition, index) => {
+            searchURL = `${searchURL}"${edition}"`;
+            if (index < datasetEditions.length - 1) {
+                searchURL = `${searchURL},`;
+            }
+        });
+        searchURL = `${searchURL}]`
+    }
+
+
     if (searchConfig.msBooks.length > 0) {
         searchURL = `${searchURL}&msBooks=[`;
         searchConfig.msBooks.forEach((book, index) => {
