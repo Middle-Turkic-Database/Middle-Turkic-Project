@@ -16,7 +16,7 @@ let searchConfig = {
 }
 
 var datasetNames = ['middle-karaim'];
-var datasetEditions = ["ADub.III.73", "ADub.III.83", "ADub.III.84", "F305-01", "JSul.I.04", "JSul.III.01", "JSul.III.02", "JSul.III.65", "JSul.IV.02A", "TKow.02"]
+//var datasetEditions = ["ADub.III.73", "ADub.III.83", "ADub.III.84", "F305-01", "JSul.I.04", "JSul.III.01", "JSul.III.02", "JSul.III.65", "JSul.IV.02A", "TKow.02"]
 
 if (typeof jQuery == 'undefined') {
     var headTag = document.getElementsByTagName("head")[0];
@@ -34,7 +34,7 @@ function loadSearchResults(pageNo = 1, $element = $("#searchResults")) {
     }
 
     // check if msSet is 'All Sets'
-    if (searchConfig.msSet == 'Any') {
+    if (searchConfig.msSet === 'any') {
         // loop through the dataset names and add them to the URL
         for (var i = 0; i < datasetNames.length; i++) {
             searchURL = `${searchURL}&msSet=${datasetNames[i]}`;
@@ -47,16 +47,6 @@ function loadSearchResults(pageNo = 1, $element = $("#searchResults")) {
         searchConfig.msEditions.forEach((edition, index) => {
             searchURL = `${searchURL}"${edition}"`;
             if (index < searchConfig.msEditions.length - 1) {
-                searchURL = `${searchURL},`;
-            }
-        });
-        searchURL = `${searchURL}]`
-    }
-    else {
-        searchURL = `${searchURL}&msEditions=[`;
-        datasetEditions.forEach((edition, index) => {
-            searchURL = `${searchURL}"${edition}"`;
-            if (index < datasetEditions.length - 1) {
                 searchURL = `${searchURL},`;
             }
         });
@@ -168,12 +158,12 @@ function enableSubmitBtn($element = $("form#ms-search-form button:submit")) {
 
 $(function () {
     $("form#ms-search-form select#searchMsSet").on('change', function (e) {
-        if (this.value === "Any") {
-            disableEditionSelect();
-            disableBookSelect();
-            disableFetchBooksBtn();
-        }
-        else {
+        if (this.value != "Any") {
+            //     disableEditionSelect();
+            //     disableBookSelect();
+            //     disableFetchBooksBtn();
+            // }
+            // else {
             disableBookSelect();
             disableFetchBooksBtn();
             loadEditionSelect();
