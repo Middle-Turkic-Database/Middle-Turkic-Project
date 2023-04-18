@@ -37,7 +37,7 @@ function loadSearchResults(pageNo = 1, $element = $("#searchResults")) {
         // loop through the dataset names and add them to the URL
         for (var i = 0; i < datasetNames.length; i++) {
             searchURL = `${searchURL}&msSet=${datasetNames[i]}`;
-            msSet = datasetNames[i]
+            searchConfig.msSet = datasetNames[i]
         }
     }
 
