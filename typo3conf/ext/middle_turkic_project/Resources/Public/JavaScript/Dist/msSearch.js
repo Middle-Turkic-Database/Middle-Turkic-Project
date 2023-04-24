@@ -15,9 +15,6 @@ let searchConfig = {
     msBooks: [],
 }
 
-var datasetNames = ['middle-karaim'];
-//var datasetEditions = ["ADub.III.73", "ADub.III.83", "ADub.III.84", "F305-01", "JSul.I.04", "JSul.III.01", "JSul.III.02", "JSul.III.65", "JSul.IV.02A", "TKow.02"]
-
 if (typeof jQuery == 'undefined') {
     var headTag = document.getElementsByTagName("head")[0];
     var jqTag = document.createElement('script');
@@ -27,67 +24,106 @@ if (typeof jQuery == 'undefined') {
     headTag.appendChild(jqTag);
 }
 
-function loadSearchResults(pageNo = 1, $element = $("#searchResults")) {
-    var searchURL = `/mssearch?q=${searchConfig.query}&page=${pageNo}`;
-    if (searchConfig.msSet != '' && searchConfig.msSet != 'Any') {
-        searchURL = `${searchURL}&msSet=${searchConfig.msSet}`;
-    }
+function loadAllSetsResults(pageNo, $element) {
+    var msAllSets = $("form#ms-search-form select#searchMsSet option:not(:first-child)").map(function () {
+        return $(this).val().toLowerCase();
+    }).get();
 
-    // check if msSet is 'All Sets'
-    if (searchConfig.msSet === 'any') {
-        // loop through the dataset names and add them to the URL
-        for (var i = 0; i < datasetNames.length; i++) {
-            searchURL = `${searchURL}&msSet=${datasetNames[i]}`;
-            // searchConfig.msSet = datasetNames[i]
+    msAllSets.forEach((set) => {
+        var searchURL = `/mssearch?q=${searchConfig.query}&page=${pageNo}&msSet=${set}`;
+
+        if (searchConfig.msEditions.length > 0) {
+            searchURL += `&msEditions=[`;
+            searchConfig.msEditions.forEach((edition, index) => {
+                searchURL = `${searchURL}"${edition}"`;
+                if (index < searchConfig.msEditions.length - 1) {
+                    searchURL = `${searchURL},`;
+                }
+            });
+            searchURL = `${searchURL}]`
         }
-    }
 
-    if (searchConfig.msEditions.length > 0) {
-        searchURL = `${searchURL}&msEditions=[`;
-        searchConfig.msEditions.forEach((edition, index) => {
-            searchURL = `${searchURL}"${edition}"`;
-            if (index < searchConfig.msEditions.length - 1) {
-                searchURL = `${searchURL},`;
-            }
-        });
-        searchURL = `${searchURL}]`
-    }
+        if (searchConfig.msBooks.length > 0) {
+            searchURL = `${searchURL}&msBooks=[`;
+            searchConfig.msBooks.forEach((book, index) => {
+                searchURL = `${searchURL}${book}`;
+                if (index < searchConfig.msBooks.length - 1) {
+                    searchURL = `${searchURL},`;
+                }
+            });
+            searchURL = `${searchURL}]`;
+        }
 
+        loadContent.loadContent(searchURL, $element);
+    });
+}
 
-    if (searchConfig.msBooks.length > 0) {
-        searchURL = `${searchURL}&msBooks=[`;
-        searchConfig.msBooks.forEach((book, index) => {
-            searchURL = `${searchURL}${book}`;
-            if (index < searchConfig.msBooks.length - 1) {
-                searchURL = `${searchURL},`;
-            }
-        });
-        searchURL = `${searchURL}]`;
+function loadSearchResults(pageNo = 1, $element = $("#searchResults")) {
+    if (searchConfig.msSet === 'any') {
+        loadAllSetsResults(pageNo, $element)
+
+    } else {
+        var searchURL = `/mssearch?q=${searchConfig.query}&page=${pageNo}`;
+
+        if (searchConfig.msSet !== '') {
+            searchURL += `&msSet=${searchConfig.msSet}`;
+        }
+
+        if (searchConfig.msEditions.length > 0) {
+            searchURL = `${searchURL}&msEditions=[`;
+            searchConfig.msEditions.forEach((edition, index) => {
+                searchURL = `${searchURL}"${edition}"`;
+                if (index < searchConfig.msEditions.length - 1) {
+                    searchURL = `${searchURL},`;
+                }
+            });
+            searchURL = `${searchURL}]`
+        }
+
+        if (searchConfig.msBooks.length > 0) {
+            searchURL = `${searchURL}&msBooks=[`;
+            searchConfig.msBooks.forEach((book, index) => {
+                searchURL = `${searchURL}${book}`;
+                if (index < searchConfig.msBooks.length - 1) {
+                    searchURL = `${searchURL},`;
+                }
+            });
+            searchURL = `${searchURL}]`;
+        }
+
+        loadContent.loadContent(searchURL, $element);
     }
-    loadContent.loadContent(searchURL, $element)
 };
 
-function disableEditionSelect($element = $("form#ms-search-form select#searchMsEditions")) {
-    $element.prop("disabled", true);
-    $element.html("<option select value='Any'>All Editions</options>");
-};
+
+
+// function disableEditionSelect($element = $("form#ms-search-form select#searchMsEditions")) {
+//     $element.prop("disabled", true);
+//     $element.html("<option select value='Any'>All Editions</options>");
+// };
 
 function disableBookSelect($element = $("form#ms-search-form select#searchMsBooks")) {
     $element.prop("disabled", true);
     $element.html("<option select value='Any'>All Books</options>");
 };
 
-function loadEditionSelect($element = $("form#ms-search-form select#searchMsEditions")) {
-    $.ajax({
-        method: "GET",
-        url: "/selectorhelper",
-        data: { msSet: getMsSet() },
-    })
-        .done(function (editions) {
-            if (editions.length > 0) {
+function loadAllEditions($element) {
+    // Get an array of all available msSet values from the dropdown menu
+    var msSets = $("form#ms-search-form select#searchMsSet option:not(:first-child)").map(function () {
+        return $(this).val().toLowerCase();
+    }).get();
+
+    // Define a function to handle the response from each AJAX request
+    var handleResponse = function (editions) {
+        if (editions.length > 0) {
+            // Add the edition names to the results array
+            results = results.concat(editions);
+
+            // If this is the last AJAX request, add the options to the select element
+            if (--remaining === 0) {
                 var optionsText = "";
-                for (const edition in editions) {
-                    const editionName = editions[edition];
+                for (const edition in results) {
+                    const editionName = results[edition];
                     optionsText = optionsText + `<option selected value="${editionName}">${editionName}</option>`;
                 }
                 $element.html(optionsText);
@@ -98,27 +134,108 @@ function loadEditionSelect($element = $("form#ms-search-form select#searchMsEdit
             else {
                 showToastr('info', 'Could not load editions or there are not editions for this manuscript set.');
             }
+        }
+    };
+
+    // Send an AJAX request for each msSet value
+    var results = [];
+    var remaining = msSets.length;
+    for (const msSet of msSets) {
+        $.ajax({
+            method: "GET",
+            url: "/selectorhelper",
+            data: { msSet: msSet },
         })
-        .fail(function () {
-            showToastr('error', 'Could not load editions. Please try again!');
-        });
-};
+            .done(handleResponse)
+            .fail(function () {
+                showToastr('error', 'Could not load editions. Please try again!');
+            });
+    }
+}
+
+function loadEditionSelect($element = $("form#ms-search-form select#searchMsEditions")) {
+    // Get the current value of the msSet dropdown
+    var msSet = getMsSet();
+
+    // If msSet is "Any", fetch editions for all available msSets
+    if (msSet === "any") {
+        loadAllEditions($element)
+    }
+    // Otherwise, fetch editions for the selected msSet value
+    else {
+        $.ajax({
+            method: "GET",
+            url: "/selectorhelper",
+            data: { msSet: msSet },
+        })
+            .done(function (editions) {
+                if (editions.length > 0) {
+                    var optionsText = "";
+                    for (const edition in editions) {
+                        const editionName = editions[edition];
+                        optionsText = optionsText + `<option selected value="${editionName}">${editionName}</option>`;
+                    }
+                    $element.html(optionsText);
+                    $element.prop("disabled", false);
+                    $element.focus();
+                    enableFetchBooksBtn();
+                }
+                else {
+                    showToastr('info', 'Could not load editions or there are not editions for this manuscript set.');
+                }
+            })
+            .fail(function () {
+                showToastr('error', 'Could not load editions. Please try again!');
+            });
+    }
+}
+
+
 
 function loadBookSelect($element = $("form#ms-search-form select#searchMsBooks")) {
-    $.ajax({
-        method: "GET",
-        url: "/selectorhelper?msSet=" + getMsSet() + "&msEditions=" + JSON.stringify(getMsEditions()),
-    })
-        .done(function (books) {
-            var optionText = "";
-            for (const bookIt in books) {
-                optionText = optionText + `<option selected value="${books[bookIt].bookNo}">${books[bookIt].bookName}</option>`
-            }
-            $element.html(optionText);
-            $element.prop("disabled", false);
-            $element.focus();
+    var msSetBook = getMsSet()
+    if (msSetBook == 'any') {
+        var msSetsBooks = $("form#ms-search-form select#searchMsSet option:not(:first-child)").map(function () {
+            return $(this).val().toLowerCase();
+        }).get();
+
+        var optionText = "";
+        msSetsBooks.forEach((set) => {
+            var url = "/selectorhelper?msSet=" + set + "&msEditions=" + JSON.stringify(getMsEditions());
+
+            $.ajax({
+                method: "GET",
+                url: url,
+            })
+                .done(function (books) {
+                    for (const bookIt in books) {
+                        optionText += `<option selected value="${books[bookIt].bookNo}">${books[bookIt].bookName}</option>`
+                    }
+                    $element.html(optionText);
+                    $element.prop("disabled", false);
+                    $element.focus();
+                })
         })
+
+    } else {
+        var url = "/selectorhelper?msSet=" + msSetBook + "&msEditions=" + JSON.stringify(getMsEditions());
+
+        $.ajax({
+            method: "GET",
+            url: url,
+        })
+            .done(function (books) {
+                var optionText = "";
+                for (const bookIt in books) {
+                    optionText += `<option selected value="${books[bookIt].bookNo}">${books[bookIt].bookName}</option>`
+                }
+                $element.html(optionText);
+                $element.prop("disabled", false);
+                $element.focus();
+            })
+    }
 };
+
 
 function getMsSet($element = $("form#ms-search-form select#searchMsSet option:selected")) {
     return $element.val().toLowerCase();
@@ -157,17 +274,13 @@ function enableSubmitBtn($element = $("form#ms-search-form button:submit")) {
 }
 
 $(function () {
+    loadEditionSelect()
+
     $("form#ms-search-form select#searchMsSet").on('change', function (e) {
-        if (this.value != "Any") {
-            //     disableEditionSelect();
-            //     disableBookSelect();
-            //     disableFetchBooksBtn();
-            // }
-            // else {
-            disableBookSelect();
-            disableFetchBooksBtn();
-            loadEditionSelect();
-        }
+        disableBookSelect();
+        disableFetchBooksBtn();
+        loadEditionSelect();
+
     });
 
     $("form#ms-search-form select#searchMsEditions").on('change', function (e) {
@@ -225,3 +338,4 @@ $(function () {
 
     });
 });
+
