@@ -4,7 +4,7 @@
  * Licensed under the GPL-2.0-or-later license
  */
 
-import * as msUtils from "./msUtils.js";
+//import * as msUtils from "./msUtils.js";
 import * as loadContent from "./loadContent.js";
 import { showToastr as showToastr } from "./showToastr.js";
 
@@ -273,6 +273,8 @@ function enableSubmitBtn($element = $("form#ms-search-form button:submit")) {
     $element.prop("disabled", false);
 }
 
+
+
 $(function () {
     loadEditionSelect()
 
@@ -311,6 +313,58 @@ $(function () {
         }
     });
 
+    // create new url for the search functionality
+    $(document).ready(function () {
+        $('#searchResults').on('click', '.card-header, .card-title a', function (event) {
+            // Prevent the default link behavior
+            event.preventDefault();
+            // Get the href attribute of the clicked element
+            var url = $(this).attr('href');
+            // Find the card-text element that contains the search word
+            var cardText = $(this).closest('.card').find('.card-text:contains(' + searchConfig.query + ')');
+            // Get the text content of the card-text element
+            var cardTextContent = cardText.text();
+            // Split the text content into an array of words
+            var words = cardTextContent.split(/\s+/);
+            // Find the index of the search word in the array of words
+            var searchWordIndex = words.indexOf(searchConfig.query);
+            const numStr1 = words[searchWordIndex + 2].match(/\d+/) ? words[searchWordIndex + 2].match(/\d+/)[0] : '';
+            const num1 = numStr1 ? parseInt(numStr1, 10) : 0;
+            const numStr2 = words[searchWordIndex + 1].match(/\d+/) ? words[searchWordIndex + 1].match(/\d+/)[0] : '';
+            const num2 = numStr2 ? parseInt(numStr2, 10) : 0;
+
+            // if the search word is the second from last word, so one token only follows
+            if (searchWordIndex >= 0 && searchWordIndex + 3 === words.length) {
+                var followingWord = words[searchWordIndex + 1]
+                var prevWord = words[searchWordIndex - 1]
+                url += '?search=' + encodeURIComponent(searchConfig.query) + '&prev=' + encodeURIComponent(prevWord) + '&following=' + encodeURIComponent(followingWord)
+            } // if we extract two words and the second is not a number
+            else if (searchWordIndex >= 0 && searchWordIndex + 2 < words.length && !num1 && !num2) {
+                // Extract the two words following the search word
+                var followingWords = words[searchWordIndex + 1] + ' ' + words[searchWordIndex + 2];
+                // Append the query parameter to the URL, including the following words
+                url += '?search=' + encodeURIComponent(searchConfig.query) + '&following=' + encodeURIComponent(followingWords);
+            } // if we extract two words and the second is a number: prev & following url
+            else if (searchWordIndex >= 0 && searchWordIndex + 2 < words.length && num1) {
+                var followingWord = words[searchWordIndex + 1]
+                var prevWord = words[searchWordIndex - 1]
+                url += '?search=' + encodeURIComponent(searchConfig.query) + '&prev=' + encodeURIComponent(prevWord) + '&following=' + encodeURIComponent(followingWord)
+            }
+            else if (searchWordIndex >= 0 && searchWordIndex + 1 < words.length && num2) {
+                var previousWords = words[searchWordIndex - 2] + ' ' + words[searchWordIndex - 1];
+                url += '?search=' + encodeURIComponent(searchConfig.query) + '&prev=' + encodeURIComponent(previousWords);
+                // If the search word is not found or there are no words following it, append only the search query parameter and prev word
+            } else {
+                url += '?search=' + encodeURIComponent(searchConfig.query) + '&prev=' + encodeURIComponent(prevWord);
+            }
+
+            // Open the new URL in a new tab
+            var newWindow = window.open(url);
+        });
+    });
+
+
+
     $(document).on('click', 'nav#searchPaginationNav li.page-item a.page-link', function () {
         let target = $(this).data("target")
         switch (target) {
@@ -337,5 +391,5 @@ $(function () {
         }
 
     });
-});
 
+});
