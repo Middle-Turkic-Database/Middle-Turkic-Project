@@ -52,13 +52,13 @@ function parseCommits($content)
   $contentsURL = getContentsURL($content);
   foreach ($commitList as $commit) {
     $commitID = getCommitID($commit);
-    addFiles($commit->added, $contentsURL, $commitID, $masterBranch);
-    modifyFiles($commit->modified, $contentsURL, $commitID, $masterBranch);
-    removeFiles($commit->removed);
+    addFiles($commit->added, $contentsURL, $commitID, $masterBranch, $content);
+    modifyFiles($commit->modified, $contentsURL, $commitID, $masterBranch, $content);
+    removeFiles($commit->removed, $content);
   }
 }
 
-function addFiles($addedList, $contentsURL, $commitID, $masterBranch)
+function addFiles($addedList, $contentsURL, $commitID, $masterBranch, $content)
 {
   logMessage("Start of adding files.");
   foreach ($addedList as $filePath) {
@@ -69,11 +69,13 @@ function addFiles($addedList, $contentsURL, $commitID, $masterBranch)
       logMessage("!!!Could not add file: " . $filePath . "!!!");
     } else {
       logMessage("File successfully added: " . $filePath);
+      $xmlData = file_get_contents($filePath);
+      updateFileInBaseX($filePath, $xmlData, $content);
     }
   }
 }
 
-function modifyFiles($modifiedList, $contentsURL, $commitID, $masterBranch)
+function modifyFiles($modifiedList, $contentsURL, $commitID, $masterBranch, $content)
 {
   logMessage("Start of modifying files");
   foreach ($modifiedList as $filePath) {
@@ -83,16 +85,20 @@ function modifyFiles($modifiedList, $contentsURL, $commitID, $masterBranch)
       logMessage("!!!Could not modify file: " . $filePath . "!!!");
     } else {
       logMessage("File successfully modified: " . $filePath);
+      // $xmlData = file_get_contents( $newFile);
+      $xmlData = file_get_contents($filePath);
+      updateFileInBaseX($filePath, $xmlData, $content);
     }
   }
 }
 
-function removeFiles($removedList)
+function removeFiles($removedList, $content)
 {
   logMessage("Start of removing files.");
   foreach ($removedList as $filePath) {
     if (unlink($filePath)) {
       logMessage("File successfully removed: " . $filePath);
+      deleteFileFromBaseX($content, $filePath); // Delete the corresponding file from BaseX
     } else {
       logMessage("!!!Could not remove file: " . $filePath . "!!!");
     }
@@ -233,4 +239,74 @@ function logMessage($message)
     mkdir($logsFolderPath);
   }
   error_log($errorMessage, 3, $logsFolderPath . "/webhook" . "_" . $repositoryName . "_" . date('Ymd') . ".log");
+}
+
+function updateFileInBaseX($filePath, $xmlData, $content)
+{
+    $baseXURL = getenv('BaseXURL');
+    $baseXUser = getenv('BaseXUser');
+    $baseXPassword = getenv('BaseXPass');
+
+    $repositoryName = $content->repository->name;
+    
+    // Construct the BaseX URL for the file
+    $baseXUpdateURL = $baseXURL . '/rest/MTDB/' . $repositoryName . '/' . $filePath;
+
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $baseXUpdateURL);
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
+    curl_setopt($ch, CURLOPT_POSTFIELDS,  $xmlData);
+
+    // Set URL options for Basic Authentication
+    curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+    curl_setopt($ch, CURLOPT_USERPWD, $baseXUser . ':' . $baseXPassword);
+
+    // Set the Content-Type header for XML
+    curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/xml']);
+    
+
+    curl_exec($ch);
+    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+
+    if ($httpCode === 200) {
+        // File updated successfully
+        return true;
+    } else {
+        // Handle error
+        return false;
+    }
+}
+
+function deleteFileFromBaseX($content, $filePath)
+{
+    $baseXURL = getenv('BaseXURL');
+    $baseXUser = getenv('BaseXUser');
+    $baseXPassword = getenv('BaseXPass');
+
+    $repositoryName = $content->repository->name;
+
+    // Construct the BaseX URL for the file to be deleted
+    $baseXDeleteURL = $baseXURL . '/rest/MTDB/' . $repositoryName . '/' . $filePath;
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $baseXDeleteURL);
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
+
+    // Set URL options for Basic Authentication
+    curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+    curl_setopt($ch, CURLOPT_USERPWD, $baseXUser . ':' . $baseXPassword);
+
+    curl_exec($ch);
+    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+
+    if ($httpCode === 200) {
+        // File deleted successfully
+        return true;
+    } else {
+        // Handle error
+        return false;
+    }
 }
