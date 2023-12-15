@@ -77,7 +77,6 @@
         <xsl:param name="node" select="." />
         <xsl:for-each select="$node/tei:l">
             <xsl:call-template name="renderLContent" />
-            <xsl:text> </xsl:text>
         </xsl:for-each>
     </xsl:template>
     
@@ -268,22 +267,28 @@
     </xsl:template>
 
     <xsl:template name="l-line-by-line">
+        <xsl:variable name="parent" select="local-name(parent::*)"/>
+        <xsl:variable name="neighbor" select="local-name(preceding-sibling::*[1])"/>
+        <xsl:variable name="neighbor-of-parent" select="local-name(parent::*/preceding-sibling::*[1])" />
+        
+        <xsl:if test="$parent = 'lg' and $neighbor">
+            <br/>
+        </xsl:if>
+
         <xsl:if test="./@n">
-            <xsl:variable name="parent" select="local-name(parent::*)"/>
-            <xsl:variable name="neighbor" select="local-name(preceding-sibling::*[1])"/>
-            <xsl:variable name="neighbor-of-parent" select="local-name(parent::*/preceding-sibling::*[1])" />
             <xsl:if test="$neighbor = 'l' or
                             $neighbor = 'lg' or
                             $parent = 'lg' and
                                 ($neighbor-of-parent = 'l' or
-                                 $neighbor-of-parent = 'lg')">
+                                 $neighbor-of-parent = 'lg')
+                                 ">
                 <xsl:text> </xsl:text>
             </xsl:if>
             <xsl:text>[</xsl:text>
             <xsl:value-of select="./@n"/>
             <xsl:text>]</xsl:text>
                 <xsl:text> </xsl:text>
-            </xsl:if>
+        </xsl:if>
     </xsl:template>
 
     <xsl:template match="tei:foreign">
