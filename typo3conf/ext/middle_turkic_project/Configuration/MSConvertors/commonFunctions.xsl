@@ -171,8 +171,15 @@
         <tr>
             <td class="pt-3" colspan="2">
                 <h5>
-                    <xsl:value-of select="./@n"/>
-                    <xsl:apply-templates select="key('transText', generate-id())"/>
+                    <xsl:if test="@facs">
+                        <a href="#" class="open-image" data-facs="{@facs}">
+                            <xsl:value-of select="@n"/>
+                        </a>
+                    </xsl:if>
+                    <xsl:if test="not(@facs)">
+                        <xsl:value-of select="./@n"/>
+                        <xsl:apply-templates select="key('transText', generate-id())"/>
+                    </xsl:if>
                 </h5>
             </td>
         </tr>
