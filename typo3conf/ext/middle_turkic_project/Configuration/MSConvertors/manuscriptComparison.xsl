@@ -222,13 +222,13 @@
     <xsl:template match="tei:addSpan">
     </xsl:template>
     
-    <xsl:template match="tei:anchor[starts-with(@xml:id, 'add')]">
+    <xsl:template  match="tei:anchor[@type='addSpan']">
     </xsl:template>
     
     <xsl:template match="tei:delSpan">
     </xsl:template>
     
-    <xsl:template match="tei:anchor[starts-with(@xml:id, 'del')]">
+    <xsl:template match="tei:anchor[@type='delSpan']">
     </xsl:template>
     
     <xsl:template match="tei:seg[@type = 'commented']">
