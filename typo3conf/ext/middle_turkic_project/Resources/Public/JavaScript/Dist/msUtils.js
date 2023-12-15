@@ -15,6 +15,7 @@ export function setChapterPars(maxChapter = 0, $formToChange = null) {
         $chapterNumInputs.attr('min', 1);
     }
     $chapterNumInputs.attr('max', maxChapter);
+    $chapterNumInputs.attr('placeholder', 1);
     $chapterNumInputs.attr('size', Math.floor(Math.log10(maxChapter)) + 1)
 };
 
