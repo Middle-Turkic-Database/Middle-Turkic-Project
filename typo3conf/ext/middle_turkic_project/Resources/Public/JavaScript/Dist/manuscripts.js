@@ -6,6 +6,7 @@
 
 import * as msUtils from './msUtils.js';
 import * as loadContent from './loadContent.js';
+import * as manuscriptsSearch from './manuscriptsSearch.js';
 
 if(typeof jQuery=='undefined') {
     var headTag = document.getElementsByTagName("head")[0];
@@ -15,6 +16,9 @@ if(typeof jQuery=='undefined') {
     jqTag.onload = myJQueryCode;
     headTag.appendChild(jqTag);
 }
+
+var currentSet = '';
+var currentEdition = '';
 
 function loadTranscript(msNav, msName, msBook = -1, msChapter = -1, $element = $("#msTranscriptContent")) {
     var transcriptURI = "/mstranscript?msNav=" + msNav + "&msName=" + msName;
@@ -27,8 +31,16 @@ function loadTranscript(msNav, msName, msBook = -1, msChapter = -1, $element = $
             transcriptURI += "&msChapter=" + msChapter;
         }
     }
+    currentSet = msNav;
+    currentEdition = msName;
 
-    loadContent.loadContent(transcriptURI, $element);
+    // Add callback function if the manuscript is loaded from the Search functionality
+    loadContent.loadContent(transcriptURI, $element, () => {
+        const searchURL = document.URL;
+        if (searchURL.includes('?search=')) {
+            manuscriptsSearch.highlightSearchTerm(searchURL);         
+        }
+      });
 };
 
 function loadTranslation(msNav, msName, msBook = -1, msChapter = -1, $element = $("#msTranslationContent")) {
