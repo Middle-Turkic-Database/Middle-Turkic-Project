@@ -132,6 +132,17 @@ $(function() {
     msUtils.setChapterPars(firstMaxChapter);
     msUtils.setL2NavWidth();
 
+    // Create new element if coming from the search function
+    const div = document.createElement("div")
+    div.setAttribute("class", "text-muted mb-3 small");
+    div.setAttribute("id", "counting");
+    div.innerHTML = "Chapter results: "
+    div.style.display = "none";
+    div.style.textAlign = "center"
+    try {
+        document.getElementById("msNavBar").appendChild(div);
+    } catch(error) {}
+
     $(document).on('click', ".ms-nav .nav-link", function() {
         let {msBook, msChapter} = msUtils.navLinkClicked(this);
         
