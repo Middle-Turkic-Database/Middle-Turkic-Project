@@ -31,6 +31,9 @@ function loadTranscript(msNav, msName, msBook = -1, msChapter = -1, $element = $
             transcriptURI += "&msChapter=" + msChapter;
         }
     }
+
+    // keep track of the set and edition that is loaded: 
+    // use it to create the path that opens the manuscript image (line 192), if available
     currentSet = msNav;
     currentEdition = msName;
 
