@@ -39,12 +39,92 @@
                                 </button>
                             </div>
                             <div class="col-md form-group">
-                                <label for="searchMsBooks">Book</label>
+                                <label for="searchMsBooks">Section</label>
                                 <select multiple class="custom-select" id="searchMsBooks" disabled>
-                                    <option select value="Any">All Books</option>
+                                    <option select value="Any">All Sections</option>
                                 </select>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- style="display: none;" -->
+        <div  class="accordion my-3" id="msComparisonFiltersMetaAccordion">
+            <div class="accordion-item card">
+
+                <!-- 1st part: the header of the item -->
+                <div class="accordion-header card-header" id="filtersMetaHeading">
+                    <!-- letter size -->
+                    <h4 class="accordion-title">
+                        <a href="#filtersMetaCollapse" class="accordion-title-link collapsed" data-toggle="collapse" aria-expanded="true" aria-controls="filtersMetaCollapse">
+                            <span class="accordion-title-link-text">
+                                <!-- filter logo -->
+                                <i class="fas fa-filter accardion-logo"></i>
+                                Advanced Filters
+                            </span>
+                            <!-- plus + and cross x symbols -->
+                            <span class="accordion-title-link-state"></span>
+                        </a>
+                    </h4>
+                </div>
+
+                <div class="collapse" id="filtersMetaCollapse">
+                    <button type="button" class="d-block btn btn-link btn-sm mb-1 mr-1 ml-auto btn-deselect-all" ><i class="bi bi-x-square"></i>Deselect All</button>
+                    <div class="card-body">
+                        <!-- row 1 -->
+                        <div class="form-row">
+                            <div class="col-md form-group" >
+                                <label for="languageOptions">Language</label>
+                                <select multiple class="custom-select" id="languageOptions">
+                                </select>
+                            </div>
+                            <div class="col-md form-group">
+                                <label for="settlementOptions">Settlement, Country</label>
+                                <select multiple class="custom-select" id="settlementOptions">
+                                </select>
+                            </div>
+                        </div>
+                        <!-- row 2 -->
+                        <div class="form-row">
+                            <div class="col-md form-group">
+                                <label for="creation-dateOptions">Date</label>
+                                <select multiple class="custom-select" id="creation-dateOptions">
+                                </select>
+                            </div>
+                            <div class="col-md form-group">
+                                <label for="scriptNoteOptions">Script</label>
+                                <select multiple class="custom-select" id="scriptNoteOptions">
+                                </select>
+                            </div>
+                        </div>
+                        <!-- row 3 -->
+                        <div class="form-row">
+                            <div class="col-md form-group">
+                                <label for="objectTypeOptions">Object Type</label>
+                                <select multiple class="custom-select" id="objectTypeOptions">
+                                </select>
+                            </div>
+                            <div class="col-md form-group">
+                                <label for="handNote_scriptOptions">Script Type</label>
+                                <select multiple class="custom-select" id="handNote_scriptOptions">
+                                </select>
+                            </div>
+                        </div>
+                        <!-- row 4 -->
+                        <div class="form-row">
+                            <div class="col-md form-group">
+                                <label for="creation-origPlaceOptions" >Place of origin</label>
+                                <select multiple class="custom-select" id="creation-origPlaceOptions">
+                                </select>
+                            </div>
+                            <div class="col-md form-group">
+                                <label for="repositoryOptions" >Repository</label>
+                                <select multiple class="custom-select" id="repositoryOptions">
+                                </select>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -80,4 +160,3 @@
         <v:format.pregReplace subject="{msNav}" pattern="#/?{msMenuItem.title}$#" replacement="" as="msNav"/>
     </f:for>
 </f:section>
-
