@@ -7,13 +7,18 @@
 //import * as msUtils from "./msUtils.js";
 import * as loadContent from "./loadContent.js";
 import { showToastr as showToastr } from "./showToastr.js";
+import * as findDesc from "./msSearchAdvanced.js"
 
 let searchConfig = {
     query: '',
     msSet: '',
     msEditions: [],
     msBooks: [],
+    urls : []
 }
+
+let checkboxesSelected = {}
+let check = false;
 
 if (typeof jQuery == 'undefined') {
     var headTag = document.getElementsByTagName("head")[0];
@@ -24,13 +29,93 @@ if (typeof jQuery == 'undefined') {
     headTag.appendChild(jqTag);
 }
 
-function loadAllSetsResults(pageNo, $element) {
-    var msAllSets = $("form#ms-search-form select#searchMsSet option:not(:first-child)").map(function () {
+function loadDescriptionResults( $element = $("#searchResults")){
+
+    let uniqueURLs = new Set ()
+
+    for (const { msSet, msEdition } of searchConfig.urls) {
+        const descURL = `/manuscripts/${msSet.replace(/\s+/g, "-")}/${msEdition}`;
+        const xmlFilePath = `/fileadmin/user_upload/manuscripts/${msSet}/${msEdition}.xml`;
+          fetchAndParseXML(xmlFilePath, descURL, uniqueURLs)
+        };
+
+        loadContent.loadContent(uniqueURLs, $element, 1, true);
+}
+
+function fetchAndParseXML(xmlFilePath,descURL, uniqueURLs) {
+    const xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === XMLHttpRequest.DONE) {
+        if (xhr.status === 200) {
+            const xmlString = xhr.responseText;
+            const parser = new DOMParser();
+            const xmlDoc = parser.parseFromString(xmlString, 'text/xml');
+            for (const key in checkboxesSelected) {
+                if (Object.hasOwnProperty.call(checkboxesSelected, key)) {
+                    if (key.includes('_')) {
+                        // If the key contains '_', split into node name and attribute name
+                        const [nodeName, attributeName] = key.split('_');
+                        const nodes = xmlDoc.getElementsByTagName(nodeName);
+        
+                        for (let i = 0; i < nodes.length; i++) {
+                            let attributeValue = nodes[i].getAttribute(attributeName);
+                            if (attributeValue && checkboxesSelected[key].includes(attributeValue)) {
+                                uniqueURLs.add(descURL)
+                            }
+                        }
+                    } else if (key.includes('-')) {
+                        // If the key contains '-', split into parent node name and target node name
+                        const [nodeName, targetName] = key.split('-');
+                        const nodes = xmlDoc.getElementsByTagName(nodeName);
+          
+                        for (let i = 0; i < nodes.length; i++) {
+                          const targetElements = nodes[i].getElementsByTagName(targetName);
+                      
+                          for (let j = 0; j < targetElements.length; j++) {
+                            let targetValue = targetElements[j].textContent;
+                            if (targetValue && checkboxesSelected[key].includes(targetValue)) {
+                                uniqueURLs.add(descURL)
+                            }
+                          }
+                        }
+                      } else {
+                        // Standard handling for non-nested elements
+                        const nodeList = xmlDoc.getElementsByTagName(key);
+        
+                        for (let i = 0; i < nodeList.length; i++) {
+                            let nodeValue = nodeList[i].textContent;
+                            if (checkboxesSelected[key].includes(nodeValue)) {
+                                uniqueURLs.add(descURL)
+                            }
+                        }
+                    }
+                }
+            }
+        } else {
+          console.error(`Error fetching ${xmlFilePath}. Status code: ${xhr.status}`);
+        }
+      }
+    };
+  
+    xhr.open('GET', xmlFilePath, true);
+    xhr.send();
+  }
+
+function loadAllSetsResults(pageNo, $element){
+    var msAllSets = $("form#ms-search-form select#searchMsSet option:not(:first-child)").map(function() {
         return $(this).val().toLowerCase();
     }).get();
+;
+    var searchURL = `/mssearch?q=${searchConfig.query}&page=${pageNo}&msSet=[`;
 
-    msAllSets.forEach((set) => {
-        var searchURL = `/mssearch?q=${searchConfig.query}&page=${pageNo}&msSet=${set}`;
+        msAllSets.forEach((set, index) => {
+            searchURL = `${searchURL}"${set}"`;
+            if (index < msAllSets.length - 1) {
+                searchURL = `${searchURL},`;
+            }
+        });
+        searchURL = `${searchURL}]`
+
 
         if (searchConfig.msEditions.length > 0) {
             searchURL += `&msEditions=[`;
@@ -53,9 +138,8 @@ function loadAllSetsResults(pageNo, $element) {
             });
             searchURL = `${searchURL}]`;
         }
-
+        
         loadContent.loadContent(searchURL, $element);
-    });
 }
 
 function loadSearchResults(pageNo = 1, $element = $("#searchResults")) {
@@ -96,61 +180,52 @@ function loadSearchResults(pageNo = 1, $element = $("#searchResults")) {
 };
 
 
-
-// function disableEditionSelect($element = $("form#ms-search-form select#searchMsEditions")) {
-//     $element.prop("disabled", true);
-//     $element.html("<option select value='Any'>All Editions</options>");
-// };
-
 function disableBookSelect($element = $("form#ms-search-form select#searchMsBooks")) {
     $element.prop("disabled", true);
     $element.html("<option select value='Any'>All Books</options>");
 };
 
-function loadAllEditions($element) {
+// We load all the editions in the 'Editions' box in the search functionality
+function loadAllEditions($element = $("form#ms-search-form select#searchMsEditions")) {
     // Get an array of all available msSet values from the dropdown menu
-    var msSets = $("form#ms-search-form select#searchMsSet option:not(:first-child)").map(function () {
+    var msSets = $("form#ms-search-form select#searchMsSet option:not(:first-child)").map(function() {
         return $(this).val().toLowerCase();
     }).get();
 
-    // Define a function to handle the response from each AJAX request
-    var handleResponse = function (editions) {
-        if (editions.length > 0) {
-            // Add the edition names to the results array
-            results = results.concat(editions);
-
-            // If this is the last AJAX request, add the options to the select element
-            if (--remaining === 0) {
-                var optionsText = "";
-                for (const edition in results) {
-                    const editionName = results[edition];
-                    optionsText = optionsText + `<option selected value="${editionName}">${editionName}</option>`;
-                }
-                $element.html(optionsText);
-                $element.prop("disabled", false);
-                $element.focus();
-                enableFetchBooksBtn();
-            }
-            else {
-                showToastr('info', 'Could not load editions or there are not editions for this manuscript set.');
-            }
-        }
-    };
-
     // Send an AJAX request for each msSet value
-    var results = [];
     var remaining = msSets.length;
-    for (const msSet of msSets) {
+    var allOptionsText = [];
+
+    msSets.forEach(function (msSet) {
         $.ajax({
             method: "GET",
             url: "/selectorhelper",
             data: { msSet: msSet },
         })
-            .done(handleResponse)
-            .fail(function () {
-                showToastr('error', 'Could not load editions. Please try again!');
-            });
+        .done(function (editions) {
+            if (editions.length > 0) {
+                var optionsText = "";
+                for (const edition of editions) {
+                    const editionName = edition;
+                    optionsText = optionsText + `<option selected value="${editionName}">${editionName}</option>`;
+                }
+                allOptionsText.push(optionsText);
+            }
+
+            // Reduce the remaining count and update the select element when all requests are complete
+            if (--remaining === 0) {
+                $element.html(allOptionsText.join(''));
+                $element.prop("disabled", false);
+                $element.focus();
+                enableFetchBooksBtn();
+            }
+        })
+        .fail(function () {
+            // Handle failures if needed
+            showToastr('error', 'Could not load editions. Please try again!');
+        });
     }
+    );
 }
 
 function loadEditionSelect($element = $("form#ms-search-form select#searchMsEditions")) {
@@ -276,7 +351,53 @@ function enableSubmitBtn($element = $("form#ms-search-form button:submit")) {
 
 
 $(function () {
-    loadEditionSelect()
+    loadAllEditions()
+    findDesc.findDesc().then((dataUrls) => {
+        searchConfig.urls = dataUrls;
+      });
+
+    $(document).on('change', '#filtersMetaCollapse .custom-select', function(e) {
+        const selectedOptions = $(this).val(); // Get an array of selected option values
+        
+        if (selectedOptions.length > 0) {
+            check = true;
+            enableSubmitBtn();
+            $('#search-input').prop('readonly', true);
+            $('#search-input').val('');
+        } else {
+            check = false;
+            disableSubmitBtn();
+            $('#search-input').prop('readonly', false);
+        }
+        
+        // const allText = $(this).siblings('label').text().trim();
+        const allText = $(this).siblings('label').attr('for').replace('Options', '');
+
+        
+        // Update the checkboxesSelected object based on option changes
+        if (selectedOptions.length > 0) {
+            checkboxesSelected[allText] = selectedOptions;
+        } else {
+            delete checkboxesSelected[allText];
+        }
+    });
+
+    // what happens when we deselect all -> checkboxes are empty 
+    $(document).ready(function() {
+        // Add a click event listener to the Deselect All button
+        $('#filtersMetaCollapse').on('click', '.btn-deselect-all', function() {
+            // Loop through each multi-select element within the same collapsible section (Advanced filters)
+            $(this)
+                .closest('.collapse')
+                .find('.custom-select')
+                .each(function() {
+                    $(this).val([]); // Deselect all options
+                    $(this).trigger('change'); // Trigger the change event
+                });
+        });
+    });
+
+    
 
     $("form#ms-search-form select#searchMsSet").on('change', function (e) {
         disableBookSelect();
@@ -302,7 +423,7 @@ $(function () {
         }
     });
 
-    $("form#ms-search-form").on('submit', function (e) {
+    $("form#ms-search-form").on('submit', function(e) {
         e.preventDefault();
         if ($(this).find("#search-input").val().length > 0) {
             searchConfig.query = $(this).find("#search-input").val();
@@ -310,6 +431,12 @@ $(function () {
             searchConfig.msEditions = getMsEditions();
             searchConfig.msBooks = getMsBooks();
             loadSearchResults();
+        }
+        else if (check) {
+            searchConfig.msSet = getMsSet();
+            searchConfig.msEditions = getMsEditions();
+            searchConfig.msBooks = getMsBooks();
+            loadDescriptionResults()
         }
     });
 
