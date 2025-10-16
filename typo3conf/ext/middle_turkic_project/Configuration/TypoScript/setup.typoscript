@@ -31,6 +31,7 @@ page {
     }
 
     includeJS {
+        jQueryLib = EXT:middle_turkic_project/Resources/Public/JavaScript/Dist/jquery-3.6.0.min.js
     }
 
     includeJSFooterlibs {

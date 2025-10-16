@@ -1,0 +1,13 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+
+<f:if condition="{validationErrors}">
+    <div class="alert alert-danger" role="alert">
+        <ul class="list-unstyled mb-0">
+            <f:for each="{validationErrors}" as="error">
+                <li>{error}</li>
+            </f:for>
+        </ul>
+    </div>
+</f:if>
+
+</html>

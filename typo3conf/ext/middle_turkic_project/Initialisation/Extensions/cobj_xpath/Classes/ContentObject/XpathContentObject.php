@@ -56,14 +56,12 @@ class XpathContentObject extends AbstractContentObject
 
         $content = '';
 
-        // TimeTracker object is gone in TYPO3 8 but needed to set TS log messages; instantiate in versions >= 8.7
-        if (VersionNumberUtility::convertVersionNumberToInteger(TYPO3_branch) >= 8007000 && !is_object($GLOBALS['TT'])) {
-            $GLOBALS['TT'] = GeneralUtility::makeInstance(TimeTracker::class);
-        }
+        // TimeTracker is now a singleton in TYPO3 8+
+        $timeTracker = GeneralUtility::makeInstance(TimeTracker::class);
 
         // Check if the SimpleXML extension is loaded
         if (!extension_loaded('SimpleXML') || !extension_loaded('libxml')) {
-            $GLOBALS['TT']->setTSlogMessage('The PHP extensions SimpleXML and libxml must be loaded.', 3);
+            $timeTracker->setTSlogMessage('The PHP extensions SimpleXML and libxml must be loaded.', 3);
 
             return $ContentObjectRenderer->stdWrap($content, $conf['stdWrap.']);
         }
@@ -81,14 +79,14 @@ class XpathContentObject extends AbstractContentObject
                 $xmlsource = GeneralUtility::getURL($xmlsource, 0, false);
             }
         } else {
-            $GLOBALS['TT']->setTSlogMessage('Source for XML is not configured.', 3);
+            $timeTracker->setTSlogMessage('Source for XML is not configured.', 3);
         }
 
         // XPATH expression - stdWrap capable
         if (isset($conf['expression']) || is_array($conf['expression.'])) {
             $expression = $ContentObjectRenderer->stdWrap($conf['expression'], $conf['expression.']);
         } else {
-            $GLOBALS['TT']->setTSlogMessage('No XPath expression set.', 3);
+            $timeTracker->setTSlogMessage('No XPath expression set.', 3);
         }
 
         // return type - stdWrap capable
@@ -96,7 +94,7 @@ class XpathContentObject extends AbstractContentObject
             $return = $ContentObjectRenderer->stdWrap($conf['return'], $conf['return.']);
         } else {
             $return = 'string';
-            $GLOBALS['TT']->setTSlogMessage('No return type for XPATH is set - using string as default.', 2);
+            $timeTracker->setTSlogMessage('No return type for XPATH is set - using string as default.', 2);
         }
 
         if (!empty($xmlsource) && !empty($expression)) {
@@ -223,7 +221,7 @@ class XpathContentObject extends AbstractContentObject
                             $content = implode($token, $result);
 
                         } else {
-                            $GLOBALS['TT']->setTSlogMessage('Handling of multivalue result not configured. Please use resultObj or implodeResult', 2);
+                            $timeTracker->setTSlogMessage('Handling of multivalue result not configured. Please use resultObj or implodeResult', 2);
                         }
                         // all other cases
                     } else {
@@ -231,19 +229,19 @@ class XpathContentObject extends AbstractContentObject
                     }
 
                 } else {
-                    $GLOBALS['TT']->setTSlogMessage('The XPath query returned no results.', 2);
+                    $timeTracker->setTSlogMessage('The XPath query returned no results.', 2);
                 }
 
             } else {
                 $errors = libxml_get_errors();
                 foreach ($errors as $error) {
-                    $GLOBALS['TT']->setTSlogMessage('XML exception: ' . $this->getXmlErrorCode($error), 3);
+                    $timeTracker->setTSlogMessage('XML exception: ' . $this->getXmlErrorCode($error), 3);
                 }
                 libxml_clear_errors();
             }
 
         } else {
-            $GLOBALS['TT']->setTSlogMessage('The configured XML source did not return any data or no XPATH expression was set.', 3);
+            $timeTracker->setTSlogMessage('The configured XML source did not return any data or no XPATH expression was set.', 3);
         }
 
         return $ContentObjectRenderer->stdWrap($content, $conf['stdWrap.']);
@@ -263,12 +261,15 @@ class XpathContentObject extends AbstractContentObject
 
         switch ($error->level) {
             case LIBXML_ERR_WARNING:
+                // @extensionScannerIgnoreLine
                 $errormessage .= 'Warning ' . $error->code . ': ';
                 break;
             case LIBXML_ERR_ERROR:
+                // @extensionScannerIgnoreLine
                 $errormessage .= 'Error ' . $error->code . ': ';
                 break;
             case LIBXML_ERR_FATAL:
+                // @extensionScannerIgnoreLine
                 $errormessage .= 'Fatal error ' . $error->code . ': ';
                 break;
         }

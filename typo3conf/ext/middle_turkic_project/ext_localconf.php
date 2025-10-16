@@ -20,7 +20,7 @@ $GLOBALS['TYPO3_CONF_VARS']['RTE']['Presets']['middle_turkic_project'] = 'EXT:mi
 /***************
  * File_List Layout
  */
-$boot = function ($_EXTKEY) {
+$boot = function () {
 
     /* ===========================================================================
         Register an "image gallery" layout
@@ -31,7 +31,7 @@ $boot = function ($_EXTKEY) {
     ];
 };
 
-$boot($_EXTKEY);
+$boot();
 unset($boot);
 
 /***************
@@ -82,3 +82,13 @@ $GLOBALS['TYPO3_CONF_VARS']['SYS']['routing']['aspects']['StaticLowerCaseMapper'
     \UppsalaUniversity\MiddleTurkicProject\Routing\Aspects\StaticLowerCaseMapper::class;
 $GLOBALS['TYPO3_CONF_VARS']['SYS']['routing']['aspects']['StaticSameCaseMapper'] =
     \UppsalaUniversity\MiddleTurkicProject\Routing\Aspects\StaticSameCaseMapper::class;
+
+/***************
+ * Register felogin TypoScript
+ */
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScriptConstants(
+    '<INCLUDE_TYPOSCRIPT: source="FILE:EXT:middle_turkic_project/Configuration/TypoScript/Extension/Felogin/constants.typoscript">'
+);
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScriptSetup(
+    '<INCLUDE_TYPOSCRIPT: source="FILE:EXT:middle_turkic_project/Configuration/TypoScript/Extension/Felogin/setup.typoscript">'
+);

@@ -1,0 +1,12 @@
+########################
+#### FRONTEND LOGIN ####
+########################
+styles.content.loginform {
+    templateFile = EXT:middle_turkic_project/Resources/Private/Templates/Felogin/FrontendLogin.html
+}
+
+########################
+#### FRONTEND LOGIN ####
+########################
+
+@import 'EXT:felogin/Configuration/TypoScript/constants.typoscript'

@@ -36,7 +36,7 @@
    </func:function>
 
    <xsl:template match="/">
-      <button type="button" class="d-block btn btn-link btn-lg btn-ExpCollAllAccard mb-1 mr-1 ml-auto d-print-none" data-toggle="tooltip" data-placement="top" title="Expand/Collapse All" data-trigger="hover">
+      <button type="button" class="d-block btn btn-link btn-lg btn-ExpCollAllAccard mb-1 mr-1 ml-auto d-print-none" data-toggle="tooltip" data-bs-placement="top" title="Expand/Collapse All" data-bs-trigger="hover">
          <i class="fas fa-plus-circle"></i>
       </button>
 
@@ -44,7 +44,7 @@
          <div class="accordion-item card">
             <div class="accordion-header card-header" id="accordion-heading-100-1">
                <h4 class="accordion-title">
-                  <a href="#accordion-100-1" class="accordion-title-link collapsed" data-toggle="collapse" aria-expanded="false" aria-controls="accordion-100-1">
+                  <a href="#accordion-100-1" class="accordion-title-link collapsed" data-toggle="collapse" data-bs-target="#accordion-100-1" aria-expanded="false" aria-controls="accordion-100-1">
                      <span class="accordion-title-link-text">
                         <i class="fas fa-info-circle accardion-logo"/>
 General Information</span>
@@ -66,7 +66,7 @@ General Information</span>
                                     <xsl:variable name="languageCode" select="$language/@ident" />
                                     <xsl:choose>
                                        <xsl:when test="$languageCode">
-                                          <a href="https://iso639-3.sil.org/code/{$languageCode}" target="_blank" class="dotted-underline" data-toggle="tooltip" data-placement="top" title="{$languageCode}">
+                                          <a href="https://iso639-3.sil.org/code/{$languageCode}" target="_blank" class="dotted-underline" data-toggle="tooltip" data-bs-placement="top" title="{$languageCode}">
                                              <xsl:value-of select="$language" />
                                           </a>
                                        </xsl:when>
@@ -150,7 +150,7 @@ General Information</span>
                            <dt class="col-sm-3">
                               <xsl:choose>
                                  <xsl:when test="$keywords/@scheme and $keywords/@scheme != ''">
-                                    <a href="{$keywords/@scheme}" target="_blank" class="dotted-underline" data-toggle="tooltip" data-placement="top" title="{$keywords/@scheme}">
+                                    <a href="{$keywords/@scheme}" target="_blank" class="dotted-underline" data-toggle="tooltip" data-bs-placement="top" title="{$keywords/@scheme}">
                                                 Keywords
                                     </a>
                                  </xsl:when>
@@ -179,7 +179,7 @@ General Information</span>
          <div class="accordion-item card">
             <div class="accordion-header card-header" id="accordion-heading-100-2">
                <h4 class="accordion-title">
-                  <a href="#accordion-100-2" class="accordion-title-link collapsed" data-toggle="collapse" aria-expanded="false" aria-controls="accordion-100-2">
+                  <a href="#accordion-100-2" class="accordion-title-link collapsed" data-toggle="collapse" data-bs-target="#accordion-100-2" aria-expanded="false" aria-controls="accordion-100-2">
                      <span class="accordion-title-link-text">
                         <i class="fas fa-ruler-combined accardion-logo"/>
 Physical Description</span>
@@ -375,7 +375,7 @@ Physical Description</span>
          <div class="accordion-item card">
             <div class="accordion-header card-header" id="accordion-heading-100-3">
                <h4 class="accordion-title">
-                  <a href="#accordion-100-3" class="accordion-title-link collapsed" data-toggle="collapse" aria-expanded="false" aria-controls="accordion-100-3">
+                  <a href="#accordion-100-3" class="accordion-title-link collapsed" data-toggle="collapse" data-bs-target="#accordion-100-3" aria-expanded="false" aria-controls="accordion-100-3">
                      <span class="accordion-title-link-text">
                         <i class="fas fa-feather accardion-logo"/>
 Description of hands</span>
@@ -466,7 +466,7 @@ Description of hands</span>
                               </xsl:choose>
                            </dd>
 
-                           <dt class="col-sm-3">Language</dt>
+                           <dt class="col-sm-3">Text Language</dt>
                            <dd class="col-sm-9">
                               <xsl:variable name="textLanguage" select="/tei:TEI/tei:teiHeader/tei:fileDesc/tei:sourceDesc/tei:msDesc/tei:msContents/tei:msItem/tei:textLang" />
                               <xsl:choose>
@@ -488,7 +488,7 @@ Description of hands</span>
          <div class="accordion-item card">
             <div class="accordion-header card-header" id="accordion-heading-100-4">
                <h4 class="accordion-title">
-                  <a href="#accordion-100-4" class="accordion-title-link collapsed" data-toggle="collapse" aria-expanded="false" aria-controls="accordion-100-4">
+                  <a href="#accordion-100-4" class="accordion-title-link collapsed" data-toggle="collapse" data-bs-target="#accordion-100-4" aria-expanded="false" aria-controls="accordion-100-4">
                      <span class="accordion-title-link-text">
                         <i class="fas fa-history accardion-logo" />
 History</span>
@@ -536,7 +536,7 @@ History</span>
          <div class="accordion-item card">
             <div class="accordion-header card-header" id="accordion-heading-100-5">
                <h4 class="accordion-title">
-                  <a href="#accordion-100-5" class="accordion-title-link collapsed" data-toggle="collapse" aria-expanded="false" aria-controls="accordion-100-5">
+                  <a href="#accordion-100-5" class="accordion-title-link collapsed" data-toggle="collapse" data-bs-target="#accordion-100-5" aria-expanded="false" aria-controls="accordion-100-5">
                      <span class="accordion-title-link-text">
                         <i class="fas fa-bookmark accardion-logo"/>
 References</span>
@@ -568,7 +568,7 @@ References</span>
          <div class="accordion-item card">
             <div class="accordion-header card-header" id="accordion-heading-100-6">
                <h4 class="accordion-title">
-                  <a href="#accordion-100-6" class="accordion-title-link collapsed" data-toggle="collapse" aria-expanded="false" aria-controls="accordion-100-6">
+                  <a href="#accordion-100-6" class="accordion-title-link collapsed" data-toggle="collapse" data-bs-target="#accordion-100-6" aria-expanded="false" aria-controls="accordion-100-6">
                      <span class="accordion-title-link-text">
                         <i class="fas fa-user-edit accardion-logo" />
 Authorship</span>
@@ -628,7 +628,7 @@ Authorship</span>
          <div class="accordion-item card">
             <div class="accordion-header card-header" id="accordion-heading-100-7">
                <h4 class="accordion-title">
-                  <a href="#accordion-100-7" class="accordion-title-link collapsed" data-toggle="collapse" aria-expanded="false" aria-controls="accordion-100-7">
+                  <a href="#accordion-100-7" class="accordion-title-link collapsed" data-toggle="collapse" data-bs-target="#accordion-100-7" aria-expanded="false" aria-controls="accordion-100-7">
                      <span class="accordion-title-link-text">
                         <i class="fas fa-file-code accardion-logo" />
 XML Source</span>
@@ -641,12 +641,12 @@ XML Source</span>
                   <div class="accordion-content accordion-content-left">
                      <div class="accordion-content-item accordion-content-text">
                         <p>
-                           <a href="{$xmlAddress}" class="dotted-underline font-weight-bold" target="_blank">
+                           <a href="/{$xmlAddress}" class="dotted-underline font-weight-bold" target="_blank">
                               <i class="far fa-eye mr-1" />
 View the XML (TEI Epidoc)</a>
                         </p>
                         <p>
-                           <a href="{$xmlAddress}" class="dotted-underline font-weight-bold" download="">
+                           <a href="/{$xmlAddress}" class="dotted-underline font-weight-bold" download="">
                               <i class="fas fa-file-download mr-1" />
 Download the XML (TEI Epidoc)</a>
                         </p>
@@ -800,7 +800,7 @@ Download the XML (TEI Epidoc)</a>
          <xsl:attribute name="data-toggle">
             <xsl:text>tooltip</xsl:text>
          </xsl:attribute>
-         <xsl:attribute name="data-placement">
+         <xsl:attribute name="data-bs-placement">
             <xsl:text>top</xsl:text>
          </xsl:attribute>
          <xsl:attribute name="data-html">

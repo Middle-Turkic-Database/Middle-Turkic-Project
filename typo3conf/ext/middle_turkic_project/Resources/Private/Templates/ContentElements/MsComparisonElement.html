@@ -82,10 +82,12 @@
 
 <f:section name="createMsSetSlectionOptions">
     <f:for each="{msMenu}" as="msMenuItem">
+        <f:comment>
         <f:if condition="{msNav}">
             <f:variable name="msNav" value="{msNav}/" />
         </f:if>
-        <f:variable name="msNav" value="{msNav}{msMenuItem.title -> f:format.case(mode='lower')}" />
+    </f:comment>
+        <f:variable name="msNav" value="{msMenuItem.title -> f:format.case(mode='lower')}" />
         <f:if condition="{msMenuItem.children}">
             <f:then>
                 <f:render section="createMsSetSlectionOptions" arguments="{msMenu: msMenuItem.children, msNav: msNav}" />

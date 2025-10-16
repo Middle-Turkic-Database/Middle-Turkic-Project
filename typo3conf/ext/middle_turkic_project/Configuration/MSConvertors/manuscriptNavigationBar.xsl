@@ -26,13 +26,13 @@
         <xsl:apply-templates select="$msItemStruct/tei:title"  mode="msNav2ndLevel"/>
       </div>
       <form class="form-inline my-2 justify-content-center ms-selector-form">
-        <label class="my-1 mr-2" for="{$uniqueID}-bookSelector">Book:</label>
+        <label class="my-1 mr-2" for="{$uniqueID}-bookSelector">Section:</label>
         <select class="custom-select my-1 mr-sm-2" id="{$uniqueID}-bookSelector" name="bookSelector">
           <xsl:apply-templates select="$msItemStruct/tei:title"  mode="bookSelector" />
         </select>
         <div class="form-group mr-2" id="{$uniqueID}-chapterFormGroup">
           <label class="my-1 mr-sm-2" for="{$uniqueID}-chapterNum">
-            Chapter:
+            Subsection:
           </label>        
           <xsl:element name="input">
             <xsl:attribute name="type">
@@ -52,7 +52,7 @@
               <xsl:text>1</xsl:text>
             </xsl:attribute>
             <xsl:attribute name="placeholder">
-              <xsl:text>1</xsl:text>
+              <!-- <xsl:text>1</xsl:text> -->
             </xsl:attribute>
             <xsl:attribute name="min">
               <xsl:text>1</xsl:text>

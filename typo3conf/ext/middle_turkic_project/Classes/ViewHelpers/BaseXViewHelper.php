@@ -68,7 +68,7 @@ class BaseXViewHelper extends AbstractViewHelper
 
         $xml = new DOMDocument();
         libxml_use_internal_errors(true);
-        if ($xml->loadXML($response)) {
+        if (!empty($response) && $xml->loadXML($response)) {
             foreach ($xml->getElementsByTagName('result') as $resultElement) {
                 if ($path = $resultElement->attributes->getNamedItem('path')) {
                     $msName = $resultElement->attributes->getNamedItem("manuscriptName")->value;

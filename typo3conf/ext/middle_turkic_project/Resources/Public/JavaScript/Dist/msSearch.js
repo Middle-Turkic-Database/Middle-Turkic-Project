@@ -6,13 +6,13 @@
 
 //import * as msUtils from "./msUtils.js";
 import * as loadContent from "./loadContent.js";
-import { showToastr as showToastr } from "./showToastr.js";
+import {showToastr as showToastr} from "./showToastr.js";
 import * as findDesc from "./msSearchAdvanced.js"
 
 let searchConfig = {
-    query: '',
-    msSet: '',
-    msEditions: [],
+    query : '',
+    msSet : '',
+    msEditions : [],
     msBooks: [],
     urls : []
 }
@@ -20,7 +20,8 @@ let searchConfig = {
 let checkboxesSelected = {}
 let check = false;
 
-if (typeof jQuery == 'undefined') {
+
+if(typeof jQuery=='undefined') {
     var headTag = document.getElementsByTagName("head")[0];
     var jqTag = document.createElement('script');
     jqTag.type = 'text/javascript';
@@ -32,6 +33,11 @@ if (typeof jQuery == 'undefined') {
 function loadDescriptionResults( $element = $("#searchResults")){
 
     let uniqueURLs = new Set ()
+    // console.log(readyUrls)
+
+    // var msAllSets = $("form#ms-search-form select#searchMsSet option:not(:first-child)").map(function() {
+    //     return $(this).val().toLowerCase();
+    // }).get();
 
     for (const { msSet, msEdition } of searchConfig.urls) {
         const descURL = `/manuscripts/${msSet.replace(/\s+/g, "-")}/${msEdition}`;
@@ -100,6 +106,7 @@ function fetchAndParseXML(xmlFilePath,descURL, uniqueURLs) {
     xhr.open('GET', xmlFilePath, true);
     xhr.send();
   }
+    
 
 function loadAllSetsResults(pageNo, $element){
     var msAllSets = $("form#ms-search-form select#searchMsSet option:not(:first-child)").map(function() {
@@ -143,10 +150,12 @@ function loadAllSetsResults(pageNo, $element){
 }
 
 function loadSearchResults(pageNo = 1, $element = $("#searchResults")) {
+    
     if (searchConfig.msSet === 'any') {
         loadAllSetsResults(pageNo, $element)
-
+        
     } else {
+        
         var searchURL = `/mssearch?q=${searchConfig.query}&page=${pageNo}`;
 
         if (searchConfig.msSet !== '') {
@@ -174,16 +183,23 @@ function loadSearchResults(pageNo = 1, $element = $("#searchResults")) {
             });
             searchURL = `${searchURL}]`;
         }
-
+       
         loadContent.loadContent(searchURL, $element);
     }
 };
 
 
+
+// function disableEditionSelect($element = $("form#ms-search-form select#searchMsEditions")) {
+//     $element.prop("disabled", true);
+//     $element.html("<option select value='Any'>All Editions</options>");
+// };
+
 function disableBookSelect($element = $("form#ms-search-form select#searchMsBooks")) {
     $element.prop("disabled", true);
-    $element.html("<option select value='Any'>All Books</options>");
+    $element.html("<option select value='Any'>All Sections</options>");
 };
+
 
 // We load all the editions in the 'Editions' box in the search functionality
 function loadAllEditions($element = $("form#ms-search-form select#searchMsEditions")) {
@@ -234,73 +250,54 @@ function loadEditionSelect($element = $("form#ms-search-form select#searchMsEdit
 
     // If msSet is "Any", fetch editions for all available msSets
     if (msSet === "any") {
-        loadAllEditions($element)
+        loadAllEditions()    
     }
     // Otherwise, fetch editions for the selected msSet value
     else {
         $.ajax({
             method: "GET",
             url: "/selectorhelper",
-            data: { msSet: msSet },
+            data: {msSet: msSet},
         })
-            .done(function (editions) {
-                if (editions.length > 0) {
-                    var optionsText = "";
-                    for (const edition in editions) {
-                        const editionName = editions[edition];
-                        optionsText = optionsText + `<option selected value="${editionName}">${editionName}</option>`;
-                    }
-                    $element.html(optionsText);
-                    $element.prop("disabled", false);
-                    $element.focus();
-                    enableFetchBooksBtn();
+        .done(function(editions) {
+            if (editions.length > 0) {
+                var optionsText = "";
+                for (const edition in editions) {
+                    const editionName = editions[edition];
+                    optionsText = optionsText + `<option selected value="${editionName}">${editionName}</option>`;
                 }
-                else {
-                    showToastr('info', 'Could not load editions or there are not editions for this manuscript set.');
-                }
-            })
-            .fail(function () {
-                showToastr('error', 'Could not load editions. Please try again!');
-            });
-    }
-}
+                $element.html(optionsText);
+                $element.prop("disabled", false);
+                $element.focus();
+                enableFetchBooksBtn();
+            }
+            else {
+                showToastr('info', 'Could not load editions or there are not editions for this manuscript set.');
+            }
+        })
+        .fail(function () {
+      showToastr('error', 'Could not load editions. Please try again!');
+    });
+}}
 
 
 
 function loadBookSelect($element = $("form#ms-search-form select#searchMsBooks")) {
     var msSetBook = getMsSet()
     if (msSetBook == 'any') {
-        var msSetsBooks = $("form#ms-search-form select#searchMsSet option:not(:first-child)").map(function () {
+        var msSetsBooks = $("form#ms-search-form select#searchMsSet option:not(:first-child)").map(function() {
             return $(this).val().toLowerCase();
         }).get();
-
+        
         var optionText = "";
         msSetsBooks.forEach((set) => {
             var url = "/selectorhelper?msSet=" + set + "&msEditions=" + JSON.stringify(getMsEditions());
-
+            
             $.ajax({
                 method: "GET",
                 url: url,
             })
-                .done(function (books) {
-                    for (const bookIt in books) {
-                        optionText += `<option selected value="${books[bookIt].bookNo}">${books[bookIt].bookName}</option>`
-                    }
-                    $element.html(optionText);
-                    $element.prop("disabled", false);
-                    $element.focus();
-                })
-        })
-
-    } else {
-        var url = "/selectorhelper?msSet=" + msSetBook + "&msEditions=" + JSON.stringify(getMsEditions());
-
-        $.ajax({
-            method: "GET",
-            url: url,
-        })
-            .done(function (books) {
-                var optionText = "";
+            .done(function(books) {
                 for (const bookIt in books) {
                     optionText += `<option selected value="${books[bookIt].bookNo}">${books[bookIt].bookName}</option>`
                 }
@@ -308,6 +305,24 @@ function loadBookSelect($element = $("form#ms-search-form select#searchMsBooks")
                 $element.prop("disabled", false);
                 $element.focus();
             })
+        })
+        
+    } else {
+        var url = "/selectorhelper?msSet=" + msSetBook + "&msEditions=" + JSON.stringify(getMsEditions());
+        
+        $.ajax({
+            method: "GET",
+            url: url,
+        })
+        .done(function(books) {
+            var optionText = "";
+            for (const bookIt in books) {
+                optionText += `<option selected value="${books[bookIt].bookNo}">${books[bookIt].bookName}</option>`
+            }
+            $element.html(optionText);
+            $element.prop("disabled", false);
+            $element.focus();
+        })
     }
 };
 
@@ -318,7 +333,7 @@ function getMsSet($element = $("form#ms-search-form select#searchMsSet option:se
 
 function getMsEditions($element = $("form#ms-search-form select#searchMsEditions option:selected")) {
     let editions = [];
-    $element.each(function () {
+    $element.each(function() {
         editions.push(this.value);
     });
     return editions;
@@ -326,7 +341,7 @@ function getMsEditions($element = $("form#ms-search-form select#searchMsEditions
 
 function getMsBooks($element = $("form#ms-search-form select#searchMsBooks option:selected")) {
     let books = [];
-    $element.each(function () {
+    $element.each(function() {
         books.push(this.value);
     });
     return books;
@@ -350,11 +365,14 @@ function enableSubmitBtn($element = $("form#ms-search-form button:submit")) {
 
 
 
-$(function () {
+$(function() {
     loadAllEditions()
+    // loadEditionSelect()
     findDesc.findDesc().then((dataUrls) => {
         searchConfig.urls = dataUrls;
       });
+    
+
 
     $(document).on('change', '#filtersMetaCollapse .custom-select', function(e) {
         const selectedOptions = $(this).val(); // Get an array of selected option values
@@ -370,7 +388,6 @@ $(function () {
             $('#search-input').prop('readonly', false);
         }
         
-        // const allText = $(this).siblings('label').text().trim();
         const allText = $(this).siblings('label').attr('for').replace('Options', '');
 
         
@@ -382,7 +399,7 @@ $(function () {
         }
     });
 
-    // what happens when we deselect all -> checkboxes are empty 
+      // what happens when we deselect all -> checkboxes are empty 
     $(document).ready(function() {
         // Add a click event listener to the Deselect All button
         $('#filtersMetaCollapse').on('click', '.btn-deselect-all', function() {
@@ -397,24 +414,25 @@ $(function () {
         });
     });
 
-    
+      
 
-    $("form#ms-search-form select#searchMsSet").on('change', function (e) {
-        disableBookSelect();
-        disableFetchBooksBtn();
-        loadEditionSelect();
+    $("form#ms-search-form select#searchMsSet").on('change', function(e) {        
+            disableBookSelect();
+            disableFetchBooksBtn();
+            loadEditionSelect();
+            
 
     });
 
-    $("form#ms-search-form select#searchMsEditions").on('change', function (e) {
+    $("form#ms-search-form select#searchMsEditions").on('change', function(e) {
         disableBookSelect();
     });
 
-    $("form#ms-search-form button#btnFetchBooks").on('click', function (e) {
+    $("form#ms-search-form button#btnFetchBooks").on('click', function(e) {
         loadBookSelect();
     });
 
-    $("form#ms-search-form input#search-input").on('input', function (e) {
+    $("form#ms-search-form input#search-input").on('input', function(e) {
         if ($(this).val().length > 0) {
             enableSubmitBtn();
         }
@@ -441,60 +459,159 @@ $(function () {
     });
 
     // create new url for the search functionality
-    $(document).ready(function () {
-        $('#searchResults').on('click', '.card-header, .card-title a', function (event) {
-            // Prevent the default link behavior
-            event.preventDefault();
-            // Get the href attribute of the clicked element
-            var url = $(this).attr('href');
-            // Find the card-text element that contains the search word
-            var cardText = $(this).closest('.card').find('.card-text:contains(' + searchConfig.query + ')');
-            // Get the text content of the card-text element
-            var cardTextContent = cardText.text();
-            // Split the text content into an array of words
-            var words = cardTextContent.split(/\s+/);
-            // Find the index of the search word in the array of words
-            var searchWordIndex = words.indexOf(searchConfig.query);
-            const numStr1 = words[searchWordIndex + 2].match(/\d+/) ? words[searchWordIndex + 2].match(/\d+/)[0] : '';
-            const num1 = numStr1 ? parseInt(numStr1, 10) : 0;
-            const numStr2 = words[searchWordIndex + 1].match(/\d+/) ? words[searchWordIndex + 1].match(/\d+/)[0] : '';
-            const num2 = numStr2 ? parseInt(numStr2, 10) : 0;
+    $(document).ready(function() {
+        $('#searchResults').on('click', '.card-header, .card-title a', function(event) {
+        // Prevent the default link behavior
+        event.preventDefault();
+        // Get the href attribute of the clicked element
+        var url = $(this).attr('href');
+        // Find the card-text element which we click on andthat contains the search word, either lowercased or uppercased 
+        // by checking if the text matches the regular expression 
+        var regex = new RegExp(searchConfig.query, 'gi'); 
+        var cardText = $(this).closest('.card').find('.card-text').filter(function() {
+            return regex.test($(this).text().toLowerCase()); 
+          });
+        
 
-            // if the search word is the second from last word, so one token only follows
-            if (searchWordIndex >= 0 && searchWordIndex + 3 === words.length) {
-                var followingWord = words[searchWordIndex + 1]
-                var prevWord = words[searchWordIndex - 1]
-                url += '?search=' + encodeURIComponent(searchConfig.query) + '&prev=' + encodeURIComponent(prevWord) + '&following=' + encodeURIComponent(followingWord)
-            } // if we extract two words and the second is not a number
-            else if (searchWordIndex >= 0 && searchWordIndex + 2 < words.length && !num1 && !num2) {
-                // Extract the two words following the search word
-                var followingWords = words[searchWordIndex + 1] + ' ' + words[searchWordIndex + 2];
-                // Append the query parameter to the URL, including the following words
-                url += '?search=' + encodeURIComponent(searchConfig.query) + '&following=' + encodeURIComponent(followingWords);
-            } // if we extract two words and the second is a number: prev & following url
-            else if (searchWordIndex >= 0 && searchWordIndex + 2 < words.length && num1) {
-                var followingWord = words[searchWordIndex + 1]
-                var prevWord = words[searchWordIndex - 1]
-                url += '?search=' + encodeURIComponent(searchConfig.query) + '&prev=' + encodeURIComponent(prevWord) + '&following=' + encodeURIComponent(followingWord)
+        
+        // Get the text content of the card-text element we clicked on
+        var cardTextContent = cardText.text();
+        // Split the text content into an array of words 
+        var words = cardTextContent.split(/\s+/)
+
+
+        searchConfig.query = searchConfig.query.toLowerCase()  
+        // Find the index of the search word in the array of words
+        var searchWordIndex = words.findIndex(function(word) {
+            return word.toLowerCase() === searchConfig.query; // Perform a case-insensitive comparison
+          });
+
+
+        const punctuationMarks = '{}()[]⸢⸣⟨⟩<>⸤⸥';
+        const prevChar = words[searchWordIndex - 1];
+        const nextChar = words[searchWordIndex + 1];
+        const prev2Char = words[searchWordIndex - 2];
+        const next2Char = words[searchWordIndex + 2];
+
+        
+        let numStr1 = '';
+        let num1; 
+        let numStr2 = '';
+        let num2; 
+        let numStr3 = '';
+        let num3;
+        let numStr4 = '' ;
+        let num4;
+
+
+        if (words[searchWordIndex + 2] !== undefined) {
+        numStr1 = words[searchWordIndex + 2].match(/\d+/) ? words[searchWordIndex + 2].match(/\d+/)[0] : '';
+        num1 = numStr1 ? parseInt(numStr1, 10) : 0;
+        }
+
+        if (words[searchWordIndex + 1] !== undefined) {
+        numStr2 = words[searchWordIndex + 1].match(/\d+/) ? words[searchWordIndex + 1].match(/\d+/)[0] : '';
+        num2 = numStr2 ? parseInt(numStr2, 10) : 0;
+        }
+
+        if (words[searchWordIndex - 1] !== undefined) {
+        numStr3 = words[searchWordIndex - 1].match(/\d+/) ? words[searchWordIndex - 1].match(/\d+/)[0] : '';
+        num3 = numStr3 ? parseInt(numStr3, 10) : 0;
+        }
+
+        if (words[searchWordIndex - 2] !== undefined) {
+        numStr4 = words[searchWordIndex - 2].match(/\d+/) ? words[searchWordIndex - 2].match(/\d+/)[0] : '';
+        num4 = numStr4 ? parseInt(numStr4, 10) : 0;
+        }
+
+
+        // if the search query exists
+        if (searchWordIndex >= 0) {
+
+            // [x search x]
+            if (punctuationMarks.includes(prev2Char) &&  punctuationMarks.includes(next2Char) 
+                    && !punctuationMarks.includes(nextChar) && !punctuationMarks.includes(prevChar)) {
+                url += '?search=' + encodeURIComponent(searchConfig.query) + '&prev=' + encodeURIComponent(prevChar)+ '&following=' + encodeURIComponent(nextChar) 
             }
-            else if (searchWordIndex >= 0 && searchWordIndex + 1 < words.length && num2) {
-                var previousWords = words[searchWordIndex - 2] + ' ' + words[searchWordIndex - 1];
+            
+            // [ search x
+            else if (prevChar && punctuationMarks.includes(prevChar) && !punctuationMarks.includes(nextChar) && !num2){
+                url += '?search=' + encodeURIComponent(searchConfig.query) + '&following=' + encodeURIComponent(nextChar)
+            }
+
+            // x search ]
+            else if (nextChar && punctuationMarks.includes(nextChar) && !punctuationMarks.includes(prevChar) && !num3){
+                url += '?search=' + encodeURIComponent(searchConfig.query) + '&prev=' + encodeURIComponent(prevChar)
+            }
+
+            // [search || search] 
+            else if ((prevChar && punctuationMarks.includes(prevChar) && !punctuationMarks.includes(nextChar)) || (nextChar && punctuationMarks.includes(nextChar))) {
+                url += '?search=' + encodeURIComponent(searchConfig.query);
+            }
+
+            // if next char is a full stop and previous not an integer
+            else if (nextChar === '.' && !num3){
+                url += '?search=' + encodeURIComponent(searchConfig.query)  + '&prev=' + encodeURIComponent(prevChar) + '&following=' + encodeURIComponent('.')
+            }
+
+            // if next char is a full stop and the 2 previous not integers
+            else if (nextChar === '.' && !num4 && !num3){
+                var previousWords = prev2Char + ' ' + prevChar;
                 url += '?search=' + encodeURIComponent(searchConfig.query) + '&prev=' + encodeURIComponent(previousWords);
-                // If the search word is not found or there are no words following it, append only the search query parameter and prev word
-            } else {
-                url += '?search=' + encodeURIComponent(searchConfig.query) + '&prev=' + encodeURIComponent(prevWord);
+            }
+            
+            // if the search word is the second from last word and next char is full stop and previous char is a number
+            else if (searchWordIndex + 3 === words.length && nextChar === '.' && num3){
+                url += '?search=' + encodeURIComponent(searchConfig.query)  + '&following=' + encodeURIComponent('.')
             }
 
-            // Open the new URL in a new tab
-            var newWindow = window.open(url);
+            // if next char is a comma and previous not an integer
+            else if (nextChar === ',' && !num3){
+                url += '?search=' + encodeURIComponent(searchConfig.query)  + '&prev=' + encodeURIComponent(prevChar) + '&following=' + encodeURIComponent(',')
+            }
+
+            // if the search word is the second from last word (so one token only follows) and the previous word is not a number in ()
+            else if (searchWordIndex + 3 === words.length && !num3) {
+                url += '?search=' + encodeURIComponent(searchConfig.query) + '&prev=' + encodeURIComponent(prevChar)+ '&following=' + encodeURIComponent(nextChar)
+            }
+
+            // extract 2 following words
+            else if (searchWordIndex + 2 < words.length && !num1 && !num2) {
+                var followingWords = nextChar + ' ' + next2Char;
+                url += '?search=' + encodeURIComponent(searchConfig.query) + '&following=' + encodeURIComponent(followingWords);
+            } 
+
+            // if the second following word is a number and the previous/next word is not a number
+            else if (searchWordIndex + 2 < words.length && num1 && !num3 && !num2) {
+                url += '?search=' + encodeURIComponent(searchConfig.query) + '&prev=' + encodeURIComponent(prevChar)+ '&following=' + encodeURIComponent(nextChar)
+            }    
+
+            // if the first following word is a number and the first/second previous words are not numbers
+            else if (searchWordIndex + 1 < words.length && num2 && !num3 && !num4){
+                var previousWords = prev2Char + ' ' + prevChar;
+                url += '?search=' + encodeURIComponent(searchConfig.query) + '&prev=' + encodeURIComponent(previousWords)
+            }
+
+            // extract 1 prev and 1 following
+            else if (searchWordIndex + 1 < words.length && !num3 && !num2) {
+                url += '?search=' + encodeURIComponent(searchConfig.query) + '&prev=' + encodeURIComponent(prevChar)+ '&following=' + encodeURIComponent(nextChar)
+            }
+            
+            else {
+                url += '?search=' + encodeURIComponent(searchConfig.query)
+            }
+        }
+        
+        // Open the new URL in a new tab
+        var newWindow = window.open(url);
         });
     });
+      
+      
 
-
-
-    $(document).on('click', 'nav#searchPaginationNav li.page-item a.page-link', function () {
+    $(document).on('click', 'nav#searchPaginationNav li.page-item a.page-link', function() {
         let target = $(this).data("target")
-        switch (target) {
+        switch(target) {
             case "first":
                 loadSearchResults(1)
                 break;

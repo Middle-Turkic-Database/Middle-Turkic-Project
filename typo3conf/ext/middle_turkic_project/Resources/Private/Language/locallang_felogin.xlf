@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="EXT:middle_turkic_project/Resources/Private/Language/locallang_felogin.xlf" date="2024-01-01T00:00:00Z" product-name="middle_turkic_project">
+        <header/>
+        <body>
+            <trans-unit id="login">
+                <source>Login</source>
+            </trans-unit>
+            <trans-unit id="logout">
+                <source>Logout</source>
+            </trans-unit>
+            <trans-unit id="username">
+                <source>Username</source>
+            </trans-unit>
+            <trans-unit id="password">
+                <source>Password</source>
+            </trans-unit>
+            <trans-unit id="permalogin">
+                <source>Remember me</source>
+            </trans-unit>
+            <trans-unit id="forgot_password">
+                <source>Forgot password?</source>
+            </trans-unit>
+            <trans-unit id="forgot_header">
+                <source>Password Recovery</source>
+            </trans-unit>
+            <trans-unit id="forgot_reset_message">
+                <source>Enter your email address to receive a password reset link.</source>
+            </trans-unit>
+            <trans-unit id="forgot_header_backToLogin">
+                <source>Back to login</source>
+            </trans-unit>
+            <trans-unit id="reset_password">
+                <source>Reset Password</source>
+            </trans-unit>
+            <trans-unit id="enter_your_data">
+                <source>Enter your email address</source>
+            </trans-unit>
+            <trans-unit id="change_password_header">
+                <source>Change Password</source>
+            </trans-unit>
+            <trans-unit id="change_password_message">
+                <source>Please enter your new password.</source>
+            </trans-unit>
+            <trans-unit id="change_password">
+                <source>Change Password</source>
+            </trans-unit>
+            <trans-unit id="new_password1">
+                <source>New Password</source>
+            </trans-unit>
+            <trans-unit id="new_password2">
+                <source>Confirm New Password</source>
+            </trans-unit>
+            <trans-unit id="back_to_login">
+                <source>Back to login</source>
+            </trans-unit>
+            <trans-unit id="cookie_warning">
+                <source>Cookie Warning</source>
+            </trans-unit>
+            <trans-unit id="cookie_warning_message">
+                <source>This site uses cookies. By continuing to use this site, you agree to our use of cookies.</source>
+            </trans-unit>
+            <trans-unit id="status_header">
+                <source>Status</source>
+            </trans-unit>
+            <trans-unit id="status_message">
+                <source>Please log in to continue.</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

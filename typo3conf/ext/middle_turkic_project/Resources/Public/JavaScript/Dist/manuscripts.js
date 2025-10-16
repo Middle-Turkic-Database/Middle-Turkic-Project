@@ -20,8 +20,10 @@ if(typeof jQuery=='undefined') {
 var currentSet = '';
 var currentEdition = '';
 
+
 function loadTranscript(msNav, msName, msBook = -1, msChapter = -1, $element = $("#msTranscriptContent")) {
     var transcriptURI = "/mstranscript?msNav=" + msNav + "&msName=" + msName;
+    console.log(transcriptURI);
     if (msBook >= 0) {
         if (msBook == 0) {
             msBook = "000";
@@ -48,6 +50,8 @@ function loadTranscript(msNav, msName, msBook = -1, msChapter = -1, $element = $
 
 function loadTranslation(msNav, msName, msBook = -1, msChapter = -1, $element = $("#msTranslationContent")) {
     var transcriptURI = "/mstranscript?msNav=" + msNav + "&msName=" + msName;
+    console.log(transcriptURI);
+    
     if (msBook >= 0) {
         if (msBook == 0) {
             msBook = "000";
@@ -59,7 +63,7 @@ function loadTranslation(msNav, msName, msBook = -1, msChapter = -1, $element = 
     }
     transcriptURI += "&type=translation";
 
-    loadContent.loadContent(transcriptURI, $element);
+    loadContent.loadContent(transcriptURI, $element)
 };
 
 function loadParallel(msNav, msName, msBook = -1, msChapter = -1, $element = $("#msParallelContent")) {
@@ -75,7 +79,7 @@ function loadParallel(msNav, msName, msBook = -1, msChapter = -1, $element = $("
     }
     transcriptURI += "&type=parallel";
 
-    loadContent.loadContent(transcriptURI, $element);
+    loadContent.loadContent(transcriptURI, $element)
 };
 
 function toNaturalNo(str) {
@@ -114,6 +118,7 @@ function changeMsTab(docType) {
     $("#" + docType + "-tab.nav-link").tab("show");
 }
 
+  
 $(function() {
     msUtils.initialize();
 
@@ -158,6 +163,7 @@ $(function() {
         document.getElementById("msNavBar").appendChild(div);
     } catch(error) {}
 
+
     $(document).on('click', ".ms-nav .nav-link", function() {
         let {msBook, msChapter} = msUtils.navLinkClicked(this);
         
@@ -176,8 +182,9 @@ $(function() {
 
     $(document).on('click', '.open-image', function(e) {
         e.preventDefault();
+    
         const imageName = $(this).data('facs');
-        
+
         // Construct the full file path
         const filePath = `/fileadmin/user_upload/manuscripts/${currentSet}/${currentEdition}.img/${imageName}`;
     
@@ -188,4 +195,5 @@ $(function() {
             alert('Failed to open the image.');
         }
     });
+
 });

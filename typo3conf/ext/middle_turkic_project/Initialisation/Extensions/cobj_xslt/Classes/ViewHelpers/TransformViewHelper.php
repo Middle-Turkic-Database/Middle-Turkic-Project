@@ -59,6 +59,7 @@ class TransformViewHelper extends AbstractViewHelper
      */
     public function injectConfigurationManager(ConfigurationManagerInterface $configurationManager) {
         $this->configurationManager = $configurationManager;
+        // @extensionScannerIgnoreLine
         $this->contentObject = $this->configurationManager->getContentObject();
         $this->contentObject->start(array(), '');
     }

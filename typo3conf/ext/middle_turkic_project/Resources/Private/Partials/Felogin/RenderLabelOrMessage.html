@@ -1,0 +1,75 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+
+<f:if condition="{key}">
+    <f:switch expression="{key}">
+        <f:case value="status_header">
+            <f:if condition="{statusHeader}">
+                {statusHeader}
+            <f:else>
+                <f:translate key="status_header" />
+                </f:else>
+            </f:if>
+        </f:case>
+        <f:case value="status_message">
+            <f:if condition="{statusMessage}">
+                {statusMessage}
+            <f:else>
+                <f:translate key="status_message" />
+                </f:else>
+            </f:if>
+        </f:case>
+        <f:case value="forgot_header">
+            <f:if condition="{forgotHeader}">
+                {forgotHeader}
+            <f:else>
+                <f:translate key="forgot_header" />
+                </f:else>
+            </f:if>
+        </f:case>
+        <f:case value="forgot_reset_message">
+            <f:if condition="{forgotResetMessage}">
+                {forgotResetMessage}
+            <f:else>
+                <f:translate key="forgot_reset_message" />
+                </f:else>
+            </f:if>
+        </f:case>
+        <f:case value="reset_password">
+            <f:if condition="{resetPasswordLabel}">
+                {resetPasswordLabel}
+            <f:else>
+                <f:translate key="reset_password" />
+                </f:else>
+            </f:if>
+        </f:case>
+        <f:case value="change_password_header">
+            <f:if condition="{changePasswordHeader}">
+                {changePasswordHeader}
+            <f:else>
+                <f:translate key="change_password_header" />
+                </f:else>
+            </f:if>
+        </f:case>
+        <f:case value="change_password_message">
+            <f:if condition="{changePasswordMessage}">
+                {changePasswordMessage}
+            <f:else>
+                <f:translate key="change_password_message" />
+                </f:else>
+            </f:if>
+        </f:case>
+        <f:case value="change_password">
+            <f:if condition="{changePasswordLabel}">
+                {changePasswordLabel}
+            <f:else>
+                <f:translate key="change_password" />
+                </f:else>
+            </f:if>
+        </f:case>
+        <f:defaultCase>
+            <f:translate key="{key}" />
+        </f:defaultCase>
+    </f:switch>
+</f:if>
+
+</html>

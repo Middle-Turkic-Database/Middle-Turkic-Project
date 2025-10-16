@@ -58,6 +58,7 @@ class QueryViewHelper extends AbstractViewHelper
      */
     public function injectConfigurationManager(ConfigurationManagerInterface $configurationManager) {
         $this->configurationManager = $configurationManager;
+        // @extensionScannerIgnoreLine
         $this->contentObject = $this->configurationManager->getContentObject();
         $this->contentObject->start(array(), '');
         $this->contentObject->cObjHookObjectsArr['XPATH'] = GeneralUtility::makeInstance(XpathContentObject::class, $this->contentObject);

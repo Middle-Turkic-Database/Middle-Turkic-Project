@@ -3,7 +3,7 @@
 /**
  * Extension Manager/Repository config file for ext "middle_turkic_project".
  */
-$EM_CONF[$_EXTKEY] = [
+$EM_CONF['middle_turkic_project'] = [
     'title' => 'Middle Turkic Project',
     'description' => '',
     'category' => 'templates',

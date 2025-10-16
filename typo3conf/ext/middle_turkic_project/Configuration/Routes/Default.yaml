@@ -1,7 +1,7 @@
 routeEnhancers:
   Manuscript:
     type: Simple
-    limitToPages: [13]
+    limitToPages: [13,15]
     routePath: '/{manuscript}/{type}/{bookNo}/{chapterNo}'
     _arguments:
       bookNo: msBook
@@ -11,7 +11,7 @@ routeEnhancers:
       bookNo: ''
       chapterNo: ''
     requirements:
-      manuscript: '^(?i:adub.iii.73|adub.iii.83|adub.iii.84|jsul.i.04|jsul.iii.01|jsul.iii.02|jsul.iii.65|tkow.02|jsul.iv.02a)$'
+      manuscript: '^(?i:adub.iii.73|adub.iii.83|adub.iii.84|jsul.i.04|jsul.iii.01|jsul.iii.02|jsul.iii.65|tkow.02|jsul.iv.02a|f305-01|f305-07|f305-90|ONUk|K1057)$'
       type: '^(?:description|transcription|translation|parallel)$'
       bookNo: '^[0-9]{1,2}$'
       chapterNo: '^[0-9]{1,3}$'

@@ -13,7 +13,7 @@
 
     <!-- Text extractor for the milestone self closing tag -->
     <xsl:key name="transText"
-        match="//tei:div[@type = 'textpart']//node()[not(parent::tei:supplied)][not(self::tei:milestone)][not(parent::tei:foreign)][not(parent::tei:ref)][not(parent::tei:emph)]"
+        match="//tei:div[@type = 'textpart']//node()[not(parent::tei:supplied)][not(self::tei:milestone)][not(parent::tei:foreign)][not(ancestor-or-self::tei:cell)][not(ancestor-or-self::tei:row)][not(parent::tei:ref)][not(parent::tei:emph)]"
         use="generate-id(preceding::tei:milestone[1])"/>
     
     <!-- Text extractor for the first continued line from the last section (no milestone-page exists at the beginning) -->
@@ -23,7 +23,7 @@
 
     <!-- Text extractor for the text between lines -->
     <xsl:key name="betweenLineText"
-        match="//tei:div[@type = 'textpart']//node()[not(ancestor-or-self::tei:l)][not(ancestor-or-self::tei:lg)][not(parent::tei:foreign)][not(parent::tei:ref)][not(ancestor-or-self::tei:title)]"
+        match="//tei:div[@type = 'textpart']//node()[not(ancestor-or-self::tei:l)][not(ancestor-or-self::tei:lg)][not(ancestor-or-self::tei:cell)][not(ancestor-or-self::tei:row)][not(parent::tei:foreign)][not(parent::tei:ref)][not(ancestor-or-self::tei:title)]"
         use="generate-id(following::tei:l[1])"/>
 
     <!-- Extracts footnote with respect to its xml:id -->
@@ -86,8 +86,30 @@
         <xsl:apply-templates select="key('betweenLineText', generate-id($node))" />
         <xsl:apply-templates select="$node/node()" />
     </xsl:template>
-    
-    <!-- Render superscript -->
+
+  <!-- Renders table content for cell and row elements -->
+    <xsl:template match="tei:ab/tei:table">
+    <tr>
+    <td class="align-text-top index pr-2">
+    </td>
+    <td>
+    <table class="table table-bordered">
+    	<thead></thead>
+    	<tbody>
+        <xsl:for-each select="tei:row">
+    		<tr>
+    		<xsl:for-each select="tei:cell">
+      		<td style="border: 1px solid #dee2e6"><xsl:value-of select="."/></td>
+      		</xsl:for-each>
+        	 </tr>
+    	</xsl:for-each>
+    	</tbody>
+    </table>
+    </td>
+    </tr>
+    </xsl:template>
+
+  <!-- Render superscript -->
     <xsl:template name="renderSup">
         <xsl:param name="title" />
         <xsl:param name="value" />
@@ -185,6 +207,7 @@
         </tr>
     </xsl:template>
 
+
     <xsl:template match="tei:milestone[@unit = 'line']">
         <xsl:choose>
             <xsl:when test="$traverseType = 'line-by-line'">
@@ -268,7 +291,7 @@
                 <xsl:call-template name="renderVerseIndex" />
             </td>
             <td>
-                <xsl:apply-templates mode="renderVerseContent" select="." />
+                <xsl:apply-templates mode="renderVerseContent" select="."/>
             </td>
         </tr>
     </xsl:template>
@@ -307,7 +330,6 @@
         </xsl:element>
     </xsl:template>
 
-
     <xsl:template match="tei:ref">
         <xsl:call-template name="renderSup">
             <xsl:with-param name="title">
@@ -335,6 +357,10 @@
     </xsl:template>
 
     <xsl:template match="tei:gap[@reason = 'lost']">
+        <xsl:text> […]</xsl:text>
+    </xsl:template>
+
+    <xsl:template match="tei:gap[@reason = 'illegible']">
         <xsl:text> […]</xsl:text>
     </xsl:template>
 

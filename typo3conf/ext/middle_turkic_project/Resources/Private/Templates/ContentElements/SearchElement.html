@@ -145,10 +145,12 @@
 
 <f:section name="createMsSetSlectionOptions">
     <f:for each="{msMenu}" as="msMenuItem">
-        <f:if condition="{msNav}">
-            <f:variable name="msNav" value="{msNav}/" />
-        </f:if>
-        <f:variable name="msNav" value="{msNav}{msMenuItem.title}" />
+        <f:comment>
+            <f:if condition="{msNav}">
+                <f:variable name="msNav" value="{msNav}/" />
+            </f:if>
+        </f:comment>
+        <f:variable name="msNav" value="{msMenuItem.title}" />
         <f:if condition="{msMenuItem.children}">
             <f:then>
                 <f:render section="createMsSetSlectionOptions" arguments="{msMenu: msMenuItem.children, msNav: msNav}" />

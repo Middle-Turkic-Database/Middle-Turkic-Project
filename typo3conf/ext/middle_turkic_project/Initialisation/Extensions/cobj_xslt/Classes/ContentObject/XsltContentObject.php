@@ -70,10 +70,8 @@ class XsltContentObject extends AbstractContentObject
     {
         $content = '';
 
-        // TimeTracker object is gone in TYPO3 8 but needed to set TS log messages; instantiate in versions >= 8.7
-        if (VersionNumberUtility::convertVersionNumberToInteger(TYPO3_branch) >= 8007000 && !is_object($GLOBALS['TT'])) {
-            $GLOBALS['TT'] = GeneralUtility::makeInstance(TimeTracker::class);
-        }
+        // TimeTracker is now a singleton in TYPO3 8+
+        $timeTracker = GeneralUtility::makeInstance(TimeTracker::class);
 
         // Check if necessary XML extensions are loaded with PHP
         if (extension_loaded('SimpleXML') && extension_loaded('libxml') && extension_loaded('dom') && extension_loaded('xsl')) {
@@ -82,7 +80,7 @@ class XsltContentObject extends AbstractContentObject
             if (isset($conf['source']) || is_array($conf['source.'])) {
                 $xmlsource = $this->fetchXml($conf['source'], $conf['source.']);
             } else {
-                $GLOBALS['TT']->setTSlogMessage('Source for XML is not configured.', 3);
+                $timeTracker->setTSlogMessage('Source for XML is not configured.', 3);
             }
             // start XSLT transformation
             if (!empty($xmlsource)) {
@@ -116,7 +114,7 @@ class XsltContentObject extends AbstractContentObject
 
                             // If loading of the stylesheet isn't successfull, skip this run
                             if (empty($stylesheet) || $this->xsl->loadXML($stylesheet) === false) {
-                                $GLOBALS['TT']->setTSlogMessage('No valid XSL stylesheet set for transformation ' . $index . '', 3);
+                                $timeTracker->setTSlogMessage('No valid XSL stylesheet set for transformation ' . $index . '', 3);
                                 continue;
                             }
 
@@ -144,7 +142,7 @@ class XsltContentObject extends AbstractContentObject
                                             } elseif (is_callable($function)) {
                                                 $registeredFunctions[] = $function;
                                             } else {
-                                                $GLOBALS['TT']->setTSlogMessage('Tried to register a function ' . $function . ' that is not callable.', 3);
+                                                $timeTracker->setTSlogMessage('Tried to register a function ' . $function . ' that is not callable.', 3);
                                             }
                                         }
 
@@ -152,7 +150,7 @@ class XsltContentObject extends AbstractContentObject
                                         if (count($registeredFunctions) > 0) {
                                             $this->xslt->registerPHPFunctions($registeredFunctions);
                                         } else {
-                                            $GLOBALS['TT']->setTSlogMessage('None of the functions specified in registerPHPFunctions were callable so nothing gets registered.', 3);
+                                            $timeTracker->setTSlogMessage('None of the functions specified in registerPHPFunctions were callable so nothing gets registered.', 3);
                                         }
 
                                         // If registerPHPFunctions was just set to 1, register all PHP functions without any restrictions
@@ -172,7 +170,7 @@ class XsltContentObject extends AbstractContentObject
                                             $paramValue = $this->cObj->stdWrap($value['value'], $value['value.']);
                                             $this->xslt->setParameter($paramNamespace, $paramName, $paramValue);
                                         } else {
-                                            $GLOBALS['TT']->setTSlogMessage('Setting the parameter ' . $parameter . ' failed due to misconfiguration', 3);
+                                            $timeTracker->setTSlogMessage('Setting the parameter ' . $parameter . ' failed due to misconfiguration', 3);
                                         }
                                     }
                                 }
@@ -211,7 +209,7 @@ class XsltContentObject extends AbstractContentObject
                                     if ($formerResult->loadXML($result) !== false) {
                                         $result = $this->xslt->transformToXML($formerResult);
                                     } else {
-                                        $GLOBALS['TT']->setTSlogMessage('XSL transformation ' . $index . ' failed because the XML resulting from the former transformation is invalid.', 3);
+                                        $timeTracker->setTSlogMessage('XSL transformation ' . $index . ' failed because the XML resulting from the former transformation is invalid.', 3);
                                     }
 
                                     // First run, process the loaded source
@@ -222,7 +220,7 @@ class XsltContentObject extends AbstractContentObject
                                 // Load the profiling result from temporary file into admin panel
                                 if (isset($transformation['setProfiling'])) {
                                     $profilingInformation = str_replace(' ', ' ', GeneralUtility::getURL($profilingTempFile));
-                                    $GLOBALS['TT']->setTSlogMessage('Profiling result for XSL transformation ' . $index . "\n" . $profilingInformation, 1);
+                                    $timeTracker->setTSlogMessage('Profiling result for XSL transformation ' . $index . "\n" . $profilingInformation, 1);
                                     GeneralUtility::unlink_tempfile($profilingTempFile);
                                 }
 
@@ -245,7 +243,7 @@ class XsltContentObject extends AbstractContentObject
                                 }
 
                             } else {
-                                $GLOBALS['TT']->setTSlogMessage('The stylesheet ' . $index . ' could not be loaded or contained errors.', 3);
+                                $timeTracker->setTSlogMessage('The stylesheet ' . $index . ' could not be loaded or contained errors.', 3);
                             }
                         }
 
@@ -253,23 +251,23 @@ class XsltContentObject extends AbstractContentObject
                         $content = $result;
 
                     } else {
-                        $GLOBALS['TT']->setTSlogMessage('XML could not be converted to a DOM object or no transformations were configured.', 3);
+                        $timeTracker->setTSlogMessage('XML could not be converted to a DOM object or no transformations were configured.', 3);
                     }
 
                 } else {
                     $errors = libxml_get_errors();
                     foreach ($errors as $error) {
-                        $GLOBALS['TT']->setTSlogMessage('XML Problem: ' . $this->getXmlErrorCode($error), 3);
+                        $timeTracker->setTSlogMessage('XML Problem: ' . $this->getXmlErrorCode($error), 3);
                     }
                     libxml_clear_errors();
                 }
 
             } else {
-                $GLOBALS['TT']->setTSlogMessage('The configured XML source did not return any data.', 3);
+                $timeTracker->setTSlogMessage('The configured XML source did not return any data.', 3);
             }
 
         } else {
-            $GLOBALS['TT']->setTSlogMessage('The PHP extensions SimpleXML, dom, xsl and libxml must be loaded.', 3);
+            $timeTracker->setTSlogMessage('The PHP extensions SimpleXML, dom, xsl and libxml must be loaded.', 3);
         }
 
         return $this->cObj->stdWrap($content, $conf['stdWrap.']);
@@ -309,7 +307,8 @@ class XsltContentObject extends AbstractContentObject
         if (is_array($configuration)) {
             $out = $GLOBALS['TSFE']->cObj->cObjGetSingle($configuration[0], $configuration[1]);
         } else {
-            $GLOBALS['TT']->setTSlogMessage('The TypoScript key ' . $key . ' referenced in the XSL stylesheet could not be found', 3);
+            $timeTracker = GeneralUtility::makeInstance(TimeTracker::class);
+            $timeTracker->setTSlogMessage('The TypoScript key ' . $key . ' referenced in the XSL stylesheet could not be found', 3);
             $out = '';
         }
 
@@ -355,12 +354,15 @@ class XsltContentObject extends AbstractContentObject
 
         switch ($error->level) {
             case LIBXML_ERR_WARNING:
+                // @extensionScannerIgnoreLine
                 $errormessage .= 'Warning ' . $error->code . ': ';
                 break;
             case LIBXML_ERR_ERROR:
+                // @extensionScannerIgnoreLine
                 $errormessage .= 'Error ' . $error->code . ': ';
                 break;
             case LIBXML_ERR_FATAL:
+                // @extensionScannerIgnoreLine
                 $errormessage .= 'Fatal error ' . $error->code . ': ';
                 break;
         }

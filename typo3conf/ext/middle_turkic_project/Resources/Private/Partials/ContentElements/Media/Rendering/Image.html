@@ -17,7 +17,8 @@
             <source data-variant="{name}" data-maxwidth="{width}" {mediaQuery->f:format.raw()} srcset="{srcset}">
         </f:if>
     </f:for>
-    <img loading="lazy" src="{f:uri.image(image: file, cropVariant: 'default', maxWidth: variants.default.width)}" width="{bk2k:lastImageInfo(property: 'width')}" height="{bk2k:lastImageInfo(property: 'height')}" intrinsicsize="{bk2k:lastImageInfo(property: 'width')}x{bk2k:lastImageInfo(property: 'height')}"
+    <f:variable name="src" value="{f:uri.image(image: file)}" />
+    <img loading="lazy" src="{f:uri.image(image: file, cropVariant: 'default', maxWidth: variants.default.width)}" width="{bk2k:data.imageInfo(src: src, property: 'width')}" height="{bk2k:data.imageInfo(src: src, property: 'height')}" intrinsicsize="{bk2k:data.imageInfo(src: src, property: 'width')}x{bk2k:data.imageInfo(src: src, property: 'height')}"
         title="{file.properties.title}" alt="{file.properties.alternative}" class="max-width-700{f:if(condition: '{data.layout} == 300', then: ' rounded-circle w-25')}{f:if(condition: '{data.layout} == 310', then: ' footer-logo')}{f:if(condition: '{data.layout} == 305', then: ' shadow-lg rounded')}">
 </picture>
 

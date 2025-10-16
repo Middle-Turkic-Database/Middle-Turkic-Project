@@ -234,8 +234,9 @@ $(function() {
     }
 
     $("#msComparisonMSSet").change(function() {
-        $(this).closest('form').find(':submit').prop('disabled', true);
-        var currentCmpMap = comparisonMap.get($(this).children("option:selected").val());
+        $(this).closest('form').find(':submit').prop('disabled', true);        
+        var selectedValue = $(this).children("option:selected").val();
+        var currentCmpMap = comparisonMap.get(selectedValue);
         var optionText = "<option selected disabled>Choose...</option>";
         $("#msComparisonSelect2").html(optionText);
         if (typeof(currentCmpMap) !== 'undefined') {
