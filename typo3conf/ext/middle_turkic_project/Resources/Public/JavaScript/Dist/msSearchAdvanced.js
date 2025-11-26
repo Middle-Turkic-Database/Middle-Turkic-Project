@@ -5,7 +5,7 @@ export async function findDesc() {
     'settlement': [],
     'repository': [],
     // 'origDate': [],
-    'scriptNote': [],
+    'scriptNote_script': [],
     'handNote_script': [], 
     'objectType': [],
     'creation-origPlace': [],

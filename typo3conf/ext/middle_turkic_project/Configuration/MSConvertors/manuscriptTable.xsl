@@ -31,7 +31,7 @@
       </td>
       <td scope="col">
          <xsl:value-of
-            select="/tei:TEI/tei:teiHeader/tei:fileDesc/tei:sourceDesc/tei:msDesc/tei:physDesc/tei:scriptDesc/tei:summary" />
+            select="/tei:TEI/tei:teiHeader/tei:fileDesc/tei:sourceDesc/tei:msDesc/tei:physDesc/tei:scriptDesc/tei:scriptNote/@script" />
       </td>
    </xsl:template>
 
