@@ -5,8 +5,8 @@ export async function findDesc() {
     'settlement': [],
     'repository': [],
     // 'origDate': [],
-    'scriptNote_script': [],
     'handNote_script': [], 
+    'scriptNote_script': [],
     'objectType': [],
     'creation-origPlace': [],
     'creation-date': []
@@ -125,7 +125,7 @@ function addOptionToSelect(optionText, selectId) {
 function clearText(doc, text) {
     const pattern =  /[A-Z]/;
     
-if (doc === 'scriptNote'){
+if (doc === 'scriptDesc'){
     const textlist = text.split(/[,]/)
     const matchingElements = textlist.map((element) => {
       element = element.trim()
