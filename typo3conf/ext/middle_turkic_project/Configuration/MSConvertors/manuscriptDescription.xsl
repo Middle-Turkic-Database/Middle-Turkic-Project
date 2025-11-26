@@ -445,7 +445,7 @@ Description of hands</span>
                               <xsl:variable name="script" select="/tei:TEI/tei:teiHeader/tei:fileDesc/tei:sourceDesc/tei:msDesc/tei:physDesc/tei:scriptDesc/tei:scriptNote" />
                               <xsl:choose>
                                  <xsl:when test="mtdb:exists($script)">
-                                    <xsl:value-of select="$script" />
+                                    <xsl:apply-templates select="$script" />
                                  </xsl:when>
                                  <xsl:otherwise>
                                     <xsl:copy-of select="$mDash" />
