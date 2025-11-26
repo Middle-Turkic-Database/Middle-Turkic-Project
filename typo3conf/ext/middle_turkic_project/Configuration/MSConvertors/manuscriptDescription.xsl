@@ -453,19 +453,6 @@ Description of hands</span>
                               </xsl:choose>
                            </dd>
 
-                           <dt class="col-sm-3">Script Type</dt>
-                           <dd class="col-sm-9">
-                              <xsl:variable name="scriptType" select="/tei:TEI/tei:teiHeader/tei:fileDesc/tei:sourceDesc/tei:msDesc/tei:physDesc/tei:handDesc/tei:handNote[@scope='sole']" />
-                              <xsl:choose>
-                                 <xsl:when test="mtdb:exists($scriptType)">
-                                    <xsl:value-of select="$scriptType/@script" />
-                                 </xsl:when>
-                                 <xsl:otherwise>
-                                    <xsl:copy-of select="$mDash" />
-                                 </xsl:otherwise>
-                              </xsl:choose>
-                           </dd>
-
                            <dt class="col-sm-3">Text Language</dt>
                            <dd class="col-sm-9">
                               <xsl:variable name="textLanguage" select="/tei:TEI/tei:teiHeader/tei:fileDesc/tei:sourceDesc/tei:msDesc/tei:msContents/tei:msItem/tei:textLang" />
