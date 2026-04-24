@@ -678,7 +678,7 @@ Download the XML (TEI Epidoc)</a>
       </xsl:if>
    </xsl:template>
 
-   <xsl:template match="tei:origPlace">
+   <xsl:template match="tei:origin/tei:origPlace">
       <xsl:apply-templates />
       <xsl:if test="position() != last()">
          <xsl:copy-of select="$newLine" />
